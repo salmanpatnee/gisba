@@ -1,11 +1,25 @@
 <?php
 
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// ── GISBA Public Pages ────────────────────────────────────────────────────────
+
+Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2');
+Route::get('/training-course-development', [PageController::class, 'training'])->name('training');
+Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
+Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
+Route::get('/digital-delivery-policy', [PageController::class, 'digitalDeliveryPolicy'])->name('digital-delivery-policy');
+Route::get('/digital-refund-policy', [PageController::class, 'digitalRefundPolicy'])->name('digital-refund-policy');
+Route::get('/terms-of-use', [PageController::class, 'termsOfUse'])->name('terms-of-use');
+
+// ── Breeze Auth (kept for future use) ────────────────────────────────────────
 
 Route::get('/dashboard', function () {
     return view('dashboard');
