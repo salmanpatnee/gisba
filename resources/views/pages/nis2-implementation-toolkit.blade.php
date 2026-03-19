@@ -66,7 +66,8 @@
                 <li><a href="#why-gisba"><i class="bi bi-award"></i> Why GISBA</a></li>
                 <li><a href="#format"><i class="bi bi-eye"></i> File Format</a></li>
                 <li><a href="#method"><i class="bi bi-link-45deg"></i> Delivery Method</a></li>
-                <li><a href="#pricing"><i class="bi bi-code-slash"></i> Pricing</a></li>
+                <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
+                <li><a href="{{ route('nis2.pricing') }}"><i class="bi bi-cart-check"></i> Buy Now</a></li>
               </ul>
             </nav>
             <div class="sidebar-contact">
@@ -312,9 +313,14 @@
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0; text-align: justify;">
                     <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.
                   </p>
-                  <a href="#contact" class="btn-hero-primary d-block text-center mt-3">
-                    <i class="bi bi-calendar-check me-2"></i>Request a Demo and Payment Link
-                  </a>
+                  <div class="d-flex flex-column gap-2 mt-3">
+                    <a href="{{ route('nis2.pricing') }}" class="btn-hero-primary d-block text-center">
+                      <i class="bi bi-cart-check me-2"></i>View Pricing &amp; Buy Now
+                    </a>
+                    <a href="{{ route('contact-us') }}" class="btn-hero-secondary d-block text-center" style="color: var(--navy) !important; border-color: var(--border-mid);">
+                      <i class="bi bi-calendar-check me-2"></i>Request a Demo
+                    </a>
+                  </div>
                 </div>
               </div>
             </section>

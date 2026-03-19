@@ -16,6 +16,11 @@ class PageController extends Controller
         return view('pages.nis2-implementation-toolkit');
     }
 
+    public function nis2Pricing(): View
+    {
+        return view('pages.nis2-pricing');
+    }
+
     public function training(): View
     {
         return view('pages.training-course-development');

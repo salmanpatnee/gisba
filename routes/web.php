@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2');
+Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2.pricing');
 Route::get('/training-course-development', [PageController::class, 'training'])->name('training');
 Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
