@@ -117,8 +117,8 @@
               <h2 class="section-heading">Delivery Method</h2>
               <p>After successful payment:</p>
               <ul>
-                <li>A secure download link will be provided immediately on the confirmation page</li>
-                <li>A copy of the download link will also be sent to your email</li>
+                <li>After the demo has been delivered, we will provide the payment link.</li>
+                <li>Upon receipt of payment, the complete “NIS2 Implementation Kit” access link will be provided on the same day.</li>
               </ul>
             </section>
 
