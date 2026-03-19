@@ -6,7 +6,8 @@
       "Bash(done)",
       "Bash(php artisan:*)",
       "Bash(grep -A 20 \"serviceLabels\\\\|service_label\\\\|$service\" c:/Users/salmanabdul.ghani/Herd/gisba_app/static/gisba/contact.php)",
-      "Bash(vendor/bin/pint --dirty --format agent)"
+      "Bash(vendor/bin/pint --dirty --format agent)",
+      "mcp__laravel-boost__get-absolute-url"
     ]
   },
   "enableAllProjectMcpServers": true,

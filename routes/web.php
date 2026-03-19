@@ -14,6 +14,8 @@ Route::get('/training-course-development', [PageController::class, 'training'])-
 Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/blog', [PageController::class, 'blog'])->name('blog');
+Route::get('/blog/{slug}', [PageController::class, 'blogShow'])->name('blog.show');
 
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/digital-delivery-policy', [PageController::class, 'digitalDeliveryPolicy'])->name('digital-delivery-policy');

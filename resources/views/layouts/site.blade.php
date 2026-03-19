@@ -117,6 +117,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('blog*') ? 'active' : '' }}" href="{{ route('blog') }}">
+              <i class="bi bi-journal-text"></i>Blog
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('contact-us') ? 'active' : '' }}" href="{{ route('contact-us') }}">
               <i class="bi bi-envelope"></i>Contact Us
             </a>
@@ -151,6 +156,7 @@
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
+            <li><a href="{{ route('blog') }}">Blog</a></li>
           </ul>
         </div>
 
