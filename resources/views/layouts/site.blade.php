@@ -170,7 +170,7 @@
       <hr style="border-color:rgba(255,255,255,0.15); margin:18px 0 14px;" />
 
       <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
-        <span style="font-size:11.5px;">&copy; 2026 GISBA. All rights reserved.</span>
+        <span style="font-size:11.5px;">&copy; 2006 - 2026 GISBA. All rights reserved.</span>
         <span style="font-size:11.5px;">
           <a href="{{ route('privacy-policy') }}">Privacy Policy</a> &nbsp;|&nbsp;
           <a href="{{ route('digital-delivery-policy') }}">Digital Delivery Policy</a> &nbsp;|&nbsp;
