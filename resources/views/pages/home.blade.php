@@ -289,7 +289,7 @@
               <div class="pricing-card">
                 <div class="pricing-header">
                   <div class="pricing-label">Complete Toolkit</div>
-                  <div style="font-size:1.3rem; font-weight:700; color:#fff; margin:6px 0 2px;">€1,795 EUR</div>
+                  <div style="font-size:1.3rem; font-weight:700; color:#fff; margin:6px 0 2px;">£1,500 GBP</div>
                   <div class="pricing-sublabel">One-time purchase · 1-year platform access</div>
                 </div>
                 <div class="pricing-body">
@@ -303,7 +303,7 @@
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Compliance and audit checklists</div>
                   </div>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
-                    <i class="bi bi-tag me-1"></i>One-time fee of €1,795 — less than one week of a professional cybersecurity consultant.
+                    <i class="bi bi-tag me-1"></i>One-time fee of £1,500 GBP — less than one week of a professional cybersecurity consultant.
                   </p>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0; text-align: justify;">
                     <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.

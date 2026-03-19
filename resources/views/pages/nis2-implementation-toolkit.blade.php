@@ -127,7 +127,7 @@
               <div class="pricing-card">
                 <div class="pricing-header">
                   <div class="pricing-label">Complete Toolkit</div>
-                  <div style="font-size:1.3rem; font-weight:700; color:#fff; margin:6px 0 2px;">€1,750</div>
+                  <div style="font-size:1.3rem; font-weight:700; color:#fff; margin:6px 0 2px;">£1,500 GBP</div>
                   <div class="pricing-sublabel">One-time Cost to Download All Templates</div>
                 </div>
               </div>
