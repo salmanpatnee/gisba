@@ -23,6 +23,7 @@ class EnquiryRequest extends FormRequest
             'email' => ['required', 'email', 'max:150'],
             'phone' => ['nullable', 'string', 'max:25', 'regex:/^\+?[\d\s\-().]{7,20}$/'],
             'service' => ['nullable', 'string', 'in:nis2,training,consulting,project-management,other'],
+            'heard_from' => ['required', 'string', 'in:linkedin,google,diac,visionary-alpha,other'],
             'message' => ['required', 'string', 'min:10', 'max:3000'],
         ];
     }
@@ -41,6 +42,8 @@ class EnquiryRequest extends FormRequest
             'phone.regex' => 'Please enter a valid phone number.',
             'message.required' => 'Message is required.',
             'message.min' => 'Message must be at least 10 characters.',
+            'heard_from.required' => 'Please let us know how you heard about us.',
+            'heard_from.in' => 'Please select a valid option for how you heard about us.',
             'message.max' => 'Message must not exceed 3000 characters.',
         ];
     }

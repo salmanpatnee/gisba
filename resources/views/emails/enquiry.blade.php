@@ -6,6 +6,7 @@ Email:        {{ $email }}
 Phone:        {{ $phone ?: 'Not provided' }}
 Organization: {{ $organization ?: 'Not provided' }}
 Service:      {{ $serviceLabel }}
+Heard From:   {{ $heardFromLabel }}
 
 Message:
 {{ $message }}

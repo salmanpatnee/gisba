@@ -158,7 +158,7 @@
                         <div class="invalid-feedback" id="err-phone"></div>
                       </div>
 
-                      <div class="col-12">
+                      <div class="col-12 col-sm-6">
                         <label for="contact-service" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Service of Interest</label>
                         <select class="form-select" id="contact-service" name="service"
                                 style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;">
@@ -169,6 +169,20 @@
                           <option value="project-management">Project Management Consulting</option>
                           <option value="other">Other / General Enquiry</option>
                         </select>
+                      </div>
+
+                      <div class="col-12 col-sm-6">
+                        <label for="contact-heard-from" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">From where you heard about us <span class="text-danger">*</span></label>
+                        <select class="form-select" id="contact-heard-from" name="heard_from" required
+                                style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;">
+                          <option value="" selected>— Please select —</option>
+                          <option value="linkedin">LinkedIn</option>
+                          <option value="google">Google Search</option>
+                          <option value="diac">DIAC (Partner's Website)</option>
+                          <option value="visionary-alpha">Visionary Alpha (Partner's Website)</option>
+                          <option value="other">Others</option>
+                        </select>
+                        <div class="invalid-feedback" id="err-heard-from"></div>
                       </div>
 
                       <div class="col-12">
@@ -240,10 +254,11 @@
 
   function validateForm() {
     let valid = true;
-    const name    = document.getElementById('contact-name');
-    const email   = document.getElementById('contact-email');
-    const phone   = document.getElementById('contact-phone');
-    const message = document.getElementById('contact-message');
+    const name      = document.getElementById('contact-name');
+    const email     = document.getElementById('contact-email');
+    const phone     = document.getElementById('contact-phone');
+    const heardFrom = document.getElementById('contact-heard-from');
+    const message   = document.getElementById('contact-message');
 
     if (!name.value.trim() || name.value.trim().length < 2) {
       setFieldError(name, document.getElementById('err-name'), 'Full name must be at least 2 characters.');
@@ -267,6 +282,13 @@
       valid = false;
     } else {
       clearFieldState(phone, document.getElementById('err-phone'));
+    }
+
+    if (!heardFrom.value) {
+      setFieldError(heardFrom, document.getElementById('err-heard-from'), 'Please let us know how you heard about us.');
+      valid = false;
+    } else {
+      setFieldValid(heardFrom);
     }
 
     if (!message.value.trim() || message.value.trim().length < 10) {
@@ -324,10 +346,11 @@
           if (msgCount) { msgCount.textContent = '0'; }
         } else if (data.errors) {
           const fieldMap = {
-            name:    ['contact-name',    'err-name'],
-            email:   ['contact-email',   'err-email'],
-            phone:   ['contact-phone',   'err-phone'],
-            message: ['contact-message', 'err-message'],
+            name:       ['contact-name',       'err-name'],
+            email:      ['contact-email',      'err-email'],
+            phone:      ['contact-phone',      'err-phone'],
+            heard_from: ['contact-heard-from', 'err-heard-from'],
+            message:    ['contact-message',    'err-message'],
           };
           Object.entries(data.errors).forEach(([field, msg]) => {
             if (fieldMap[field]) {

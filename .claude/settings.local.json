@@ -1,6 +1,16 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(for f:*)",
+      "Bash(do touch:*)",
+      "Bash(done)",
+      "Bash(php artisan:*)",
+      "Bash(grep -A 20 \"serviceLabels\\\\|service_label\\\\|$service\" c:/Users/salmanabdul.ghani/Herd/gisba_app/static/gisba/contact.php)",
+      "Bash(vendor/bin/pint --dirty --format agent)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "laravel-boost"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }

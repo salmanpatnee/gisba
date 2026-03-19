@@ -21,6 +21,7 @@ class ContactController extends Controller
                     phone: $validated['phone'] ?? '',
                     organization: $validated['organization'] ?? '',
                     service: $validated['service'] ?? '',
+                    heardFrom: $validated['heard_from'],
                     message: $validated['message'],
                 ));
         } catch (\Throwable) {
