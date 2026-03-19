@@ -65,14 +65,14 @@
                 <li><a href="#who-should-use"><i class="bi bi-people"></i> Who Should Use</a></li>
                 <li><a href="#why-gisba"><i class="bi bi-award"></i> Why GISBA</a></li>
                 <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
-                <li><a href="#satisfaction-guarantee"><i class="bi bi-shield-fill-check"></i> Guarantee</a></li>
-                <li><a href="#contact"><i class="bi bi-envelope"></i> Contact</a></li>
+                {{-- <li><a href="#satisfaction-guarantee"><i class="bi bi-shield-fill-check"></i> Guarantee</a></li>
+                <li><a href="#contact"><i class="bi bi-envelope"></i> Contact</a></li> --}}
               </ul>
             </nav>
             <div class="sidebar-contact">
               <strong><i class="bi bi-envelope me-1"></i>Contact GISBA</strong>
               <a href="mailto:support@gisba.net">support@gisba.net</a><br />
-              <a href="tel:+97338397453">+973 3839 7453</a>
+              {{-- <a href="tel:+97338397453">+973 3839 7453</a> --}}
             </div>
           </aside>
         </div>
@@ -289,7 +289,7 @@
               <div class="pricing-card">
                 <div class="pricing-header">
                   <div class="pricing-label">Complete Toolkit</div>
-                  <div style="font-size:1.3rem; font-weight:700; color:#fff; margin:6px 0 2px;">£1,500 GBP</div>
+                  <div style="font-size:1.3rem; font-weight:700; color:#fff; margin:6px 0 2px;">£1,500 GBP+VAT</div>
                   <div class="pricing-sublabel">One-time purchase · 1-year platform access</div>
                 </div>
                 <div class="pricing-body">
@@ -303,7 +303,7 @@
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Compliance and audit checklists</div>
                   </div>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
-                    <i class="bi bi-tag me-1"></i>One-time fee of £1,500 GBP — less than one week of a professional cybersecurity consultant.
+                    <i class="bi bi-tag me-1"></i>One-time fee of £1,500 GBP+VAT — less than one week of a professional cybersecurity consultant.
                   </p>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0; text-align: justify;">
                     <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.
@@ -313,15 +313,15 @@
                   </a>
                 </div>
               </div>
-              <div class="info-box mt-3">
+              {{-- <div class="info-box mt-3">
                 <strong><i class="bi bi-info-circle me-2"></i>VAT Reverse Charge</strong><br />
                 In accordance with international VAT regulations for cross-border B2B services, VAT must
                 be accounted for by the customer under the reverse charge mechanism.<br />
                 <span class="text-muted" style="font-size:13px;">Supplier: GISBA Consultants Co. W.L.L. — Kingdom of Bahrain</span>
-              </div>
+              </div> --}}
             </section>
 
-            <hr class="content-divider" />
+            {{-- <hr class="content-divider" />
 
             <section id="satisfaction-guarantee">
               <h2 class="section-heading">Satisfaction Guarantee</h2>
@@ -362,7 +362,7 @@
                 <p>The country enjoys a warm climate with sunshine for most of the year. Bahrain also offers attractive beaches and a variety of water sports and recreational activities. In addition, Bahrain hosts the Formula 1 Bahrain Grand Prix annually at the Bahrain International Circuit, attracting many international tourists and motorsport enthusiasts.</p>
                 <p>Bahrain serves as an important regional hub for business and tourism. Its international environment and modern infrastructure make it a popular destination for expatriates from many countries.</p>
               </div>
-            </section>
+            </section> --}}
 
           </main>
         </div>
