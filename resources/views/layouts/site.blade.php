@@ -158,10 +158,10 @@
           <strong style="color:#fff; font-size:13px; display:block; margin-bottom:8px;">Contact</strong>
           <p style="font-size:12.5px; margin:0;">
             <i class="bi bi-envelope me-1"></i> <a href="mailto:support@gisba.net">support@gisba.net</a><br />
-            <i class="bi bi-telephone me-1"></i> <a href="tel:+97338397453">+973 3839 7453</a><br />
+            {{-- <i class="bi bi-telephone me-1"></i> <a href="tel:+97338397453">+973 3839 7453</a><br />
             <i class="bi bi-geo-alt me-1"></i> GISBA Consultants Co. W.L.L.<br />
             Kingdom of Bahrain<br />
-            Commercial Registration: 59649-1
+            Commercial Registration: 59649-1 --}}
           </p>
         </div>
 
