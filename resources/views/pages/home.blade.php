@@ -57,6 +57,7 @@
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
                 <li><a href="#about"><i class="bi bi-info-circle"></i> About</a></li>
+                <li><a href="#european-partners"><i class="bi bi-people-fill"></i> European Partners</a></li>
                 <li><a href="#what-is-nis2"><i class="bi bi-shield-check"></i> What is NIS2?</a></li>
                 <li><a href="#fast-track"><i class="bi bi-lightning-charge"></i> Fast Track</a></li>
                 <li><a href="#experts"><i class="bi bi-person-badge"></i> Our Experts</a></li>
@@ -83,7 +84,7 @@
               <div class="hero-badge">
                 <i class="bi bi-shield-lock-fill me-2"></i>EU Directive 2022/2555
               </div>
-              <h1 class="hero-title">NIS2 Implementation Kit<br /><span>for Corporates</span> (Coming soon)</h1>
+              <h1 class="hero-title">NIS2 Implementation Kit<br /><span>for Corporates</span></h1>
               <p class="hero-subtitle">Complete NIS2 Compliance Toolkit for EU Directive 2022/2555</p>
               <p class="hero-desc">
                 Implement NIS2 Directive (EU) 2022/2555 compliance faster using a professionally developed
@@ -98,11 +99,26 @@
               </p>
               <div class="hero-actions">
                 <a href="#pricing" class="btn-hero-primary">
-                  <i class="bi bi-download me-2"></i>Payment & Download Option Coming Soon
+                  <i class="bi bi-calendar-check me-2"></i>Request a Demo and Payment Link
                 </a>
-                <a href="{{ route('contact-us') }}#enquiry-form-el" class="btn-demo">
+                {{-- <a href="{{ route('contact-us') }}#enquiry-form-el" class="btn-demo">
                   <i class="bi bi-calendar-check me-2"></i>Request a Free Demo and a Framework
-                </a>
+                </a> --}}
+              </div>
+            </section>
+
+            <hr class="content-divider" />
+
+            <section id="european-partners">
+              <h2 class="section-heading">Our European partners for NIS2</h2>
+              <p>We work alongside trusted European organisations to bring NIS2 expertise directly to organisations across the EU.</p>
+              <div class="partners-grid">
+                <div class="partner-card">
+                  <img src="{{ asset('assets/images/visionaryalpha.png') }}" alt="Visionary Alpha" class="partner-logo" />
+                </div>
+                <div class="partner-card">
+                  <img src="{{ asset('assets/images/daic.png') }}" alt="DAIC" class="partner-logo" />
+                </div>
               </div>
             </section>
 
@@ -293,7 +309,7 @@
                     <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.
                   </p>
                   <a href="#contact" class="btn-hero-primary d-block text-center mt-3">
-                    <i class="bi bi-download me-2"></i>Payment & Download Option Coming Soon
+                    <i class="bi bi-calendar-check me-2"></i>Request a Demo and Payment Link
                   </a>
                 </div>
               </div>
