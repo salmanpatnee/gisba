@@ -60,10 +60,10 @@
                 <li><a href="#fast-track"><i class="bi bi-lightning-charge"></i> Fast Track</a></li>
                 <li><a href="#experts"><i class="bi bi-person-badge"></i> Our Experts</a></li>
                 <li><a href="#whats-included"><i class="bi bi-box-seam"></i> What's Included</a></li>
-                <li><a href="#includes"><i class="bi bi-journal-bookmark"></i> Toolkit Includes</a></li>
+                {{-- <li><a href="#includes"><i class="bi bi-journal-bookmark"></i> Toolkit Includes</a></li> --}}
                 <li><a href="#who-should-use"><i class="bi bi-people"></i> Who Should Use</a></li>
-                <li><a href="#audience"><i class="bi bi-grid"></i> Audience</a></li>
-                <li><a href="#why-gisba"><i class="bi bi-award"></i> Why GISBA</a></li>
+                {{-- <li><a href="#audience"><i class="bi bi-grid"></i> Audience</a></li> --}}
+                {{-- <li><a href="#why-gisba"><i class="bi bi-award"></i> Why GISBA</a></li> --}}
                 <li><a href="#format"><i class="bi bi-eye"></i> File Format</a></li>
                 <li><a href="#method"><i class="bi bi-link-45deg"></i> Delivery Method</a></li>
                 <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
@@ -204,7 +204,7 @@
               </div>
             </section>
 
-            <hr class="content-divider" />
+            {{-- <hr class="content-divider" />
 
             <section id="includes">
               <h2 class="section-heading">What the NIS2 Implementation Toolkit Includes</h2>
@@ -218,7 +218,7 @@
                 <div class="requirement-item"><i class="bi bi-journal-text"></i><span>Compliance monitoring and reporting templates</span></div>
                 <div class="requirement-item"><i class="bi bi-journal-text"></i><span>Implementation guidance documents</span></div>
               </div>
-            </section>
+            </section> --}}
 
             <hr class="content-divider" />
 
@@ -239,7 +239,7 @@
               </div>
             </section>
 
-            <hr class="content-divider" />
+            {{-- <hr class="content-divider" />
 
             <section id="audience">
               <h2 class="section-heading">Who This Toolkit Is For?</h2>
@@ -251,7 +251,7 @@
                 <div class="checklist-item"><i class="bi bi-check-circle-fill"></i><span>Organizations required to comply with the NIS2 Directive</span></div>
                 <div class="checklist-item"><i class="bi bi-check-circle-fill"></i><span>Consultants assisting clients with NIS2 compliance</span></div>
               </div>
-            </section>
+            </section> --}}
 
             <hr class="content-divider" />
 

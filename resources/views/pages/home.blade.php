@@ -78,7 +78,7 @@
                 <li><a href="#services"><i class="bi bi-briefcase"></i> Our Services</a></li>
                 <li><a href="#european-partners"><i class="bi bi-people-fill"></i> European Partners</a></li>
                 <li><a href="#why-gisba"><i class="bi bi-star-fill"></i> Why Choose Us</a></li>
-                <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
+                {{-- <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li> --}}
               </ul>
             </nav>
             <div class="sidebar-contact">
@@ -448,7 +448,7 @@
             {{-- --------------------------------------------------------
                  PRICING — existing section, preserved
             -------------------------------------------------------- --}}
-            <section id="pricing">
+            {{-- <section id="pricing">
               <h2 class="section-heading">Pricing — NIS2 Implementation Kit</h2>
               <div class="pricing-card">
                 <div class="pricing-header">
@@ -479,7 +479,7 @@
               </div>
             </section>
 
-            <hr class="content-divider" />
+            <hr class="content-divider" /> --}}
 
             {{-- --------------------------------------------------------
                  CALL TO ACTION
