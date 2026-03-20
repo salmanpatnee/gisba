@@ -96,20 +96,20 @@
       <div class="col-12 col-md-6 col-lg-4 blog-reveal" style="transition-delay: {{ $index * 0.1 }}s;">
         <div class="blog-card">
           <div class="blog-card-img-wrap">
-            <img src="{{ $post['image'] }}" alt="{{ $post['title'] }}" loading="lazy">
+            <img src="{{ $post->image_url }}" alt="{{ $post->title }}" loading="lazy">
             <div class="blog-card-overlay"></div>
-            <span class="blog-card-category">{{ $post['category'] }}</span>
+            <span class="blog-card-category">{{ $post->category->value }}</span>
           </div>
           <div class="blog-card-body">
             <div class="blog-card-meta">
-              <span><i class="bi bi-calendar3"></i> {{ $post['date'] }}</span>
-              <span><i class="bi bi-clock"></i> {{ $post['read_time'] }}</span>
+              <span><i class="bi bi-calendar3"></i> {{ $post->formatted_date }}</span>
+              {{-- <span><i class="bi bi-person"></i> {{ $post->author }}</span> --}}
             </div>
-            <h2 class="blog-card-title">{{ $post['title'] }}</h2>
-            <p class="blog-card-excerpt">{{ $post['excerpt'] }}</p>
+            <h2 class="blog-card-title">{{ $post->title }}</h2>
+            <p class="blog-card-excerpt">{{ $post->excerpt }}</p>
             <div class="blog-card-footer">
-              <span class="blog-card-author"><i class="bi bi-person me-1"></i>{{ $post['author'] }}</span>
-              <a href="{{ route('blog.show', $post['slug']) }}" class="btn-read-more">
+              <span class="blog-card-author"><i class="bi bi-person me-1"></i>{{ $post->author }}</span>
+              <a href="{{ route('blog.show', $post->slug) }}" class="btn-read-more">
                 Read More <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -119,8 +119,8 @@
       @endforeach
 
       {{-- Placeholder card to fill the 3-column grid --}}
-      @if(count($posts) % 3 !== 0)
-        @for($i = 0; $i < (3 - (count($posts) % 3)); $i++)
+      @if($posts->count() % 3 !== 0)
+        @for($i = 0; $i < (3 - ($posts->count() % 3)); $i++)
         <div class="col-12 col-md-6 col-lg-4 blog-reveal d-none d-lg-block">
           <div class="blog-card-placeholder">
             <i class="bi bi-pencil-square"></i>
@@ -131,6 +131,13 @@
       @endif
 
     </div>
+
+    @if($posts->hasPages())
+    <div class="mt-5 d-flex justify-content-center">
+      {{ $posts->links() }}
+    </div>
+    @endif
+
   </div>
 </section>
 

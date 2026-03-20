@@ -1,11 +1,11 @@
 @extends('layouts.site')
 
-@section('title', $post['title'] . ' | GISBA Blog')
-@section('meta_description', $post['excerpt'])
+@section('title', ($post->meta_title ?? $post->title) . ' | GISBA Blog')
+@section('meta_description', $post->meta_description ?? $post->excerpt)
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-journal-text me-2"></i>GISBA Blog &mdash; {{ $post['category'] }}</span>
+    <span><i class="bi bi-journal-text me-2"></i>GISBA Blog &mdash; {{ $post->category->value }}</span>
     <div class="d-flex gap-3">
       <a href="{{ route('blog') }}"><i class="bi bi-arrow-left me-1"></i>All Articles</a>
       <a href="{{ route('contact-us') }}"><i class="bi bi-envelope me-1"></i>Contact</a>
@@ -93,14 +93,13 @@
         <i class="bi bi-chevron-right"></i>
         <a href="{{ route('blog') }}">Blog</a>
         <i class="bi bi-chevron-right"></i>
-        <span style="color:rgba(255,255,255,0.85);">{{ $post['category'] }}</span>
+        <span style="color:rgba(255,255,255,0.85);">{{ $post->category->value }}</span>
       </nav>
-      <span class="article-category-badge">{{ $post['category'] }}</span>
-      <h1 class="article-hero-title">{{ $post['title'] }}</h1>
+      <span class="article-category-badge">{{ $post->category->value }}</span>
+      <h1 class="article-hero-title">{{ $post->title }}</h1>
       <div class="article-meta">
-        <span class="article-meta-item"><i class="bi bi-calendar3"></i> {{ $post['date'] }}</span>
-        <span class="article-meta-item"><i class="bi bi-person"></i> {{ $post['author'] }}</span>
-        <span class="article-meta-item"><i class="bi bi-clock"></i> {{ $post['read_time'] }}</span>
+        <span class="article-meta-item"><i class="bi bi-calendar3"></i> {{ $post->formatted_date }}</span>
+        <span class="article-meta-item"><i class="bi bi-person"></i> {{ $post->author }}</span>
       </div>
     </div>
   </div>
@@ -117,23 +116,23 @@
         <a href="{{ route('blog') }}" class="back-link"><i class="bi bi-arrow-left"></i> Back to All Articles</a>
 
         <img
-          src="{{ $post['image'] }}"
-          alt="{{ $post['title'] }}"
+          src="{{ $post->image_url }}"
+          alt="{{ $post->title }}"
           class="article-featured-img"
           loading="eager"
         />
 
         <div class="article-content-wrap">
           <div class="article-body">
-            {!! $post['content'] !!}
+            {!! $post->body !!}
           </div>
 
           <hr style="border-color:var(--border-light);margin:28px 0 22px;">
 
           <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="article-meta" style="gap:14px;">
-              <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-calendar3" style="color:var(--accent);"></i> {{ $post['date'] }}</span>
-              <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-tag" style="color:var(--accent);"></i> {{ $post['category'] }}</span>
+              <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-calendar3" style="color:var(--accent);"></i> {{ $post->formatted_date }}</span>
+              <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-tag" style="color:var(--accent);"></i> {{ $post->category->value }}</span>
             </div>
             <a href="{{ route('blog') }}" class="back-link" style="margin-bottom:0;">
               <i class="bi bi-arrow-left"></i> All Articles
@@ -143,7 +142,7 @@
 
         {{-- Bottom CTA --}}
         <div class="article-bottom-cta">
-          <h3>Ready to take action on {{ $post['category'] === 'Compliance' ? 'NIS2 compliance' : 'cyber resilience' }}?</h3>
+          <h3>Ready to take action on {{ $post->category === \App\Enums\Category::Compliance ? 'NIS2 compliance' : 'cyber resilience' }}?</h3>
           <p>Our expert consultants are ready to help you build and implement a tailored programme that meets regulatory requirements and protects what matters most.</p>
           <div class="d-flex gap-3 flex-wrap">
             <a href="{{ route('nis2') }}" class="btn-hero-primary">Explore NIS2 Toolkit</a>
@@ -163,7 +162,7 @@
             <div class="author-info">
               <div class="author-avatar"><i class="bi bi-people-fill"></i></div>
               <div>
-                <span class="author-name">{{ $post['author'] }}</span>
+                <span class="author-name">{{ $post->author }}</span>
                 <span class="author-role">GISBA Cybersecurity &amp; Compliance Consultants</span>
               </div>
             </div>
@@ -171,18 +170,15 @@
           </div>
 
           {{-- Related Articles --}}
-          @php
-            $related = collect($posts)->where('slug', '!=', $post['slug'])->values();
-          @endphp
           @if($related->count() > 0)
           <div class="article-sidebar-card">
             <div class="article-sidebar-card-title">Related Articles</div>
             @foreach($related as $relatedPost)
-            <a href="{{ route('blog.show', $relatedPost['slug']) }}" class="related-post-item">
-              <img src="{{ $relatedPost['image'] }}" alt="{{ $relatedPost['title'] }}" class="related-post-img">
+            <a href="{{ route('blog.show', $relatedPost->slug) }}" class="related-post-item">
+              <img src="{{ $relatedPost->image_url }}" alt="{{ $relatedPost->title }}" class="related-post-img">
               <div>
-                <span class="related-post-title">{{ $relatedPost['title'] }}</span>
-                <span class="related-post-date"><i class="bi bi-calendar3 me-1"></i>{{ $relatedPost['date'] }}</span>
+                <span class="related-post-title">{{ $relatedPost->title }}</span>
+                <span class="related-post-date"><i class="bi bi-calendar3 me-1"></i>{{ $relatedPost->formatted_date }}</span>
               </div>
             </a>
             @endforeach

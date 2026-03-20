@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
@@ -14,15 +15,21 @@ Route::get('/training-course-development', [PageController::class, 'training'])-
 Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
-Route::get('/blog', [PageController::class, 'blog'])->name('blog');
-Route::get('/blog/{slug}', [PageController::class, 'blogShow'])->name('blog.show');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/digital-delivery-policy', [PageController::class, 'digitalDeliveryPolicy'])->name('digital-delivery-policy');
 Route::get('/digital-refund-policy', [PageController::class, 'digitalRefundPolicy'])->name('digital-refund-policy');
 Route::get('/terms-of-use', [PageController::class, 'termsOfUse'])->name('terms-of-use');
 
-// ── Breeze Auth (kept for future use) ────────────────────────────────────────
+// ── Admin ─────────────────────────────────────────────────────────────────────
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
+});
+
+// ── Breeze Auth ───────────────────────────────────────────────────────────────
 
 Route::get('/dashboard', function () {
     return view('dashboard');
