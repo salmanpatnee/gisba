@@ -9,7 +9,7 @@ Service:      {{ $serviceLabel }}
 Heard From:   {{ $heardFromLabel }}
 
 Message:
-{{ $message }}
+{{ $body }}
 
 ------------------------------------------------------------
 Sent: {{ now()->format('Y-m-d H:i:s T') }}

@@ -4,6 +4,7 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -47,14 +48,14 @@ class ContactMail extends Mailable
 
         return new Envelope(
             subject: $subject,
-            replyTo: [$this->email => $this->name],
+            replyTo: [new Address($this->email, $this->name)],
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.enquiry',
+            text: 'emails.enquiry',
             with: [
                 'name' => $this->name,
                 'email' => $this->email,
@@ -62,7 +63,7 @@ class ContactMail extends Mailable
                 'organization' => $this->organization,
                 'serviceLabel' => self::$serviceLabels[$this->service] ?? 'Not specified',
                 'heardFromLabel' => self::$heardFromLabels[$this->heardFrom] ?? $this->heardFrom,
-                'message' => $this->message,
+                'body' => $this->message,
             ],
         );
     }
