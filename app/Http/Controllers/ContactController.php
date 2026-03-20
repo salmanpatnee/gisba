@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\EnquiryRequest;
 use App\Mail\ContactMail;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
@@ -24,7 +25,9 @@ class ContactController extends Controller
                     heardFrom: $validated['heard_from'],
                     message: $validated['message'],
                 ));
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
+            Log::error('ContactMail failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+
             return response()->json([
                 'success' => false,
                 'message' => 'We could not send your message right now. Please email us directly at <a href="mailto:support@gisba.net">support@gisba.net</a>.',
