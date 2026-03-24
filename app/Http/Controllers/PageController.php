@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\PaymentNotificationMail;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class PageController extends Controller
@@ -204,6 +207,18 @@ class PageController extends Controller
     public function termsOfUse(): View
     {
         return view('pages.terms-of-use');
+    }
+
+    public function paymentSuccess(): View
+    {
+        try {
+            Mail::to(config('mail.enquiry_recipient', 'support@gisba.net'))
+                ->send(new PaymentNotificationMail);
+        } catch (\Throwable $e) {
+            Log::error('PaymentNotificationMail failed', ['error' => $e->getMessage()]);
+        }
+
+        return view('pages.payment-success');
     }
 
     public function blog(): View

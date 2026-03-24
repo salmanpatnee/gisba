@@ -80,6 +80,9 @@
   </div>
 </div>
 
+{{-- ── NIS2 Kit Promo Banner ──────────────────────────────────────── --}}
+@include('partials.nis2-kit-banner')
+
 {{-- ── Blog Grid ─────────────────────────────────────────────────── --}}
 <section class="blog-section">
   <div class="container">

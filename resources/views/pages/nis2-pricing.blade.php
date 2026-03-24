@@ -8,7 +8,7 @@
    * Stripe Payment Link
    * Replace the value below with your Stripe payment link URL.
    */
-  $stripePaymentLink = '#';
+  $stripePaymentLink = 'https://buy.stripe.com/test_00wfZi0B51n7a8PbkLds401';
 @endphp
 
 @section('banner')

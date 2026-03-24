@@ -105,6 +105,9 @@
   </div>
 </div>
 
+{{-- ── NIS2 Kit Promo Banner ──────────────────────────────────────── --}}
+@include('partials.nis2-kit-banner')
+
 {{-- ── Article Body ──────────────────────────────────────────────── --}}
 <section class="article-layout">
   <div class="container">

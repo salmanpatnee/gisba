@@ -20,6 +20,9 @@ enum Category: string
     case ApplicationDevelopment = 'Application Development';
     case BusinessContinuityAndCrisesManagement = 'Business Continuity and Crises Management';
     case SupplyChain = 'Supply Chain';
+    case Compliance = 'Compliance';
+    case Cybersecurity = 'Cybersecurity';
+    case Governance = 'Governance';
     case Other = 'Others';
 
     /** @return array<string, string> */

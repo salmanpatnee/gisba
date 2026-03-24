@@ -23,6 +23,7 @@ Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('p
 Route::get('/digital-delivery-policy', [PageController::class, 'digitalDeliveryPolicy'])->name('digital-delivery-policy');
 Route::get('/digital-refund-policy', [PageController::class, 'digitalRefundPolicy'])->name('digital-refund-policy');
 Route::get('/terms-of-use', [PageController::class, 'termsOfUse'])->name('terms-of-use');
+Route::get('/payment/success', [PageController::class, 'paymentSuccess'])->name('payment.success');
 
 // ── Server Setup (auth-protected, remove after use) ───────────────────────────
 

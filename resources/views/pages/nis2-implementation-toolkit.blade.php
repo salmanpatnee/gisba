@@ -314,12 +314,12 @@
                     <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.
                   </p>
                   <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="{{ route('nis2.pricing') }}" class="btn-hero-primary d-block text-center">
-                      <i class="bi bi-cart-check me-2"></i>View Pricing &amp; Buy Now
+                    <a href="{{ route('contact-us') }}#enquiry-form" class="btn-hero-primary d-block text-center">
+                      <i class="bi bi-calendar-check me-2"></i>Request a Demo or Purchase
                     </a>
-                    <a href="{{ route('contact-us') }}" class="btn-hero-secondary d-block text-center" style="color: var(--navy) !important; border-color: var(--border-mid);">
+                    {{-- <a href="{{ route('contact-us') }}" class="btn-hero-secondary d-block text-center" style="color: var(--navy) !important; border-color: var(--border-mid);">
                       <i class="bi bi-calendar-check me-2"></i>Request a Demo
-                    </a>
+                    </a> --}}
                   </div>
                 </div>
               </div>
