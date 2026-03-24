@@ -149,7 +149,13 @@
                         </select>
                         <div class="invalid-feedback" id="err-heard-from"></div>
                       </div>
-
+                      <div class="col-12 col-sm-6">
+                        <label for="contact-phone" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Phone Number</label>
+                        <input type="tel" class="form-control" id="contact-phone" name="phone"
+                               placeholder="+1 234 567 8900" maxlength="25"
+                               style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
+                        <div class="invalid-feedback" id="err-phone"></div>
+                      </div>
                       <div class="col-12">
                         <label for="contact-message" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Message <span class="text-danger">*</span></label>
                         <textarea class="form-control" id="contact-message" name="message" rows="5"
