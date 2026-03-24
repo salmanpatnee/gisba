@@ -300,11 +300,10 @@
                 <div class="pricing-body">
                   <p class="pricing-includes-title">Your purchase includes:</p>
                   <div class="pricing-includes">
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Access to NIS2.GISBA.Net</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Downloadable implementation frameworks</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Policy and procedure templates</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Completed implementation examples</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Video implementation guidance</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Editable frameworks</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Editable management charters</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> All relevant forms and templates</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Video explanations</div>
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Compliance and audit checklists</div>
                   </div>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
