@@ -31,27 +31,11 @@ Route::get('/payment/success', [PageController::class, 'paymentSuccess'])->name(
 Route::get('/setup/init', function () {
     $output = [];
 
-    // Force-recreate the storage symlink
-    $link = public_path('storage');
-    $target = storage_path('app/public');
-
     $output[] = 'public_path: '.public_path();
-    $output[] = 'storage target: '.$target;
-    $output[] = 'link path: '.$link;
-    $output[] = 'link exists: '.(file_exists($link) ? 'yes' : 'no');
-    $output[] = 'is symlink: '.(is_link($link) ? 'yes' : 'no');
-    $output[] = 'current target: '.(is_link($link) ? readlink($link) : 'n/a');
+    $output[] = 'storage target: '.storage_path('app/public');
 
-    if (is_link($link)) {
-        unlink($link);
-        $output[] = 'old symlink deleted';
-    }
-
-    if (symlink($target, $link)) {
-        $output[] = 'storage:link: created successfully';
-    } else {
-        $output[] = 'storage:link: FAILED - '.json_encode(error_get_last());
-    }
+    Artisan::call('storage:link', ['--force' => true]);
+    $output[] = 'storage:link: '.trim(Artisan::output());
 
     Artisan::call('config:clear');
     $output[] = 'config:clear: '.trim(Artisan::output());

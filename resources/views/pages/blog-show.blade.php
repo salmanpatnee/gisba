@@ -187,7 +187,7 @@
 
         {{-- Bottom CTA --}}
         <div class="article-bottom-cta">
-          <h3>Ready to take action on {{ $post->category === \App\Enums\Category::Compliance ? 'NIS2 compliance' : 'cyber resilience' }}?</h3>
+          <h3>Ready to take action on NIS2 compliance?</h3>
           <p>Our expert consultants are ready to help you build and implement a tailored programme that meets regulatory requirements and protects what matters most.</p>
           <div class="d-flex gap-3 flex-wrap">
             <a href="{{ route('nis2') }}" class="btn-hero-primary">Explore NIS2 Toolkit</a>
