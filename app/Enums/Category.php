@@ -4,6 +4,8 @@ namespace App\Enums;
 
 enum Category: string
 {
+    case GeneralTopics = 'General Topics';
+    case QuickTips = 'Quick Tips';
     case CybersecurityGovernance = 'Cybersecurity Governance';
     case PoliciesAndProcedureManagement = 'Policies and Procedure Management';
     case RiskManagement = 'Risk Management';
@@ -20,9 +22,6 @@ enum Category: string
     case ApplicationDevelopment = 'Application Development';
     case BusinessContinuityAndCrisesManagement = 'Business Continuity and Crises Management';
     case SupplyChain = 'Supply Chain';
-    case Compliance = 'Compliance';
-    case Cybersecurity = 'Cybersecurity';
-    case Governance = 'Governance';
     case Other = 'Others';
 
     /** @return array<string, string> */
