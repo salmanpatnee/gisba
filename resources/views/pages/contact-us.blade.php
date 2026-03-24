@@ -60,8 +60,7 @@
             </nav>
             <div class="sidebar-contact">
               <strong><i class="bi bi-envelope me-1"></i>Contact GISBA</strong>
-              <a href="mailto:support@gisba.net">support@gisba.net</a><br />
-              <a href="tel:+97338397453">+973 3839 7453</a>
+              <a href="mailto:support@gisba.net">support@gisba.net</a>
             </div>
           </aside>
         </div>
@@ -80,32 +79,6 @@
                     <div class="contact-card-body">
                       <p>For general enquiries, service requests, and proposals:</p>
                       <p style="font-size:15px; font-weight:600;"><a href="mailto:support@gisba.net">support@gisba.net</a></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12 col-sm-6">
-                  <div class="contact-card h-100">
-                    <div class="contact-card-title"><i class="bi bi-telephone me-2"></i>Phone</div>
-                    <div class="contact-card-body">
-                      <p>Available during business hours (GMT+3):</p>
-                      <p style="font-size:15px; font-weight:600;"><a href="tel:+97338397453">+973 3839 7453</a></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-12">
-                  <div class="contact-card">
-                    <div class="contact-card-title"><i class="bi bi-building me-2"></i>GISBA Consultants Co. W.L.L.</div>
-                    <div class="contact-card-body">
-                      <div class="row g-4">
-                        <div class="col-12 col-sm-6">
-                          <p style="font-weight:600; font-size:13.5px; color:var(--text-heading); margin-bottom:8px;"><i class="bi bi-geo-alt-fill me-1 text-primary"></i>Registered Address</p>
-                          <p style="margin:0; line-height:1.9;">Office #2062, Building #2004<br />Road #1527, Block #115<br />Area HIDD<br />Kingdom of Bahrain</p>
-                        </div>
-                        <div class="col-12 col-sm-6">
-                          <p style="font-weight:600; font-size:13.5px; color:var(--text-heading); margin-bottom:8px;"><i class="bi bi-card-text me-1 text-primary"></i>Company Details</p>
-                          <p style="margin:0; line-height:1.9;"><strong>Commercial Registration:</strong> 59649-1<br /><strong>Jurisdiction:</strong> Kingdom of Bahrain<br /><strong>Type:</strong> With Limited Liability (W.L.L.)</p>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -148,14 +121,6 @@
                                placeholder="your@email.com" required maxlength="150"
                                style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
                         <div class="invalid-feedback" id="err-email"></div>
-                      </div>
-
-                      <div class="col-12 col-sm-6">
-                        <label for="contact-phone" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Phone Number</label>
-                        <input type="tel" class="form-control" id="contact-phone" name="phone"
-                               placeholder="+1 234 567 8900" maxlength="25"
-                               style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
-                        <div class="invalid-feedback" id="err-phone"></div>
                       </div>
 
                       <div class="col-12 col-sm-6">

@@ -7,7 +7,16 @@
       "Bash(php artisan:*)",
       "Bash(grep -A 20 \"serviceLabels\\\\|service_label\\\\|$service\" c:/Users/salmanabdul.ghani/Herd/gisba_app/static/gisba/contact.php)",
       "Bash(vendor/bin/pint --dirty --format agent)",
-      "mcp__laravel-boost__get-absolute-url"
+      "mcp__laravel-boost__get-absolute-url",
+      "Bash(npm install:*)",
+      "Bash(node -e \"const p = require\\(''./node_modules/tinymce/package.json''\\); console.log\\(p.version\\);\")",
+      "Bash(node -e \"const p = require\\(''./public/vendor/tinymce/package.json''\\); console.log\\(p.version\\);\")",
+      "mcp__laravel-boost__last-error",
+      "mcp__laravel-boost__read-log-entries",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(grep -rn \"featured_image\\\\|storage\\\\|asset\" resources/views/pages/blog.blade.php resources/views/ --include=*.php -l)",
+      "mcp__laravel-boost__database-query"
     ]
   },
   "enableAllProjectMcpServers": true,
