@@ -82,6 +82,21 @@
 .back-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--navy-light); text-decoration: none; margin-bottom: 24px; transition: gap 0.2s, color 0.2s; }
 .back-link:hover { gap: 11px; color: var(--navy); }
 .back-link i { font-size: 12px; }
+
+/* ─── Downloadable Resources ────────────────────────────────── */
+.resources-section { margin-top: 28px; }
+.resources-section-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.resources-section-title::before { content: ''; display: inline-block; width: 4px; height: 18px; background: var(--accent); border-radius: 2px; flex-shrink: 0; }
+.resource-item { display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-md); text-decoration: none; transition: border-color 0.2s, box-shadow 0.2s; }
+.resource-item:hover { border-color: var(--accent); box-shadow: 0 2px 8px rgba(200,168,75,0.12); }
+.resource-icon { width: 40px; height: 40px; border-radius: var(--radius-sm); display: flex; align-items: center; justify-content: center; font-size: 1.15rem; flex-shrink: 0; }
+.resource-info { flex: 1; min-width: 0; }
+.resource-name { font-size: 13.5px; font-weight: 600; color: var(--navy); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+.resource-meta { display: flex; align-items: center; gap: 8px; }
+.resource-type-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 1px 7px; border-radius: 10px; }
+.resource-size { font-size: 11px; color: var(--text-muted); }
+.resource-download-btn { display: flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 600; color: var(--navy-light); flex-shrink: 0; transition: color 0.2s; }
+.resource-item:hover .resource-download-btn { color: var(--navy); }
 </style>
 
 {{-- ── Article Hero ──────────────────────────────────────────────── --}}
@@ -142,6 +157,33 @@
             </a>
           </div>
         </div>
+
+        {{-- Downloadable Resources --}}
+        @if($post->attachments->count())
+        <div class="resources-section">
+          <div class="resources-section-title">Downloadable Resources</div>
+          <div class="d-flex flex-column gap-2">
+            @foreach($post->attachments as $attachment)
+            <a href="{{ $attachment->file_url }}" download="{{ $attachment->filename }}" class="resource-item">
+              <div class="resource-icon" style="background-color:{{ $attachment->file_type_color }}18;">
+                <i class="bi {{ $attachment->file_icon }}" style="color:{{ $attachment->file_type_color }};"></i>
+              </div>
+              <div class="resource-info">
+                <span class="resource-name">{{ $attachment->filename }}</span>
+                <div class="resource-meta">
+                  <span class="resource-type-badge" style="background-color:{{ $attachment->file_type_color }}18;color:{{ $attachment->file_type_color }};">{{ $attachment->file_type_label }}</span>
+                  <span class="resource-size">{{ $attachment->readable_size }}</span>
+                </div>
+              </div>
+              <div class="resource-download-btn">
+                <i class="bi bi-download"></i>
+                <span>Download</span>
+              </div>
+            </a>
+            @endforeach
+          </div>
+        </div>
+        @endif
 
         {{-- Bottom CTA --}}
         <div class="article-bottom-cta">

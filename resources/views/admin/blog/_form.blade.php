@@ -62,6 +62,52 @@
     @enderror
 </div>
 
+{{-- Downloadable Attachments --}}
+<div class="border-t border-gray-100 pt-6 mt-6">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4">Downloadable Resources</h3>
+
+    {{-- Existing attachments (edit mode) --}}
+    @if($post?->attachments?->count())
+        <div class="mb-4 space-y-2">
+            @foreach($post->attachments as $attachment)
+                <div class="flex items-center justify-between gap-3 bg-gray-50 border border-gray-200 rounded-md px-4 py-2 text-sm">
+                    <div class="flex items-center gap-2 min-w-0">
+                        <i class="bi {{ $attachment->file_icon }} text-gray-500 flex-shrink-0"></i>
+                        <span class="truncate font-medium text-gray-700">{{ $attachment->filename }}</span>
+                        <span class="text-xs text-gray-400 flex-shrink-0">{{ $attachment->readable_size }}</span>
+                        <span class="text-xs px-1.5 py-0.5 rounded font-semibold flex-shrink-0"
+                              style="background-color:{{ $attachment->file_type_color }}22;color:{{ $attachment->file_type_color }}">
+                            {{ $attachment->file_type_label }}
+                        </span>
+                    </div>
+                    <label class="flex items-center gap-1.5 cursor-pointer flex-shrink-0">
+                        <input type="checkbox"
+                               name="delete_attachments[]"
+                               value="{{ $attachment->id }}"
+                               class="rounded border-gray-300 text-red-600 focus:ring-red-500">
+                        <span class="text-xs text-red-600 font-medium">Remove</span>
+                    </label>
+                </div>
+            @endforeach
+        </div>
+        <p class="text-xs text-gray-400 mb-3">Tick "Remove" on any file above, then save to delete it.</p>
+    @endif
+
+    <input type="file"
+           id="attachments"
+           name="attachments[]"
+           multiple
+           accept=".jpg,.jpeg,.png,.gif,.webp,.pdf,.doc,.docx,.ppt,.pptx"
+           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 @error('attachments') border-red-400 @enderror @error('attachments.*') border-red-400 @enderror">
+    <p class="mt-1 text-xs text-gray-400">Images, PDF, Word, PowerPoint — max 10 MB each. Multiple files allowed.</p>
+    @error('attachments')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+    @error('attachments.*')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
 {{-- SEO --}}
 <div class="border-t border-gray-100 pt-6 mt-6">
     <h3 class="text-sm font-semibold text-gray-700 mb-4">SEO (optional)</h3>

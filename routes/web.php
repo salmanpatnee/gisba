@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
@@ -68,6 +69,7 @@ Route::get('/setup/init', function () {
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
+    Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
 });
 
 // ── Breeze Auth ───────────────────────────────────────────────────────────────

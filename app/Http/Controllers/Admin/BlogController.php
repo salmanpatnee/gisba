@@ -8,6 +8,7 @@ use App\Http\Requests\StoreBlogPostRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogPost;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -30,7 +31,7 @@ class BlogController extends Controller
 
     public function store(StoreBlogPostRequest $request): RedirectResponse
     {
-        $data = $request->safe()->except('featured_image');
+        $data = $request->safe()->except(['featured_image', 'attachments']);
         $data['slug'] = Str::slug($request->title);
         $data['author'] = 'GISBA Editorial Team';
 
@@ -38,7 +39,9 @@ class BlogController extends Controller
             $data['featured_image'] = $request->file('featured_image')->store('blog', 'public');
         }
 
-        BlogPost::create($data);
+        $post = BlogPost::create($data);
+
+        $this->storeAttachments($post, $request->file('attachments', []));
 
         return redirect()->route('admin.blog.index')
             ->with('success', 'Blog post created successfully.');
@@ -47,13 +50,14 @@ class BlogController extends Controller
     public function edit(BlogPost $blog): View
     {
         $categories = Category::options();
+        $blog->load('attachments');
 
         return view('admin.blog.edit', compact('blog', 'categories'));
     }
 
     public function update(UpdateBlogPostRequest $request, BlogPost $blog): RedirectResponse
     {
-        $data = $request->safe()->except('featured_image');
+        $data = $request->safe()->except(['featured_image', 'attachments', 'delete_attachments']);
         $data['slug'] = Str::slug($request->title);
 
         if ($request->hasFile('featured_image')) {
@@ -65,6 +69,16 @@ class BlogController extends Controller
 
         $blog->update($data);
 
+        foreach ($request->input('delete_attachments', []) as $attachmentId) {
+            $attachment = $blog->attachments()->find($attachmentId);
+            if ($attachment) {
+                Storage::disk('public')->delete($attachment->path);
+                $attachment->delete();
+            }
+        }
+
+        $this->storeAttachments($blog, $request->file('attachments', []));
+
         return redirect()->route('admin.blog.index')
             ->with('success', 'Blog post updated successfully.');
     }
@@ -75,9 +89,28 @@ class BlogController extends Controller
             Storage::disk('public')->delete($blog->featured_image);
         }
 
+        foreach ($blog->attachments as $attachment) {
+            Storage::disk('public')->delete($attachment->path);
+        }
+
         $blog->delete();
 
         return redirect()->route('admin.blog.index')
             ->with('success', 'Blog post deleted successfully.');
+    }
+
+    /** @param array<UploadedFile> $files */
+    private function storeAttachments(BlogPost $post, array $files): void
+    {
+        foreach ($files as $file) {
+            $path = $file->store('blog/attachments', 'public');
+
+            $post->attachments()->create([
+                'filename' => $file->getClientOriginalName(),
+                'path' => $path,
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+            ]);
+        }
     }
 }

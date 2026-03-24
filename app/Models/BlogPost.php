@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\Category;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -26,6 +27,11 @@ class BlogPost extends Model
     protected $casts = [
         'category' => Category::class,
     ];
+
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(BlogPostAttachment::class);
+    }
 
     /**
      * Auto-generate slug from title when creating.

@@ -21,6 +21,7 @@ class BlogController extends Controller
     public function show(string $slug): View
     {
         $post = BlogPost::query()
+            ->with('attachments')
             ->where('slug', $slug)
             ->firstOrFail();
 

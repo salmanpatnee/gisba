@@ -24,6 +24,10 @@ class UpdateBlogPostRequest extends FormRequest
             'featured_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],
+            'attachments' => ['nullable', 'array'],
+            'attachments.*' => ['file', 'mimes:jpeg,png,jpg,gif,webp,pdf,doc,docx,ppt,pptx', 'max:10240'],
+            'delete_attachments' => ['nullable', 'array'],
+            'delete_attachments.*' => ['integer'],
         ];
     }
 }
