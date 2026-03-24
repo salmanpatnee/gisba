@@ -102,6 +102,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('nis2-free-resources*') ? 'active' : '' }}" href="{{ route('nis2-free-resources') }}">
+              <i class="bi bi-journal-text"></i>NIS2 Free Resources
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('nis2') ? 'active' : '' }}" href="{{ route('nis2') }}">
               <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit
             </a>
@@ -114,11 +119,6 @@
           <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('success-stories') ? 'active' : '' }}" href="{{ route('success-stories') }}">
               <i class="bi bi-star"></i>Success Stories
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('blog*') ? 'active' : '' }}" href="{{ route('blog') }}">
-              <i class="bi bi-journal-text"></i>Blog
             </a>
           </li>
           <li class="nav-item">
@@ -152,11 +152,11 @@
           <strong style="color:#fff; font-size:13px; display:block; margin-bottom:8px;">Quick Links</strong>
           <ul style="list-style:none; padding:0; margin:0; font-size:12.5px;">
             <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('nis2-free-resources') }}">NIS2 Free Resources</a></li>
             <li><a href="{{ route('nis2') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
-            <li><a href="{{ route('blog') }}">Blog</a></li>
           </ul>
         </div>
 

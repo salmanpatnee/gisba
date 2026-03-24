@@ -7,7 +7,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
     <span><i class="bi bi-journal-text me-2"></i>GISBA Blog &mdash; {{ $post->category->value }}</span>
     <div class="d-flex gap-3">
-      <a href="{{ route('blog') }}"><i class="bi bi-arrow-left me-1"></i>All Articles</a>
+      <a href="{{ route('nis2-free-resources') }}"><i class="bi bi-arrow-left me-1"></i>All Articles</a>
       <a href="{{ route('contact-us') }}"><i class="bi bi-envelope me-1"></i>Contact</a>
     </div>
   </div>
@@ -91,7 +91,7 @@
       <nav class="article-breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}"><i class="bi bi-house"></i> Home</a>
         <i class="bi bi-chevron-right"></i>
-        <a href="{{ route('blog') }}">Blog</a>
+        <a href="{{ route('nis2-free-resources') }}">NIS2 Free Resources</a>
         <i class="bi bi-chevron-right"></i>
         <span style="color:rgba(255,255,255,0.85);">{{ $post->category->value }}</span>
       </nav>
@@ -116,7 +116,7 @@
       {{-- Main Content --}}
       <div class="col-12 col-lg-8">
 
-        <a href="{{ route('blog') }}" class="back-link"><i class="bi bi-arrow-left"></i> Back to All Articles</a>
+        <a href="{{ route('nis2-free-resources') }}" class="back-link"><i class="bi bi-arrow-left"></i> Back to All Articles</a>
 
         <img
           src="{{ $post->image_url }}"
@@ -137,7 +137,7 @@
               <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-calendar3" style="color:var(--accent);"></i> {{ $post->formatted_date }}</span>
               <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-tag" style="color:var(--accent);"></i> {{ $post->category->value }}</span>
             </div>
-            <a href="{{ route('blog') }}" class="back-link" style="margin-bottom:0;">
+            <a href="{{ route('nis2-free-resources') }}" class="back-link" style="margin-bottom:0;">
               <i class="bi bi-arrow-left"></i> All Articles
             </a>
           </div>
@@ -177,7 +177,7 @@
           <div class="article-sidebar-card">
             <div class="article-sidebar-card-title">Related Articles</div>
             @foreach($related as $relatedPost)
-            <a href="{{ route('blog.show', $relatedPost->slug) }}" class="related-post-item">
+            <a href="{{ route('nis2-free-resources.show',$relatedPost->slug) }}" class="related-post-item">
               <img src="{{ $relatedPost->image_url }}" alt="{{ $relatedPost->title }}" class="related-post-img">
               <div>
                 <span class="related-post-title">{{ $relatedPost->title }}</span>

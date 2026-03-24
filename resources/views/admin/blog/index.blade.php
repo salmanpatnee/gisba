@@ -38,7 +38,7 @@
                             <td class="px-6 py-4 text-gray-600">{{ $post->category->value }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ $post->formatted_date }}</td>
                             <td class="px-6 py-4 text-right space-x-3">
-                                <a href="{{ route('blog.show', $post->slug) }}"
+                                <a href="{{ route('nis2-free-resources.show',$post->slug) }}"
                                    target="_blank"
                                    class="text-blue-600 hover:text-blue-800 font-medium">View</a>
                                 <a href="{{ route('admin.blog.edit', $post) }}"

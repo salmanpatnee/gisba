@@ -112,7 +112,7 @@
             <p class="blog-card-excerpt">{{ $post->excerpt }}</p>
             <div class="blog-card-footer">
               <span class="blog-card-author"><i class="bi bi-person me-1"></i>{{ $post->author }}</span>
-              <a href="{{ route('blog.show', $post->slug) }}" class="btn-read-more">
+              <a href="{{ route('nis2-free-resources.show',$post->slug) }}" class="btn-read-more">
                 Read More <i class="bi bi-arrow-right"></i>
               </a>
             </div>

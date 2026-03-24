@@ -16,8 +16,8 @@ Route::get('/training-course-development', [PageController::class, 'training'])-
 Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
-Route::get('/blog', [BlogController::class, 'index'])->name('blog');
-Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/nis2-free-resources', [BlogController::class, 'index'])->name('nis2-free-resources');
+Route::get('/nis2-free-resources/{slug}', [BlogController::class, 'show'])->name('nis2-free-resources.show');
 
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/digital-delivery-policy', [PageController::class, 'digitalDeliveryPolicy'])->name('digital-delivery-policy');
