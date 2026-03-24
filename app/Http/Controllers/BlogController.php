@@ -9,11 +9,13 @@ class BlogController extends Controller
 {
     public function index(): View
     {
-        $posts = BlogPost::query()
+        $categorizedPosts = BlogPost::query()
             ->latest()
-            ->paginate(9);
+            ->get()
+            ->groupBy(fn (BlogPost $post): string => $post->category->value)
+            ->filter(fn ($posts): bool => $posts->isNotEmpty());
 
-        return view('pages.blog', compact('posts'));
+        return view('pages.blog', compact('categorizedPosts'));
     }
 
     public function show(string $slug): View
