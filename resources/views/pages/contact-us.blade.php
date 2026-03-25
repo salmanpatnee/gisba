@@ -53,7 +53,7 @@
             <nav class="sidebar-nav">
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
-                <li><a href="#about"><i class="bi bi-info-circle"></i> About GISBA</a></li>
+                {{-- <li><a href="#about"><i class="bi bi-info-circle"></i> About GISBA</a></li> --}}
                 <li><a href="#get-in-touch"><i class="bi bi-chat-dots"></i> Get in Touch</a></li>
                 <li><a href="#enquiry-form"><i class="bi bi-envelope"></i> Send Enquiry</a></li>
               </ul>

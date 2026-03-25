@@ -16,7 +16,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(grep -rn \"featured_image\\\\|storage\\\\|asset\" resources/views/pages/blog.blade.php resources/views/ --include=*.php -l)",
-      "mcp__laravel-boost__database-query"
+      "mcp__laravel-boost__database-query",
+      "WebFetch(domain:www.hostinger.com)"
     ]
   },
   "enableAllProjectMcpServers": true,
