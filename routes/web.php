@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-u
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/nis2-free-resources', [BlogController::class, 'index'])->name('nis2-free-resources');
 Route::get('/nis2-free-resources/{slug}', [BlogController::class, 'show'])->name('nis2-free-resources.show');
+Route::get('/video-resources', [VideoController::class, 'index'])->name('video-resources');
+Route::get('/video-resources/{video}/stream', [VideoController::class, 'stream'])->name('videos.stream');
+Route::post('/video-resources/{video}/view', [VideoController::class, 'recordView'])->name('videos.record-view');
 
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy-policy');
 Route::get('/digital-delivery-policy', [PageController::class, 'digitalDeliveryPolicy'])->name('digital-delivery-policy');
@@ -54,6 +58,7 @@ Route::get('/setup/init', function () {
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
     Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
+    Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
 });
 
 // ── Breeze Auth ───────────────────────────────────────────────────────────────

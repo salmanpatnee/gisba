@@ -107,6 +107,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('video-resources') ? 'active' : '' }}" href="{{ route('video-resources') }}">
+              <i class="bi bi-play-circle"></i>NIS2 Video Resources
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('nis2') ? 'active' : '' }}" href="{{ route('nis2') }}">
               <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit
             </a>
@@ -153,6 +158,7 @@
           <ul style="list-style:none; padding:0; margin:0; font-size:12.5px;">
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('nis2-free-resources') }}">NIS2 Free Resources</a></li>
+            <li><a href="{{ route('video-resources') }}">NIS2 Video Resources</a></li>
             <li><a href="{{ route('nis2') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>

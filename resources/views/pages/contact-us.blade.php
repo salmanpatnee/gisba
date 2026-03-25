@@ -118,9 +118,10 @@
                       <div class="col-12 col-sm-6">
                         <label for="contact-email" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Email Address <span class="text-danger">*</span></label>
                         <input type="email" class="form-control" id="contact-email" name="email"
-                               placeholder="your@email.com" required maxlength="150"
+                               placeholder="name@company.com" required maxlength="150"
                                style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
                         <div class="invalid-feedback" id="err-email"></div>
+                        <div style="font-size:12px; color:var(--text-muted); margin-top:4px;">Personal email addresses (Gmail, Yahoo, Outlook, etc.) are not accepted.</div>
                       </div>
 
                       <div class="col-12 col-sm-6">
@@ -215,8 +216,20 @@
     if (errEl) { errEl.textContent = ''; }
   }
 
+  const blockedEmailDomains = [
+    'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'live.com',
+    'aol.com', 'icloud.com', 'mail.com', 'protonmail.com', 'zoho.com',
+  ];
+
   function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function isBusinessEmail(email) {
+    const atIndex = email.lastIndexOf('@');
+    if (atIndex === -1) { return false; }
+    const domain = email.slice(atIndex + 1).toLowerCase();
+    return !blockedEmailDomains.includes(domain);
   }
 
   function validatePhone(phone) {
@@ -243,6 +256,9 @@
       valid = false;
     } else if (!validateEmail(email.value.trim())) {
       setFieldError(email, document.getElementById('err-email'), 'Please enter a valid email address.');
+      valid = false;
+    } else if (!isBusinessEmail(email.value.trim())) {
+      setFieldError(email, document.getElementById('err-email'), 'Please use your business email address.');
       valid = false;
     } else {
       setFieldValid(email);

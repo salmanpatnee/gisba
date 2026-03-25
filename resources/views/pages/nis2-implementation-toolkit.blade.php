@@ -5,7 +5,7 @@
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-mortarboard me-2"></i>GISBA: Cybersecurity Training Development Services — Corporate Course Development</span>
+    <span><i class="bi bi-mortarboard me-2"></i>NIS2 Implementation Toolkit — Achieve EU Compliance Faster</span>
     <div class="d-flex gap-3">
       <a href="#about"><i class="bi bi-info-circle me-1"></i>About</a>
       <a href="#courses"><i class="bi bi-journal-bookmark me-1"></i>Courses</a>
@@ -39,6 +39,12 @@
                 <p class="hero-desc">
                   This toolkit provides structured documentation, templates, and implementation guidance to support organizations in establishing compliant cybersecurity governance and operational practices.
                 </p>
+                 <div class="hero-actions">
+                  
+                  <a href="{{ route('contact-us') }}#enquiry-form-el" class="btn-hero-primary">
+                    <i class="bi bi-envelope me-2"></i>Request a Demo or Purchase
+                  </a>
+                </div>
               </div>
               <div class="col-md-6 text-center">
                 <img class="image-content img-fluid" src="{{ asset('assets/images/compliance.png') }}" alt="Cybersecurity">
