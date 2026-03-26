@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="d-flex align-items-center gap-2 flex-shrink-0">
-        <a href="{{ route('nis2') }}" class="btn-nis2-buy">Learn More <i class="bi bi-arrow-right"></i></a>
+        <a href="{{ route('nis2-toolkit') }}" class="btn-nis2-buy">Learn More <i class="bi bi-arrow-right"></i></a>
       </div>
     </div>
   </div>

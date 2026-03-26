@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Route;
 // ── GISBA Public Pages ────────────────────────────────────────────────────────
 
 Route::get('/', [PageController::class, 'home'])->name('home');
-Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2');
-Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2.pricing');
+Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2-toolkit');
+Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2-toolkit.pricing');
 Route::get('/training-course-development', [PageController::class, 'training'])->name('training');
 Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
-Route::get('/nis2-free-resources', [BlogController::class, 'index'])->name('nis2-free-resources');
-Route::get('/nis2-free-resources/{slug}', [BlogController::class, 'show'])->name('nis2-free-resources.show');
+Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
+Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
 Route::get('/video-resources', [VideoController::class, 'index'])->name('video-resources');
 Route::get('/video-resources/{video}/stream', [VideoController::class, 'stream'])->name('videos.stream');
 Route::post('/video-resources/{video}/view', [VideoController::class, 'recordView'])->name('videos.record-view');

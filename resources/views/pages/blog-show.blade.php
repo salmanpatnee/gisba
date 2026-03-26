@@ -7,7 +7,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
     <span><i class="bi bi-journal-text me-2"></i>GISBA Blog &mdash; {{ $post->category->value }}</span>
     <div class="d-flex gap-3">
-      <a href="{{ route('nis2-free-resources') }}"><i class="bi bi-arrow-left me-1"></i>All Articles</a>
+      <a href="{{ route('nis2') }}"><i class="bi bi-arrow-left me-1"></i>All Articles</a>
       <a href="{{ route('contact-us') }}"><i class="bi bi-envelope me-1"></i>Contact</a>
     </div>
   </div>
@@ -117,7 +117,7 @@
       <nav class="article-breadcrumb" aria-label="Breadcrumb">
         <a href="{{ route('home') }}"><i class="bi bi-house"></i> Home</a>
         <i class="bi bi-chevron-right"></i>
-        <a href="{{ route('nis2-free-resources') }}">NIS2 Free Resources</a>
+        <a href="{{ route('nis2') }}">NIS2</a>
         <i class="bi bi-chevron-right"></i>
         <span style="color:rgba(255,255,255,0.85);">{{ $post->category->value }}</span>
       </nav>
@@ -142,7 +142,7 @@
       {{-- Main Content --}}
       <div class="col-12 col-lg-8">
 
-        <a href="{{ route('nis2-free-resources') }}" class="back-link"><i class="bi bi-arrow-left"></i> Back to All Articles</a>
+        <a href="{{ route('nis2') }}" class="back-link"><i class="bi bi-arrow-left"></i> Back to All Articles</a>
 
         <img
           src="{{ $post->image_url }}"
@@ -163,7 +163,7 @@
               <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-calendar3" style="color:var(--accent);"></i> {{ $post->formatted_date }}</span>
               <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-tag" style="color:var(--accent);"></i> {{ $post->category->value }}</span>
             </div>
-            <a href="{{ route('nis2-free-resources') }}" class="back-link" style="margin-bottom:0;">
+            <a href="{{ route('nis2') }}" class="back-link" style="margin-bottom:0;">
               <i class="bi bi-arrow-left"></i> All Articles
             </a>
           </div>
@@ -201,7 +201,7 @@
           <h3>Ready to take action on NIS2 compliance?</h3>
           <p>Our expert consultants are ready to help you build and implement a tailored programme that meets regulatory requirements and protects what matters most.</p>
           <div class="d-flex gap-3 flex-wrap">
-            <a href="{{ route('nis2') }}" class="btn-hero-primary">Explore NIS2 Toolkit</a>
+            <a href="{{ route('nis2-toolkit') }}" class="btn-hero-primary">Explore NIS2 Toolkit</a>
             <a href="{{ route('contact-us') }}" class="btn-hero-secondary">Speak to a Consultant</a>
           </div>
         </div>
@@ -230,7 +230,7 @@
           <div class="article-sidebar-card">
             <div class="article-sidebar-card-title">Related Articles</div>
             @foreach($related as $relatedPost)
-            <a href="{{ route('nis2-free-resources.show',$relatedPost->slug) }}" class="related-post-item">
+            <a href="{{ route('nis2.show',$relatedPost->slug) }}" class="related-post-item">
               <img src="{{ $relatedPost->image_url }}" alt="{{ $relatedPost->title }}" class="related-post-img">
               <div>
                 <span class="related-post-title">{{ $relatedPost->title }}</span>
@@ -246,7 +246,7 @@
             <div class="article-sidebar-card-title">Our Services</div>
             <ul style="list-style:none;padding:0;margin:0;">
               <li style="padding:7px 0;border-bottom:1px solid var(--border-light);">
-                <a href="{{ route('nis2') }}" style="font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='var(--navy-light)'" onmouseout="this.style.color='var(--navy)'">
+                <a href="{{ route('nis2-toolkit') }}" style="font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='var(--navy-light)'" onmouseout="this.style.color='var(--navy)'">
                   <i class="bi bi-shield-check" style="color:var(--accent);"></i> NIS2 Implementation Toolkit
                 </a>
               </li>

@@ -185,7 +185,7 @@
             <ul class="kb-article-list">
               @foreach($articles as $article)
               <li>
-                <a href="{{ route('nis2-free-resources.show', $article->slug) }}" class="kb-article-link">
+                <a href="{{ route('nis2.show', $article->slug) }}" class="kb-article-link">
                   {{ $article->title }}
                 </a>
               </li>

@@ -15,7 +15,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
     <span><i class="bi bi-shield-check me-2"></i>NIS2 Implementation Toolkit — Pricing</span>
     <div class="d-flex gap-3">
-      <a href="{{ route('nis2') }}"><i class="bi bi-arrow-left me-1"></i>Back to Toolkit</a>
+      <a href="{{ route('nis2-toolkit') }}"><i class="bi bi-arrow-left me-1"></i>Back to Toolkit</a>
       <a href="{{ route('contact-us') }}"><i class="bi bi-envelope me-1"></i>Contact</a>
     </div>
   </div>

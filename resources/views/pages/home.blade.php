@@ -194,7 +194,7 @@
                       <span style="font-size:13px;">Ensures full regulatory alignment</span>
                     </div>
                   </div>
-                  <a href="{{ route('nis2') }}" class="btn-hero-primary d-inline-flex mt-3" style="font-size:13px; padding:9px 18px;">
+                  <a href="{{ route('nis2-toolkit') }}" class="btn-hero-primary d-inline-flex mt-3" style="font-size:13px; padding:9px 18px;">
                     <i class="bi bi-arrow-right me-2"></i>Learn More &amp; Get Toolkit
                   </a>
                 </div>

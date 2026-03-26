@@ -135,7 +135,7 @@ it('shows downloadable resources on the public blog show page', function () {
         'size' => 102400,
     ]);
 
-    $this->get(route('nis2-free-resources.show', $post->slug))
+    $this->get(route('nis2.show', $post->slug))
         ->assertSuccessful()
         ->assertSee('Downloadable Resources')
         ->assertSee('nis2-guide.pdf');
@@ -144,7 +144,7 @@ it('shows downloadable resources on the public blog show page', function () {
 it('hides the downloadable resources section when a post has no attachments', function () {
     $post = BlogPost::factory()->create();
 
-    $this->get(route('nis2-free-resources.show', $post->slug))
+    $this->get(route('nis2.show', $post->slug))
         ->assertSuccessful()
         ->assertDontSee('class="resources-section"', escape: false);
 });

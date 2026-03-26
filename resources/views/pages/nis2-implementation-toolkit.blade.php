@@ -73,7 +73,7 @@
                 <li><a href="#format"><i class="bi bi-eye"></i> File Format</a></li>
                 <li><a href="#method"><i class="bi bi-link-45deg"></i> Delivery Method</a></li>
                 <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
-                <li><a href="{{ route('nis2.pricing') }}"><i class="bi bi-cart-check"></i> Buy Now</a></li>
+                <li><a href="{{ route('nis2-toolkit.pricing') }}"><i class="bi bi-cart-check"></i> Buy Now</a></li>
               </ul>
             </nav>
             <div class="sidebar-contact">
