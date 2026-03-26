@@ -39,7 +39,7 @@
                 <p class="hero-desc">
                   This toolkit provides structured documentation, templates, and implementation guidance to support organizations in establishing compliant cybersecurity governance and operational practices.
                 </p>
-                 <div class="hero-actions">
+                 <div class="hero-actions mb-3">
                   
                   <a href="{{ route('contact-us') }}#enquiry-form-el" class="btn-hero-primary">
                     <i class="bi bi-envelope me-2"></i>Request a Demo or Purchase

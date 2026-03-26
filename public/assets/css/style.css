@@ -1440,6 +1440,16 @@ ul li {
   .audience-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .hero-desc,
+  .cta-desc,
+  .inclusion-body p,
+  .main-content p,
+  .info-box p,
+  .article-bottom-cta p,
+  .contact-card-body p {
+    text-align: justify;
+  }
 }
 
 /* ============================================================

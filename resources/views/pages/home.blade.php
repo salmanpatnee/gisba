@@ -46,7 +46,7 @@
                 <p class="hero-desc">
                   We are at the forefront to address emerging trends and requirements, providing clients with the best possible solutions that are effective, easy to implement, and meet both business and regulatory requirements.
                 </p>
-                <div class="hero-actions">
+                <div class="hero-actions mb-3">
                   <a href="#services" class="btn-hero-primary">
                     <i class="bi bi-grid-fill me-2"></i>Our Services
                   </a>

@@ -78,6 +78,17 @@
 .article-bottom-cta h3 { font-family: var(--font-display); font-size: 1.1rem; color: #fff; font-weight: 700; margin-bottom: 8px; }
 .article-bottom-cta p { font-size: 13.5px; color: rgba(255,255,255,0.72); margin-bottom: 18px; }
 
+/* ─── Mobile text justify ───────────────────────────────────── */
+@media (max-width: 767px) {
+  .article-body p,
+  .article-body .blog-lead,
+  .blog-callout,
+  .article-bottom-cta p,
+  .article-sidebar-card p {
+    text-align: justify;
+  }
+}
+
 /* ─── Back link ─────────────────────────────────────────────── */
 .back-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; color: var(--navy-light); text-decoration: none; margin-bottom: 24px; transition: gap 0.2s, color 0.2s; }
 .back-link:hover { gap: 11px; color: var(--navy); }
