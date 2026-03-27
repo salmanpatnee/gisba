@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogAttachmentController;
+use App\Http\Controllers\Admin\Nis2PricingController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
@@ -59,6 +60,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
     Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+    Route::get('nis2-pricing', [Nis2PricingController::class, 'edit'])->name('nis2-pricing.edit');
+    Route::put('nis2-pricing', [Nis2PricingController::class, 'update'])->name('nis2-pricing.update');
 });
 
 // ── Breeze Auth ───────────────────────────────────────────────────────────────

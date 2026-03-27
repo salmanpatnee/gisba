@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\PaymentNotificationMail;
+use App\Models\Nis2Pricing;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -166,12 +167,16 @@ class PageController extends Controller
 
     public function nis2(): View
     {
-        return view('pages.nis2-implementation-toolkit');
+        $pricing = Nis2Pricing::current();
+
+        return view('pages.nis2-implementation-toolkit', compact('pricing'));
     }
 
     public function nis2Pricing(): View
     {
-        return view('pages.nis2-pricing');
+        $pricing = Nis2Pricing::current();
+
+        return view('pages.nis2-pricing', compact('pricing'));
     }
 
     public function training(): View

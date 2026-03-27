@@ -330,12 +330,12 @@
                       font-size:1.2rem; font-weight:700; color:#fff;
                       text-decoration:line-through; text-decoration-color:#e63946;
                       text-decoration-thickness:3px;
-                    ">£2,495 GBP+VAT</span>
+                    ">£{{ number_format($pricing->regular_price, 0) }} GBP+VAT</span>
                   </div>
 
                   {{-- Sale price --}}
                   <div style="font-size:1.75rem; font-weight:800; color:#fff; margin:2px 0 2px; letter-spacing:-.02em;">
-                    £1,500 <span style="font-size:1rem; font-weight:600;">GBP+VAT</span>
+                    £{{ number_format($pricing->sale_price, 0) }} <span style="font-size:1rem; font-weight:600;">GBP+VAT</span>
                   </div>
 
                   <div class="pricing-sublabel">One-time purchase · 1-year platform access</div>
@@ -351,7 +351,7 @@
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Compliance and audit checklists</div>
                   </div>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
-                    <i class="bi bi-tag me-1"></i>Save £995 — limited-time 40% discount off the regular price of £2,495 GBP+VAT.
+                    <i class="bi bi-tag me-1"></i>Save £{{ number_format($pricing->savings, 0) }} — limited-time 40% discount off the regular price of £{{ number_format($pricing->regular_price, 0) }} GBP+VAT.
                   </p>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0; text-align: justify;">
                     <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.

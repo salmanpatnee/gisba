@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 @section('title', 'NIS2 Implementation Toolkit — Pricing | GISBA Consultants')
-@section('meta_description', 'Purchase the GISBA NIS2 Implementation Toolkit — £1,500 GBP+VAT. Includes 16 frameworks, video guidance, audit checklists, and 1-year platform access.')
+@section('meta_description', 'Purchase the GISBA NIS2 Implementation Toolkit — £' . number_format($pricing->sale_price, 0) . ' GBP+VAT. Includes 16 frameworks, video guidance, audit checklists, and 1-year platform access.')
 
 @php
   /**
@@ -52,11 +52,11 @@
             {{-- Discount badge + original price --}}
             <div class="pt-discount-row">
               <span class="pt-discount-badge">40% OFF</span>
-              <span class="pt-original-price">£2,495 GBP+VAT</span>
+              <span class="pt-original-price">£{{ number_format($pricing->regular_price, 0) }} GBP+VAT</span>
             </div>
 
             <div class="pt-price">
-              <span class="pt-currency">£</span>1,500
+              <span class="pt-currency">£</span>{{ number_format($pricing->sale_price, 0) }}
             </div>
             <div class="pt-billing">GBP + VAT &nbsp;·&nbsp; One-time purchase</div>
           </div>
@@ -166,7 +166,7 @@
       <div class="pricing-page-footnote">
         <p>
           <i class="bi bi-tag me-1"></i>
-          One-time fee of £1,500 GBP+VAT — less than one week of a professional cybersecurity consultant.
+          One-time fee of £{{ number_format($pricing->sale_price, 0) }} GBP+VAT — less than one week of a professional cybersecurity consultant.
           The average compliance consultant charges ~€800/day; a 20-day engagement costs ~€16,000.
         </p>
         <p class="mt-2">
