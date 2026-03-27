@@ -99,15 +99,15 @@
     <div class="container">
       <div class="ss-section-header ss-reveal">
         <span class="ss-section-label">Established 2006</span>
-        <h2 class="ss-section-title">Operational and Trusted for Nearly 20 Years</h2>
+        <h2 class="ss-section-title">Operational and Trusted for 20 Years</h2>
         <div class="ss-accent-bar"></div>
         <p class="ss-section-desc">From inception to global recognition — a visual timeline of GISBA's journey and cumulative achievements.</p>
       </div>
       <div class="row g-4 gy-4">
         <div class="col-md-6 ss-reveal">
-          <div class="ss-featured-card" data-img="{{ asset('assets/images/success_stories/Slide3.jpg') }}" data-caption="Operational and Trusted Since 2006 – Nearly 20 Years of Consulting Excellence">
+          <div class="ss-featured-card" data-img="{{ asset('assets/images/success_stories/Slide3.jpg') }}" data-caption="Operational and Trusted Since 2006 – 20 Years of Consulting Excellence">
             <img src="{{ asset('assets/images/success_stories/Slide3.jpg') }}" alt="Operational and Trusted Since 2006" loading="lazy">
-            <div class="ss-featured-caption"><h3>Operational and Trusted Since 2006 – Nearly 20 Years of Consulting Excellence</h3></div>
+            <div class="ss-featured-caption"><h3>Operational and Trusted Since 2006 – 20 Years of Consulting Excellence</h3></div>
           </div>
         </div>
         <div class="col-md-6 ss-reveal">

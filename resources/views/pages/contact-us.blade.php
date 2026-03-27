@@ -144,7 +144,7 @@
                           <option value="" selected>— Please select —</option>
                           <option value="linkedin">LinkedIn</option>
                           <option value="google">Google Search</option>
-                          <option value="diac">DIAC (Partner's Website)</option>
+                          <option value="daic">DAIC (Partner's Website)</option>
                           <option value="visionary-alpha">Visionary Alpha (Partner's Website)</option>
                           <option value="other">Others</option>
                         </select>

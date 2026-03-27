@@ -36,9 +36,8 @@
               <p>After successful payment:</p>
 
               <ul>
-                <li>Customers will receive immediate access to the download link on the payment confirmation page.</li>
-                <li>The download link will also be sent via email to the address used during purchase.</li>
-                <li>If the email is not received within 10 minutes, please check your spam folder or contact support.</li>
+                <li>The complete NIS2 Implementation Kit access link will be sent via email to the address used during purchase on the same day as payment.</li>
+                <li>If the email is not received within 24 hours, please check your spam folder or contact support.</li>
               </ul>
 
               <p>For delivery issues please contact:</p>

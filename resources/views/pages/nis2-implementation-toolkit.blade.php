@@ -8,7 +8,7 @@
     <span><i class="bi bi-mortarboard me-2"></i>NIS2 Implementation Toolkit — Achieve EU Compliance Faster</span>
     <div class="d-flex gap-3">
       <a href="#about"><i class="bi bi-info-circle me-1"></i>About</a>
-      <a href="#courses"><i class="bi bi-journal-bookmark me-1"></i>Courses</a>
+      <a href="#whats-included"><i class="bi bi-journal-bookmark me-1"></i>What's Included</a>
       <a href="#why-gisba"><i class="bi bi-award me-1"></i>Why GISBA</a>
       <a href="#contact"><i class="bi bi-envelope me-1"></i>Contact</a>
     </div>
