@@ -189,6 +189,16 @@ class PageController extends Controller
         return view('pages.success-stories');
     }
 
+    public function successStoriesEu(): View
+    {
+        return view('pages.success-stories-eu');
+    }
+
+    public function successStoriesMe(): View
+    {
+        return view('pages.success-stories-me');
+    }
+
     public function contactUs(): View
     {
         return view('pages.contact-us');

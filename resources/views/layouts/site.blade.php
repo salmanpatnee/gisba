@@ -132,7 +132,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('success-stories') ? 'active' : '' }}" href="{{ route('success-stories') }}">
+            <a class="nav-link site-nav-link {{ request()->routeIs('success-stories.*') ? 'active' : '' }}" href="{{ $successStoriesRoute }}">
               <i class="bi bi-star"></i>Success Stories
             </a>
           </li>
@@ -171,7 +171,7 @@
             <li><a href="{{ route('video-resources') }}">NIS2 Video Resources</a></li>
             <li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
-            <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
+            <li><a href="{{ $successStoriesRoute }}">Success Stories</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
           </ul>
         </div>

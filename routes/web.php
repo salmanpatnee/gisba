@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\Nis2PricingController;
+use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
+use App\Models\SiteSettings;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +18,13 @@ Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2-toolkit');
 Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2-toolkit.pricing');
 Route::get('/training-course-development', [PageController::class, 'training'])->name('training');
-Route::get('/success-stories', [PageController::class, 'successStories'])->name('success-stories');
+Route::get('/success-stories', function () {
+    $region = SiteSettings::current()->success_stories_region;
+
+    return redirect()->route('success-stories.'.$region);
+})->name('success-stories');
+Route::get('/success-stories/eu', [PageController::class, 'successStoriesEu'])->name('success-stories.eu');
+Route::get('/success-stories/me', [PageController::class, 'successStoriesMe'])->name('success-stories.me');
 Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-us');
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
@@ -62,6 +70,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('nis2-pricing', [Nis2PricingController::class, 'edit'])->name('nis2-pricing.edit');
     Route::put('nis2-pricing', [Nis2PricingController::class, 'update'])->name('nis2-pricing.update');
+    Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
 });
 
 // ── Breeze Auth ───────────────────────────────────────────────────────────────
