@@ -20,6 +20,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'success_stories_region' => ['required', 'in:eu,me'],
             'regular_price' => ['required', 'numeric', 'min:0'],
             'sale_price' => ['required', 'numeric', 'min:0'],
+            'toolkit_zip' => ['nullable', 'file', 'mimes:zip', 'max:51200'],
         ];
     }
 }

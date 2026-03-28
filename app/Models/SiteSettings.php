@@ -8,7 +8,7 @@ class SiteSettings extends Model
 {
     protected $table = 'site_settings';
 
-    protected $fillable = ['success_stories_region', 'regular_price', 'sale_price'];
+    protected $fillable = ['success_stories_region', 'regular_price', 'sale_price', 'toolkit_zip_path'];
 
     protected $casts = [
         'regular_price' => 'decimal:2',

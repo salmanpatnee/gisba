@@ -18,7 +18,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('admin.settings.update') }}">
+            <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -138,6 +138,42 @@
                             <span>Sale: <strong x-text="fmt(salePrice)"></strong></span>
                             <span>Customer saves: <strong x-text="fmt(savings)"></strong></span>
                         </div>
+                    </div>
+
+                </div>
+
+                {{-- NIS2 Toolkit ZIP --}}
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
+
+                    <h3 class="text-sm font-medium text-gray-700 mb-1">NIS2 Toolkit ZIP</h3>
+                    <p class="text-sm text-gray-500 mb-4">
+                        Upload the ZIP file that customers can download from the payment success page.
+                    </p>
+
+                    @if ($settings->toolkit_zip_path)
+                        <div class="mb-3 flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-green-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>Current file: <strong>{{ basename($settings->toolkit_zip_path) }}</strong></span>
+                        </div>
+                    @endif
+
+                    <div>
+                        <label for="toolkit_zip" class="block text-sm font-medium text-gray-700 mb-1">
+                            {{ $settings->toolkit_zip_path ? 'Replace ZIP file' : 'Upload ZIP file' }}
+                        </label>
+                        <input
+                            type="file"
+                            id="toolkit_zip"
+                            name="toolkit_zip"
+                            accept=".zip"
+                            class="block w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 @error('toolkit_zip') border border-red-400 rounded-md @enderror"
+                        >
+                        @error('toolkit_zip')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                        <p class="mt-1 text-xs text-gray-400">Accepted: .zip — Max 50 MB</p>
                     </div>
 
                 </div>

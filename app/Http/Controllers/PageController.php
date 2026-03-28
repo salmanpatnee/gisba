@@ -233,7 +233,9 @@ class PageController extends Controller
             Log::error('PaymentNotificationMail failed', ['error' => $e->getMessage()]);
         }
 
-        return view('pages.payment-success');
+        return view('pages.payment-success', [
+            'settings' => SiteSettings::current(),
+        ]);
     }
 
     public function blog(): View

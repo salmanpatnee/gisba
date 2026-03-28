@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
 @section('title', 'Payment Successful | GISBA')
-@section('meta_description', 'Your payment was successful. Thank you for your purchase from GISBA Consultants.')
+@section('meta_description', 'Your payment was successful. Your NIS2 Implementation Toolkit is ready for download.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
@@ -100,6 +100,57 @@
       margin: 0 auto 32px;
     }
 
+    /* Download block */
+    .toolkit-download-block {
+      background: #f0faf4;
+      border: 1px solid #b2dfcb;
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+
+    .toolkit-download-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #1a7f4b;
+      margin-bottom: 4px;
+    }
+
+    .toolkit-download-name {
+      font-family: 'Merriweather', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1a2e3b;
+      margin-bottom: 18px;
+    }
+
+    .btn-download-toolkit {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #1a7f4b, #28a745);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 13px 32px;
+      border-radius: 8px;
+      transition: opacity 0.2s, transform 0.15s, box-shadow 0.2s;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(40, 167, 69, 0.30);
+    }
+
+    .btn-download-toolkit:hover {
+      opacity: 0.92;
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(40, 167, 69, 0.40);
+      text-decoration: none;
+    }
+
+    /* Email notice */
     .success-notice {
       background: #e8eef8;
       border: 1px solid #b3caf0;
@@ -112,7 +163,7 @@
       gap: 12px;
       text-align: left;
       max-width: 520px;
-      margin: 0 auto 36px;
+      margin: 0 auto 32px;
     }
 
     .success-notice i {
@@ -124,7 +175,60 @@
     .success-divider {
       border: none;
       border-top: 1px solid #e9ecef;
-      margin: 36px 0;
+      margin: 32px 0;
+    }
+
+    /* Secondary CTAs */
+    .secondary-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .btn-home-primary {
+      background: linear-gradient(135deg, #003366, #0066cc);
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 12px 28px;
+      border-radius: 8px;
+      transition: opacity 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn-home-primary:hover {
+      opacity: 0.9;
+      color: #fff;
+      transform: translateY(-1px);
+      text-decoration: none;
+    }
+
+    .btn-outline-contact {
+      background: transparent;
+      border: 2px solid #003366;
+      color: #003366;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 10px 24px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s, transform 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .btn-outline-contact:hover {
+      background: #003366;
+      color: #fff;
+      transform: translateY(-1px);
+      text-decoration: none;
     }
 
     .support-section {
@@ -145,42 +249,8 @@
       text-decoration: underline;
     }
 
-    .btn-home-primary {
-      background: linear-gradient(135deg, #003366, #0066cc);
-      border: none;
-      color: #fff;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 14px 36px;
-      border-radius: 8px;
-      transition: opacity 0.2s, transform 0.15s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn-home-primary:hover {
-      opacity: 0.9;
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .btn-outline-contact {
-      background: transparent;
-      border: 2px solid #003366;
-      color: #003366;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 12px 32px;
-      border-radius: 8px;
-      transition: background 0.2s, color 0.2s, transform 0.15s;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .btn-outline-contact:hover {
-      background: #003366;
-      color: #fff;
-      transform: translateY(-1px);
+    @media (max-width: 576px) {
+      .success-card { padding: 40px 24px; }
     }
   </style>
 
@@ -202,28 +272,43 @@
 
             <!-- Confirmation Message -->
             <p class="success-message">
-              Your payment has been processed and confirmed. The complete <strong>NIS2 Implementation Kit</strong> access link will be sent to you on the same day. We appreciate your trust in GISBA Consultants.
+              Your payment has been processed and confirmed. Your
+              <strong>NIS2 Implementation Toolkit</strong> is ready for immediate download below.
+              We appreciate your trust in GISBA Consultants.
             </p>
+
+            <!-- Toolkit Download -->
+            @if ($settings->toolkit_zip_path)
+              <div class="toolkit-download-block">
+                <p class="toolkit-download-label">Ready to Download</p>
+                <p class="toolkit-download-name">NIS2 Implementation Toolkit</p>
+                <a href="{{ Storage::disk('public')->url($settings->toolkit_zip_path) }}"
+                   class="btn-download-toolkit"
+                   download>
+                  <i class="bi bi-download"></i> Download Toolkit
+                </a>
+              </div>
+            @endif
 
             <!-- Email Notice -->
             <div class="success-notice">
               <i class="bi bi-envelope-check-fill"></i>
-              <span>You will receive the <strong>NIS2 Implementation Kit</strong> access link via email on the same day of payment. Please check your inbox (and spam folder).</span>
+              <span>A <strong>purchase confirmation</strong> has been sent to your email. Please check your inbox (and spam folder) if you don't see it shortly.</span>
             </div>
 
-            <!-- CTA Buttons -->
-            <div class="d-flex flex-wrap justify-content-center gap-3">
+            <!-- Secondary CTAs -->
+            <div class="secondary-actions">
               <a href="{{ route('home') }}" class="btn-home-primary">
-                <i class="bi bi-house me-2"></i>Return to Homepage
+                <i class="bi bi-house"></i> Return to Homepage
               </a>
               <a href="{{ route('contact-us') }}" class="btn-outline-contact">
-                <i class="bi bi-chat-dots me-2"></i>Contact Us
+                <i class="bi bi-chat-dots"></i> Contact Us
               </a>
             </div>
 
             <hr class="success-divider" />
 
-            <!-- Support Section -->
+            <!-- Support -->
             <div class="support-section">
               <i class="bi bi-headset me-2"></i>
               <strong>Need help?</strong> Our team is here for you. Reach out at
