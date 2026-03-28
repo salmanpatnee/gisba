@@ -21,9 +21,6 @@
                     <x-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                         {{ __('Videos') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('admin.nis2-pricing.edit')" :active="request()->routeIs('admin.nis2-pricing.*')">
-                        {{ __('NIS2 Pricing') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('admin.settings.edit')" :active="request()->routeIs('admin.settings.*')">
                         {{ __('Settings') }}
                     </x-nav-link>
@@ -87,9 +84,6 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                 {{ __('Videos') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.nis2-pricing.edit')" :active="request()->routeIs('admin.nis2-pricing.*')">
-                {{ __('NIS2 Pricing') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.settings.edit')" :active="request()->routeIs('admin.settings.*')">
                 {{ __('Settings') }}

@@ -26,7 +26,11 @@ it('defaults success stories region to eu', function () {
 
 it('can update region to me', function () {
     $this->actingAs(User::factory()->create())
-        ->put(route('admin.settings.update'), ['success_stories_region' => 'me'])
+        ->put(route('admin.settings.update'), [
+            'success_stories_region' => 'me',
+            'regular_price' => 2495,
+            'sale_price' => 1500,
+        ])
         ->assertRedirect(route('admin.settings.edit'))
         ->assertSessionHas('success');
 
@@ -35,7 +39,11 @@ it('can update region to me', function () {
 
 it('rejects an invalid region', function () {
     $this->actingAs(User::factory()->create())
-        ->put(route('admin.settings.update'), ['success_stories_region' => 'us'])
+        ->put(route('admin.settings.update'), [
+            'success_stories_region' => 'us',
+            'regular_price' => 2495,
+            'sale_price' => 1500,
+        ])
         ->assertSessionHasErrors('success_stories_region');
 });
 

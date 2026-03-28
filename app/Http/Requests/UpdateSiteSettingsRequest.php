@@ -18,6 +18,8 @@ class UpdateSiteSettingsRequest extends FormRequest
     {
         return [
             'success_stories_region' => ['required', 'in:eu,me'],
+            'regular_price' => ['required', 'numeric', 'min:0'],
+            'sale_price' => ['required', 'numeric', 'min:0'],
         ];
     }
 }
