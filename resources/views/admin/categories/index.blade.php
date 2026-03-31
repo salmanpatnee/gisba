@@ -1,10 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex items-center justify-between">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Blog Posts</h2>
-            <a href="{{ route('admin.blog.create') }}"
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">Categories</h2>
+            <a href="{{ route('admin.categories.create') }}"
                class="inline-flex items-center px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-md hover:bg-gray-700 transition">
-                + New Post
+                + New Category
             </a>
         </div>
     </x-slot>
@@ -18,33 +18,37 @@
                 </div>
             @endif
 
+            @if(session('error'))
+                <div class="mb-6 px-4 py-3 bg-red-100 border border-red-300 text-red-800 rounded-md text-sm">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <table class="min-w-full divide-y divide-gray-200 text-sm">
+                <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Blog Posts</th>
+                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Created</th>
                             <th class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($posts as $post)
+                        @forelse($categories as $category)
                         <tr>
                             <td class="px-6 py-4">
-                                <div class="font-medium text-gray-900">{{ $post->title }}</div>
-                                <div class="text-xs text-gray-400 mt-0.5">{{ $post->slug }}</div>
+                                <div class="font-medium text-gray-900">{{ $category->name }}</div>
                             </td>
-                            <td class="px-6 py-4 text-gray-600">{{ $post->category?->name ?? 'Uncategorized' }}</td>
-                            <td class="px-6 py-4 text-gray-600">{{ $post->formatted_date }}</td>
+                            <td class="px-6 py-4 text-gray-600">
+                                {{ $category->blogPosts->count() }} post(s)
+                            </td>
+                            <td class="px-6 py-4 text-gray-600">{{ $category->created_at->format('M d, Y') }}</td>
                             <td class="px-6 py-4 text-right space-x-3">
-                                <a href="{{ route('nis2.show',$post->slug) }}"
-                                   target="_blank"
-                                   class="text-blue-600 hover:text-blue-800 font-medium">View</a>
-                                <a href="{{ route('admin.blog.edit', $post) }}"
+                                <a href="{{ route('admin.categories.edit', $category) }}"
                                    class="text-indigo-600 hover:text-indigo-800 font-medium">Edit</a>
-                                <form action="{{ route('admin.blog.destroy', $post) }}" method="POST" class="inline"
-                                      onsubmit="return confirm('Delete this post?')">
+                                <form action="{{ route('admin.categories.destroy', $category) }}" method="POST" class="inline"
+                                      onsubmit="return confirm('Delete this category? This cannot be undone if it has blog posts.')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Delete</button>
@@ -53,15 +57,15 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-10 text-center text-gray-500">No blog posts yet.</td>
+                            <td colspan="4" class="px-6 py-10 text-center text-gray-500">No categories yet.</td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
 
-                @if($posts->hasPages())
+                @if($categories->hasPages())
                 <div class="px-6 py-4 border-t border-gray-200">
-                    {{ $posts->links() }}
+                    {{ $categories->links() }}
                 </div>
                 @endif
             </div>

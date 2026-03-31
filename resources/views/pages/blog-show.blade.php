@@ -5,7 +5,7 @@
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-journal-text me-2"></i>GISBA Blog &mdash; {{ $post->category->value }}</span>
+    <span><i class="bi bi-journal-text me-2"></i>GISBA Blog &mdash; {{ $post->category?->name ?? 'Uncategorized' }}</span>
     <div class="d-flex gap-3">
       <a href="{{ route('nis2') }}"><i class="bi bi-arrow-left me-1"></i>All Articles</a>
       <a href="{{ route('contact-us') }}"><i class="bi bi-envelope me-1"></i>Contact</a>
@@ -119,9 +119,9 @@
         <i class="bi bi-chevron-right"></i>
         <a href="{{ route('nis2') }}">NIS2</a>
         <i class="bi bi-chevron-right"></i>
-        <span style="color:rgba(255,255,255,0.85);">{{ $post->category->value }}</span>
+        <span style="color:rgba(255,255,255,0.85);">{{ $post->category?->name ?? 'Uncategorized' }}</span>
       </nav>
-      <span class="article-category-badge">{{ $post->category->value }}</span>
+      <span class="article-category-badge">{{ $post->category?->name ?? 'Uncategorized' }}</span>
       <h1 class="article-hero-title">{{ $post->title }}</h1>
       <div class="article-meta">
         <span class="article-meta-item"><i class="bi bi-calendar3"></i> {{ $post->formatted_date }}</span>
@@ -161,7 +161,7 @@
           <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
             <div class="article-meta" style="gap:14px;">
               <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-calendar3" style="color:var(--accent);"></i> {{ $post->formatted_date }}</span>
-              <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-tag" style="color:var(--accent);"></i> {{ $post->category->value }}</span>
+              <span class="article-meta-item" style="color:var(--text-muted);"><i class="bi bi-tag" style="color:var(--accent);"></i> {{ $post->category?->name ?? 'Uncategorized' }}</span>
             </div>
             <a href="{{ route('nis2') }}" class="back-link" style="margin-bottom:0;">
               <i class="bi bi-arrow-left"></i> All Articles
@@ -264,5 +264,5 @@
     </div>
   </div>
 </section>
-
+@include('partials.nis2-kit-banner')
 @endsection

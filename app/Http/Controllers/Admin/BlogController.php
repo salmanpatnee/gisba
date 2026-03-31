@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Enums\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBlogPostRequest;
 use App\Http\Requests\UpdateBlogPostRequest;
 use App\Models\BlogPost;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -17,14 +17,14 @@ class BlogController extends Controller
 {
     public function index(): View
     {
-        $posts = BlogPost::query()->latest()->paginate(15);
+        $posts = BlogPost::query()->with('category')->latest()->paginate(15);
 
         return view('admin.blog.index', compact('posts'));
     }
 
     public function create(): View
     {
-        $categories = Category::options();
+        $categories = Category::query()->latest()->get();
 
         return view('admin.blog.create', compact('categories'));
     }
@@ -49,7 +49,7 @@ class BlogController extends Controller
 
     public function edit(BlogPost $blog): View
     {
-        $categories = Category::options();
+        $categories = Category::query()->latest()->get();
         $blog->load('attachments');
 
         return view('admin.blog.edit', compact('blog', 'categories'));

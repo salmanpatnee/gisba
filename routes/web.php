@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\BlogAttachmentController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
@@ -65,6 +66,7 @@ Route::get('/setup/init', function () {
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
+    Route::resource('categories', CategoryController::class)->except('show');
     Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');

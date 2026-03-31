@@ -14,18 +14,18 @@
 
 {{-- Category --}}
 <div class="mb-6">
-    <label for="category" class="block text-sm font-medium text-gray-700 mb-1">Category <span class="text-red-500">*</span></label>
-    <select id="category"
-            name="category"
-            class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('category') border-red-400 @enderror">
+    <label for="category_id" class="block text-sm font-medium text-gray-700 mb-1">Category <span class="text-red-500">*</span></label>
+    <select id="category_id"
+            name="category_id"
+            class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('category_id') border-red-400 @enderror">
         <option value="">— Select a category —</option>
-        @foreach($categories as $value)
-            <option value="{{ $value }}" {{ old('category', $post?->category?->value) === $value ? 'selected' : '' }}>
-                {{ $value }}
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}" {{ old('category_id', $post?->category?->id) == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
             </option>
         @endforeach
     </select>
-    @error('category')
+    @error('category_id')
         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
     @enderror
 </div>

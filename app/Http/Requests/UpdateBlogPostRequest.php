@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-use App\Enums\Category;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rules\Enum;
 
 class UpdateBlogPostRequest extends FormRequest
 {
@@ -20,7 +18,7 @@ class UpdateBlogPostRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'body' => ['required', 'string'],
-            'category' => ['required', new Enum(Category::class)],
+            'category_id' => ['required', 'exists:categories,id'],
             'featured_image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'meta_title' => ['nullable', 'string', 'max:255'],
             'meta_description' => ['nullable', 'string', 'max:500'],

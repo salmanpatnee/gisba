@@ -153,6 +153,7 @@
 {{-- ── NIS2 Kit Promo Banner ──────────────────────────────────────── --}}
 @include('partials.nis2-kit-banner')
 
+
 {{-- ── Knowledge Base Grid ───────────────────────────────────────── --}}
 <section class="kb-section">
   <div class="container">
@@ -173,7 +174,7 @@
 
     <div class="row g-4">
       @foreach($categorizedPosts as $categoryName => $articles)
-      <div class="col-12 col-md-6 col-lg-4 kb-reveal" style="transition-delay: {{ $loop->index * 0.07 }}s;">
+      <div class="col-12  kb-reveal" style="transition-delay: {{ $loop->index * 0.07 }}s;">
         <div class="kb-card">
           <div class="kb-card-header">
             <div class="d-flex align-items-center gap-2" style="position:relative;z-index:1;">
@@ -201,6 +202,7 @@
 </section>
 
 
+@include('partials.nis2-kit-banner')
 @endsection
 
 @push('scripts')

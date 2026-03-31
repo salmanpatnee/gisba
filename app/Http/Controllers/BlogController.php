@@ -10,9 +10,10 @@ class BlogController extends Controller
     public function index(): View
     {
         $categorizedPosts = BlogPost::query()
+            ->with('category')
             ->latest()
             ->get()
-            ->groupBy(fn (BlogPost $post): string => $post->category->value)
+            ->groupBy(fn (BlogPost $post): string => $post->category?->name ?? 'Uncategorized')
             ->filter(fn ($posts): bool => $posts->isNotEmpty());
 
         return view('pages.blog', compact('categorizedPosts'));

@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\Category;
 use App\Models\BlogPost;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -43,10 +43,12 @@ it('stores a new blog post', function () {
     Storage::fake('public');
     $this->actingAs(User::factory()->create());
 
+    $category = Category::create(['name' => 'Cybersecurity Governance']);
+
     $this->post(route('admin.blog.store'), [
         'title' => 'A New Post',
         'body' => '<p>Post content here.</p>',
-        'category' => Category::Governance->value,
+        'category_id' => $category->id,
         'featured_image' => UploadedFile::fake()->image('cover.jpg'),
         'meta_title' => 'A New Post | GISBA',
         'meta_description' => 'Short description.',
@@ -55,7 +57,7 @@ it('stores a new blog post', function () {
     $this->assertDatabaseHas('blog_posts', [
         'title' => 'A New Post',
         'slug' => 'a-new-post',
-        'category' => Category::Governance->value,
+        'category_id' => $category->id,
         'author' => 'GISBA Editorial Team',
     ]);
 });
@@ -64,7 +66,7 @@ it('validates required fields on store', function () {
     $this->actingAs(User::factory()->create());
 
     $this->post(route('admin.blog.store'), [])
-        ->assertSessionHasErrors(['title', 'body', 'category']);
+        ->assertSessionHasErrors(['title', 'body', 'category_id']);
 });
 
 it('shows the edit form for an existing post', function () {
@@ -79,18 +81,21 @@ it('shows the edit form for an existing post', function () {
 
 it('updates an existing blog post', function () {
     $this->actingAs(User::factory()->create());
-    $post = BlogPost::factory()->create();
+
+    $category = Category::create(['name' => 'Cybersecurity Governance']);
+    $newCategory = Category::create(['name' => 'News']);
+    $post = BlogPost::factory()->create(['category_id' => $category->id]);
 
     $this->put(route('admin.blog.update', $post), [
         'title' => 'Updated Title',
         'body' => '<p>Updated body.</p>',
-        'category' => Category::News->value,
+        'category_id' => $newCategory->id,
     ])->assertRedirect(route('admin.blog.index'));
 
     $this->assertDatabaseHas('blog_posts', [
         'id' => $post->id,
         'title' => 'Updated Title',
-        'category' => Category::News->value,
+        'category_id' => $newCategory->id,
     ]);
 });
 

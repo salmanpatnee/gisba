@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
-use App\Enums\Category;
 use App\Models\BlogPost;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -24,7 +24,7 @@ class BlogPostFactory extends Factory
             'featured_image' => null,
             'meta_title' => null,
             'meta_description' => fake()->sentence(12),
-            'category' => fake()->randomElement(Category::cases())->value,
+            'category_id' => Category::factory(),
             'author' => 'GISBA Editorial Team',
         ];
     }

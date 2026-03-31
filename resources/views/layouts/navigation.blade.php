@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
                         {{ __('Blog') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                         {{ __('Videos') }}
                     </x-nav-link>
@@ -81,6 +84,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
                 {{ __('Blog') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
+                {{ __('Categories') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                 {{ __('Videos') }}

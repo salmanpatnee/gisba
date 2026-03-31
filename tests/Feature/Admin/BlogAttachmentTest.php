@@ -1,7 +1,7 @@
 <?php
 
-use App\Enums\Category;
 use App\Models\BlogPost;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
@@ -13,10 +13,12 @@ it('stores attachments when creating a blog post', function () {
     Storage::fake('public');
     $this->actingAs(User::factory()->create());
 
+    $category = Category::create(['name' => 'Cybersecurity Governance']);
+
     $this->post(route('admin.blog.store'), [
         'title' => 'Post With Attachments',
         'body' => '<p>Content.</p>',
-        'category' => Category::Governance->value,
+        'category_id' => $category->id,
         'attachments' => [
             UploadedFile::fake()->create('report.pdf', 100, 'application/pdf'),
             UploadedFile::fake()->image('diagram.png'),
@@ -50,7 +52,8 @@ it('deletes marked attachments when updating a blog post', function () {
     Storage::fake('public');
     $this->actingAs(User::factory()->create());
 
-    $post = BlogPost::factory()->create();
+    $category = Category::create(['name' => 'Cybersecurity Governance']);
+    $post = BlogPost::factory()->create(['category_id' => $category->id]);
     $file = UploadedFile::fake()->create('old-file.pdf', 50, 'application/pdf');
     $path = $file->store('blog/attachments', 'public');
 
@@ -64,7 +67,7 @@ it('deletes marked attachments when updating a blog post', function () {
     $this->put(route('admin.blog.update', $post), [
         'title' => $post->title,
         'body' => $post->body,
-        'category' => $post->category->value,
+        'category_id' => $category->id,
         'delete_attachments' => [$attachment->id],
     ])->assertRedirect(route('admin.blog.index'));
 
@@ -76,12 +79,13 @@ it('adds new attachments when updating a blog post', function () {
     Storage::fake('public');
     $this->actingAs(User::factory()->create());
 
-    $post = BlogPost::factory()->create();
+    $category = Category::create(['name' => 'Cybersecurity Governance']);
+    $post = BlogPost::factory()->create(['category_id' => $category->id]);
 
     $this->put(route('admin.blog.update', $post), [
         'title' => $post->title,
         'body' => $post->body,
-        'category' => $post->category->value,
+        'category_id' => $category->id,
         'attachments' => [
             UploadedFile::fake()->create('new-doc.docx', 80, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'),
         ],
@@ -116,10 +120,12 @@ it('deletes all attachments when deleting a blog post', function () {
 it('rejects invalid file types for attachments', function () {
     $this->actingAs(User::factory()->create());
 
+    $category = Category::create(['name' => 'Cybersecurity Governance']);
+
     $this->post(route('admin.blog.store'), [
         'title' => 'Post',
         'body' => '<p>Content.</p>',
-        'category' => Category::Governance->value,
+        'category_id' => $category->id,
         'attachments' => [
             UploadedFile::fake()->create('script.exe', 10, 'application/x-msdownload'),
         ],
