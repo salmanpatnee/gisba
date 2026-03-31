@@ -164,6 +164,38 @@
             <hr class="content-divider" />
 
             {{-- --------------------------------------------------------
+                 SECURE AI DEPLOYMENT SERVICE
+            -------------------------------------------------------- --}}
+            <section id="secure-ai-deployment">
+              <h2 class="section-heading">Secure AI Deployment Service</h2>
+              <p>Enabling organizations to safely adopt and manage AI systems in alignment with ISO/IEC 42001.</p>
+
+              <div class="inclusion-card mt-3" style="display:flex; flex-direction:column; gap:0; overflow:hidden;">
+                {{-- Image Section - Full Width Top --}}
+                <div style="width:100%; padding:0;">
+                  <img src="{{ asset('assets/images/secure-ai-system.jpeg') }}" alt="Secure AI Management System - ISO/IEC 42001 Compliant" style="width:100%; height:auto; object-fit:cover; min-height:350px;" />
+                </div>
+
+                {{-- Content Section - Below Image --}}
+                <div style="padding:24px;">
+                  <div class="inclusion-body">
+                    
+                    <p>
+                      Secure AI Deployment Service enables organizations to safely adopt and manage AI systems in alignment with ISO/IEC 42001. The service includes the appointment of a dedicated Secure AI Officer who leads AI governance, risk management, and deployment oversight, ensuring that AI solutions are secure, compliant, and responsibly managed throughout their lifecycle. Working in close collaboration with Cybersecurity, Legal, Compliance, and business teams, this service provides end-to-end support—from use-case approval and risk assessment to monitoring and continuous improvement—ensuring trusted, controlled, and business-aligned AI deployment.
+                    </p>
+                
+                    <div class="highlight-box">
+                      <i class="bi bi-lightbulb-fill"></i>
+                      <span>Ensuring <strong>trusted, controlled, and business-aligned AI deployment</strong> for your organization.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <hr class="content-divider" />
+
+            {{-- --------------------------------------------------------
                  FLAGSHIP SERVICES — 6 Services
             -------------------------------------------------------- --}}
             <section id="services">
