@@ -21,6 +21,12 @@
                     <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
                         {{ __('Categories') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">
+                        {{ __('PMP') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">
+                        {{ __('PMP Categories') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                         {{ __('Videos') }}
                     </x-nav-link>
@@ -87,6 +93,12 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
                 {{ __('Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">
+                {{ __('PMP') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">
+                {{ __('PMP Categories') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                 {{ __('Videos') }}

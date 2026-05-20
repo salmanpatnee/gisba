@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PmpAttachmentController;
+use App\Http\Controllers\Admin\PmpCategoryController;
 use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PmpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
 use App\Models\SiteSettings;
@@ -31,6 +34,8 @@ Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-u
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
 Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
+Route::get('/pmp', [PmpController::class, 'index'])->name('pmp');
+Route::get('/pmp/{slug}', [PmpController::class, 'show'])->name('pmp.show');
 Route::get('/video-resources', [VideoController::class, 'index'])->name('video-resources');
 Route::get('/video-resources/{video}/stream', [VideoController::class, 'stream'])->name('videos.stream');
 Route::post('/video-resources/{video}/view', [VideoController::class, 'recordView'])->name('videos.record-view');
@@ -70,6 +75,9 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
     Route::resource('categories', CategoryController::class)->except('show');
     Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
+    Route::resource('pmp', App\Http\Controllers\Admin\PmpController::class)->except('show');
+    Route::resource('pmp-categories', PmpCategoryController::class)->except('show');
+    Route::delete('pmp-attachments/{attachment}', [PmpAttachmentController::class, 'destroy'])->name('pmp-attachments.destroy');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');

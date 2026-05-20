@@ -117,6 +117,11 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('pmp') }}">
+              <i class="bi bi-award"></i>PMP
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('nis2-toolkit') ? 'active' : '' }}" href="{{ route('nis2-toolkit') }}">
               <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit
             </a>
@@ -165,6 +170,7 @@
             <li><a href="{{ route('home') }}">Home</a></li>
             <li><a href="{{ route('awareness') }}">Awareness Toolkit</a></li>
             <li><a href="{{ route('nis2') }}">NIS2</a></li>
+            <li><a href="{{ route('pmp') }}">PMP</a></li>
             <li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
