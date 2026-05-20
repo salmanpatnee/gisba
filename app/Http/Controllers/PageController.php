@@ -164,6 +164,16 @@ class PageController extends Controller
     {
         return view('pages.home');
     }
+    
+    public function portfolio(): View
+    {
+        return view('pages.portfolio');
+    }
+    
+    public function awareness(): View
+    {
+        return view('pages.awareness');
+    }
 
     public function nis2(): View
     {

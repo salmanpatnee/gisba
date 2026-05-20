@@ -61,6 +61,7 @@
             <nav class="sidebar-nav">
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
+                <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
                 <li><a href="#title"><i class="bi bi-info-circle"></i> About</a></li>
                 <li><a href="#what-is-nis2"><i class="bi bi-shield-check"></i> What is NIS2?</a></li>
                 <li><a href="#fast-track"><i class="bi bi-lightning-charge"></i> Fast Track</a></li>
@@ -72,8 +73,6 @@
                 {{-- <li><a href="#why-gisba"><i class="bi bi-award"></i> Why GISBA</a></li> --}}
                 <li><a href="#format"><i class="bi bi-eye"></i> File Format</a></li>
                 <li><a href="#method"><i class="bi bi-link-45deg"></i> Delivery Method</a></li>
-                <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
-                <li><a href="{{ route('nis2-toolkit.pricing') }}"><i class="bi bi-cart-check"></i> Buy Now</a></li>
               </ul>
             </nav>
             <div class="sidebar-contact">
@@ -86,8 +85,78 @@
         <div class="col-12 col-md-9">
           <main class="main-content">
 
+            <section id="pricing">
+              <h2 class="section-heading">Pricing — NIS2 Implementation Kit</h2>
+              <div class="pricing-card" style="position:relative; overflow:visible;">
+
+                {{-- Sale ribbon --}}
+                <div style="
+                  position:absolute;
+                  top:-14px; left:50%; transform:translateX(-50%);
+                  background:linear-gradient(90deg,#e63946,#c1121f);
+                  color:#fff;
+                  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+                  padding:5px 22px;
+                  border-radius:20px;
+                  box-shadow:0 3px 10px rgba(198,18,31,.35);
+                  white-space:nowrap;
+                  z-index:10;
+                ">
+                  <i class="bi bi-lightning-charge-fill me-1"></i>Limited Time Offer
+                </div>
+
+                <div class="pricing-header" style="padding-top:28px;">
+                  <div class="pricing-label">Complete Toolkit</div>
+
+                  {{-- Discount badge + original price row --}}
+                  <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin:10px 0 4px;">
+                    <span style="
+                      background:#e63946;
+                      color:#fff;
+                      font-size:13px; font-weight:800; letter-spacing:.06em;
+                      padding:3px 10px; border-radius:6px;
+                    ">40% OFF</span>
+                    <span style="
+                      font-size:1.2rem; font-weight:700; color:#fff;
+                      text-decoration:line-through; text-decoration-color:#e63946;
+                      text-decoration-thickness:3px;
+                    ">£{{ number_format($pricing->regular_price, 0) }} GBP+VAT</span>
+                  </div>
+
+                  {{-- Sale price --}}
+                  <div style="font-size:1.75rem; font-weight:800; color:#fff; margin:2px 0 2px; letter-spacing:-.02em;">
+                    £{{ number_format($pricing->sale_price, 0) }} <span style="font-size:1rem; font-weight:600;">GBP+VAT</span>
+                  </div>
+
+                  <div class="pricing-sublabel">One-time purchase · 1-year platform access</div>
+                </div>
+
+                <div class="pricing-body">
+                  <p class="pricing-includes-title">Your purchase includes:</p>
+                  <div class="pricing-includes">
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Editable frameworks</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Editable management charters</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> All relevant forms and templates</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Video explanations</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Compliance and audit checklists</div>
+                  </div>
+                  <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
+                    <i class="bi bi-tag me-1"></i>Save £{{ number_format($pricing->savings, 0) }} — limited-time 40% discount off the regular price of £{{ number_format($pricing->regular_price, 0) }} GBP+VAT.
+                  </p>
+                  <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0; text-align: justify;">
+                    <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.
+                  </p>
+                  <div class="d-flex flex-column gap-2 mt-3">
+                    <a href="{{ route('contact-us') }}#enquiry-form" class="btn-hero-primary d-block text-center">
+                      <i class="bi bi-calendar-check me-2"></i>Request a Demo or Purchase
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <section id="what-is-nis2">
-              <h2 class="section-heading">What is NIS2 Compliance?</h2>
+              <h2 class="section-heading mt-4">What is NIS2 Compliance?</h2>
               <p>
                 The <strong>Network and Information Systems Directive (NIS2 – EU Directive 2022/2555)</strong>
                 is the European Union's updated cybersecurity directives designed to strengthen the security
@@ -294,78 +363,6 @@
                 <li>Upon receipt of payment, the complete “NIS2 Implementation Kit” access link will be provided on the same day.</li>
               </ul>
             </section>
-
-            <section id="pricing">
-              <h2 class="section-heading">Pricing — NIS2 Implementation Kit</h2>
-              <div class="pricing-card" style="position:relative; overflow:visible;">
-
-                {{-- Sale ribbon --}}
-                <div style="
-                  position:absolute;
-                  top:-14px; left:50%; transform:translateX(-50%);
-                  background:linear-gradient(90deg,#e63946,#c1121f);
-                  color:#fff;
-                  font-size:11px; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
-                  padding:5px 22px;
-                  border-radius:20px;
-                  box-shadow:0 3px 10px rgba(198,18,31,.35);
-                  white-space:nowrap;
-                  z-index:10;
-                ">
-                  <i class="bi bi-lightning-charge-fill me-1"></i>Limited Time Offer
-                </div>
-
-                <div class="pricing-header" style="padding-top:28px;">
-                  <div class="pricing-label">Complete Toolkit</div>
-
-                  {{-- Discount badge + original price row --}}
-                  <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin:10px 0 4px;">
-                    <span style="
-                      background:#e63946;
-                      color:#fff;
-                      font-size:13px; font-weight:800; letter-spacing:.06em;
-                      padding:3px 10px; border-radius:6px;
-                    ">40% OFF</span>
-                    <span style="
-                      font-size:1.2rem; font-weight:700; color:#fff;
-                      text-decoration:line-through; text-decoration-color:#e63946;
-                      text-decoration-thickness:3px;
-                    ">£{{ number_format($pricing->regular_price, 0) }} GBP+VAT</span>
-                  </div>
-
-                  {{-- Sale price --}}
-                  <div style="font-size:1.75rem; font-weight:800; color:#fff; margin:2px 0 2px; letter-spacing:-.02em;">
-                    £{{ number_format($pricing->sale_price, 0) }} <span style="font-size:1rem; font-weight:600;">GBP+VAT</span>
-                  </div>
-
-                  <div class="pricing-sublabel">One-time purchase · 1-year platform access</div>
-                </div>
-
-                <div class="pricing-body">
-                  <p class="pricing-includes-title">Your purchase includes:</p>
-                  <div class="pricing-includes">
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Editable frameworks</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Editable management charters</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> All relevant forms and templates</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Video explanations</div>
-                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Compliance and audit checklists</div>
-                  </div>
-                  <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
-                    <i class="bi bi-tag me-1"></i>Save £{{ number_format($pricing->savings, 0) }} — limited-time 40% discount off the regular price of £{{ number_format($pricing->regular_price, 0) }} GBP+VAT.
-                  </p>
-                  <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0; text-align: justify;">
-                    <i class="bi bi-tag me-1"></i><b>Cost Justification:</b> Most SMEs operate under tight budget constraints. The average daily rate for a compliance consultant is approximately €800, and engaging one for 20 days would cost around €16,000. Therefore, purchasing the toolkit—which requires only minimal customization—results in significant cost savings compared to hiring a consultant.
-                  </p>
-                  <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="{{ route('contact-us') }}#enquiry-form" class="btn-hero-primary d-block text-center">
-                      <i class="bi bi-calendar-check me-2"></i>Request a Demo or Purchase
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            
 
           </main>
         </div>

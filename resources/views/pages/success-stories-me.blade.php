@@ -65,7 +65,7 @@
         <section class="hero-section container">
           <div class="row align-items-center">
             <div class="col-md-6">
-              <h1 class="hero-title">Success Stories<br /><span>Middle East</span></h1>
+              <h1 class="hero-title">Success Stories<br /></h1>
               <p class="hero-subtitle">Measurable Cybersecurity Outcomes Across Middle Eastern Industries</p>
               <p class="hero-desc">A documented record of real-world engagements — measurable outcomes delivered for clients across the Middle East since <strong>2006</strong>.</p>
             </div>

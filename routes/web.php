@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 // ── GISBA Public Pages ────────────────────────────────────────────────────────
 
 Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
+Route::get('/awareness', [PageController::class, 'awareness'])->name('awareness');
 Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2-toolkit');
 Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2-toolkit.pricing');
 Route::get('/training-course-development', [PageController::class, 'training'])->name('training');

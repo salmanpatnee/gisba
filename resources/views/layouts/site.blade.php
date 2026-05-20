@@ -5,16 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>@yield('title')</title>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NQ0CWR1DLB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-NQ0CWR1DLB');
-  </script>
   <meta name="description" content="@yield('meta_description')" />
 
   <!-- Bootstrap 5.3 CDN -->
@@ -111,14 +101,19 @@
               <i class="bi bi-house"></i>Home
             </a>
           </li>
+          <!--<li class="nav-item">-->
+          <!--  <a class="nav-link site-nav-link {{ request()->routeIs('portfolio') ? 'active' : '' }}" href="{{ route('portfolio') }}">-->
+          <!--    <i class="bi bi-grid-3x3-gap"></i>Portfolio-->
+          <!--  </a>-->
+          <!--</li>-->
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('nis2*') && !request()->routeIs('nis2-toolkit*') ? 'active' : '' }}" href="{{ route('nis2') }}">
-              <i class="bi bi-journal-text"></i>NIS2
+            <a class="nav-link site-nav-link {{ request()->routeIs('awareness') ? 'active' : '' }}" href="{{ route('awareness') }}">
+              <i class="bi bi-lightbulb"></i>Awareness Toolkit
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('video-resources') ? 'active' : '' }}" href="{{ route('video-resources') }}">
-              <i class="bi bi-play-circle"></i>NIS2 Video Resources
+            <a class="nav-link site-nav-link {{ request()->routeIs('nis2') ? 'active' : '' }}" href="{{ route('nis2') }}">
+              <i class="bi bi-journal-text"></i>NIS2
             </a>
           </li>
           <li class="nav-item">
@@ -126,16 +121,17 @@
               <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit
             </a>
           </li>
+          <!--<li class="nav-item">-->
+          <!--  <a class="nav-link site-nav-link {{ request()->routeIs('training') ? 'active' : '' }}" href="{{ route('training') }}">-->
+          <!--    <i class="bi bi-mortarboard"></i>Training Course Development Services-->
+          <!--  </a>-->
+          <!--</li>-->
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('training') ? 'active' : '' }}" href="{{ route('training') }}">
-              <i class="bi bi-mortarboard"></i>Training Course Development Services
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('success-stories.*') ? 'active' : '' }}" href="{{ $successStoriesRoute }}">
+            <a class="nav-link site-nav-link {{ request()->routeIs('success-stories') ? 'active' : '' }}" href="{{ route('success-stories') }}">
               <i class="bi bi-star"></i>Success Stories
             </a>
           </li>
+          
           <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('contact-us') ? 'active' : '' }}" href="{{ route('contact-us') }}">
               <i class="bi bi-envelope"></i>Contact Us
@@ -167,11 +163,11 @@
           <strong style="color:#fff; font-size:13px; display:block; margin-bottom:8px;">Quick Links</strong>
           <ul style="list-style:none; padding:0; margin:0; font-size:12.5px;">
             <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('awareness') }}">Awareness Toolkit</a></li>
             <li><a href="{{ route('nis2') }}">NIS2</a></li>
-            <li><a href="{{ route('video-resources') }}">NIS2 Video Resources</a></li>
             <li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
-            <li><a href="{{ $successStoriesRoute }}">Success Stories</a></li>
+            <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
           </ul>
         </div>
