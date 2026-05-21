@@ -1,0 +1,77 @@
+{{-- Title --}}
+<div class="mb-6">
+    <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title <span class="text-red-500">*</span></label>
+    <input type="text"
+           id="title"
+           name="title"
+           value="{{ old('title', $post?->title) }}"
+           class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('title') border-red-400 @enderror"
+           placeholder="Enter member post title">
+    @error('title')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
+{{-- Body (TinyMCE) --}}
+<div class="mb-6">
+    <label for="body" class="block text-sm font-medium text-gray-700 mb-1">Body <span class="text-red-500">*</span></label>
+    <textarea id="body"
+              name="body"
+              rows="20"
+              class="w-full border-gray-300 rounded-md shadow-sm text-sm @error('body') border-red-400 @enderror">{{ old('body', $post?->body) }}</textarea>
+    @error('body')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
+{{-- Featured Image --}}
+<div class="mb-6">
+    <label for="featured_image" class="block text-sm font-medium text-gray-700 mb-1">Featured Image</label>
+    @if($post?->featured_image)
+        <div class="mb-3">
+            <img src="{{ $post->image_url }}" alt="Current image" class="h-32 w-auto rounded-md border border-gray-200 object-cover">
+            <p class="text-xs text-gray-500 mt-1">Upload a new image to replace the current one.</p>
+        </div>
+    @endif
+    <input type="file"
+           id="featured_image"
+           name="featured_image"
+           accept="image/*"
+           class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200 @error('featured_image') border-red-400 @enderror">
+    <p class="mt-1 text-xs text-gray-400">JPEG, PNG, WebP — max 2 MB.</p>
+    @error('featured_image')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
+{{-- SEO --}}
+<div class="border-t border-gray-100 pt-6 mt-6">
+    <h3 class="text-sm font-semibold text-gray-700 mb-4">SEO (optional)</h3>
+
+    <div class="mb-4">
+        <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-1">Meta Title</label>
+        <input type="text"
+               id="meta_title"
+               name="meta_title"
+               value="{{ old('meta_title', $post?->meta_title) }}"
+               maxlength="255"
+               class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('meta_title') border-red-400 @enderror"
+               placeholder="Defaults to post title if left blank">
+        @error('meta_title')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div>
+        <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-1">Meta Description</label>
+        <textarea id="meta_description"
+                  name="meta_description"
+                  rows="3"
+                  maxlength="500"
+                  class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('meta_description') border-red-400 @enderror"
+                  placeholder="Short summary for search engines (max 500 chars)">{{ old('meta_description', $post?->meta_description) }}</textarea>
+        @error('meta_description')
+            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+        @enderror
+    </div>
+</div>

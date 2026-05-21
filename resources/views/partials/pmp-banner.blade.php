@@ -20,7 +20,7 @@
       </div>
 
       <div class="nis2-promo-cta">
-        <a href="{{ route('contact-us') }}" class="btn-nis2-buy">
+        <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
           $30 — Get PMP Training <i class="bi bi-arrow-right"></i>
         </a>
       </div>

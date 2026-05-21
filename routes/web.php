@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
 use App\Http\Controllers\Admin\PmpCategoryController;
 use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MembersController;
+use App\Http\Controllers\MembersLoginController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PayPalCheckoutController;
 use App\Http\Controllers\PmpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
@@ -46,6 +50,22 @@ Route::get('/digital-refund-policy', [PageController::class, 'digitalRefundPolic
 Route::get('/terms-of-use', [PageController::class, 'termsOfUse'])->name('terms-of-use');
 Route::get('/payment/success', [PageController::class, 'paymentSuccess'])->name('payment.success');
 
+// ── Members ───────────────────────────────────────────────────────────────────
+
+Route::get('/members', [MembersController::class, 'paywall'])->name('members.paywall');
+Route::post('/members/checkout', [PayPalCheckoutController::class, 'create'])->name('members.checkout');
+Route::get('/members/paypal/return', [PayPalCheckoutController::class, 'capture'])->name('members.paypal.return');
+Route::get('/members/paypal/cancel', [PayPalCheckoutController::class, 'cancel'])->name('members.paypal.cancel');
+Route::get('/members/email-sent', fn () => view('pages.members-email-sent'))->name('members.email-sent');
+Route::get('/members/login', [MembersLoginController::class, 'showForm'])->name('members.login');
+Route::post('/members/login', [MembersLoginController::class, 'login'])->name('members.login.submit');
+Route::post('/members/logout', [MembersLoginController::class, 'logout'])->name('members.logout');
+
+Route::middleware('member')->prefix('members')->name('members.')->group(function () {
+    Route::get('/library', [MembersController::class, 'index'])->name('index');
+    Route::get('/library/{slug}', [MembersController::class, 'show'])->name('show');
+});
+
 // ── Server Setup (auth-protected, remove after use) ───────────────────────────
 
 Route::get('/setup/init', function () {
@@ -71,7 +91,7 @@ Route::get('/setup/init', function () {
 
 // ── Admin ─────────────────────────────────────────────────────────────────────
 
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.')->group(function () {
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
     Route::resource('categories', CategoryController::class)->except('show');
     Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
@@ -81,13 +101,14 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
+    Route::resource('member-posts', AdminMemberPostController::class)->except('show');
 });
 
 // ── Breeze Auth ───────────────────────────────────────────────────────────────
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'redirect-if-member'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

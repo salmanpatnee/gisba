@@ -142,6 +142,27 @@
               <i class="bi bi-envelope"></i>Contact Us
             </a>
           </li>
+          <li class="nav-item">
+            @if(auth()->check() && auth()->user()->isMember())
+              <a class="nav-link site-nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}" href="{{ route('members.index') }}">
+                <i class="bi bi-star-fill"></i>My Library
+              </a>
+            @else
+              <a class="nav-link site-nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}" href="{{ route('members.login') }}">
+                <i class="bi bi-people"></i>Member Area
+              </a>
+            @endif
+          </li>
+          @if(auth()->check() && auth()->user()->isMember())
+          <li class="nav-item">
+            <form method="POST" action="{{ route('members.logout') }}" style="margin:0;">
+              @csrf
+              <button type="submit" class="nav-link site-nav-link" style="background:none;border:none;cursor:pointer;">
+                <i class="bi bi-box-arrow-right"></i>Log Out
+              </button>
+            </form>
+          </li>
+          @endif
         </ul>
       </div>
 
