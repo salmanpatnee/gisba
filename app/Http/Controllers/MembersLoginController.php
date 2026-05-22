@@ -13,7 +13,7 @@ class MembersLoginController extends Controller
     public function showForm(): View|RedirectResponse
     {
         if (auth()->check() && auth()->user()->isMember()) {
-            return redirect()->route('members.index');
+            return redirect()->route('members.chapters.index');
         }
 
         return view('pages.members-login');
@@ -33,7 +33,7 @@ class MembersLoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('members.index');
+        return redirect()->route('members.chapters.index');
     }
 
     public function logout(Request $request): RedirectResponse

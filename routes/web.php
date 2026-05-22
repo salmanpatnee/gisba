@@ -2,11 +2,15 @@
 
 use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ChapterController as AdminChapterController;
+use App\Http\Controllers\Admin\ChapterResourceController as AdminChapterResourceController;
 use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
 use App\Http\Controllers\Admin\PmpCategoryController;
 use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\ChapterResourceController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\MembersLoginController;
@@ -62,8 +66,19 @@ Route::post('/members/login', [MembersLoginController::class, 'login'])->name('m
 Route::post('/members/logout', [MembersLoginController::class, 'logout'])->name('members.logout');
 
 Route::middleware('member')->prefix('members')->name('members.')->group(function () {
-    Route::get('/library', [MembersController::class, 'index'])->name('index');
-    Route::get('/library/{slug}', [MembersController::class, 'show'])->name('show');
+    // Static resource routes MUST come before slug wildcards
+    Route::get('/chapters/stream/{resource}', [ChapterResourceController::class, 'stream'])->name('chapters.stream');
+    Route::get('/chapters/view/{resource}', [ChapterResourceController::class, 'view'])->name('chapters.view');
+    Route::get('/chapters/download/{resource}', [ChapterResourceController::class, 'download'])->name('chapters.download');
+    Route::delete('/chapters/resources/{resource}', [ChapterResourceController::class, 'destroy'])->name('chapters.resource.destroy');
+
+    // PMP Quick Review Training — Chapters
+    Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');
+    Route::get('/chapters/{chapter:slug}', [ChapterController::class, 'show'])->name('chapters.show');
+    Route::get('/chapters/{chapter:slug}/videos', [ChapterResourceController::class, 'videos'])->name('chapters.videos');
+    Route::get('/chapters/{chapter:slug}/documents', [ChapterResourceController::class, 'documents'])->name('chapters.documents');
+    Route::get('/chapters/{chapter:slug}/checklist', [ChapterResourceController::class, 'checklist'])->name('chapters.checklist');
+    Route::get('/chapters/{chapter:slug}/glossary', [ChapterResourceController::class, 'glossary'])->name('chapters.glossary');
 });
 
 // ── Server Setup (auth-protected, remove after use) ───────────────────────────
@@ -102,6 +117,12 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
     Route::resource('member-posts', AdminMemberPostController::class)->except('show');
+
+    // PMP Quick Review Training — Chapter CMS
+    Route::resource('chapters', AdminChapterController::class);
+    Route::get('/chapters/{chapter}/resources/create', [AdminChapterResourceController::class, 'create'])->name('chapters.resources.create');
+    Route::post('/chapters/resources', [AdminChapterResourceController::class, 'store'])->name('chapters.resources.store');
+    Route::delete('/chapters/resources/{resource}', [AdminChapterResourceController::class, 'destroy'])->name('chapters.resources.destroy');
 });
 
 // ── Breeze Auth ───────────────────────────────────────────────────────────────

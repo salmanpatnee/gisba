@@ -11,7 +11,7 @@ class RedirectIfMember
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->check() && auth()->user()->isMember()) {
-            return redirect()->route('members.index')
+            return redirect()->route('members.chapters.index')
                 ->with('info', 'Members do not have access to the admin area.');
         }
 

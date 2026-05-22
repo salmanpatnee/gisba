@@ -144,7 +144,7 @@
           </li>
           <li class="nav-item">
             @if(auth()->check() && auth()->user()->isMember())
-              <a class="nav-link site-nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}" href="{{ route('members.index') }}">
+              <a class="nav-link site-nav-link {{ request()->routeIs('members.*') ? 'active' : '' }}" href="{{ route('members.chapters.index') }}">
                 <i class="bi bi-star-fill"></i>My Library
               </a>
             @else

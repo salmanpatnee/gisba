@@ -7,7 +7,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
     <span><i class="bi bi-star-fill me-2"></i>Members Library</span>
     <div class="d-flex gap-3">
-      <a href="{{ route('members.index') }}"><i class="bi bi-arrow-left me-1"></i>Back to Library</a>
+      <a href="{{ route('members.chapters.index') }}"><i class="bi bi-arrow-left me-1"></i>Back to Library</a>
       <a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a>
     </div>
   </div>
@@ -50,7 +50,7 @@
     </div>
 
     <div style="margin-top:48px;padding-top:24px;border-top:1px solid #eee;">
-      <a href="{{ route('members.index') }}" style="font-size:14px;font-weight:600;color:var(--navy);text-decoration:none;">
+      <a href="{{ route('members.chapters.index') }}" style="font-size:14px;font-weight:600;color:var(--navy);text-decoration:none;">
         <i class="bi bi-arrow-left me-1"></i>Back to Members Library
       </a>
     </div>
