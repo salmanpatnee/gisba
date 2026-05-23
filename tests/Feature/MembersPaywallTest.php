@@ -23,7 +23,7 @@ it('redirects authenticated non-member from chapters', function () {
 });
 
 it('allows authenticated member to access chapters', function () {
-    $user = User::factory()->create(['is_member' => true]);
+    $user = User::factory()->member()->create();
 
     $this->actingAs($user)
         ->get(route('members.chapters.index'))

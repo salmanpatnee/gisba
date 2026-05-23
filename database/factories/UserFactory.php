@@ -42,4 +42,12 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    public function member(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'is_member' => true,
+            'member_since' => now(),
+        ]);
+    }
 }

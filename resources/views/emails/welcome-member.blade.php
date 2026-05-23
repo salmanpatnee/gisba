@@ -23,6 +23,9 @@
               <h1 style="font-size:22px;color:#002150;margin:0 0 12px;">Welcome to GISBA Members!</h1>
               <p style="font-size:15px;color:#444;line-height:1.7;margin:0 0 28px;">
                 Your payment was successful. Use the credentials below to log in and access the members-only library.
+                @if($expiresAt)
+                  Your 6-month access is valid until <strong>{{ $expiresAt }}</strong>.
+                @endif
               </p>
 
               {{-- Credentials box --}}

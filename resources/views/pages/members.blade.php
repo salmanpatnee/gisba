@@ -39,23 +39,24 @@
   <div class="container">
     <div class="text-center mb-4">
       <span style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);padding:4px 14px;border-radius:20px;">Members Only</span>
-      <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);font-weight:900;margin:16px 0 10px;">Unlock the GISBA Library</h1>
-      <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">One-time payment. Lifetime access to exclusive cybersecurity &amp; PMP resources.</p>
+      <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);font-weight:900;margin:16px 0 10px;">Enroll in GISBA’s PMP Training</h1>
+      <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">$30 for 6 months of full access to exclusive cybersecurity &amp; PMP resources.</p>
     </div>
 
     <div class="paywall-card">
       <div class="paywall-icon"><i class="bi bi-award-fill"></i></div>
 
       <div class="text-center mb-4">
-        <div class="paywall-price">$30 <sub>one-time</sub></div>
-        <p style="font-size:13px;color:#888;margin-top:6px;">No subscription. No hidden fees.</p>
+        <div class="paywall-price">$30 <sub>/ 6 months</sub></div>
+        <p style="font-size:13px;color:#888;margin-top:6px;">Renew any time. No auto-charge.</p>
       </div>
 
       <ul class="paywall-features">
-        <li><i class="bi bi-check-circle-fill"></i> Full members-only article library</li>
-        <li><i class="bi bi-check-circle-fill"></i> Exclusive cybersecurity &amp; PMP guides</li>
-        <li><i class="bi bi-check-circle-fill"></i> New content added regularly</li>
-        <li><i class="bi bi-check-circle-fill"></i> Magic-link access — no password needed</li>
+        <li><i class="bi bi-check-circle-fill"></i> Tutorial videos for every domain</li>
+        <li><i class="bi bi-check-circle-fill"></i> Quizzes &amp; practice questions</li>
+        <li><i class="bi bi-check-circle-fill"></i> Key takeaways &amp; domain summaries</li>
+        <li><i class="bi bi-check-circle-fill"></i> Domain summaries in poetry</li>
+        <li><i class="bi bi-check-circle-fill"></i> 6 months of full access</li>
         <li><i class="bi bi-check-circle-fill"></i> Secure PayPal checkout</li>
       </ul>
 

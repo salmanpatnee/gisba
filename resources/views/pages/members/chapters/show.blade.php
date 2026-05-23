@@ -232,46 +232,46 @@
             <p class="resources-panel-title"><i class="bi bi-collection me-2" style="color:var(--accent);"></i>Chapter Resources</p>
           </div>
 
-          <a href="{{ route('members.chapters.videos', $chapter->slug) }}" class="resource-row">
+          <a href="{{ route('members.chapters.tutorials', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(59,130,246,0.1);color:#3b82f6;">
               <i class="bi bi-play-circle-fill"></i>
             </span>
             <div class="resource-row-text">
-              <div class="resource-row-name">Video Lessons</div>
-              <div class="resource-row-sub">Watch chapter training videos at your own pace</div>
+              <div class="resource-row-name">Tutorials</div>
+              <div class="resource-row-sub">Watch chapter tutorial videos at your own pace</div>
             </div>
             <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
           </a>
 
-          <a href="{{ route('members.chapters.documents', $chapter->slug) }}" class="resource-row">
+          <a href="{{ route('members.chapters.takeaways', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(16,185,129,0.1);color:#10b981;">
               <i class="bi bi-file-earmark-text-fill"></i>
             </span>
             <div class="resource-row-text">
-              <div class="resource-row-name">Documents &amp; Templates</div>
-              <div class="resource-row-sub">PDF and Word reference materials for this chapter</div>
+              <div class="resource-row-name">Takeaways</div>
+              <div class="resource-row-sub">PDF and Word takeaway materials for this chapter</div>
             </div>
             <span class="resource-row-action">View <i class="bi bi-arrow-right"></i></span>
           </a>
 
-          <a href="{{ route('members.chapters.checklist', $chapter->slug) }}" class="resource-row">
-            <span class="resource-row-icon" style="background:rgba(245,158,11,0.1);color:#f59e0b;">
-              <i class="bi bi-check2-square"></i>
+          <div class="resource-row" style="opacity:0.5;cursor:not-allowed;pointer-events:none;">
+            <span class="resource-row-icon" style="background:rgba(249,115,22,0.1);color:#f97316;">
+              <i class="bi bi-patch-question-fill"></i>
             </span>
             <div class="resource-row-text">
-              <div class="resource-row-name">Checklists</div>
-              <div class="resource-row-sub">Actionable checklists to track chapter progress</div>
+              <div class="resource-row-name">Quizzes</div>
+              <div class="resource-row-sub">Test your knowledge on chapter concepts</div>
             </div>
-            <span class="resource-row-action">Open <i class="bi bi-arrow-right"></i></span>
-          </a>
+            <span style="font-size:11px;font-weight:700;color:#f97316;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.3);padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;">Coming Soon</span>
+          </div>
 
-          <a href="{{ route('members.chapters.glossary', $chapter->slug) }}" class="resource-row">
+          <a href="{{ route('members.chapters.domain-summary', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
               <i class="bi bi-book-fill"></i>
             </span>
             <div class="resource-row-text">
-              <div class="resource-row-name">Glossary</div>
-              <div class="resource-row-sub">Key terms and definitions for this chapter</div>
+              <div class="resource-row-name">Domain Summary in Poetry</div>
+              <div class="resource-row-sub">Chapter concepts expressed through verse</div>
             </div>
             <span class="resource-row-action">Read <i class="bi bi-arrow-right"></i></span>
           </a>

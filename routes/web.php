@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChapterController as AdminChapterController;
 use App\Http\Controllers\Admin\ChapterResourceController as AdminChapterResourceController;
+use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
 use App\Http\Controllers\Admin\PmpCategoryController;
@@ -75,10 +76,9 @@ Route::middleware('member')->prefix('members')->name('members.')->group(function
     // PMP Quick Review Training — Chapters
     Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');
     Route::get('/chapters/{chapter:slug}', [ChapterController::class, 'show'])->name('chapters.show');
-    Route::get('/chapters/{chapter:slug}/videos', [ChapterResourceController::class, 'videos'])->name('chapters.videos');
-    Route::get('/chapters/{chapter:slug}/documents', [ChapterResourceController::class, 'documents'])->name('chapters.documents');
-    Route::get('/chapters/{chapter:slug}/checklist', [ChapterResourceController::class, 'checklist'])->name('chapters.checklist');
-    Route::get('/chapters/{chapter:slug}/glossary', [ChapterResourceController::class, 'glossary'])->name('chapters.glossary');
+    Route::get('/chapters/{chapter:slug}/tutorials', [ChapterResourceController::class, 'tutorials'])->name('chapters.tutorials');
+    Route::get('/chapters/{chapter:slug}/takeaways', [ChapterResourceController::class, 'takeaways'])->name('chapters.takeaways');
+    Route::get('/chapters/{chapter:slug}/domain-summary', [ChapterResourceController::class, 'domainSummary'])->name('chapters.domain-summary');
 });
 
 // ── Server Setup (auth-protected, remove after use) ───────────────────────────
@@ -117,6 +117,9 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
     Route::resource('member-posts', AdminMemberPostController::class)->except('show');
+    Route::get('members', [MemberController::class, 'index'])->name('members.index');
+    Route::patch('members/{user}/revoke', [MemberController::class, 'revoke'])->name('members.revoke');
+    Route::delete('members/{user}', [MemberController::class, 'destroy'])->name('members.destroy');
 
     // PMP Quick Review Training — Chapter CMS
     Route::resource('chapters', AdminChapterController::class);

@@ -10,7 +10,7 @@ it('shows the member login form to guests', function () {
 });
 
 it('redirects already-authenticated members away from login form', function () {
-    $user = User::factory()->create(['is_member' => true]);
+    $user = User::factory()->member()->create();
 
     $this->actingAs($user)
         ->get(route('members.login'))
@@ -18,7 +18,7 @@ it('redirects already-authenticated members away from login form', function () {
 });
 
 it('logs in a valid member and redirects to chapters', function () {
-    $user = User::factory()->create(['is_member' => true, 'password' => bcrypt('secret123')]);
+    $user = User::factory()->member()->create(['password' => bcrypt('secret123')]);
 
     $this->post(route('members.login.submit'), ['email' => $user->email, 'password' => 'secret123'])
         ->assertRedirect(route('members.chapters.index'));

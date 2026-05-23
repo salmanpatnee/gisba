@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ResourceType;
 use App\Models\Chapter;
 use App\Models\Resource;
 use Illuminate\Http\RedirectResponse;
@@ -12,37 +13,30 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ChapterResourceController extends Controller
 {
-    public function videos(Chapter $chapter): View
+    public function tutorials(Chapter $chapter): View
     {
-        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', 'video')]);
+        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', ResourceType::Tutorial)]);
 
-        return view('pages.members.chapters.videos', compact('chapter'));
+        return view('pages.members.chapters.tutorials', compact('chapter'));
     }
 
-    public function documents(Chapter $chapter): View
+    public function takeaways(Chapter $chapter): View
     {
-        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', 'document')]);
+        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', ResourceType::Takeaway)]);
 
-        return view('pages.members.chapters.documents', compact('chapter'));
+        return view('pages.members.chapters.takeaways', compact('chapter'));
     }
 
-    public function checklist(Chapter $chapter): View
+    public function domainSummary(Chapter $chapter): View
     {
-        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', 'checklist')]);
+        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', ResourceType::DomainSummary)]);
 
-        return view('pages.members.chapters.checklist', compact('chapter'));
-    }
-
-    public function glossary(Chapter $chapter): View
-    {
-        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', 'glossary')]);
-
-        return view('pages.members.chapters.glossary', compact('chapter'));
+        return view('pages.members.chapters.domain-summary', compact('chapter'));
     }
 
     public function stream(Resource $resource): BinaryFileResponse
     {
-        if ($resource->resource_type !== 'video') {
+        if ($resource->resource_type !== ResourceType::Tutorial) {
             abort(403);
         }
 

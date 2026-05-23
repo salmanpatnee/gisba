@@ -1,11 +1,11 @@
 @extends('layouts.site')
 
-@section('title', $chapter->title.' — Documents | GISBA Members')
-@section('meta_description', 'Download documents and templates for '.$chapter->title.'.')
+@section('title', $chapter->title.' — Domain Summary in Poetry | GISBA Members')
+@section('meta_description', 'Domain summary in poetry for '.$chapter->title.'.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-file-earmark-text me-2"></i>Documents &amp; Templates</span>
+    <span><i class="bi bi-book me-2"></i>Domain Summary in Poetry</span>
     <div class="d-flex gap-3 align-items-center">
       <a href="{{ route('members.chapters.show', $chapter->slug) }}"><i class="bi bi-arrow-left me-1"></i>{{ $chapter->title }}</a>
       <a href="{{ route('members.chapters.index') }}">All Chapters</a>
@@ -23,7 +23,7 @@
 <style>
 .rp-header {
   background: var(--bg-white);
-  border-top: 4px solid #10b981;
+  border-top: 4px solid #8b5cf6;
   border-bottom: 1px solid var(--border-light);
   padding: 24px 0 20px;
   margin-bottom: 40px;
@@ -38,7 +38,7 @@
 .rp-type-label {
   font-size: 13px;
   font-weight: 700;
-  color: #10b981;
+  color: #8b5cf6;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -53,13 +53,13 @@
 .rp-chapter-link:hover { color: var(--navy); text-decoration: none; }
 .rp-count-badge {
   margin-left: auto;
-  background: rgba(16,185,129,0.1);
-  color: #10b981;
+  background: rgba(139,92,246,0.1);
+  color: #8b5cf6;
   font-size: 11px;
   font-weight: 700;
   padding: 3px 10px;
   border-radius: 20px;
-  border: 1px solid rgba(16,185,129,0.2);
+  border: 1px solid rgba(139,92,246,0.2);
 }
 .rp-title {
   font-family: var(--font-display);
@@ -74,7 +74,7 @@
 <div class="rp-header">
   <div class="container">
     <div class="rp-meta">
-      <span class="rp-type-label"><i class="bi bi-file-earmark-text-fill"></i> Documents &amp; Templates</span>
+      <span class="rp-type-label"><i class="bi bi-book-fill"></i> Domain Summary in Poetry</span>
       <span class="rp-sep">•</span>
       <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="rp-chapter-link">{{ $chapter->title }}</a>
       @if($chapter->resources->isNotEmpty())

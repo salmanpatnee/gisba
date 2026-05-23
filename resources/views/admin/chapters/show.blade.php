@@ -64,12 +64,8 @@
                         <tr>
                             <td class="px-6 py-4 font-medium text-gray-900 max-w-xs truncate">{{ $resource->file_name }}</td>
                             <td class="px-6 py-4">
-                                <span class="inline-flex px-2 py-0.5 rounded text-xs font-semibold
-                                    {{ $resource->resource_type === 'video' ? 'bg-blue-100 text-blue-700' :
-                                       ($resource->resource_type === 'document' ? 'bg-green-100 text-green-700' :
-                                       ($resource->resource_type === 'checklist' ? 'bg-yellow-100 text-yellow-700' :
-                                       'bg-purple-100 text-purple-700')) }}">
-                                    {{ ucfirst($resource->resource_type) }}
+                                <span class="inline-flex px-2 py-0.5 rounded text-xs font-semibold {{ $resource->resource_type->badgeColor() }}">
+                                    {{ $resource->resource_type->label() }}
                                 </span>
                             </td>
                             <td class="px-6 py-4 text-gray-400 text-xs">{{ $resource->file_type }}</td>

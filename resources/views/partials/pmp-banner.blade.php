@@ -21,7 +21,7 @@
 
       <div class="nis2-promo-cta">
         <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
-          $30 — Get PMP Training <i class="bi bi-arrow-right"></i>
+          $30 / 6 months — Get PMP Training <i class="bi bi-arrow-right"></i>
         </a>
       </div>
 

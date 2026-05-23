@@ -71,17 +71,17 @@ class PayPalCheckoutController extends Controller
 
         $user->update([
             'is_member' => true,
-            'member_since' => $user->member_since ?? now(),
+            'member_since' => now(),
         ]);
 
         MemberAccessToken::create([
             'email' => $email,
             'token' => Str::random(64),
             'paypal_order_id' => $orderId,
-            'expires_at' => now()->addYears(10),
+            'expires_at' => now()->addMonths(6),
         ]);
 
-        Mail::to($email)->send(new WelcomeMemberMail($email, $plainPassword));
+        Mail::to($email)->send(new WelcomeMemberMail($email, $plainPassword, now()->addMonths(6)->format('F j, Y')));
 
         session()->forget('paypal_pending_email');
 

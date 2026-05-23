@@ -37,7 +37,7 @@ beforeEach(function () {
 });
 
 it('redirects existing member to login instead of PayPal', function () {
-    $user = User::factory()->create(['email' => 'member@example.com', 'is_member' => true]);
+    $user = User::factory()->member()->create(['email' => 'member@example.com']);
 
     $this->post(route('members.checkout'), ['email' => 'member@example.com'])
         ->assertRedirect(route('members.login'))

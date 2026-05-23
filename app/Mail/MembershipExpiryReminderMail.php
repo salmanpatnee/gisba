@@ -2,36 +2,34 @@
 
 namespace App\Mail;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeMemberMail extends Mailable
+class MembershipExpiryReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct(
-        public readonly string $memberEmail,
-        public readonly ?string $password = null,
-        public readonly ?string $expiresAt = null,
-    ) {}
+    public function __construct(public readonly User $user) {}
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your GISBA Members Access',
+            subject: 'Your GISBA Membership Expires in 7 Days',
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcome-member',
+            view: 'emails.membership-expiry-reminder',
             with: [
-                'loginUrl' => route('members.login'),
-                'expiresAt' => $this->expiresAt,
+                'userName' => $this->user->name,
+                'expiresAt' => $this->user->memberExpiresAt()->format('F j, Y'),
+                'renewUrl' => route('members.paywall'),
             ],
         );
     }

@@ -1,11 +1,11 @@
 @extends('layouts.site')
 
-@section('title', $chapter->title.' — Videos | GISBA Members')
-@section('meta_description', 'Watch video lessons for '.$chapter->title.'.')
+@section('title', $chapter->title.' — Tutorials | GISBA Members')
+@section('meta_description', 'Watch tutorial lessons for '.$chapter->title.'.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-play-circle me-2"></i>Video Lessons</span>
+    <span><i class="bi bi-play-circle me-2"></i>Tutorials</span>
     <div class="d-flex gap-3 align-items-center">
       <a href="{{ route('members.chapters.show', $chapter->slug) }}"><i class="bi bi-arrow-left me-1"></i>{{ $chapter->title }}</a>
       <a href="{{ route('members.chapters.index') }}">All Chapters</a>
@@ -116,11 +116,11 @@
 <div class="rp-header">
   <div class="container">
     <div class="rp-meta">
-      <span class="rp-type-label"><i class="bi bi-play-circle-fill"></i> Video Lessons</span>
+      <span class="rp-type-label"><i class="bi bi-play-circle-fill"></i> Tutorials</span>
       <span class="rp-sep">•</span>
       <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="rp-chapter-link">{{ $chapter->title }}</a>
       @if($chapter->resources->isNotEmpty())
-        <span class="rp-count-badge">{{ $chapter->resources->count() }} {{ Str::plural('video', $chapter->resources->count()) }}</span>
+        <span class="rp-count-badge">{{ $chapter->resources->count() }} {{ Str::plural('tutorial', $chapter->resources->count()) }}</span>
       @endif
     </div>
     <h1 class="rp-title">{{ $chapter->title }}</h1>
@@ -133,7 +133,7 @@
     @if($chapter->resources->isEmpty())
       <div style="text-align:center;padding:72px 0;color:#9ca3af;">
         <i class="bi bi-camera-video" style="font-size:3rem;display:block;margin-bottom:16px;color:#d1d5db;"></i>
-        <p style="font-size:14.5px;margin:0;">No videos uploaded yet. Check back soon.</p>
+        <p style="font-size:14.5px;margin:0;">No tutorials uploaded yet. Check back soon.</p>
       </div>
     @else
       <div class="row g-4">

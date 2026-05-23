@@ -27,7 +27,7 @@
 <style>
 .chapter-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s, transform 0.25s; height: 100%; display: flex; flex-direction: column; position: relative; cursor: pointer; }
 .chapter-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
-.chapter-card-img { width: 100%; height: 180px; object-fit: cover; }
+.chapter-card-img { width: 100%; height: 200px; object-fit: cover; }
 .chapter-card-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
 .chapter-card-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.35; }
 .chapter-card-desc { font-size: 13px; color: #555; line-height: 1.6; flex: 1; margin-bottom: 16px; }

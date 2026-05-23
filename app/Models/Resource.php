@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ResourceType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -17,6 +18,10 @@ class Resource extends Model
         'resource_type',
         'resourceable_type',
         'resourceable_id',
+    ];
+
+    protected $casts = [
+        'resource_type' => ResourceType::class,
     ];
 
     public function resourceable(): MorphTo

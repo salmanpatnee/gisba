@@ -21,19 +21,17 @@ class ChapterResourceController extends Controller
     {
         $request->validate([
             'chapter_id' => ['required', 'integer', 'exists:chapters,id'],
-            'video' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
-            'document' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
-            'checklist' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
-            'glossary' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
+            'tutorial' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
+            'takeaway' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
+            'domain_summary' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
         ]);
 
         $chapter = Chapter::findOrFail($request->chapter_id);
 
         $uploads = [
-            'video' => 'video',
-            'document' => 'document',
-            'checklist' => 'checklist',
-            'glossary' => 'glossary',
+            'tutorial' => 'tutorial',
+            'takeaway' => 'takeaway',
+            'domain_summary' => 'domain_summary',
         ];
 
         foreach ($uploads as $input => $type) {

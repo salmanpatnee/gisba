@@ -23,56 +23,51 @@
                     @csrf
                     <input type="hidden" name="chapter_id" value="{{ $chapter->id }}">
 
-                    {{-- Video --}}
+                    {{-- Tutorial --}}
                     <div class="mb-6 p-4 border border-gray-200 rounded-md">
                         <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"></span>Video (MP4)
+                            <span class="inline-block w-2 h-2 rounded-full bg-blue-500 mr-2"></span>Tutorial (MP4)
                         </h3>
                         <input type="file"
-                               name="video"
+                               name="tutorial"
                                accept="video/mp4"
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
                         <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
-                        @error('video')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                        @error('tutorial')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
-                    {{-- Document / Template --}}
+                    {{-- Takeaway --}}
                     <div class="mb-6 p-4 border border-gray-200 rounded-md">
                         <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Document / Template
+                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Takeaway
                         </h3>
                         <input type="file"
-                               name="document"
+                               name="takeaway"
                                accept=".pdf,.doc,.docx"
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
                         <p class="mt-1 text-xs text-gray-400">PDF or Word — max 20 MB.</p>
-                        @error('document')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                        @error('takeaway')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
-                    {{-- Checklist --}}
+                    {{-- Domain Summary in Poetry --}}
                     <div class="mb-6 p-4 border border-gray-200 rounded-md">
                         <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-yellow-500 mr-2"></span>Checklist
+                            <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Domain Summary in Poetry
                         </h3>
                         <input type="file"
-                               name="checklist"
+                               name="domain_summary"
                                accept=".pdf,.doc,.docx"
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
                         <p class="mt-1 text-xs text-gray-400">PDF or Word — max 20 MB.</p>
-                        @error('checklist')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                        @error('domain_summary')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
-                    {{-- Glossary --}}
-                    <div class="mb-6 p-4 border border-gray-200 rounded-md">
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Glossary
+                    {{-- Quizzes placeholder --}}
+                    <div class="mb-6 p-4 border border-dashed border-orange-200 rounded-md bg-orange-50">
+                        <h3 class="text-sm font-semibold text-orange-600 mb-1">
+                            <span class="inline-block w-2 h-2 rounded-full bg-orange-400 mr-2"></span>Quizzes — Coming Soon
                         </h3>
-                        <input type="file"
-                               name="glossary"
-                               accept=".pdf,.doc,.docx"
-                               class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
-                        <p class="mt-1 text-xs text-gray-400">PDF or Word — max 20 MB.</p>
-                        @error('glossary')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                        <p class="text-xs text-orange-500">Quiz upload will be available in a future release.</p>
                     </div>
 
                     <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
