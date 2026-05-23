@@ -28,7 +28,6 @@
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">#</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Title</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Slug</th>
                             <th class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Actions</th>
@@ -37,7 +36,6 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($chapters as $chapter)
                         <tr>
-                            <td class="px-6 py-4 text-gray-500">{{ $chapter->sort_order }}</td>
                             <td class="px-6 py-4">
                                 <div class="font-medium text-gray-900">{{ $chapter->title }}</div>
                             </td>
@@ -57,7 +55,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-10 text-center text-gray-500">No chapters yet.</td>
+                            <td colspan="3" class="px-6 py-10 text-center text-gray-500">No chapters yet.</td>
                         </tr>
                         @endforelse
                     </tbody>

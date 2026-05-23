@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">
                         {{ __('PMP Categories') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
+                        {{ __('Chapters') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                         {{ __('Videos') }}
                     </x-nav-link>
@@ -99,6 +102,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">
                 {{ __('PMP Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
+                {{ __('Chapters') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                 {{ __('Videos') }}
