@@ -34,9 +34,16 @@ class ChapterResourceController extends Controller
         return view('pages.members.chapters.domain-summary', compact('chapter'));
     }
 
+    public function quizzes(Chapter $chapter): View
+    {
+        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', ResourceType::Quizzes)]);
+
+        return view('pages.members.chapters.quizzes', compact('chapter'));
+    }
+
     public function stream(Resource $resource): BinaryFileResponse
     {
-        if ($resource->resource_type !== ResourceType::Tutorial) {
+        if (! in_array($resource->resource_type, [ResourceType::Tutorial, ResourceType::Quizzes])) {
             abort(403);
         }
 

@@ -62,12 +62,17 @@
                         @error('domain_summary')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
-                    {{-- Quizzes placeholder --}}
-                    <div class="mb-6 p-4 border border-dashed border-orange-200 rounded-md bg-orange-50">
-                        <h3 class="text-sm font-semibold text-orange-600 mb-1">
-                            <span class="inline-block w-2 h-2 rounded-full bg-orange-400 mr-2"></span>Quizzes — Coming Soon
+                    {{-- Quizzes --}}
+                    <div class="mb-6 p-4 border border-gray-200 rounded-md">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-2">
+                            <span class="inline-block w-2 h-2 rounded-full bg-orange-500 mr-2"></span>Quiz (MP4)
                         </h3>
-                        <p class="text-xs text-orange-500">Quiz upload will be available in a future release.</p>
+                        <input type="file"
+                               name="quiz"
+                               accept="video/mp4"
+                               class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
+                        <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
+                        @error('quiz')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
                     <div class="flex items-center gap-4 pt-4 border-t border-gray-100">

@@ -254,7 +254,7 @@
             <span class="resource-row-action">View <i class="bi bi-arrow-right"></i></span>
           </a>
 
-          <div class="resource-row" style="opacity:0.5;cursor:not-allowed;pointer-events:none;">
+          <a href="{{ route('members.chapters.quizzes', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(249,115,22,0.1);color:#f97316;">
               <i class="bi bi-patch-question-fill"></i>
             </span>
@@ -262,8 +262,8 @@
               <div class="resource-row-name">Quizzes</div>
               <div class="resource-row-sub">Test your knowledge on chapter concepts</div>
             </div>
-            <span style="font-size:11px;font-weight:700;color:#f97316;background:rgba(249,115,22,0.1);border:1px solid rgba(249,115,22,0.3);padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;">Coming Soon</span>
-          </div>
+            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
+          </a>
 
           <a href="{{ route('members.chapters.domain-summary', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">

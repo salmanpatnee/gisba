@@ -22,6 +22,7 @@ class ChapterResourceController extends Controller
         $request->validate([
             'chapter_id' => ['required', 'integer', 'exists:chapters,id'],
             'tutorial' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
+            'quiz' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
             'takeaway' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
             'domain_summary' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
         ]);
@@ -30,6 +31,7 @@ class ChapterResourceController extends Controller
 
         $uploads = [
             'tutorial' => 'tutorial',
+            'quiz' => 'quizzes',
             'takeaway' => 'takeaway',
             'domain_summary' => 'domain_summary',
         ];
