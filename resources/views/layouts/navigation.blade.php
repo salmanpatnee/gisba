@@ -16,10 +16,10 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
-                        {{ __('Blog') }}
+                        {{ __('NIS2 Blogs') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
-                        {{ __('Categories') }}
+                        {{ __('NIS2 Categories') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">
                         {{ __('PMP') }}
@@ -95,10 +95,10 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
-                {{ __('Blog') }}
+                {{ __('NIS2 Blogs') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
-                {{ __('Categories') }}
+                {{ __('NIS2 Categories') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">
                 {{ __('PMP') }}
