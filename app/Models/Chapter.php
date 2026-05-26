@@ -18,6 +18,7 @@ class Chapter extends Model
         'description',
         'image_path',
         'sort_order',
+        'section',
     ];
 
     public function resources(): MorphMany

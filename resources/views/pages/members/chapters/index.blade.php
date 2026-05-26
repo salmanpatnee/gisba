@@ -33,6 +33,13 @@
 .chapter-card-desc { font-size: 13px; color: #555; line-height: 1.6; flex: 1; margin-bottom: 16px; }
 .btn-view { font-size: 12.5px; font-weight: 600; color: var(--navy); text-decoration: none; display: flex; align-items: center; gap: 4px; }
 .btn-view:hover { color: var(--accent); }
+.section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.section-badge { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--font-display); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-weight: 800; color: var(--navy); margin: 0; }
+.section-divider { border: none; border-top: 2px solid var(--border-light); margin: 60px 0 56px; }
+.section-coming-soon { text-align: center; padding: 48px 24px; background: var(--bg-white); border: 1px dashed var(--border-light); border-radius: var(--radius-lg); color: #999; }
+.section-coming-soon i { font-size: 2.4rem; display: block; margin-bottom: 14px; color: #ccc; }
+.section-coming-soon p { margin: 0; font-size: 14px; line-height: 1.6; }
 </style>
 
 <div class="page-layout" style="padding-bottom:0;">
@@ -58,19 +65,25 @@
 <section style="padding:60px 0 80px;background:var(--bg-page);">
   <div class="container">
 
-    @if($chapters->isEmpty())
-      <div style="text-align:center;padding:60px 0;color:#888;">
-        <i class="bi bi-journal-x" style="font-size:3rem;display:block;margin-bottom:16px;color:#ccc;"></i>
+    {{-- Part 1 --}}
+    <div class="section-header">
+      <div class="section-badge">1</div>
+      <h2 class="section-title">PMBOK 8th Edition Review Training</h2>
+    </div>
+
+    @if($part1->isEmpty())
+      <div class="section-coming-soon">
+        <i class="bi bi-journal-x"></i>
         <p>No chapters available yet. Check back soon.</p>
       </div>
     @else
       <div class="row g-4">
-        @foreach($chapters as $chapter)
+        @foreach($part1 as $chapter)
           <div class="col-12 col-md-6 col-lg-4">
             <div class="chapter-card">
               <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
               <div class="chapter-card-body">
-                <h2 class="chapter-card-title">{{ $chapter->title }}</h2>
+                <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
                 @if($chapter->description)
                   <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
                 @endif
@@ -84,12 +97,78 @@
           </div>
         @endforeach
       </div>
+    @endif
 
-      @if($chapters->hasPages())
-        <div class="d-flex justify-content-center mt-5">
-          {{ $chapters->links() }}
-        </div>
-      @endif
+    <hr class="section-divider">
+
+    {{-- Part 2 --}}
+    <div class="section-header">
+      <div class="section-badge">2</div>
+      <h2 class="section-title">PMP Exam Content Outline Mapping Trainings</h2>
+    </div>
+
+    @if($part2->isEmpty())
+      <div class="section-coming-soon">
+        <i class="bi bi-clock-history"></i>
+        <p>Coming soon — these chapters are currently in development.<br>Check back for updates.</p>
+      </div>
+    @else
+      <div class="row g-4">
+        @foreach($part2 as $chapter)
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="chapter-card">
+              <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+              <div class="chapter-card-body">
+                <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
+                @if($chapter->description)
+                  <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
+                @endif
+                <div style="display:flex;align-items:center;justify-content:flex-end;">
+                  <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">
+                    View Chapter <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
+    @endif
+
+    <hr class="section-divider">
+
+    {{-- Part 3 --}}
+    <div class="section-header">
+      <div class="section-badge">3</div>
+      <h2 class="section-title">Practical Tips and Others</h2>
+    </div>
+
+    @if($part3->isEmpty())
+      <div class="section-coming-soon">
+        <i class="bi bi-journal-x"></i>
+        <p>No chapters available yet. Check back soon.</p>
+      </div>
+    @else
+      <div class="row g-4">
+        @foreach($part3 as $chapter)
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="chapter-card">
+              <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+              <div class="chapter-card-body">
+                <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
+                @if($chapter->description)
+                  <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
+                @endif
+                <div style="display:flex;align-items:center;justify-content:flex-end;">
+                  <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">
+                    View Chapter <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        @endforeach
+      </div>
     @endif
 
   </div>

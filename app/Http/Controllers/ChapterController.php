@@ -9,9 +9,13 @@ class ChapterController extends Controller
 {
     public function index(): View
     {
-        $chapters = Chapter::query()->orderBy('sort_order')->orderBy('title')->paginate(20);
+        $chapters = Chapter::query()->orderBy('sort_order')->orderBy('title')->get();
 
-        return view('pages.members.chapters.index', compact('chapters'));
+        return view('pages.members.chapters.index', [
+            'part1' => $chapters->where('section', 1),
+            'part2' => $chapters->where('section', 2),
+            'part3' => $chapters->where('section', 3),
+        ]);
     }
 
     public function show(Chapter $chapter): View
