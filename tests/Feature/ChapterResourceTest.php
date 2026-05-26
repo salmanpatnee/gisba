@@ -108,20 +108,24 @@ it('streams a quiz video for authenticated member', function () {
         ->assertHeader('Content-Type', 'video/mp4');
 });
 
-it('blocks streaming for non-video resource types via stream route', function () {
+it('streams a takeaway video for authenticated member', function () {
     Storage::fake('public');
+
+    $file = UploadedFile::fake()->create('takeaway.mp4', 100, 'video/mp4');
+    $path = $file->store('chapters/resources', 'public');
 
     $chapter = Chapter::factory()->create();
     $resource = Resource::factory()->forChapter($chapter)->create([
         'resource_type' => ResourceType::Takeaway,
-        'file_path' => 'chapters/resources/doc.pdf',
-        'file_type' => 'application/pdf',
-        'file_name' => 'doc.pdf',
+        'file_path' => $path,
+        'file_type' => 'video/mp4',
+        'file_name' => 'takeaway.mp4',
     ]);
 
     $this->actingAs(User::factory()->member()->create())
         ->get(route('members.chapters.stream', $resource->id))
-        ->assertForbidden();
+        ->assertSuccessful()
+        ->assertHeader('Content-Type', 'video/mp4');
 });
 
 // ── Chapter show — quiz row is live ──────────────────────────────────────────

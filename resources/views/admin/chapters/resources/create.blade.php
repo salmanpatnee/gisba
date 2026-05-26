@@ -39,26 +39,26 @@
                     {{-- Takeaway --}}
                     <div class="mb-6 p-4 border border-gray-200 rounded-md">
                         <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Takeaway
+                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Takeaway (MP4)
                         </h3>
                         <input type="file"
                                name="takeaway"
-                               accept=".pdf,.doc,.docx"
+                               accept="video/mp4"
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
-                        <p class="mt-1 text-xs text-gray-400">PDF or Word — max 20 MB.</p>
+                        <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
                         @error('takeaway')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
                     {{-- Domain Summary in Poetry --}}
                     <div class="mb-6 p-4 border border-gray-200 rounded-md">
                         <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Domain Summary in Poetry
+                            <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Domain Summary in Poetry (MP4)
                         </h3>
                         <input type="file"
                                name="domain_summary"
-                               accept=".pdf,.doc,.docx"
+                               accept="video/mp4"
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
-                        <p class="mt-1 text-xs text-gray-400">PDF or Word — max 20 MB.</p>
+                        <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
                         @error('domain_summary')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 

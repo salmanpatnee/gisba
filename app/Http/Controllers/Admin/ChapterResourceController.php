@@ -23,8 +23,8 @@ class ChapterResourceController extends Controller
             'chapter_id' => ['required', 'integer', 'exists:chapters,id'],
             'tutorial' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
             'quiz' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
-            'takeaway' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
-            'domain_summary' => ['nullable', 'file', 'mimes:pdf,doc,docx', 'max:20480'],
+            'takeaway' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
+            'domain_summary' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
         ]);
 
         $chapter = Chapter::findOrFail($request->chapter_id);

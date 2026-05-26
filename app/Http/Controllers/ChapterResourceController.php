@@ -43,7 +43,7 @@ class ChapterResourceController extends Controller
 
     public function stream(Resource $resource): BinaryFileResponse
     {
-        if (! in_array($resource->resource_type, [ResourceType::Tutorial, ResourceType::Quizzes])) {
+        if (! in_array($resource->resource_type, [ResourceType::Tutorial, ResourceType::Quizzes, ResourceType::Takeaway, ResourceType::DomainSummary])) {
             abort(403);
         }
 

@@ -245,13 +245,13 @@
 
           <a href="{{ route('members.chapters.takeaways', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(16,185,129,0.1);color:#10b981;">
-              <i class="bi bi-file-earmark-text-fill"></i>
+              <i class="bi bi-play-circle-fill"></i>
             </span>
             <div class="resource-row-text">
               <div class="resource-row-name">Takeaways</div>
-              <div class="resource-row-sub">PDF and Word takeaway materials for this chapter</div>
+              <div class="resource-row-sub">Watch takeaway videos for this chapter</div>
             </div>
-            <span class="resource-row-action">View <i class="bi bi-arrow-right"></i></span>
+            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
           </a>
 
           <a href="{{ route('members.chapters.quizzes', $chapter->slug) }}" class="resource-row">
@@ -267,13 +267,13 @@
 
           <a href="{{ route('members.chapters.domain-summary', $chapter->slug) }}" class="resource-row">
             <span class="resource-row-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
-              <i class="bi bi-book-fill"></i>
+              <i class="bi bi-play-circle-fill"></i>
             </span>
             <div class="resource-row-text">
               <div class="resource-row-name">Domain Summary in Poetry</div>
-              <div class="resource-row-sub">Chapter concepts expressed through verse</div>
+              <div class="resource-row-sub">Watch domain summary videos for this chapter</div>
             </div>
-            <span class="resource-row-action">Read <i class="bi bi-arrow-right"></i></span>
+            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
           </a>
         </div>
 
