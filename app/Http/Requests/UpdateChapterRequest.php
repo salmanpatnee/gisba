@@ -23,6 +23,7 @@ class UpdateChapterRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'image_path' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
+            'section' => ['required', 'integer', 'in:1,2,3'],
         ];
     }
 }

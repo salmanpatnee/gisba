@@ -41,6 +41,26 @@
     @enderror
 </div>
 
+{{-- Section --}}
+<div class="mb-6">
+    <label for="section" class="block text-sm font-medium text-gray-700 mb-1">Section <span class="text-red-500">*</span></label>
+    <select id="section" name="section"
+            class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('section') border-red-400 @enderror">
+        @foreach([
+            1 => 'PMBOK 8th Edition Review Training',
+            2 => 'PMP Exam Content Outline Mapping Trainings',
+            3 => 'Practical Tips and Others',
+        ] as $value => $label)
+            <option value="{{ $value }}" {{ old('section', $chapter?->section ?? 1) == $value ? 'selected' : '' }}>
+                {{ $value }}. {{ $label }}
+            </option>
+        @endforeach
+    </select>
+    @error('section')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
 {{-- Description --}}
 <div class="mb-6">
     <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
