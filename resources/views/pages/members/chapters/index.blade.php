@@ -40,6 +40,29 @@
 .section-coming-soon { text-align: center; padding: 48px 24px; background: var(--bg-white); border: 1px dashed var(--border-light); border-radius: var(--radius-lg); color: #999; }
 .section-coming-soon i { font-size: 2.4rem; display: block; margin-bottom: 14px; color: #ccc; }
 .section-coming-soon p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+/* ── Overall course progress (hero) ─────────────────────────── */
+.overall-progress { margin-top: 26px; max-width: 560px; }
+.overall-progress-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; flex-wrap: wrap; }
+.overall-progress-label { font-size: 12px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: #fff; display: flex; align-items: center; }
+.overall-progress-stat { font-size: 12.5px; font-weight: 700; color: var(--accent); }
+.op-track { height: 10px; border-radius: 999px; background: rgba(255,255,255,0.16); overflow: hidden; }
+.op-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), #e0c468); transition: width 0.7s ease; position: relative; overflow: hidden; }
+.op-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: translateX(-100%); animation: opShimmer 2.4s ease-in-out infinite; }
+@keyframes opShimmer { to { transform: translateX(100%); } }
+
+/* ── Per-chapter card progress ──────────────────────────────── */
+.chapter-card-media { position: relative; }
+.chapter-complete-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; background: rgba(16,185,129,0.95); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 0.3px; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.18); }
+.chapter-complete-badge i { font-size: 12px; }
+.chapter-progress { margin-bottom: 16px; }
+.chapter-progress-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.chapter-progress-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.7px; text-transform: uppercase; color: var(--text-muted); }
+.chapter-progress-count { font-size: 11px; font-weight: 700; color: var(--navy); }
+.cp-track { height: 6px; border-radius: 999px; background: rgba(0,51,102,0.08); overflow: hidden; }
+.cp-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), #e0c468); transition: width 0.6s ease; }
+
+@media (prefers-reduced-motion: reduce) { .op-fill::after { animation: none; } }
 </style>
 
 <div class="page-layout" style="padding-bottom:0;">
@@ -56,6 +79,17 @@
           <p style="color:rgba(255,255,255,0.78);font-size:15.5px;line-height:1.7;max-width:520px;margin:0;">
             All chapters with videos, documents, checklists, and glossary resources.
           </p>
+          @if($totalResources > 0)
+            <div class="overall-progress">
+              <div class="overall-progress-head">
+                <span class="overall-progress-label"><i class="bi bi-mortarboard-fill me-2"></i>Your Progress</span>
+                <span class="overall-progress-stat">{{ $totalWatched }} / {{ $totalResources }} videos &middot; {{ $overallPercent }}%</span>
+              </div>
+              <div class="op-track" role="progressbar" aria-valuenow="{{ $overallPercent }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="op-fill" style="width:{{ $overallPercent }}%"></div>
+              </div>
+            </div>
+          @endif
         </div>
       </div>
     </div>
@@ -81,11 +115,28 @@
         @foreach($part1 as $chapter)
           <div class="col-12 col-md-6 col-lg-4">
             <div class="chapter-card">
-              <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+              <div class="chapter-card-media">
+                <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+                @if($chapter->isCompletedBy(auth()->user()))
+                  <span class="chapter-complete-badge"><i class="bi bi-patch-check-fill"></i> Completed</span>
+                @endif
+              </div>
               <div class="chapter-card-body">
                 <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
                 @if($chapter->description)
                   <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
+                @endif
+                @php($chTotal = $chapter->totalResourceCount())
+                @if($chTotal > 0)
+                  <div class="chapter-progress">
+                    <div class="chapter-progress-head">
+                      <span class="chapter-progress-label">Progress</span>
+                      <span class="chapter-progress-count">{{ $chapter->watchedResourceCount(auth()->user()) }}/{{ $chTotal }}</span>
+                    </div>
+                    <div class="cp-track">
+                      <div class="cp-fill" style="width:{{ $chapter->progressPercent(auth()->user()) }}%"></div>
+                    </div>
+                  </div>
                 @endif
                 <div style="display:flex;align-items:center;justify-content:flex-end;">
                   <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">
@@ -117,11 +168,28 @@
         @foreach($part2 as $chapter)
           <div class="col-12 col-md-6 col-lg-4">
             <div class="chapter-card">
-              <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+              <div class="chapter-card-media">
+                <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+                @if($chapter->isCompletedBy(auth()->user()))
+                  <span class="chapter-complete-badge"><i class="bi bi-patch-check-fill"></i> Completed</span>
+                @endif
+              </div>
               <div class="chapter-card-body">
                 <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
                 @if($chapter->description)
                   <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
+                @endif
+                @php($chTotal = $chapter->totalResourceCount())
+                @if($chTotal > 0)
+                  <div class="chapter-progress">
+                    <div class="chapter-progress-head">
+                      <span class="chapter-progress-label">Progress</span>
+                      <span class="chapter-progress-count">{{ $chapter->watchedResourceCount(auth()->user()) }}/{{ $chTotal }}</span>
+                    </div>
+                    <div class="cp-track">
+                      <div class="cp-fill" style="width:{{ $chapter->progressPercent(auth()->user()) }}%"></div>
+                    </div>
+                  </div>
                 @endif
                 <div style="display:flex;align-items:center;justify-content:flex-end;">
                   <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">
@@ -153,11 +221,28 @@
         @foreach($part3 as $chapter)
           <div class="col-12 col-md-6 col-lg-4">
             <div class="chapter-card">
-              <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+              <div class="chapter-card-media">
+                <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+                @if($chapter->isCompletedBy(auth()->user()))
+                  <span class="chapter-complete-badge"><i class="bi bi-patch-check-fill"></i> Completed</span>
+                @endif
+              </div>
               <div class="chapter-card-body">
                 <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
                 @if($chapter->description)
                   <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
+                @endif
+                @php($chTotal = $chapter->totalResourceCount())
+                @if($chTotal > 0)
+                  <div class="chapter-progress">
+                    <div class="chapter-progress-head">
+                      <span class="chapter-progress-label">Progress</span>
+                      <span class="chapter-progress-count">{{ $chapter->watchedResourceCount(auth()->user()) }}/{{ $chTotal }}</span>
+                    </div>
+                    <div class="cp-track">
+                      <div class="cp-fill" style="width:{{ $chapter->progressPercent(auth()->user()) }}%"></div>
+                    </div>
+                  </div>
                 @endif
                 <div style="display:flex;align-items:center;justify-content:flex-end;">
                   <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">

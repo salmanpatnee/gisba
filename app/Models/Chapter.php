@@ -26,6 +26,42 @@ class Chapter extends Model
         return $this->morphMany(Resource::class, 'resourceable');
     }
 
+    public function totalResourceCount(): int
+    {
+        return $this->resources_count ?? $this->resources()->count();
+    }
+
+    public function watchedResourceCount(?User $user): int
+    {
+        if (! $user) {
+            return 0;
+        }
+
+        $loaded = $this->getAttribute('watched_count');
+
+        if ($loaded !== null) {
+            return (int) $loaded;
+        }
+
+        return $this->resources()
+            ->whereHas('watchers', fn ($q) => $q->where('users.id', $user->id))
+            ->count();
+    }
+
+    public function progressPercent(?User $user): int
+    {
+        $total = $this->totalResourceCount();
+
+        return $total > 0 ? (int) round($this->watchedResourceCount($user) / $total * 100) : 0;
+    }
+
+    public function isCompletedBy(?User $user): bool
+    {
+        $total = $this->totalResourceCount();
+
+        return $total > 0 && $this->watchedResourceCount($user) === $total;
+    }
+
     protected static function booted(): void
     {
         static::creating(function (Chapter $chapter): void {

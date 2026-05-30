@@ -72,6 +72,7 @@ Route::middleware('member')->prefix('members')->name('members.')->group(function
     Route::get('/chapters/view/{resource}', [ChapterResourceController::class, 'view'])->name('chapters.view');
     Route::get('/chapters/download/{resource}', [ChapterResourceController::class, 'download'])->name('chapters.download');
     Route::delete('/chapters/resources/{resource}', [ChapterResourceController::class, 'destroy'])->name('chapters.resource.destroy');
+    Route::post('/chapters/resources/{resource}/complete', [ChapterResourceController::class, 'markComplete'])->name('chapters.resource.complete');
 
     // PMP Quick Review Training — Chapters
     Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');

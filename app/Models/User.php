@@ -7,6 +7,7 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -26,6 +27,13 @@ class User extends Authenticatable
             'is_member' => 'boolean',
             'member_since' => 'datetime',
         ];
+    }
+
+    public function watchedResources(): BelongsToMany
+    {
+        return $this->belongsToMany(Resource::class, 'resource_user')
+            ->withPivot('completed_at')
+            ->withTimestamps();
     }
 
     public function isMember(): bool

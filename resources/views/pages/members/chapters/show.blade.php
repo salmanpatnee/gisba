@@ -145,6 +145,10 @@
   flex-shrink: 0;
 }
 .resource-row:hover .resource-row-action { color: var(--navy-mid); }
+.resource-row.is-done { border-left-color: #10b981; background: rgba(16,185,129,0.05); }
+.resource-row.is-done:hover { border-left-color: #10b981; }
+.resource-row-action.is-done { color: #10b981; }
+.resource-row-progress { font-size: 11px; font-weight: 700; color: var(--text-muted); white-space: nowrap; flex-shrink: 0; }
 
 /* ── Chapter nav ────────────────────────────────────────────── */
 .chapter-nav {
@@ -232,7 +236,8 @@
             <p class="resources-panel-title"><i class="bi bi-collection me-2" style="color:var(--accent);"></i>Chapter Resources</p>
           </div>
 
-          <a href="{{ route('members.chapters.tutorials', $chapter->slug) }}" class="resource-row">
+          @php($cat = $categoryProgress->get('tutorial'))
+          <a href="{{ route('members.chapters.tutorials', $chapter->slug) }}" class="resource-row {{ ($cat['done'] ?? false) ? 'is-done' : '' }}">
             <span class="resource-row-icon" style="background:rgba(59,130,246,0.1);color:#3b82f6;">
               <i class="bi bi-play-circle-fill"></i>
             </span>
@@ -240,10 +245,11 @@
               <div class="resource-row-name">Tutorials</div>
               <div class="resource-row-sub">Watch chapter tutorial videos at your own pace</div>
             </div>
-            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
+            @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
           </a>
 
-          <a href="{{ route('members.chapters.takeaways', $chapter->slug) }}" class="resource-row">
+          @php($cat = $categoryProgress->get('takeaway'))
+          <a href="{{ route('members.chapters.takeaways', $chapter->slug) }}" class="resource-row {{ ($cat['done'] ?? false) ? 'is-done' : '' }}">
             <span class="resource-row-icon" style="background:rgba(16,185,129,0.1);color:#10b981;">
               <i class="bi bi-play-circle-fill"></i>
             </span>
@@ -251,10 +257,11 @@
               <div class="resource-row-name">Takeaways</div>
               <div class="resource-row-sub">Watch takeaway videos for this chapter</div>
             </div>
-            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
+            @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
           </a>
 
-          <a href="{{ route('members.chapters.quizzes', $chapter->slug) }}" class="resource-row">
+          @php($cat = $categoryProgress->get('quizzes'))
+          <a href="{{ route('members.chapters.quizzes', $chapter->slug) }}" class="resource-row {{ ($cat['done'] ?? false) ? 'is-done' : '' }}">
             <span class="resource-row-icon" style="background:rgba(249,115,22,0.1);color:#f97316;">
               <i class="bi bi-patch-question-fill"></i>
             </span>
@@ -262,10 +269,11 @@
               <div class="resource-row-name">Quizzes</div>
               <div class="resource-row-sub">Test your knowledge on chapter concepts</div>
             </div>
-            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
+            @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
           </a>
 
-          <a href="{{ route('members.chapters.domain-summary', $chapter->slug) }}" class="resource-row">
+          @php($cat = $categoryProgress->get('domain_summary'))
+          <a href="{{ route('members.chapters.domain-summary', $chapter->slug) }}" class="resource-row {{ ($cat['done'] ?? false) ? 'is-done' : '' }}">
             <span class="resource-row-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
               <i class="bi bi-play-circle-fill"></i>
             </span>
@@ -273,7 +281,7 @@
               <div class="resource-row-name">Domain Summary in Poetry</div>
               <div class="resource-row-sub">Watch domain summary videos for this chapter</div>
             </div>
-            <span class="resource-row-action">Watch <i class="bi bi-arrow-right"></i></span>
+            @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
           </a>
         </div>
 

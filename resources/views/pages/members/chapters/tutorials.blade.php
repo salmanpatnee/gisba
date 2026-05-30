@@ -112,6 +112,7 @@
   min-width: 0;
 }
 </style>
+@include('pages.members.chapters._completion-styles')
 
 <div class="rp-header">
   <div class="container">
@@ -139,21 +140,7 @@
       <div class="row g-4">
         @foreach($chapter->resources as $index => $resource)
           <div class="{{ $chapter->resources->count() === 1 ? 'col-12 col-lg-8 mx-auto' : 'col-12 col-md-6' }}">
-            <div class="video-card">
-              <div class="video-card-player">
-                <video
-                  controls
-                  controlsList="nodownload"
-                  preload="metadata">
-                  <source src="{{ route('members.chapters.stream', $resource->id) }}" type="video/mp4">
-                  Your browser does not support video playback.
-                </video>
-              </div>
-              <div class="video-card-footer">
-                <span class="video-num">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
-                <span class="video-title">{{ $resource->file_name }}</span>
-              </div>
-            </div>
+            @include('pages.members.chapters._video-card', ['resource' => $resource, 'index' => $index])
           </div>
         @endforeach
       </div>
@@ -167,5 +154,7 @@
 
   </div>
 </section>
+
+@include('pages.members.chapters._completion-script')
 
 @endsection
