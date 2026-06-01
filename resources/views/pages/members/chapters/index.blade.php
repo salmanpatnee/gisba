@@ -50,6 +50,10 @@
 .op-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), #e0c468); transition: width 0.7s ease; position: relative; overflow: hidden; }
 .op-fill::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: translateX(-100%); animation: opShimmer 2.4s ease-in-out infinite; }
 @keyframes opShimmer { to { transform: translateX(100%); } }
+.cert-download-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 16px; background: linear-gradient(90deg, var(--accent), #e0c468); color: var(--navy); font-size: 13px; font-weight: 800; letter-spacing: 0.3px; text-decoration: none; padding: 10px 20px; border-radius: 999px; box-shadow: 0 4px 16px rgba(200,168,75,0.4); transition: transform 0.2s, box-shadow 0.2s; }
+.cert-download-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 22px rgba(200,168,75,0.55); color: var(--navy); }
+.cert-download-btn i { font-size: 15px; }
+.cert-locked-hint { margin-top: 14px; font-size: 12px; color: rgba(255,255,255,0.65); display: flex; align-items: center; }
 
 /* ── Per-chapter card progress ──────────────────────────────── */
 .chapter-card-media { position: relative; }
@@ -88,6 +92,13 @@
               <div class="op-track" role="progressbar" aria-valuenow="{{ $overallPercent }}" aria-valuemin="0" aria-valuemax="100">
                 <div class="op-fill" style="width:{{ $overallPercent }}%"></div>
               </div>
+              @if($overallPercent === 100)
+                <a href="{{ route('members.certificate') }}" target="_blank" rel="noopener" class="cert-download-btn">
+                  <i class="bi bi-award-fill"></i> Download Certificate
+                </a>
+              @else
+                <p class="cert-locked-hint"><i class="bi bi-lock-fill me-1"></i>Complete all videos to unlock your certificate.</p>
+              @endif
             </div>
           @endif
         </div>
