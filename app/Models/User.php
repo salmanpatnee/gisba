@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
@@ -34,6 +35,62 @@ class User extends Authenticatable
         return $this->belongsToMany(Resource::class, 'resource_user')
             ->withPivot('completed_at')
             ->withTimestamps();
+    }
+
+    public function certificate(): HasOne
+    {
+        return $this->hasOne(Certificate::class);
+    }
+
+    /**
+     * The moment the member finished the last chapter resource, or null if the
+     * training (all currently existing chapter resources) is not yet 100% watched.
+     */
+    public function completedTrainingAt(): ?Carbon
+    {
+        $total = Resource::where('resourceable_type', Chapter::class)->count();
+
+        if ($total === 0) {
+            return null;
+        }
+
+        $watched = $this->watchedResources()
+            ->where('resourceable_type', Chapter::class)
+            ->get();
+
+        if ($watched->count() < $total) {
+            return null;
+        }
+
+        $latest = $watched
+            ->map(fn (Resource $resource) => $resource->pivot->completed_at)
+            ->filter()
+            ->max();
+
+        return $latest ? Carbon::parse($latest) : $this->freshTimestamp();
+    }
+
+    public function hasCompletedTraining(): bool
+    {
+        return $this->completedTrainingAt() !== null;
+    }
+
+    /**
+     * Issue (or fetch the existing) certificate once the training is complete.
+     * Returns null when the member has not finished the training.
+     */
+    public function issueCertificate(): ?Certificate
+    {
+        $completedAt = $this->completedTrainingAt();
+
+        if ($completedAt === null) {
+            return null;
+        }
+
+        return $this->certificate()->firstOrCreate(
+            ['user_id' => $this->id],
+            ['completed_at' => $completedAt],
+        );
     }
 
     public function isMember(): bool

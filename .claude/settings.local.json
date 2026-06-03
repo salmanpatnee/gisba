@@ -41,7 +41,17 @@
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\salmanabdul.ghani\\\\Herd\\\\gisba_app\" -Directory)",
       "Bash(Select-Object -First 20)",
       "Bash(xargs grep -l \"chapter\")",
-      "Bash(Get-ChildItem *)"
+      "Bash(Get-ChildItem *)",
+      "mcp__laravel-boost__database-schema",
+      "Bash(Select-Object FullName)",
+      "PowerShell(php artisan make:migration add_section_to_chapters_table --table=chapters --no-interaction)",
+      "PowerShell(php artisan migrate --path=database/migrations/2026_05_26_093117_add_section_to_chapters_table.php --no-interaction)",
+      "PowerShell(vendor/bin/pint --dirty --format agent)",
+      "PowerShell(php artisan test --filter ChapterControllerTest --compact 2>&1)",
+      "PowerShell(php artisan test --filter Chapter --compact 2>&1)",
+      "PowerShell(git add *)",
+      "Bash(Get-Item *)",
+      "Skill(gsd-discuss-phase)"
     ]
   },
   "enableAllProjectMcpServers": true,

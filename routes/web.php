@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\PmpAttachmentController;
 use App\Http\Controllers\Admin\PmpCategoryController;
 use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterResourceController;
 use App\Http\Controllers\ContactController;
@@ -81,6 +82,9 @@ Route::middleware('member')->prefix('members')->name('members.')->group(function
     Route::get('/chapters/{chapter:slug}/takeaways', [ChapterResourceController::class, 'takeaways'])->name('chapters.takeaways');
     Route::get('/chapters/{chapter:slug}/quizzes', [ChapterResourceController::class, 'quizzes'])->name('chapters.quizzes');
     Route::get('/chapters/{chapter:slug}/domain-summary', [ChapterResourceController::class, 'domainSummary'])->name('chapters.domain-summary');
+
+    // Training completion certificate
+    Route::get('/certificate', [CertificateController::class, 'show'])->name('certificate');
 });
 
 // ── Server Setup (auth-protected, remove after use) ───────────────────────────
