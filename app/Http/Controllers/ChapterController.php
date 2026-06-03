@@ -24,9 +24,16 @@ class ChapterController extends Controller
         $totalResources = (int) $chapters->sum('resources_count');
         $totalWatched = (int) $chapters->sum('watched_count');
 
+        $part2 = $chapters->where('section', 2);
+
         return view('pages.members.chapters.index', [
             'part1' => $chapters->where('section', 1),
-            'part2' => $chapters->where('section', 2),
+            'part2' => $part2,
+            'part2Divisions' => [
+                1 => $part2->where('division', 1),
+                2 => $part2->where('division', 2),
+                3 => $part2->where('division', 3),
+            ],
             'part3' => $chapters->where('section', 3),
             'totalResources' => $totalResources,
             'totalWatched' => $totalWatched,

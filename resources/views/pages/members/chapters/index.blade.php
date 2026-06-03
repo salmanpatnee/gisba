@@ -37,6 +37,25 @@
 .section-badge { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--font-display); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
 .section-title { font-family: var(--font-display); font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-weight: 800; color: var(--navy); margin: 0; }
 .section-divider { border: none; border-top: 2px solid var(--border-light); margin: 60px 0 56px; }
+/* ── Part 2 domain separators ───────────────────────────────── */
+.division-group { position: relative; }
+.division-group + .division-group { margin-top: 66px; }
+.domain-header { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: 24px; padding-bottom: 22px; margin-bottom: 36px; border-bottom: 1px solid var(--border-light); animation: domainIn 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+.domain-header::after { content: ''; position: absolute; left: 0; bottom: -1.5px; width: 116px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+.domain-no { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; letter-spacing: -1px; color: transparent; -webkit-text-stroke: 1.5px rgba(200,168,75,0.5); text-stroke: 1.5px rgba(200,168,75,0.5); user-select: none; }
+.domain-headtext { min-width: 0; }
+.domain-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+.domain-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); transform: rotate(45deg); }
+.domain-title { font-family: var(--font-display); font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 800; color: var(--navy); line-height: 1.18; margin: 0; }
+.domain-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; margin: 6px 0 0; max-width: 540px; }
+.domain-count { flex-shrink: 0; align-self: center; display: inline-flex; align-items: baseline; gap: 6px; font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; color: var(--navy); background: var(--bg-section-alt); border: 1px solid var(--border-light); padding: 8px 16px; border-radius: 999px; white-space: nowrap; }
+.domain-count small { font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); }
+@keyframes domainIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@media (max-width: 575px) {
+  .domain-header { grid-template-columns: auto 1fr; row-gap: 12px; column-gap: 18px; }
+  .domain-count { grid-column: 2; justify-self: start; align-self: start; }
+}
+@media (prefers-reduced-motion: reduce) { .domain-header { animation: none; } }
 .section-coming-soon { text-align: center; padding: 48px 24px; background: var(--bg-white); border: 1px dashed var(--border-light); border-radius: var(--radius-lg); color: #999; }
 .section-coming-soon i { font-size: 2.4rem; display: block; margin-bottom: 14px; color: #ccc; }
 .section-coming-soon p { margin: 0; font-size: 14px; line-height: 1.6; }
@@ -175,43 +194,63 @@
         <p>Coming soon — these chapters are currently in development.<br>Check back for updates.</p>
       </div>
     @else
-      <div class="row g-4">
-        @foreach($part2 as $chapter)
-          <div class="col-12 col-md-6 col-lg-4">
-            <div class="chapter-card">
-              <div class="chapter-card-media">
-                <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
-                @if($chapter->isCompletedBy(auth()->user()))
-                  <span class="chapter-complete-badge"><i class="bi bi-patch-check-fill"></i> Completed</span>
-                @endif
-              </div>
-              <div class="chapter-card-body">
-                <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
-                @if($chapter->description)
-                  <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
-                @endif
-                @php($chTotal = $chapter->totalResourceCount())
-                @if($chTotal > 0)
-                  <div class="chapter-progress">
-                    <div class="chapter-progress-head">
-                      <span class="chapter-progress-label">Progress</span>
-                      <span class="chapter-progress-count">{{ $chapter->watchedResourceCount(auth()->user()) }}/{{ $chTotal }}</span>
-                    </div>
-                    <div class="cp-track">
-                      <div class="cp-fill" style="width:{{ $chapter->progressPercent(auth()->user()) }}%"></div>
+      @php($divMeta = [
+        1 => ['no' => '01', 'name' => 'People',               'desc' => 'Leading, motivating and empowering the project team.'],
+        2 => ['no' => '02', 'name' => 'Process',              'desc' => 'Executing the technical work that delivers the project.'],
+        3 => ['no' => '03', 'name' => 'Business Environment', 'desc' => 'Aligning the project with organizational strategy and compliance.'],
+      ])
+      @foreach($part2Divisions as $divId => $divChapters)
+        @continue($divChapters->isEmpty())
+        @php($meta = $divMeta[$divId])
+        <div class="division-group">
+          <header class="domain-header">
+            <span class="domain-no" aria-hidden="true">{{ $meta['no'] }}</span>
+            <div class="domain-headtext">
+              <span class="domain-eyebrow">Domain {{ $meta['no'] }}</span>
+              <h3 class="domain-title">{{ $meta['name'] }}</h3>
+              <p class="domain-desc">{{ $meta['desc'] }}</p>
+            </div>
+            <span class="domain-count">{{ $divChapters->count() }} <small>chapters</small></span>
+          </header>
+          <div class="row g-4">
+            @foreach($divChapters as $chapter)
+              <div class="col-12 col-md-6 col-lg-4">
+                <div class="chapter-card">
+                  <div class="chapter-card-media">
+                    <img src="{{ $chapter->image_url }}" alt="{{ $chapter->title }}" class="chapter-card-img">
+                    @if($chapter->isCompletedBy(auth()->user()))
+                      <span class="chapter-complete-badge"><i class="bi bi-patch-check-fill"></i> Completed</span>
+                    @endif
+                  </div>
+                  <div class="chapter-card-body">
+                    <h3 class="chapter-card-title">{{ $chapter->title }}</h3>
+                    @if($chapter->description)
+                      <p class="chapter-card-desc">{{ Str::limit($chapter->description, 120) }}</p>
+                    @endif
+                    @php($chTotal = $chapter->totalResourceCount())
+                    @if($chTotal > 0)
+                      <div class="chapter-progress">
+                        <div class="chapter-progress-head">
+                          <span class="chapter-progress-label">Progress</span>
+                          <span class="chapter-progress-count">{{ $chapter->watchedResourceCount(auth()->user()) }}/{{ $chTotal }}</span>
+                        </div>
+                        <div class="cp-track">
+                          <div class="cp-fill" style="width:{{ $chapter->progressPercent(auth()->user()) }}%"></div>
+                        </div>
+                      </div>
+                    @endif
+                    <div style="display:flex;align-items:center;justify-content:flex-end;">
+                      <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">
+                        View Chapter <i class="bi bi-arrow-right"></i>
+                      </a>
                     </div>
                   </div>
-                @endif
-                <div style="display:flex;align-items:center;justify-content:flex-end;">
-                  <a href="{{ route('members.chapters.show', $chapter->slug) }}" class="btn-view stretched-link">
-                    View Chapter <i class="bi bi-arrow-right"></i>
-                  </a>
                 </div>
               </div>
-            </div>
+            @endforeach
           </div>
-        @endforeach
-      </div>
+        </div>
+      @endforeach
     @endif
 
     <hr class="section-divider">

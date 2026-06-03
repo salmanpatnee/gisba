@@ -41,10 +41,12 @@
     @enderror
 </div>
 
+<div x-data="{ section: {{ old('section', $chapter?->section ?? 1) }} }">
+
 {{-- Section --}}
 <div class="mb-6">
     <label for="section" class="block text-sm font-medium text-gray-700 mb-1">Section <span class="text-red-500">*</span></label>
-    <select id="section" name="section"
+    <select id="section" name="section" x-model.number="section"
             class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('section') border-red-400 @enderror">
         @foreach([
             1 => 'PMBOK 8th Edition Review Training',
@@ -59,6 +61,30 @@
     @error('section')
         <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
     @enderror
+</div>
+
+{{-- Division (Part 2 only) --}}
+<div class="mb-6" x-show="section === 2" x-cloak>
+    <label for="division" class="block text-sm font-medium text-gray-700 mb-1">Division <span class="text-red-500">*</span></label>
+    <select id="division" name="division"
+            class="w-full border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 text-sm @error('division') border-red-400 @enderror">
+        <option value="">— Select division —</option>
+        @foreach([
+            1 => 'People',
+            2 => 'Process',
+            3 => 'Business Environment',
+        ] as $value => $label)
+            <option value="{{ $value }}" {{ old('division', $chapter?->division) == $value ? 'selected' : '' }}>
+                {{ $value }}. {{ $label }}
+            </option>
+        @endforeach
+    </select>
+    <p class="mt-1 text-xs text-gray-400">PMP Exam Content Outline domain. Required for Part 2 chapters.</p>
+    @error('division')
+        <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+    @enderror
+</div>
+
 </div>
 
 {{-- Description --}}
