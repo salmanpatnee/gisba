@@ -133,6 +133,58 @@
 /* ─── Reveal animation ──────────────────────────────────────── */
 .kb-reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.48s ease, transform 0.48s ease; }
 .kb-reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─── Course Outline Section ────────────────────────────────── */
+.outline-section { padding: 60px 0 20px; background: var(--bg-page); }
+.outline-head { text-align: center; max-width: 640px; margin: 0 auto 14px; }
+.outline-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
+.outline-title { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: var(--navy); line-height: 1.2; margin-bottom: 12px; }
+.outline-lead { font-size: 14.5px; color: #555; line-height: 1.7; margin: 0; }
+.outline-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 22px 0 8px; }
+.outline-stat { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; color: var(--navy); background: var(--bg-section-alt); border: 1px solid var(--border-light); padding: 7px 16px; border-radius: 999px; }
+.outline-stat i { color: var(--accent); }
+
+.section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.section-badge { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--font-display); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-weight: 800; color: var(--navy); margin: 0; }
+.section-divider { border: none; border-top: 2px solid var(--border-light); margin: 60px 0 56px; }
+
+/* ── Part 2 domain separators ───────────────────────────────── */
+.division-group { position: relative; }
+.division-group + .division-group { margin-top: 66px; }
+.domain-header { position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; column-gap: 24px; padding-bottom: 22px; margin-bottom: 36px; border-bottom: 1px solid var(--border-light); }
+.domain-header::after { content: ''; position: absolute; left: 0; bottom: -1.5px; width: 116px; height: 3px; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+.domain-no { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; letter-spacing: -1px; color: transparent; -webkit-text-stroke: 1.5px rgba(200,168,75,0.5); user-select: none; }
+.domain-headtext { min-width: 0; }
+.domain-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 2.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 5px; }
+.domain-eyebrow::before { content: ''; width: 6px; height: 6px; background: var(--accent); transform: rotate(45deg); }
+.domain-title { font-family: var(--font-display); font-size: clamp(1.2rem, 2.6vw, 1.6rem); font-weight: 800; color: var(--navy); line-height: 1.18; margin: 0; }
+.domain-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.55; margin: 6px 0 0; max-width: 540px; }
+.domain-count { flex-shrink: 0; align-self: center; display: inline-flex; align-items: baseline; gap: 6px; font-family: var(--font-display); font-size: 1.05rem; font-weight: 800; color: var(--navy); background: var(--bg-section-alt); border: 1px solid var(--border-light); padding: 8px 16px; border-radius: 999px; white-space: nowrap; }
+.domain-count small { font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--text-muted); }
+@media (max-width: 575px) {
+  .domain-header { grid-template-columns: auto 1fr; row-gap: 12px; column-gap: 18px; }
+  .domain-count { grid-column: 2; justify-self: start; align-self: start; }
+}
+.section-coming-soon { text-align: center; padding: 48px 24px; background: var(--bg-white); border: 1px dashed var(--border-light); border-radius: var(--radius-lg); color: #999; }
+.section-coming-soon i { font-size: 2.4rem; display: block; margin-bottom: 14px; color: #ccc; }
+.section-coming-soon p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+/* ── Guest chapter card ─────────────────────────────────────── */
+.chapter-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s, transform 0.25s; height: 100%; display: flex; flex-direction: column; position: relative; }
+.chapter-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.chapter-card-media { position: relative; }
+.chapter-card-img { width: 100%; height: 200px; object-fit: cover; }
+.chapter-lock-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; background: rgba(0,33,80,0.92); color: var(--accent); font-size: 10.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+.chapter-lock-badge i { font-size: 11px; }
+.chapter-card-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
+.chapter-card-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.35; }
+.chapter-card-desc { font-size: 13px; color: #555; line-height: 1.6; flex: 1; margin-bottom: 16px; }
+.chapter-card-foot { margin-top: auto; }
+.btn-unlock { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--navy); text-decoration: none; transition: color 0.2s, gap 0.2s; }
+.btn-unlock i { color: var(--accent); transition: transform 0.2s; }
+.chapter-card:hover .btn-unlock { color: var(--accent); gap: 9px; }
+.chapter-card:hover .btn-unlock i { transform: scale(1.12); }
 </style>
 
 {{-- ── Hero ─────────────────────────────────────────────────────── --}}
@@ -152,6 +204,92 @@
 
 {{-- ── PMP Training Promo Banner ──────────────────────────────────────── --}}
 @include('partials.pmp-banner')
+
+
+{{-- ── Course Outline (what members get) ─────────────────────────── --}}
+@if($outlineChapterCount > 0)
+<section class="outline-section">
+  <div class="container">
+
+    <div class="outline-head kb-reveal">
+      <span class="outline-eyebrow"><i class="bi bi-mortarboard-fill me-1"></i> Inside the Training</span>
+      <h2 class="outline-title">What You'll Master in the PMP Quick Review</h2>
+      <p class="outline-lead">A structured, exam-aligned curriculum — from the PMBOK 8th Edition to the full PMP Exam Content Outline. Here's every chapter waiting for you inside.</p>
+      <div class="outline-stats">
+        <span class="outline-stat"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
+        <span class="outline-stat"><i class="bi bi-patch-check-fill"></i> Tutorials, Quizzes &amp; Takeaways</span>
+        <span class="outline-stat"><i class="bi bi-award-fill"></i> Completion Certificate</span>
+      </div>
+    </div>
+
+    {{-- Part 1 --}}
+    @if($outlinePart1->isNotEmpty())
+      <div class="section-header kb-reveal">
+        <div class="section-badge">1</div>
+        <h2 class="section-title">PMBOK 8th Edition Review Training</h2>
+      </div>
+      <div class="row g-4">
+        @foreach($outlinePart1 as $chapter)
+          @include('pages._chapter-outline-card', ['chapter' => $chapter])
+        @endforeach
+      </div>
+      <hr class="section-divider">
+    @endif
+
+    {{-- Part 2 — PMP Exam Content Outline by domain --}}
+    @php($hasPart2 = collect($outlinePart2Divisions)->contains(fn ($d) => $d->isNotEmpty()))
+    @if($hasPart2)
+      <div class="section-header kb-reveal">
+        <div class="section-badge">2</div>
+        <h2 class="section-title">PMP Exam Content Outline Mapping Trainings</h2>
+      </div>
+      @php($divMeta = [
+        1 => ['no' => '01', 'name' => 'People',               'desc' => 'Leading, motivating and empowering the project team.'],
+        2 => ['no' => '02', 'name' => 'Process',              'desc' => 'Executing the technical work that delivers the project.'],
+        3 => ['no' => '03', 'name' => 'Business Environment', 'desc' => 'Aligning the project with organizational strategy and compliance.'],
+      ])
+      @foreach($outlinePart2Divisions as $divId => $divChapters)
+        @continue($divChapters->isEmpty())
+        @php($meta = $divMeta[$divId])
+        <div class="division-group">
+          <header class="domain-header">
+            <span class="domain-no" aria-hidden="true">{{ $meta['no'] }}</span>
+            <div class="domain-headtext">
+              <span class="domain-eyebrow">Domain {{ $meta['no'] }}</span>
+              <h3 class="domain-title">{{ $meta['name'] }}</h3>
+              <p class="domain-desc">{{ $meta['desc'] }}</p>
+            </div>
+            <span class="domain-count">{{ $divChapters->count() }} <small>chapters</small></span>
+          </header>
+          <div class="row g-4">
+            @foreach($divChapters as $chapter)
+              @include('pages._chapter-outline-card', ['chapter' => $chapter])
+            @endforeach
+          </div>
+        </div>
+      @endforeach
+      <hr class="section-divider">
+    @endif
+
+    {{-- Part 3 --}}
+    @if($outlinePart3->isNotEmpty())
+      <div class="section-header kb-reveal">
+        <div class="section-badge">3</div>
+        <h2 class="section-title">Practical Tips and Others</h2>
+      </div>
+      <div class="row g-4">
+        @foreach($outlinePart3 as $chapter)
+          @include('pages._chapter-outline-card', ['chapter' => $chapter])
+        @endforeach
+      </div>
+    @endif
+
+  </div>
+</section>
+
+{{-- ── Reinforcing CTA after the outline ─────────────────────────── --}}
+@include('partials.pmp-banner')
+@endif
 
 
 {{-- ── Knowledge Base Grid ───────────────────────────────────────── --}}
