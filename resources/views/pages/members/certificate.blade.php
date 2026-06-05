@@ -391,7 +391,7 @@
       <div class="eyebrow">Certificate of Completion</div>
       <div class="eyebrow-rule"><span class="diamond"></span></div>
 
-      <h1 class="title">PMP Quick Review</h1>
+      <h1 class="title">PMP Comprehensive Training Aligned with PMBOK 8th Edition</h1>
       <div class="subtitle">Training Programme</div>
 
       <p class="presented">This certificate is proudly presented to</p>
@@ -399,7 +399,7 @@
       <hr class="name-rule">
 
       <p class="body">
-        for the successful completion of the <span class="course">PMP Quick Review Training</span>
+        for the successful completion of the <span class="course">PMP Comprehensive Training Aligned with PMBOK 8th Edition</span>
         programme offered by GISBA, having diligently reviewed every chapter and training
         resource in full.
       </p>

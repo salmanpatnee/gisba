@@ -247,7 +247,7 @@
             <ul style="list-style:none;padding:0;margin:0;">
               <li style="padding:7px 0;border-bottom:1px solid var(--border-light);">
                 <a href="{{ route('contact-us') }}" style="font-size:13px;font-weight:600;color:var(--navy);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s;" onmouseover="this.style.color='var(--navy-light)'" onmouseout="this.style.color='var(--navy)'">
-                  <i class="bi bi-award" style="color:var(--accent);"></i> PMP Quick Review Training
+                  <i class="bi bi-award" style="color:var(--accent);"></i> PMP Comprehensive Training Aligned with PMBOK 8th Edition
                 </a>
               </li>
               <li style="padding:7px 0;border-bottom:1px solid var(--border-light);">

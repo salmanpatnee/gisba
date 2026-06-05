@@ -203,7 +203,7 @@
 </div>
 
 {{-- ── PMP Training Promo Banner ──────────────────────────────────────── --}}
-@include('partials.pmp-banner')
+@include('partials.pmp-banner', ['showBlogLink' => true])
 
 
 {{-- ── Course Outline (what members get) ─────────────────────────── --}}
@@ -213,8 +213,8 @@
 
     <div class="outline-head kb-reveal">
       <span class="outline-eyebrow"><i class="bi bi-mortarboard-fill me-1"></i> Inside the Training</span>
-      <h2 class="outline-title">What You'll Master in the PMP Quick Review</h2>
-      <p class="outline-lead">A structured, exam-aligned curriculum — from the PMBOK 8th Edition to the full PMP Exam Content Outline. Here's every chapter waiting for you inside.</p>
+      <h2 class="outline-title">What You'll Master in the PMP Comprehensive Training Aligned with PMBOK 8th Edition</h2>
+      <p class="outline-lead">Aligned with Exam Content Outline July 2026 Exam</p>
       <div class="outline-stats">
         <span class="outline-stat"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
         <span class="outline-stat"><i class="bi bi-patch-check-fill"></i> Tutorials, Quizzes &amp; Takeaways</span>
@@ -293,7 +293,7 @@
 
 
 {{-- ── Knowledge Base Grid ───────────────────────────────────────── --}}
-<section class="kb-section">
+<section class="kb-section" id="knowledge-base" style="scroll-margin-top:80px;">
   <div class="container">
 
     <div class="kb-section-header kb-reveal">
@@ -340,7 +340,6 @@
 </section>
 
 
-@include('partials.pmp-banner')
 @endsection
 
 @push('scripts')

@@ -25,7 +25,7 @@
                 Hi {{ $userName }},
               </p>
               <p style="font-size:15px;color:#444;line-height:1.7;margin:0 0 28px;">
-                Your GISBA PMP Quick Review Training membership expires on <strong>{{ $expiresAt }}</strong>.
+                Your GISBA PMP Comprehensive Training Aligned with PMBOK 8th Edition membership expires on <strong>{{ $expiresAt }}</strong>.
                 Renew now to keep uninterrupted access to the members-only library — videos, documents, checklists, and glossaries.
               </p>
 

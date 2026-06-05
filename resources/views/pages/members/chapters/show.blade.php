@@ -1,11 +1,11 @@
 @extends('layouts.site')
 
-@section('title', $chapter->title.' — PMP Quick Review | GISBA Members')
-@section('meta_description', $chapter->description ?? 'Access resources for '.$chapter->title.' in PMP Quick Review Training.')
+@section('title', $chapter->title.' — PMP Comprehensive Training Aligned with PMBOK 8th Edition | GISBA Members')
+@section('meta_description', $chapter->description ?? 'Access resources for '.$chapter->title.' in PMP Comprehensive Training Aligned with PMBOK 8th Edition.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-star-fill me-2"></i>PMP Quick Review Training</span>
+    <span><i class="bi bi-star-fill me-2"></i>PMP Comprehensive Training Aligned with PMBOK 8th Edition</span>
     <div class="d-flex gap-3 align-items-center">
       <a href="{{ route('members.chapters.index') }}"><i class="bi bi-arrow-left me-1"></i>All Chapters</a>
       <a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a>
@@ -18,7 +18,7 @@
 @endsection
 
 @section('footer_tagline')
-  GISBA Members — PMP Quick Review Training<br />
+  GISBA Members — PMP Comprehensive Training Aligned with PMBOK 8th Edition<br />
   Structured learning resources for PMP certification.
 @endsection
 

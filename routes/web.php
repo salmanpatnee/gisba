@@ -75,7 +75,7 @@ Route::middleware('member')->prefix('members')->name('members.')->group(function
     Route::delete('/chapters/resources/{resource}', [ChapterResourceController::class, 'destroy'])->name('chapters.resource.destroy');
     Route::post('/chapters/resources/{resource}/complete', [ChapterResourceController::class, 'markComplete'])->name('chapters.resource.complete');
 
-    // PMP Quick Review Training — Chapters
+    // PMP Comprehensive Training Aligned with PMBOK 8th Edition — Chapters
     Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');
     Route::get('/chapters/{chapter:slug}', [ChapterController::class, 'show'])->name('chapters.show');
     Route::get('/chapters/{chapter:slug}/tutorials', [ChapterResourceController::class, 'tutorials'])->name('chapters.tutorials');
@@ -127,7 +127,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::patch('members/{user}/revoke', [MemberController::class, 'revoke'])->name('members.revoke');
     Route::delete('members/{user}', [MemberController::class, 'destroy'])->name('members.destroy');
 
-    // PMP Quick Review Training — Chapter CMS
+    // PMP Comprehensive Training Aligned with PMBOK 8th Edition — Chapter CMS
     Route::resource('chapters', AdminChapterController::class);
     Route::get('/chapters/{chapter}/resources/create', [AdminChapterResourceController::class, 'create'])->name('chapters.resources.create');
     Route::post('/chapters/resources', [AdminChapterResourceController::class, 'store'])->name('chapters.resources.store');

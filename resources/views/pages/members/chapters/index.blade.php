@@ -1,11 +1,11 @@
 @extends('layouts.site')
 
-@section('title', 'PMP Quick Review Training — Chapters | GISBA Members')
-@section('meta_description', 'Access all PMP Quick Review Training chapters. Videos, documents, checklists, and glossary for each chapter.')
+@section('title', 'PMP Comprehensive Training Aligned with PMBOK 8th Edition — Chapters | GISBA Members')
+@section('meta_description', 'Access all PMP Comprehensive Training Aligned with PMBOK 8th Edition chapters. Videos, documents, checklists, and glossary for each chapter.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-star-fill me-2"></i>PMP Quick Review Training</span>
+    <span><i class="bi bi-star-fill me-2"></i>PMP Comprehensive Training Aligned with PMBOK 8th Edition</span>
     <div class="d-flex gap-3 align-items-center">
       <a href="{{ route('members.chapters.index') }}"><i class="bi bi-arrow-left me-1"></i>Library</a>
       <a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a>
@@ -18,7 +18,7 @@
 @endsection
 
 @section('footer_tagline')
-  GISBA Members — PMP Quick Review Training<br />
+  GISBA Members — PMP Comprehensive Training Aligned with PMBOK 8th Edition<br />
   Structured learning resources for PMP certification.
 @endsection
 
@@ -97,7 +97,7 @@
             <i class="bi bi-star-fill me-1"></i> Members Only
           </span>
           <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:14px;">
-            PMP Quick Review <span style="color:var(--accent);">Training</span>
+            PMP Comprehensive Training <span style="color:var(--accent);">Aligned with PMBOK 8th Edition</span>
           </h1>
           <p style="color:rgba(255,255,255,0.78);font-size:15.5px;line-height:1.7;max-width:520px;margin:0;">
             All chapters with videos, documents, checklists, and glossary resources.

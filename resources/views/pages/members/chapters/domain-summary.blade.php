@@ -14,7 +14,7 @@
 @endsection
 
 @section('footer_tagline')
-  GISBA Members — PMP Quick Review Training<br />
+  GISBA Members — PMP Comprehensive Training Aligned with PMBOK 8th Edition<br />
   Structured learning resources for PMP certification.
 @endsection
 

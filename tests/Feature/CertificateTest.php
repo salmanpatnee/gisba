@@ -46,7 +46,7 @@ it('shows the certificate to a member who completed all resources', function () 
         ->get(route('members.certificate'))
         ->assertOk()
         ->assertSee($member->name)
-        ->assertSee('PMP Quick Review Training')
+        ->assertSee('PMP Comprehensive Training Aligned with PMBOK 8th Edition')
         ->assertSee('GISBA-');
 });
 
