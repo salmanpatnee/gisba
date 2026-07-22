@@ -12,9 +12,6 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
                     <x-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
                         {{ __('NIS2 Blogs') }}
                     </x-nav-link>
@@ -28,7 +25,7 @@
                         {{ __('PMP Categories') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
-                        {{ __('Chapters') }}
+                        {{ __('PMP Chapters') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                         {{ __('Members') }}
@@ -91,9 +88,6 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
                 {{ __('NIS2 Blogs') }}
             </x-responsive-nav-link>
@@ -107,7 +101,7 @@
                 {{ __('PMP Categories') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
-                {{ __('Chapters') }}
+                {{ __('PMP Chapters') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                 {{ __('Members') }}

@@ -185,10 +185,38 @@
 .btn-unlock i { color: var(--accent); transition: transform 0.2s; }
 .chapter-card:hover .btn-unlock { color: var(--accent); gap: 9px; }
 .chapter-card:hover .btn-unlock i { transform: scale(1.12); }
+
+/* ─── Rhyme-Based Learning Card ───────────────────────────────── */
+.rhyme-section { padding: 56px 0; background: var(--bg-page); }
+.rhyme-head { text-align: center; max-width: 640px; margin: 0 auto 32px; }
+.rhyme-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
+.rhyme-title { font-family: var(--font-display); font-size: clamp(1.3rem, 2.8vw, 1.9rem); font-weight: 800; color: var(--navy); line-height: 1.25; margin: 0; }
+
+.rhyme-card { max-width: 720px; margin: 0 auto; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.rhyme-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+
+.rhyme-card-header { display: flex; align-items: center; gap: 14px; padding: 22px 28px; background: linear-gradient(135deg, var(--navy) 0%, rgba(0,33,80,0.92) 100%); position: relative; overflow: hidden; }
+.rhyme-card-header::before { content: ''; position: absolute; top: -22px; right: -22px; width: 90px; height: 90px; background: rgba(200,168,75,0.12); border-radius: 50%; }
+.rhyme-card-header::after { content: ''; position: absolute; bottom: -30px; left: 38%; width: 70px; height: 70px; background: rgba(200,168,75,0.08); border-radius: 50%; }
+.rhyme-card-icon { flex-shrink: 0; width: 44px; height: 44px; background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.35); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); position: relative; z-index: 1; }
+.rhyme-card-kicker { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; position: relative; z-index: 1; }
+.rhyme-card-question { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0; position: relative; z-index: 1; }
+
+.rhyme-card-body { padding: 28px; }
+.rhyme-quote { background: var(--bg-section-alt); border-left: 3px solid var(--accent); border-radius: 8px; padding: 18px 22px; margin-bottom: 22px; }
+.rhyme-quote p { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 15px; line-height: 1.85; color: var(--navy); margin: 0; }
+.rhyme-desc { font-size: 13.5px; color: #555; line-height: 1.7; margin: 0 0 20px; }
+.rhyme-note { display: flex; align-items: flex-start; gap: 10px; background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.35); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--navy); line-height: 1.6; }
+.rhyme-note i { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
+.rhyme-note strong { font-weight: 800; }
+@media (max-width: 575px) {
+  .rhyme-card-header { padding: 18px 20px; }
+  .rhyme-card-body { padding: 22px 20px; }
+}
 </style>
 
 {{-- ── Hero ─────────────────────────────────────────────────────── --}}
-<div class="page-layout" style="padding-bottom:0;">
+{{-- <div class="page-layout" style="padding-bottom:0;">
   <div class="container">
     <div class="hero-section blog-hero">
       <div class="row align-items-center g-4">
@@ -200,10 +228,45 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 {{-- ── PMP Training Promo Banner ──────────────────────────────────────── --}}
 @include('partials.pmp-banner', ['showBlogLink' => true])
+
+{{-- ── Rhyme-Based Learning ─────────────────────────────────────── --}}
+<section class="rhyme-section">
+  <div class="container">
+    <div class="rhyme-head kb-reveal">
+      <span class="rhyme-eyebrow"><i class="bi bi-music-note-beamed me-1"></i> Learning Innovation</span>
+      <h2 class="rhyme-title">PMP Training Reinvented Through Rhyming: A Breakthrough in Learning</h2>
+    </div>
+
+    <div class="rhyme-card kb-reveal">
+      <div class="rhyme-card-header">
+        <span class="rhyme-card-icon"><i class="bi bi-vinyl-fill"></i></span>
+        <div>
+          <span class="rhyme-card-kicker">For Example</span>
+          <h3 class="rhyme-card-question">What is a Project?</h3>
+        </div>
+      </div>
+      <div class="rhyme-card-body">
+        <div class="rhyme-quote">
+          <p>
+            A project is an initiative, clearly and simply stated,<br>
+            Temporary, unique, and progressively elaborated.<br>
+            A project must create value and it can be stand-alone,<br>
+            Or part of a Portfolio or a Program, this is well known
+          </p>
+        </div>
+        <p class="rhyme-desc">Similarly, all key project management concepts are summarized at the end of the training, creating lasting value for both learners and educational institutions.</p>
+        <div class="rhyme-note">
+          <i class="bi bi-patch-check-fill"></i>
+          <span><strong>Important Note:</strong> Our rhyming is effective and memorable because it is human generated, not AI generated.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 
 {{-- ── Course Outline (what members get) ─────────────────────────── --}}
@@ -213,7 +276,7 @@
 
     <div class="outline-head kb-reveal">
       <span class="outline-eyebrow"><i class="bi bi-mortarboard-fill me-1"></i> Inside the Training</span>
-      <h2 class="outline-title">What You'll Master in the PMP Comprehensive Training Aligned with PMBOK 8th Edition</h2>
+      <h2 class="outline-title">What You'll Master in the PMP Comprehensive Training Aligned with PMBOK 8th Edition and PMP July 2026 Exam Outline</h2>
       <p class="outline-lead">Aligned with Exam Content Outline July 2026 Exam</p>
       <div class="outline-stats">
         <span class="outline-stat"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
