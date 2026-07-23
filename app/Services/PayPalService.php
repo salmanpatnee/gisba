@@ -65,7 +65,7 @@ class PayPalService
                 'purchase_units' => [[
                     'amount' => [
                         'currency_code' => 'USD',
-                        'value' => '30.00',
+                        'value' => '3.00',
                     ],
                     'description' => 'GISBA Members-Only Access',
                 ]],
