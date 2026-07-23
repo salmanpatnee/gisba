@@ -24,6 +24,10 @@
 .paywall-hero { padding: 60px 0 40px; }
 .paywall-card { max-width: 520px; margin: 0 auto; background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; box-shadow: 0 4px 24px rgba(0,33,80,0.08); padding: 40px 40px 36px; }
 .paywall-icon { width: 56px; height: 56px; background: rgba(200,168,75,0.12); border: 2px solid rgba(200,168,75,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--accent); margin: 0 auto 20px; }
+.paywall-offer-ribbon { display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(90deg, #e63946, #c1121f); color: #fff; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; box-shadow: 0 3px 10px rgba(198,18,31,0.35); margin-bottom: 10px; }
+.paywall-price-row { display: flex; align-items: baseline; justify-content: center; flex-wrap: wrap; gap: 10px; }
+.paywall-discount-badge { background: #e63946; color: #fff; font-family: var(--font-body); font-size: 11px; font-weight: 800; letter-spacing: 0.4px; padding: 3px 9px; border-radius: 6px; }
+.paywall-old-price { font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; color: #999; text-decoration: line-through; text-decoration-color: #e63946; text-decoration-thickness: 2px; }
 .paywall-price { font-size: 2.4rem; font-weight: 900; color: var(--navy); line-height: 1; }
 .paywall-price sub { font-size: 1rem; font-weight: 500; color: #666; }
 .paywall-features { list-style: none; padding: 0; margin: 0 0 28px; }
@@ -40,14 +44,19 @@
     <div class="text-center mb-4">
       <span style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);padding:4px 14px;border-radius:20px;">Members Only</span>
       <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);font-weight:900;margin:16px 0 10px;">Enroll in GISBA’s PMP Training</h1>
-      <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">$30 for 6 months of full access to exclusive cybersecurity &amp; PMP resources.</p>
+      <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">Now $30 <span style="text-decoration:line-through;color:#aaa;">$59</span> for 6 months of full access to exclusive cybersecurity &amp; PMP resources — limited time only.</p>
     </div>
 
     <div class="paywall-card">
       <div class="paywall-icon"><i class="bi bi-award-fill"></i></div>
 
       <div class="text-center mb-4">
-        <div class="paywall-price">$30 <sub>/ 6 months</sub></div>
+        <span class="paywall-offer-ribbon"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
+        <div class="paywall-price-row">
+          <span class="paywall-discount-badge">49% OFF</span>
+          <span class="paywall-old-price">$59</span>
+          <div class="paywall-price">$30 <sub>/ 6 months</sub></div>
+        </div>
         <p style="font-size:13px;color:#888;margin-top:6px;">Renew any time. No auto-charge.</p>
       </div>
 

@@ -23,9 +23,17 @@
       </div>
 
       <div class="nis2-promo-cta">
+        <span class="nis2-promo-ribbon"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
+        <div class="nis2-promo-price-line">
+          <span class="nis2-promo-discount-badge">49% OFF</span>
+          <span class="nis2-promo-old-price">$59</span>
+          <i class="bi bi-arrow-right nis2-promo-price-arrow"></i>
+          <span class="nis2-promo-new-price">$30<small>/person</small></span>
+        </div>
         <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
-          $30 / 6 months — Get PMP Training <i class="bi bi-arrow-right"></i>
+          Get PMP Training <i class="bi bi-arrow-right"></i>
         </a>
+        <span class="nis2-promo-note">6-month access</span>
       </div>
 
     </div>

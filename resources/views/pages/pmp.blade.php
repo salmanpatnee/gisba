@@ -192,7 +192,7 @@
 .rhyme-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
 .rhyme-title { font-family: var(--font-display); font-size: clamp(1.3rem, 2.8vw, 1.9rem); font-weight: 800; color: var(--navy); line-height: 1.25; margin: 0; }
 
-.rhyme-card { max-width: 720px; margin: 0 auto; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.rhyme-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; }
 .rhyme-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
 
 .rhyme-card-header { display: flex; align-items: center; gap: 14px; padding: 22px 28px; background: linear-gradient(135deg, var(--navy) 0%, rgba(0,33,80,0.92) 100%); position: relative; overflow: hidden; }
@@ -212,6 +212,15 @@
 @media (max-width: 575px) {
   .rhyme-card-header { padding: 18px 20px; }
   .rhyme-card-body { padding: 22px 20px; }
+}
+
+/* ─── Special Offer Ticket ───────────────────────────────────── */
+.offer-section { padding: 0 0 56px; background: var(--bg-page); }
+.offer-card { position: relative; text-align: center; background: var(--bg-white); border: 2px dashed rgba(200,168,75,0.55); border-radius: var(--radius-lg); padding: 40px 44px; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.offer-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+.offer-heading { font-family: var(--font-display); font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 800; line-height: 1.5; color: var(--navy); margin: 0 0 28px; }
+@media (max-width: 575px) {
+  .offer-card { padding: 32px 24px; }
 }
 </style>
 
@@ -268,6 +277,17 @@
   </div>
 </section>
 
+{{-- ── Special Offer ────────────────────────────────────────────── --}}
+<section class="offer-section">
+  <div class="container">
+    <div class="offer-card kb-reveal">
+      <p class="offer-heading">Special Offer: Discounted Pricing on Bulk Training for Corporates and Educational Institutions</p>
+      <a href="{{ route('contact-us') }}" class="btn-nis2-buy">
+        Get in Touch <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
 
 {{-- ── Course Outline (what members get) ─────────────────────────── --}}
 @if($outlineChapterCount > 0)
