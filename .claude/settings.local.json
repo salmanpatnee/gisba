@@ -51,7 +51,11 @@
       "PowerShell(php artisan test --filter Chapter --compact 2>&1)",
       "PowerShell(git add *)",
       "Bash(Get-Item *)",
-      "Skill(gsd-discuss-phase)"
+      "Skill(gsd-discuss-phase)",
+      "Bash(Remove-Item -Recurse -Force \"tests\\\\Feature\\\\Feature\")",
+      "Bash(git push *)",
+      "Bash(php -r \"echo \\(new ReflectionClass\\('Illuminate\\\\Mail\\\\MailManager'\\)\\)->getFileName\\(\\);\")",
+      "Bash(git check-ignore *)"
     ]
   },
   "enableAllProjectMcpServers": true,

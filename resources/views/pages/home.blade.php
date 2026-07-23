@@ -130,6 +130,13 @@
               <h2 class="section-heading">Our Expertise</h2>
               <p>We provide a comprehensive range of consulting services tailored to modern business challenges:</p>
               <div class="requirement-grid" style="margin-top:16px;">
+                 <div class="requirement-item">
+                  <i class="bi bi-diagram-3-fill"></i>
+                  <div>
+                    <strong style="display:block; font-size:13.5px; color:var(--navy);">Project Management</strong>
+                    <span style="font-size:12.5px; color:var(--text-muted);">Establishing efficient project structures, especially in IT and cybersecurity.</span>
+                  </div>
+                </div>
                 <div class="requirement-item">
                   <i class="bi bi-shield-lock-fill"></i>
                   <div>
@@ -144,13 +151,7 @@
                     <span style="font-size:12.5px; color:var(--text-muted);">Ensuring alignment with global standards and regulatory frameworks.</span>
                   </div>
                 </div>
-                <div class="requirement-item">
-                  <i class="bi bi-diagram-3-fill"></i>
-                  <div>
-                    <strong style="display:block; font-size:13.5px; color:var(--navy);">Project Management</strong>
-                    <span style="font-size:12.5px; color:var(--text-muted);">Establishing efficient project structures, especially in IT and cybersecurity.</span>
-                  </div>
-                </div>
+               
                 <div class="requirement-item">
                   <i class="bi bi-mortarboard-fill"></i>
                   <div>
