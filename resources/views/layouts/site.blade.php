@@ -155,6 +155,11 @@
           </li>
           @if(auth()->check() && auth()->user()->isMember())
           <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('members.account.*') ? 'active' : '' }}" href="{{ route('members.account.edit') }}">
+              <i class="bi bi-person-circle"></i>Account
+            </a>
+          </li>
+          <li class="nav-item">
             <form method="POST" action="{{ route('members.logout') }}" style="margin:0;">
               @csrf
               <button type="submit" class="nav-link site-nav-link" style="background:none;border:none;cursor:pointer;">

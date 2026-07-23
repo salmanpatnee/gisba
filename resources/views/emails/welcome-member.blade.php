@@ -63,7 +63,7 @@
 
               @if($password)
               <p style="font-size:13px;color:#888;line-height:1.6;margin:0;">
-                <strong>Tip:</strong> You can change your password after logging in via your profile settings.
+                <strong>Tip:</strong> You can change this password anytime from the <strong>Account</strong> link in the members area after logging in.
               </p>
               @endif
             </td>

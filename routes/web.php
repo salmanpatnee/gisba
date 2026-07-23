@@ -14,6 +14,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterResourceController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MemberAccountController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\MembersLoginController;
 use App\Http\Controllers\PageController;
@@ -68,6 +69,9 @@ Route::post('/members/login', [MembersLoginController::class, 'login'])->name('m
 Route::post('/members/logout', [MembersLoginController::class, 'logout'])->name('members.logout');
 
 Route::middleware('member')->prefix('members')->name('members.')->group(function () {
+    Route::get('/account', [MemberAccountController::class, 'edit'])->name('account.edit');
+    Route::put('/account/password', [MemberAccountController::class, 'updatePassword'])->name('account.password');
+
     // Static resource routes MUST come before slug wildcards
     Route::get('/chapters/stream/{resource}', [ChapterResourceController::class, 'stream'])->name('chapters.stream');
     Route::get('/chapters/view/{resource}', [ChapterResourceController::class, 'view'])->name('chapters.view');

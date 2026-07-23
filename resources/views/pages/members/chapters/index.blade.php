@@ -8,6 +8,7 @@
     <span><i class="bi bi-star-fill me-2"></i>PMP Comprehensive Training Aligned with PMBOK 8th Edition</span>
     <div class="d-flex gap-3 align-items-center">
       <a href="{{ route('members.chapters.index') }}"><i class="bi bi-arrow-left me-1"></i>Library</a>
+      <a href="{{ route('members.account.edit') }}"><i class="bi bi-person-circle me-1"></i>Account</a>
       <a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a>
       <form method="POST" action="{{ route('members.logout') }}" style="margin:0;">
         @csrf
