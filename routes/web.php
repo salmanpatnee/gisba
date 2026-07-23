@@ -28,7 +28,8 @@ use Illuminate\Support\Facades\Route;
 
 // ── GISBA Public Pages ────────────────────────────────────────────────────────
 
-Route::get('/', [PageController::class, 'home'])->name('home');
+Route::get('/', [PmpController::class, 'index'])->name('home');
+Route::get('/home', [PageController::class, 'home'])->name('home.legacy');
 Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
 Route::get('/awareness', [PageController::class, 'awareness'])->name('awareness');
 Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2-toolkit');

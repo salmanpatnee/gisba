@@ -97,7 +97,7 @@
       <div class="collapse navbar-collapse" id="primaryNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+            <a class="nav-link site-nav-link {{ request()->routeIs('home.legacy') ? 'active' : '' }}" href="{{ route('home.legacy') }}">
               <i class="bi bi-house"></i>Home
             </a>
           </li>
@@ -117,7 +117,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('pmp') }}">
+            <a class="nav-link site-nav-link {{ request()->routeIs('home') || request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('home') }}">
               <i class="bi bi-award"></i>PMP
             </a>
           </li>
@@ -193,10 +193,10 @@
         <div class="col-12 col-md-4">
           <strong style="color:#fff; font-size:13px; display:block; margin-bottom:8px;">Quick Links</strong>
           <ul style="list-style:none; padding:0; margin:0; font-size:12.5px;">
-            <li><a href="{{ route('home') }}">Home</a></li>
+            <li><a href="{{ route('home.legacy') }}">Home</a></li>
             <li><a href="{{ route('awareness') }}">Awareness Toolkit</a></li>
             <li><a href="{{ route('nis2') }}">NIS2</a></li>
-            <li><a href="{{ route('pmp') }}">PMP</a></li>
+            <li><a href="{{ route('home') }}">PMP</a></li>
             <li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
