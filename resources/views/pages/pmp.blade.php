@@ -191,8 +191,11 @@
 .rhyme-head { text-align: center; max-width: 640px; margin: 0 auto 32px; }
 .rhyme-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
 .rhyme-title { font-family: var(--font-display); font-size: clamp(1.3rem, 2.8vw, 1.9rem); font-weight: 800; color: var(--navy); line-height: 1.25; margin: 0; }
+.rhyme-lead { font-size: 14px; color: #555; line-height: 1.7; margin: 10px auto 16px; max-width: 620px; }
+.rhyme-human-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.4); color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 7px 16px; border-radius: 999px; }
+.rhyme-human-badge i { color: var(--accent); }
 
-.rhyme-card { background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.rhyme-card { background: var(--bg-white); border: 1px solid var(--border-light); border-top: 3px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; height: 100%; }
 .rhyme-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
 
 .rhyme-card-header { display: flex; align-items: center; gap: 14px; padding: 22px 28px; background: linear-gradient(135deg, var(--navy) 0%, rgba(0,33,80,0.92) 100%); position: relative; overflow: hidden; }
@@ -203,24 +206,36 @@
 .rhyme-card-question { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0; position: relative; z-index: 1; }
 
 .rhyme-card-body { padding: 28px; }
-.rhyme-quote { background: var(--bg-section-alt); border-left: 3px solid var(--accent); border-radius: 8px; padding: 18px 22px; margin-bottom: 22px; }
+.rhyme-quote { background: var(--bg-section-alt); border-left: 3px solid var(--accent); border-radius: 8px; padding: 18px 22px; margin-bottom: 0; }
 .rhyme-quote p { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 15px; line-height: 1.85; color: var(--navy); margin: 0; }
-.rhyme-desc { font-size: 13.5px; color: #555; line-height: 1.7; margin: 0 0 20px; }
-.rhyme-note { display: flex; align-items: flex-start; gap: 10px; background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.35); border-radius: 8px; padding: 12px 16px; font-size: 13px; color: var(--navy); line-height: 1.6; }
-.rhyme-note i { color: var(--accent); margin-top: 2px; flex-shrink: 0; }
-.rhyme-note strong { font-weight: 800; }
+.rhyme-desc { font-size: 13.5px; color: #555; line-height: 1.7; margin: 0; }
+.rhyme-desc-wide { max-width: 760px; margin: 28px auto 0; text-align: center; }
 @media (max-width: 575px) {
   .rhyme-card-header { padding: 18px 20px; }
   .rhyme-card-body { padding: 22px 20px; }
 }
 
-/* ─── Special Offer Ticket ───────────────────────────────────── */
+/* ─── Special Offer Card ─────────────────────────────────────── */
 .offer-section { padding: 0 0 56px; background: var(--bg-page); }
-.offer-card { position: relative; text-align: center; background: var(--bg-white); border: 2px dashed rgba(200,168,75,0.55); border-radius: var(--radius-lg); padding: 40px 44px; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; }
+.offer-card { position: relative; display: flex; align-items: center; gap: 28px; background: var(--bg-white); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 36px 40px; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; overflow: hidden; }
 .offer-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
-.offer-heading { font-family: var(--font-display); font-size: clamp(1.15rem, 2.6vw, 1.5rem); font-weight: 800; line-height: 1.5; color: var(--navy); margin: 0 0 28px; }
+.offer-card::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: linear-gradient(180deg, var(--navy), var(--navy-mid)); }
+.offer-card-icon { flex-shrink: 0; width: 64px; height: 64px; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); border: 1px solid rgba(200,168,75,0.35); display: flex; align-items: center; justify-content: center; font-size: 1.7rem; color: var(--accent); }
+.offer-card-body { flex: 1; min-width: 0; }
+.offer-eyebrow { display: inline-flex; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+.offer-heading { font-family: var(--font-display); font-size: clamp(1.1rem, 2.4vw, 1.4rem); font-weight: 800; line-height: 1.4; color: var(--navy); margin: 0 0 14px; }
+.offer-benefits { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.offer-benefits li { display: flex; align-items: center; gap: 7px; font-size: 13px; color: #555; font-weight: 500; }
+.offer-benefits li i { color: var(--accent); font-size: 13px; flex-shrink: 0; }
+.offer-card-cta { flex-shrink: 0; }
+@media (max-width: 767px) {
+  .offer-card { flex-direction: column; align-items: flex-start; padding: 28px 24px; gap: 20px; }
+  .offer-card-cta { width: 100%; }
+  .offer-card-cta .btn-nis2-buy { width: 100%; justify-content: center; }
+}
 @media (max-width: 575px) {
-  .offer-card { padding: 32px 24px; }
+  .offer-card { padding: 24px 20px; }
+  .offer-benefits { flex-direction: column; gap: 8px; }
 }
 </style>
 
@@ -247,33 +262,59 @@
   <div class="container">
     <div class="rhyme-head kb-reveal">
       <span class="rhyme-eyebrow"><i class="bi bi-music-note-beamed me-1"></i> Learning Innovation</span>
-      <h2 class="rhyme-title">PMP Training Reinvented Through Rhyming: A Breakthrough in Learning</h2>
+      <h2 class="rhyme-title">PMP Concepts You'll Actually Remember — Taught Through Rhyme</h2>
+      <p class="rhyme-lead">Every key concept in the training is distilled into a short, human-written rhyme — a memory technique built for exam recall, not novelty.</p>
+      <span class="rhyme-human-badge"><i class="bi bi-patch-check-fill"></i> 100% Human-Written — No AI-Generated Rhymes</span>
     </div>
 
-    <div class="rhyme-card kb-reveal">
-      <div class="rhyme-card-header">
-        <span class="rhyme-card-icon"><i class="bi bi-vinyl-fill"></i></span>
-        <div>
-          <span class="rhyme-card-kicker">For Example</span>
-          <h3 class="rhyme-card-question">What is a Project?</h3>
+    <div class="row g-4">
+      <div class="col-md-6 kb-reveal">
+        <div class="rhyme-card">
+          <div class="rhyme-card-header">
+            <span class="rhyme-card-icon"><i class="bi bi-vinyl-fill"></i></span>
+            <div>
+              <span class="rhyme-card-kicker">For Example</span>
+              <h3 class="rhyme-card-question">What is a Project?</h3>
+            </div>
+          </div>
+          <div class="rhyme-card-body">
+            <div class="rhyme-quote">
+              <p>
+                A project is an initiative, clearly and simply stated,<br>
+                Temporary, unique, and progressively elaborated.<br>
+                A project must create value and it can be stand-alone,<br>
+                Or part of a Portfolio or a Program, this is well known
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="rhyme-card-body">
-        <div class="rhyme-quote">
-          <p>
-            A project is an initiative, clearly and simply stated,<br>
-            Temporary, unique, and progressively elaborated.<br>
-            A project must create value and it can be stand-alone,<br>
-            Or part of a Portfolio or a Program, this is well known
-          </p>
-        </div>
-        <p class="rhyme-desc">Similarly, all key project management concepts are summarized at the end of the training, creating lasting value for both learners and educational institutions.</p>
-        <div class="rhyme-note">
-          <i class="bi bi-patch-check-fill"></i>
-          <span><strong>Important Note:</strong> Our rhyming is effective and memorable because it is human generated, not AI generated.</span>
+
+      {{-- PLACEHOLDER: illustrative second rhyme — replace with a real second rhyme from course content before shipping --}}
+      <div class="col-md-6 kb-reveal" style="transition-delay: 0.08s;">
+        <div class="rhyme-card">
+          <div class="rhyme-card-header">
+            <span class="rhyme-card-icon"><i class="bi bi-vinyl-fill"></i></span>
+            <div>
+              <span class="rhyme-card-kicker">For Example</span>
+              <h3 class="rhyme-card-question">What is Scope?</h3>
+            </div>
+          </div>
+          <div class="rhyme-card-body">
+            <div class="rhyme-quote">
+              <p>
+                Scope defines the boundary of the work to be done,<br>
+                What's included and excluded, agreed on by everyone.<br>
+                Guard it well against creep, both silent and bold,<br>
+                For a project without scope control is a story half-told.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
+    <p class="rhyme-desc rhyme-desc-wide kb-reveal">All key project management concepts are summarized this way throughout the training — creating a fast, memorable review at the end of every chapter, for both individual learners and educational institutions.</p>
   </div>
 </section>
 
@@ -281,10 +322,22 @@
 <section class="offer-section">
   <div class="container">
     <div class="offer-card kb-reveal">
-      <p class="offer-heading">Special Offer: Discounted Pricing on Bulk Training for Corporates and Educational Institutions</p>
-      <a href="{{ route('contact-us') }}" class="btn-nis2-buy">
-        Get in Touch <i class="bi bi-arrow-right"></i>
-      </a>
+      <div class="offer-card-icon"><i class="bi bi-building-fill-check"></i></div>
+      <div class="offer-card-body">
+        <span class="offer-eyebrow"><i class="bi bi-briefcase-fill me-1"></i> For Organizations</span>
+        <h2 class="offer-heading">Special Offer: Discounted Pricing on Bulk Training for Corporates and Educational Institutions</h2>
+        {{-- PLACEHOLDER: illustrative benefits — confirm against actual bulk/corporate policy before shipping --}}
+        <ul class="offer-benefits">
+          <li><i class="bi bi-check-circle-fill"></i> Custom seat counts for teams &amp; cohorts</li>
+          <li><i class="bi bi-check-circle-fill"></i> Dedicated onboarding &amp; progress reporting</li>
+          <li><i class="bi bi-check-circle-fill"></i> Invoice billing for procurement teams</li>
+        </ul>
+      </div>
+      <div class="offer-card-cta">
+        <a href="{{ route('contact-us') }}" class="btn-nis2-buy">
+          Get in Touch <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -371,7 +424,7 @@
 </section>
 
 {{-- ── Reinforcing CTA after the outline ─────────────────────────── --}}
-@include('partials.pmp-banner')
+@include('partials.pmp-banner', ['variant' => 'reinforcing'])
 @endif
 
 
