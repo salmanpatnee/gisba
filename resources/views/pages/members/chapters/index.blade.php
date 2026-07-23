@@ -97,7 +97,7 @@
             <i class="bi bi-star-fill me-1"></i> Members Only
           </span>
           <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3.5vw,2.4rem);color:#fff;font-weight:900;line-height:1.2;margin-bottom:14px;">
-            PMP Comprehensive Training <span style="color:var(--accent);">Aligned with PMBOK 8th Edition</span>
+            PMP Comprehensive Training <span style="color:var(--accent);">Aligned with PMBOK 8th Edition and PMP July 2026 Exam Outline</span>
           </h1>
           <p style="color:rgba(255,255,255,0.78);font-size:15.5px;line-height:1.7;max-width:520px;margin:0;">
             All chapters with videos, documents, checklists, and glossary resources.
