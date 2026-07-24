@@ -66,7 +66,11 @@ Route::get('/members', [MembersController::class, 'paywall'])->name('members.pay
 Route::post('/members/checkout', [PayPalCheckoutController::class, 'create'])->name('members.checkout');
 Route::get('/members/paypal/return', [PayPalCheckoutController::class, 'capture'])->name('members.paypal.return');
 Route::get('/members/paypal/cancel', [PayPalCheckoutController::class, 'cancel'])->name('members.paypal.cancel');
-Route::get('/members/email-sent', fn () => view('pages.members-email-sent'))->name('members.email-sent');
+Route::get('/members/email-sent', fn () => view('pages.members-email-sent', [
+    'memberEmail' => session('member_email'),
+    'plainPassword' => session('plain_password'),
+    'expiresAt' => session('member_expires_at'),
+]))->name('members.email-sent');
 Route::get('/members/login', [MembersLoginController::class, 'showForm'])->name('members.login');
 Route::post('/members/login', [MembersLoginController::class, 'login'])->name('members.login.submit');
 Route::post('/members/logout', [MembersLoginController::class, 'logout'])->name('members.logout');

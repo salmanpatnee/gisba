@@ -75,22 +75,28 @@ class PayPalCheckoutController extends Controller
             'member_since' => now(),
         ]);
 
+        $expiresAt = now()->addMonths(6);
+
         MemberAccessToken::create([
             'email' => $email,
             'token' => Str::random(64),
             'paypal_order_id' => $orderId,
-            'expires_at' => now()->addMonths(6),
+            'expires_at' => $expiresAt,
         ]);
 
         try {
-            Mail::to($email)->send(new WelcomeMemberMail($email, $plainPassword, now()->addMonths(6)->format('F j, Y')));
+            Mail::to($email)->send(new WelcomeMemberMail($email, $plainPassword, $expiresAt->format('F j, Y')));
         } catch (\Throwable $e) {
             Log::error('WelcomeMemberMail failed', ['error' => $e->getMessage()]);
         }
 
         session()->forget('paypal_pending_email');
 
-        return redirect()->route('members.email-sent');
+        return redirect()->route('members.email-sent')->with([
+            'member_email' => $email,
+            'plain_password' => $plainPassword,
+            'member_expires_at' => $expiresAt->format('F j, Y'),
+        ]);
     }
 
     public function cancel(): RedirectResponse

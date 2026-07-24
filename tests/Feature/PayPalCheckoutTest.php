@@ -61,13 +61,22 @@ it('creates user, stores audit token, sends welcome email, and redirects to succ
     Mail::fake();
     session(['paypal_pending_email' => 'buyer@example.com']);
 
-    $this->get(route('members.paypal.return', ['token' => 'ORDER-123']))
-        ->assertRedirect(route('members.email-sent'));
+    $response = $this->get(route('members.paypal.return', ['token' => 'ORDER-123']));
+
+    $response->assertRedirect(route('members.email-sent'));
+    $response->assertSessionHas('member_email', 'buyer@example.com');
+    $response->assertSessionHas('plain_password', fn ($password) => ! empty($password));
 
     $this->assertGuest();
     expect(User::where('email', 'buyer@example.com')->value('is_member'))->toBeTrue();
     expect(MemberAccessToken::where('email', 'buyer@example.com')->exists())->toBeTrue();
     Mail::assertSent(WelcomeMemberMail::class, fn ($mail) => $mail->hasTo('buyer@example.com'));
+
+    $plainPassword = session('plain_password');
+    $this->get(route('members.email-sent'))
+        ->assertOk()
+        ->assertSee('buyer@example.com')
+        ->assertSee($plainPassword);
 });
 
 it('sets is_member on existing user without changing password', function () {
@@ -76,22 +85,42 @@ it('sets is_member on existing user without changing password', function () {
     $oldHash = $user->password;
     session(['paypal_pending_email' => 'existing@example.com']);
 
-    $this->get(route('members.paypal.return', ['token' => 'ORDER-123']));
+    $response = $this->get(route('members.paypal.return', ['token' => 'ORDER-123']));
 
     expect($user->fresh()->is_member)->toBeTrue();
     expect($user->fresh()->password)->toBe($oldHash);
     Mail::assertSent(WelcomeMemberMail::class, fn ($m) => $m->password === null);
+
+    $response->assertSessionHas('plain_password', null);
+
+    $this->get(route('members.email-sent'))
+        ->assertOk()
+        ->assertSee('existing@example.com')
+        ->assertSee('Use your existing password');
 });
 
 it('still redirects to success page and provisions membership when the welcome email fails to send', function () {
     Mail::shouldReceive('to')->andThrow(new RuntimeException('Unable to connect with STARTTLS'));
     session(['paypal_pending_email' => 'buyer@example.com']);
 
-    $this->get(route('members.paypal.return', ['token' => 'ORDER-123']))
-        ->assertRedirect(route('members.email-sent'));
+    $response = $this->get(route('members.paypal.return', ['token' => 'ORDER-123']));
+
+    $response->assertRedirect(route('members.email-sent'));
+    $response->assertSessionHas('member_email', 'buyer@example.com');
 
     expect(User::where('email', 'buyer@example.com')->value('is_member'))->toBeTrue();
     expect(MemberAccessToken::where('email', 'buyer@example.com')->exists())->toBeTrue();
+
+    $this->get(route('members.email-sent'))
+        ->assertOk()
+        ->assertSee('buyer@example.com');
+});
+
+it('shows a generic fallback on the success page when visited without a fresh payment', function () {
+    $this->get(route('members.email-sent'))
+        ->assertOk()
+        ->assertSee('Thanks for your recent purchase')
+        ->assertSee('Reset it here');
 });
 
 it('redirects to paywall on missing session', function () {
