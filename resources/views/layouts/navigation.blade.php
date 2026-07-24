@@ -30,6 +30,9 @@
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                         {{ __('Members') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.user-activity.index')" :active="request()->routeIs('admin.user-activity.*')">
+                        {{ __('User Activity') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                         {{ __('Videos') }}
                     </x-nav-link>
@@ -105,6 +108,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                 {{ __('Members') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.user-activity.index')" :active="request()->routeIs('admin.user-activity.*')">
+                {{ __('User Activity') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.videos.index')" :active="request()->routeIs('admin.videos.*')">
                 {{ __('Videos') }}

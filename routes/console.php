@@ -9,3 +9,5 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::command('members:send-expiry-reminders')->dailyAt('08:00');
+Schedule::command('sessions:close-stale')->everyFiveMinutes()->withoutOverlapping();
+Schedule::command('sessions:prune-activities')->daily()->withoutOverlapping();

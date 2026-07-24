@@ -3,6 +3,8 @@
 use App\Http\Middleware\EnsureMemberAccess;
 use App\Http\Middleware\LowercaseUrl;
 use App\Http\Middleware\RedirectIfMember;
+use App\Http\Middleware\TrackPageVisit;
+use App\Http\Middleware\TrackUserActivity;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -16,8 +18,12 @@ $app = Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->prepend(LowercaseUrl::class);
         $middleware->alias([
-            'member'             => EnsureMemberAccess::class,
+            'member' => EnsureMemberAccess::class,
             'redirect-if-member' => RedirectIfMember::class,
+        ]);
+        $middleware->web(append: [
+            TrackUserActivity::class,
+            TrackPageVisit::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

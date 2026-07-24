@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController
 use App\Http\Controllers\Admin\PmpAttachmentController;
 use App\Http\Controllers\Admin\PmpCategoryController;
 use App\Http\Controllers\Admin\SiteSettingsController;
+use App\Http\Controllers\Admin\UserActivityController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChapterController;
@@ -131,6 +132,8 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::get('members', [MemberController::class, 'index'])->name('members.index');
     Route::patch('members/{user}/revoke', [MemberController::class, 'revoke'])->name('members.revoke');
     Route::delete('members/{user}', [MemberController::class, 'destroy'])->name('members.destroy');
+    Route::get('user-activity', [UserActivityController::class, 'index'])->name('user-activity.index');
+    Route::get('user-activity/{userSession}', [UserActivityController::class, 'show'])->name('user-activity.show');
 
     // PMP Comprehensive Training Aligned with PMBOK 8th Edition — Chapter CMS
     Route::resource('chapters', AdminChapterController::class);
