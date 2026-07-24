@@ -8,6 +8,7 @@ use App\Models\MemberAccessToken;
 use App\Models\User;
 use App\Services\PayPalService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -81,7 +82,11 @@ class PayPalCheckoutController extends Controller
             'expires_at' => now()->addMonths(6),
         ]);
 
-        Mail::to($email)->send(new WelcomeMemberMail($email, $plainPassword, now()->addMonths(6)->format('F j, Y')));
+        try {
+            Mail::to($email)->send(new WelcomeMemberMail($email, $plainPassword, now()->addMonths(6)->format('F j, Y')));
+        } catch (\Throwable $e) {
+            Log::error('WelcomeMemberMail failed', ['error' => $e->getMessage()]);
+        }
 
         session()->forget('paypal_pending_email');
 

@@ -83,6 +83,17 @@ it('sets is_member on existing user without changing password', function () {
     Mail::assertSent(WelcomeMemberMail::class, fn ($m) => $m->password === null);
 });
 
+it('still redirects to success page and provisions membership when the welcome email fails to send', function () {
+    Mail::shouldReceive('to')->andThrow(new RuntimeException('Unable to connect with STARTTLS'));
+    session(['paypal_pending_email' => 'buyer@example.com']);
+
+    $this->get(route('members.paypal.return', ['token' => 'ORDER-123']))
+        ->assertRedirect(route('members.email-sent'));
+
+    expect(User::where('email', 'buyer@example.com')->value('is_member'))->toBeTrue();
+    expect(MemberAccessToken::where('email', 'buyer@example.com')->exists())->toBeTrue();
+});
+
 it('redirects to paywall on missing session', function () {
     $this->get(route('members.paypal.return', ['token' => 'ORDER-123']))
         ->assertRedirect(route('members.paywall'));
