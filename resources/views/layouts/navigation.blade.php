@@ -12,21 +12,52 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
-                        {{ __('NIS2 Blogs') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
-                        {{ __('NIS2 Categories') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">
-                        {{ __('PMP') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">
-                        {{ __('PMP Categories') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
-                        {{ __('PMP Chapters') }}
-                    </x-nav-link>
+                    @php
+                        $nis2Active = request()->routeIs('admin.blog.*') || request()->routeIs('admin.categories.*');
+                        $pmpActive = request()->routeIs('admin.pmp.*') || request()->routeIs('admin.pmp-categories.*') || request()->routeIs('admin.chapters.*');
+                        $wrapperClasses = fn ($active) => $active
+                            ? 'flex items-center px-1 pt-1 border-b-2 border-indigo-400'
+                            : 'flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 transition duration-150 ease-in-out';
+                        $labelClasses = fn ($active) => $active
+                            ? 'inline-flex items-center gap-1 text-sm font-medium leading-5 text-gray-900 focus:outline-none'
+                            : 'inline-flex items-center gap-1 text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700 transition duration-150 ease-in-out';
+                    @endphp
+
+                    <div class="{{ $wrapperClasses($nis2Active) }}">
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button type="button" class="{{ $labelClasses($nis2Active) }}">
+                                    {{ __('NIS2') }}
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.blog.index')">{{ __('Blogs') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.categories.index')">{{ __('Categories') }}</x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+
+                    <div class="{{ $wrapperClasses($pmpActive) }}">
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button type="button" class="{{ $labelClasses($pmpActive) }}">
+                                    {{ __('PMP') }}
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.pmp.index')">{{ __('Overview') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.pmp-categories.index')">{{ __('Categories') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.chapters.index')">{{ __('Chapters') }}</x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                         {{ __('Members') }}
                     </x-nav-link>
@@ -91,21 +122,25 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <div class="px-4 pt-2 pb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('NIS2') }}</div>
             <x-responsive-nav-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">
-                {{ __('NIS2 Blogs') }}
+                {{ __('Blogs') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">
-                {{ __('NIS2 Categories') }}
+                {{ __('Categories') }}
             </x-responsive-nav-link>
+
+            <div class="px-4 pt-3 pb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('PMP') }}</div>
             <x-responsive-nav-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">
-                {{ __('PMP') }}
+                {{ __('Overview') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">
-                {{ __('PMP Categories') }}
+                {{ __('Categories') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
-                {{ __('PMP Chapters') }}
+                {{ __('Chapters') }}
             </x-responsive-nav-link>
+
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                 {{ __('Members') }}
             </x-responsive-nav-link>
