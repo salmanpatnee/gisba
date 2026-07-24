@@ -18,6 +18,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MemberAccountController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\MembersLoginController;
+use App\Http\Controllers\MembersPasswordResetController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayPalCheckoutController;
 use App\Http\Controllers\PmpController;
@@ -69,6 +70,10 @@ Route::get('/members/email-sent', fn () => view('pages.members-email-sent'))->na
 Route::get('/members/login', [MembersLoginController::class, 'showForm'])->name('members.login');
 Route::post('/members/login', [MembersLoginController::class, 'login'])->name('members.login.submit');
 Route::post('/members/logout', [MembersLoginController::class, 'logout'])->name('members.logout');
+Route::get('/members/forgot-password', [MembersPasswordResetController::class, 'showForgotForm'])->name('members.password.request');
+Route::post('/members/forgot-password', [MembersPasswordResetController::class, 'sendResetLink'])->name('members.password.email');
+Route::get('/members/reset-password/{token}', [MembersPasswordResetController::class, 'showResetForm'])->name('members.password.reset');
+Route::post('/members/reset-password', [MembersPasswordResetController::class, 'resetPassword'])->name('members.password.update');
 
 Route::middleware('member')->prefix('members')->name('members.')->group(function () {
     Route::get('/account', [MemberAccountController::class, 'edit'])->name('account.edit');

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Mail\ResetMemberPasswordMail;
 use Database\Factories\UserFactory;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 #[Fillable(['name', 'email', 'password', 'is_member', 'member_since'])]
 #[Hidden(['password', 'remember_token'])]
@@ -109,5 +112,18 @@ class User extends Authenticatable
     {
         return $this->isMember()
             && $this->member_since->addMonths(6)->diffInDays(now(), true) <= $days;
+    }
+
+    public function sendPasswordResetNotification($token): void
+    {
+        if (! $this->is_member) {
+            $this->notify(new ResetPassword($token));
+
+            return;
+        }
+
+        $resetUrl = route('members.password.reset', ['token' => $token, 'email' => $this->email]);
+
+        Mail::to($this->email)->send(new ResetMemberPasswordMail($resetUrl));
     }
 }

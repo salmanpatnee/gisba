@@ -1,7 +1,7 @@
 @extends('layouts.site')
 
-@section('title', 'Member Login — GISBA')
-@section('meta_description', 'Log in to access the GISBA members-only library of exclusive cybersecurity and project management resources.')
+@section('title', 'Forgot Password — GISBA Members')
+@section('meta_description', 'Reset the password for your GISBA members account.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
@@ -23,10 +23,10 @@
 
       <div style="text-align:center;margin-bottom:36px;">
         <div style="width:64px;height:64px;background:rgba(0,33,80,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;color:var(--navy);margin:0 auto 20px;">
-          <i class="bi bi-lock"></i>
+          <i class="bi bi-key"></i>
         </div>
-        <h1 style="font-family:var(--font-display);font-size:1.8rem;color:var(--navy);font-weight:900;margin-bottom:8px;">Member Login</h1>
-        <p style="color:#666;font-size:14px;margin:0;">Use the credentials from your welcome email.</p>
+        <h1 style="font-family:var(--font-display);font-size:1.8rem;color:var(--navy);font-weight:900;margin-bottom:8px;">Forgot Your Password?</h1>
+        <p style="color:#666;font-size:14px;margin:0;">Enter your email and we'll send you a link to reset your password.</p>
       </div>
 
       @if(session('info'))
@@ -43,10 +43,10 @@
         </div>
       @endif
 
-      <form method="POST" action="{{ route('members.login.submit') }}" style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:32px;">
+      <form method="POST" action="{{ route('members.password.email') }}" style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:32px;">
         @csrf
 
-        <div style="margin-bottom:20px;">
+        <div style="margin-bottom:28px;">
           <label style="display:block;font-size:13px;font-weight:600;color:#374151;margin-bottom:6px;">Email Address</label>
           <input
             type="email"
@@ -59,31 +59,16 @@
           />
         </div>
 
-        <div style="margin-bottom:28px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
-            <label style="font-size:13px;font-weight:600;color:#374151;">Password</label>
-            <a href="{{ route('members.password.request') }}" style="font-size:12px;color:var(--navy);font-weight:600;">Forgot your password?</a>
-          </div>
-          <input
-            type="password"
-            name="password"
-            required
-            autocomplete="current-password"
-            style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:6px;font-size:15px;color:#111;outline:none;box-sizing:border-box;"
-            placeholder="••••••••••••"
-          />
-        </div>
-
         <button
           type="submit"
           style="width:100%;background:var(--navy);color:#fff;font-weight:700;font-size:16px;padding:13px;border:none;border-radius:6px;cursor:pointer;letter-spacing:0.3px;">
-          Log In to Members Library
+          Send Password Reset Link
         </button>
       </form>
 
       <p style="text-align:center;font-size:13px;color:#888;margin-top:24px;">
-        Not a member yet?
-        <a href="{{ route('members.paywall') }}" style="color:var(--navy);font-weight:600;">Join here</a>
+        Remembered your password?
+        <a href="{{ route('members.login') }}" style="color:var(--navy);font-weight:600;">Log in</a>
       </p>
 
     </div>
