@@ -61,7 +61,7 @@ class PayPalCheckoutController extends Controller
         $plainPassword = null;
 
         if (! $user) {
-            $plainPassword = Str::password(12);
+            $plainPassword = Str::password(12, symbols: false);
             $user = User::create([
                 'name' => explode('@', $email)[0],
                 'email' => $email,
