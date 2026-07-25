@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
 use App\Http\Controllers\Admin\PmpCategoryController;
+use App\Http\Controllers\Admin\PmpController;
 use App\Http\Controllers\Admin\SiteSettingsController;
 use App\Http\Controllers\Admin\UserActivityController;
 use App\Http\Controllers\BlogController;
@@ -21,7 +22,6 @@ use App\Http\Controllers\MembersLoginController;
 use App\Http\Controllers\MembersPasswordResetController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PayPalCheckoutController;
-use App\Http\Controllers\PmpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VideoController;
 use App\Models\SiteSettings;
@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 
 // ── GISBA Public Pages ────────────────────────────────────────────────────────
 
-Route::get('/', [PmpController::class, 'index'])->name('home');
+Route::get('/', [PageController::class, 'home'])->name('home');
 Route::get('/home', [PageController::class, 'home'])->name('home.legacy');
 Route::get('/portfolio', [PageController::class, 'portfolio'])->name('portfolio');
 Route::get('/awareness', [PageController::class, 'awareness'])->name('awareness');
@@ -48,8 +48,9 @@ Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-u
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
 Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
-Route::get('/pmp', [PmpController::class, 'index'])->name('pmp');
-Route::get('/pmp/{slug}', [PmpController::class, 'show'])->name('pmp.show');
+// PMP page is hidden from the public site (redirects home). See PmpController for the underlying page.
+Route::get('/pmp', fn () => redirect()->route('home'))->name('pmp');
+Route::get('/pmp/{slug}', fn () => redirect()->route('home'))->name('pmp.show');
 Route::get('/video-resources', [VideoController::class, 'index'])->name('video-resources');
 Route::get('/video-resources/{video}/stream', [VideoController::class, 'stream'])->name('videos.stream');
 Route::post('/video-resources/{video}/view', [VideoController::class, 'recordView'])->name('videos.record-view');
@@ -131,7 +132,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::resource('blog', App\Http\Controllers\Admin\BlogController::class)->except('show');
     Route::resource('categories', CategoryController::class)->except('show');
     Route::delete('blog-attachments/{attachment}', [BlogAttachmentController::class, 'destroy'])->name('blog-attachments.destroy');
-    Route::resource('pmp', App\Http\Controllers\Admin\PmpController::class)->except('show');
+    Route::resource('pmp', PmpController::class)->except('show');
     Route::resource('pmp-categories', PmpCategoryController::class)->except('show');
     Route::delete('pmp-attachments/{attachment}', [PmpAttachmentController::class, 'destroy'])->name('pmp-attachments.destroy');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
