@@ -79,7 +79,7 @@
             </nav>
             <div class="sidebar-contact">
               <strong><i class="bi bi-handshake me-1"></i>Partnership Enquiries</strong>
-              <a href="mailto:support@gisba.net">support@gisba.net</a>
+              <a href="{{ route('contact-us') }}">Contact Us</a>
             </div>
           </aside>
         </div>

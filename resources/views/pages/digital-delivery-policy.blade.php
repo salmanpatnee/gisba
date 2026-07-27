@@ -40,9 +40,7 @@
                 <li>If the email is not received within 24 hours, please check your spam folder or contact support.</li>
               </ul>
 
-              <p>For delivery issues please contact:</p>
-
-              <p><a href="mailto:support@gisba.net">support@gisba.net</a></p>
+              <p>For delivery issues please <a href="{{ route('contact-us') }}">contact us</a>.</p>
 
               <p>We typically respond within <b>1 business day</b>.</p>
             </section>

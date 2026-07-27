@@ -44,7 +44,7 @@
           <tr>
             <td style="padding:20px 40px 36px;border-top:1px solid #eee;">
               <p style="font-size:12px;color:#aaa;margin:0;line-height:1.6;">
-                Need help? Contact <a href="mailto:support@gisba.net" style="color:#002150;">support@gisba.net</a>.<br />
+                Need help? Contact us at <a href="{{ route('contact-us') }}" style="color:#002150;">{{ route('contact-us') }}</a>.<br />
                 &copy; {{ date('Y') }} GISBA. All rights reserved.
               </p>
             </td>

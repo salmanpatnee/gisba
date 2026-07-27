@@ -164,12 +164,12 @@ class PageController extends Controller
     {
         return view('pages.home');
     }
-    
+
     public function portfolio(): View
     {
         return view('pages.portfolio');
     }
-    
+
     public function awareness(): View
     {
         return view('pages.awareness');
@@ -237,7 +237,7 @@ class PageController extends Controller
     public function paymentSuccess(): View
     {
         try {
-            Mail::to(config('mail.enquiry_recipient', 'support@gisba.net'))
+            Mail::to(config('mail.enquiry_recipient'))
                 ->send(new PaymentNotificationMail);
         } catch (\Throwable $e) {
             Log::error('PaymentNotificationMail failed', ['error' => $e->getMessage()]);

@@ -153,7 +153,7 @@
                       <i class="bi bi-building me-2"></i>GISBA Consultants Co. W.L.L.
                     </div>
                     <div class="contact-card-body">
-                      <p><i class="bi bi-envelope me-2 text-primary"></i><a href="mailto:support@gisba.net">support@gisba.net</a></p>
+                      <p><i class="bi bi-envelope me-2 text-primary"></i><a href="{{ route('contact-us') }}">Contact Us</a></p>
                     </div>
                   </div>
                 </div>

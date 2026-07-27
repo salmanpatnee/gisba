@@ -83,7 +83,7 @@
             </nav>
             <div class="sidebar-contact">
               <strong><i class="bi bi-envelope me-1"></i>Contact GISBA</strong>
-              <a href="mailto:support@gisba.net">support@gisba.net</a>
+              <a href="{{ route('contact-us') }}">Contact Us</a>
             </div>
           </aside>
         </div>
@@ -525,7 +525,7 @@
                   <a href="{{ route('contact-us') }}" class="btn-hero-primary">
                     <i class="bi bi-calendar-check me-2"></i>Schedule a Consultation
                   </a>
-                  <a href="mailto:support@gisba.net" class="btn-hero-secondary">
+                  <a href="{{ route('contact-us') }}" class="btn-hero-secondary">
                     <i class="bi bi-envelope me-2"></i>Contact Us Today
                   </a>
                 </div>

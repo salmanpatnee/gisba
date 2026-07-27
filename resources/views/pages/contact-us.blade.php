@@ -8,7 +8,6 @@
     <span><i class="bi bi-envelope me-2"></i>GISBA Consultants Co. W.L.L. — Global Reach in Consulting &amp; Training</span>
     <div class="d-flex gap-3">
       <a href="{{ route('home') }}"><i class="bi bi-house me-1"></i>Home</a>
-      <a href="#get-in-touch"><i class="bi bi-chat-dots me-1"></i>Get in Touch</a>
       <a href="#enquiry-form"><i class="bi bi-envelope me-1"></i>Send Enquiry</a>
     </div>
   </div>
@@ -54,38 +53,18 @@
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
                 {{-- <li><a href="#about"><i class="bi bi-info-circle"></i> About GISBA</a></li> --}}
-                <li><a href="#get-in-touch"><i class="bi bi-chat-dots"></i> Get in Touch</a></li>
                 <li><a href="#enquiry-form"><i class="bi bi-envelope"></i> Send Enquiry</a></li>
               </ul>
             </nav>
             <div class="sidebar-contact">
               <strong><i class="bi bi-envelope me-1"></i>Contact GISBA</strong>
-              <a href="mailto:support@gisba.net">support@gisba.net</a>
+              <a href="#enquiry-form">Send us an enquiry</a>
             </div>
           </aside>
         </div>
 
         <div class="col-12 col-md-9">
           <main class="main-content">
-
-            <section id="get-in-touch">
-              <h2 class="section-heading">Get in Touch</h2>
-              <p>Reach us directly using the contact details below. We respond to all enquiries within one business day.</p>
-
-              <div class="row g-3 mt-2">
-                <div class="col-12 col-sm-6">
-                  <div class="contact-card h-100">
-                    <div class="contact-card-title"><i class="bi bi-envelope me-2"></i>Email</div>
-                    <div class="contact-card-body">
-                      <p>For general enquiries, service requests, and proposals:</p>
-                      <p style="font-size:15px; font-weight:600;"><a href="mailto:support@gisba.net">support@gisba.net</a></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <hr class="content-divider" />
 
             <section id="enquiry-form">
               <h2 class="section-heading">Send Us an Enquiry</h2>
@@ -347,10 +326,10 @@
           });
           showAlert('warning', 'Please correct the highlighted fields before submitting.');
         } else {
-          showAlert('danger', data.message || 'Something went wrong. Please try again or email us directly at <a href="mailto:support@gisba.net">support@gisba.net</a>.');
+          showAlert('danger', data.message || 'Something went wrong. Please try again in a moment.');
         }
       } catch (err) {
-        showAlert('danger', 'A network error occurred. Please check your connection or email us directly at <a href="mailto:support@gisba.net">support@gisba.net</a>.');
+        showAlert('danger', 'A network error occurred. Please check your connection and try again.');
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = '<i class="bi bi-send me-2"></i>Send Enquiry';

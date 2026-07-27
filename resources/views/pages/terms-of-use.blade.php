@@ -86,7 +86,7 @@
                 <li>Delivery is typically provided through an immediate download link or email notification</li>
                 <li>Customers are responsible for ensuring their email address is correct at the time of purchase</li>
               </ul>
-              <p>If a customer experiences issues receiving the product, they should contact: <a href="mailto:support@gisba.net">support@gisba.net</a></p>
+              <p>If a customer experiences issues receiving the product, they should <a href="{{ route('contact-us') }}">contact us</a>.</p>
 
               <h3 class="section-heading" style="font-size:1.2rem;">7. Refund Policy</h3>
               <p>Refunds are governed by the Digital Refund Policy available on this website.</p>
@@ -168,7 +168,7 @@
                       <i class="bi bi-building me-2"></i>GISBA Consultants Co. W.L.L.
                     </div>
                     <div class="contact-card-body">
-                      <p><i class="bi bi-envelope me-2 text-primary"></i><a href="mailto:support@gisba.net">support@gisba.net</a></p>
+                      <p><i class="bi bi-envelope me-2 text-primary"></i><a href="{{ route('contact-us') }}">Contact Us</a></p>
                     </div>
                   </div>
                 </div>

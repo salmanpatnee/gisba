@@ -116,6 +116,6 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
-    'enquiry_recipient' => env('MAIL_ENQUIRY_RECIPIENT', 'support@gisba.net'),
+    'enquiry_recipient' => env('MAIL_ENQUIRY_RECIPIENT'),
 
 ];

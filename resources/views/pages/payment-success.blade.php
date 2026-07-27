@@ -311,8 +311,8 @@
             <!-- Support -->
             <div class="support-section">
               <i class="bi bi-headset me-2"></i>
-              <strong>Need help?</strong> Our team is here for you. Reach out at
-              <a href="mailto:support@gisba.net">support@gisba.net</a>
+              <strong>Need help?</strong> Our team is here for you.
+              <a href="{{ route('contact-us') }}">Contact us</a>
               and we'll respond within one business day.
             </div>
 

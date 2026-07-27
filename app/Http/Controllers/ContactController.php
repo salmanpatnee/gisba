@@ -15,7 +15,7 @@ class ContactController extends Controller
         $validated = $request->validated();
 
         try {
-            Mail::to(config('mail.enquiry_recipient', 'support@gisba.net'))
+            Mail::to(config('mail.enquiry_recipient'))
                 ->send(new ContactMail(
                     name: $validated['name'],
                     email: $validated['email'],
@@ -30,7 +30,7 @@ class ContactController extends Controller
 
             return response()->json([
                 'success' => false,
-                'message' => 'We could not send your message right now. Please email us directly at <a href="mailto:support@gisba.net">support@gisba.net</a>.',
+                'message' => 'We could not send your message right now. Please try again in a moment.',
             ], 500);
         }
 

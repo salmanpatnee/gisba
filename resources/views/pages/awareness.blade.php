@@ -66,7 +66,7 @@
             </nav>
             <div class="sidebar-contact">
               <strong><i class="bi bi-envelope me-1"></i>Contact GISBA</strong>
-              <a href="mailto:support@gisba.net">support@gisba.net</a>
+              <a href="{{ route('contact-us') }}">Contact Us</a>
             </div>
           </aside>
         </div>

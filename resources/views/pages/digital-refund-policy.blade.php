@@ -70,7 +70,7 @@
                 <li>Order confirmation or payment reference</li>
                 <li>Reason for the refund request</li>
               </ul>
-              <p>Refund requests should be submitted to: <a href="mailto:support@gisba.net">support@gisba.net</a></p>
+              <p>Refund requests should be submitted via our <a href="{{ route('contact-us') }}">contact form</a>.</p>
               <p>Our support team typically responds within one business day.</p>
 
               <h3 class="section-heading" style="font-size:1.2rem;">5. Refund Processing</h3>
@@ -94,7 +94,7 @@
                     </div>
                     <p>For refund requests or assistance, please contact.</p>
                     <div class="contact-card-body">
-                      <p><i class="bi bi-envelope me-2 text-primary"></i><a href="mailto:support@gisba.net">support@gisba.net</a></p>
+                      <p><i class="bi bi-envelope me-2 text-primary"></i><a href="{{ route('contact-us') }}">Contact Us</a></p>
                     </div>
                   </div>
                 </div>

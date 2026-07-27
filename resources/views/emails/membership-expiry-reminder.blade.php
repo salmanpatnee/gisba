@@ -37,7 +37,7 @@
               </div>
 
               <p style="font-size:13px;color:#888;line-height:1.6;margin:0;">
-                If you have questions, contact <a href="mailto:support@gisba.net" style="color:#002150;">support@gisba.net</a>.
+                If you have questions, contact us at <a href="{{ route('contact-us') }}" style="color:#002150;">{{ route('contact-us') }}</a>.
               </p>
             </td>
           </tr>
@@ -45,7 +45,7 @@
           <tr>
             <td style="padding:20px 40px 36px;border-top:1px solid #eee;">
               <p style="font-size:12px;color:#aaa;margin:0;line-height:1.6;">
-                You received this because you are a GISBA member. If this was unexpected, contact <a href="mailto:support@gisba.net" style="color:#002150;">support@gisba.net</a>.<br />
+                You received this because you are a GISBA member. If this was unexpected, contact us at <a href="{{ route('contact-us') }}" style="color:#002150;">{{ route('contact-us') }}</a>.<br />
                 &copy; {{ date('Y') }} GISBA. All rights reserved.
               </p>
             </td>
