@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\BusinessEmail;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -21,7 +20,7 @@ class EnquiryRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'min:2', 'max:100'],
             'organization' => ['nullable', 'string', 'max:150'],
-            'email' => ['required', 'email', 'max:150', new BusinessEmail],
+            'email' => ['required', 'email', 'max:150'],
             'phone' => ['nullable', 'string', 'max:25', 'regex:/^\+?[\d\s\-().]{7,20}$/'],
             'service' => ['nullable', 'string', 'in:nis2,training,consulting,project-management,other'],
             'heard_from' => ['required', 'string', 'in:linkedin,google,diac,visionary-alpha,other'],
