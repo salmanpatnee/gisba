@@ -116,11 +116,13 @@
               <i class="bi bi-journal-text"></i>NIS2
             </a>
           </li>
-          <!--<li class="nav-item">-->
-          <!--  <a class="nav-link site-nav-link {{ request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('pmp') }}">-->
-          <!--    <i class="bi bi-award"></i>PMP-->
-          <!--  </a>-->
-          <!--</li>-->
+          @if($isPmpMode)
+          <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('home') || request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('home') }}">
+              <i class="bi bi-award"></i>PMP
+            </a>
+          </li>
+          @endif
           <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('nis2-toolkit') ? 'active' : '' }}" href="{{ route('nis2-toolkit') }}">
               <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit
@@ -196,7 +198,7 @@
             <li><a href="{{ route('home.legacy') }}">Home</a></li>
             <li><a href="{{ route('awareness') }}">Awareness Toolkit</a></li>
             <li><a href="{{ route('nis2') }}">NIS2</a></li>
-            <!--<li><a href="{{ route('pmp') }}">PMP</a></li>-->
+            @if($isPmpMode)<li><a href="{{ route('home') }}">PMP</a></li>@endif
             <li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>

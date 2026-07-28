@@ -28,6 +28,7 @@ it('can update region to me', function () {
     $this->actingAs(User::factory()->create())
         ->put(route('admin.settings.update'), [
             'success_stories_region' => 'me',
+            'website_mode' => 'b2b',
             'regular_price' => 2495,
             'sale_price' => 1500,
         ])
@@ -41,6 +42,7 @@ it('rejects an invalid region', function () {
     $this->actingAs(User::factory()->create())
         ->put(route('admin.settings.update'), [
             'success_stories_region' => 'us',
+            'website_mode' => 'b2b',
             'regular_price' => 2495,
             'sale_price' => 1500,
         ])

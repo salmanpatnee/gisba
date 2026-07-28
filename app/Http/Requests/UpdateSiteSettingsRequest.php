@@ -18,6 +18,7 @@ class UpdateSiteSettingsRequest extends FormRequest
     {
         return [
             'success_stories_region' => ['required', 'in:eu,me'],
+            'website_mode' => ['required', 'in:b2b,b2pmp'],
             'regular_price' => ['required', 'numeric', 'min:0'],
             'sale_price' => ['required', 'numeric', 'min:0'],
             'toolkit_zip' => ['nullable', 'file', 'mimes:zip', 'max:51200'],

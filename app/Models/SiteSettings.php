@@ -8,7 +8,7 @@ class SiteSettings extends Model
 {
     protected $table = 'site_settings';
 
-    protected $fillable = ['success_stories_region', 'regular_price', 'sale_price', 'toolkit_zip_path'];
+    protected $fillable = ['success_stories_region', 'website_mode', 'regular_price', 'sale_price', 'toolkit_zip_path'];
 
     protected $casts = [
         'regular_price' => 'decimal:2',
@@ -19,6 +19,7 @@ class SiteSettings extends Model
     {
         return self::firstOrCreate([], [
             'success_stories_region' => 'eu',
+            'website_mode' => 'b2b',
             'regular_price' => 2495.00,
             'sale_price' => 1500.00,
         ]);

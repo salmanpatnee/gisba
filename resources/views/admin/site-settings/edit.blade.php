@@ -22,6 +22,41 @@
                 @csrf
                 @method('PUT')
 
+                {{-- Website Mode --}}
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
+
+                    <p class="text-sm text-gray-500 mb-6">
+                        Choose the public site's <strong>Website Mode</strong>. Controls what the site root (<code>/</code>) shows and whether the PMP nav link is visible. Takes effect immediately, no deploy required.
+                    </p>
+
+                    <fieldset class="mb-6">
+                        <legend class="block text-sm font-medium text-gray-700 mb-3">Active Website Mode</legend>
+
+                        <div class="flex flex-col gap-3">
+                            @foreach (\App\Enums\WebsiteMode::cases() as $mode)
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input
+                                        type="radio"
+                                        name="website_mode"
+                                        value="{{ $mode->value }}"
+                                        {{ old('website_mode', $settings->website_mode) === $mode->value ? 'checked' : '' }}
+                                        class="w-4 h-4 mt-0.5 text-gray-800 border-gray-300 focus:ring-gray-400"
+                                    >
+                                    <span class="text-sm text-gray-700">
+                                        <strong>{{ $mode->label() }}</strong>
+                                        <span class="block text-gray-400">{{ $mode->description() }}</span>
+                                    </span>
+                                </label>
+                            @endforeach
+                        </div>
+
+                        @error('website_mode')
+                            <p class="mt-2 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </fieldset>
+
+                </div>
+
                 {{-- Success Stories Region --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
 
