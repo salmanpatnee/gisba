@@ -13,7 +13,7 @@ tinymce.init({
     toolbar:
         'undo redo | blocks | ' +
         'bold italic underline | forecolor | ' +
-        'alignleft aligncenter alignright | ' +
+        'alignleft aligncenter alignright alignjustify | ' +
         'bullist numlist | link image | ' +
         'blockquote code | removeformat',
     content_style: 'body { font-family: system-ui, sans-serif; font-size: 15px; line-height: 1.7; color: #374151; }',
