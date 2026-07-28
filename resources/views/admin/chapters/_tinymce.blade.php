@@ -16,7 +16,9 @@ tinymce.init({
         'alignleft aligncenter alignright | ' +
         'bullist numlist | link image | ' +
         'blockquote code | removeformat',
-    content_style: 'body { font-family: system-ui, sans-serif; font-size: 15px; line-height: 1.7; color: #374151; }',
+    content_style: 'body { font-family: system-ui, sans-serif; font-size: 15px; line-height: 1.7; color: #374151; } table { width: 100%; }',
+    table_default_styles: { width: '100%' },
+    table_sizing_mode: 'responsive',
     branding: false,
 });
 </script>

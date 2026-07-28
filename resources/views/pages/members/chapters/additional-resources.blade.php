@@ -71,6 +71,9 @@
   color: #374151;
 }
 .additional-resources-card img { max-width: 100%; height: auto; }
+.additional-resources-card table { width: 100% !important; max-width: 100%; border-collapse: collapse; }
+.additional-resources-card table td,
+.additional-resources-card table th { border: 1px solid var(--border-light); padding: 8px 12px; }
 </style>
 
 <div class="rp-header">
