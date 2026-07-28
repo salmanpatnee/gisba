@@ -21,18 +21,9 @@ class ChapterResourceController extends Controller
         return view('pages.members.chapters.tutorials', compact('chapter'));
     }
 
-    public function takeaways(Chapter $chapter): View
+    public function additionalResources(Chapter $chapter): View
     {
-        $this->loadResourcesForType($chapter, ResourceType::Takeaway);
-
-        return view('pages.members.chapters.takeaways', compact('chapter'));
-    }
-
-    public function domainSummary(Chapter $chapter): View
-    {
-        $this->loadResourcesForType($chapter, ResourceType::DomainSummary);
-
-        return view('pages.members.chapters.domain-summary', compact('chapter'));
+        return view('pages.members.chapters.additional-resources', compact('chapter'));
     }
 
     public function quizzes(Chapter $chapter): View

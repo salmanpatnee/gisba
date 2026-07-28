@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ResourceType;
 use App\Models\Chapter;
 use Illuminate\View\View;
 
@@ -13,8 +14,9 @@ class ChapterController extends Controller
 
         $chapters = Chapter::query()
             ->withCount([
-                'resources',
+                'resources' => fn ($q) => $q->whereIn('resource_type', ResourceType::completable()),
                 'resources as watched_count' => fn ($q) => $q
+                    ->whereIn('resource_type', ResourceType::completable())
                     ->whereHas('watchers', fn ($w) => $w->where('users.id', $userId)),
             ])
             ->orderBy('sort_order')

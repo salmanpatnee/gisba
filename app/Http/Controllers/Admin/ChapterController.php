@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\ResourceType;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreChapterRequest;
 use App\Http\Requests\UpdateChapterRequest;
@@ -45,7 +46,7 @@ class ChapterController extends Controller
 
     public function show(Chapter $chapter): View
     {
-        $chapter->load('resources');
+        $chapter->load(['resources' => fn ($q) => $q->where('resource_type', '!=', ResourceType::DomainSummary)]);
 
         return view('admin.chapters.show', compact('chapter'));
     }

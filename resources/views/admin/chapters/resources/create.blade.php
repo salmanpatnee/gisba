@@ -36,32 +36,6 @@
                         @error('tutorial')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
-                    {{-- Takeaway --}}
-                    <div class="mb-6 p-4 border border-gray-200 rounded-md">
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Takeaway (MP4)
-                        </h3>
-                        <input type="file"
-                               name="takeaway"
-                               accept="video/mp4"
-                               class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
-                        <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
-                        @error('takeaway')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                    </div>
-
-                    {{-- Domain Summary in Poetry --}}
-                    <div class="mb-6 p-4 border border-gray-200 rounded-md">
-                        <h3 class="text-sm font-semibold text-gray-700 mb-2">
-                            <span class="inline-block w-2 h-2 rounded-full bg-purple-500 mr-2"></span>Domain Summary in Poetry (MP4)
-                        </h3>
-                        <input type="file"
-                               name="domain_summary"
-                               accept="video/mp4"
-                               class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
-                        <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
-                        @error('domain_summary')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                    </div>
-
                     {{-- Quizzes --}}
                     <div class="mb-6 p-4 border border-gray-200 rounded-md">
                         <h3 class="text-sm font-semibold text-gray-700 mb-2">
@@ -73,6 +47,19 @@
                                class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200">
                         <p class="mt-1 text-xs text-gray-400">MP4 format — max 500 MB.</p>
                         @error('quiz')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                    </div>
+
+                    {{-- Additional Optional Resources --}}
+                    <div class="mb-6 p-4 border border-gray-200 rounded-md">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-2">
+                            <span class="inline-block w-2 h-2 rounded-full bg-green-500 mr-2"></span>Additional Optional Resources
+                        </h3>
+                        <textarea id="additional_resources"
+                                  name="additional_resources"
+                                  rows="12"
+                                  class="w-full border-gray-300 rounded-md shadow-sm text-sm @error('additional_resources') border-red-400 @enderror">{{ old('additional_resources', $chapter->additional_resources) }}</textarea>
+                        <p class="mt-1 text-xs text-gray-400">Optional rich-text content shown to members after Tutorial and Quiz.</p>
+                        @error('additional_resources')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                     </div>
 
                     <div class="flex items-center gap-4 pt-4 border-t border-gray-100">
@@ -87,4 +74,6 @@
             </div>
         </div>
     </div>
+
+    @include('admin.chapters._tinymce')
 </x-app-layout>

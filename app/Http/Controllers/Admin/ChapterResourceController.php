@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreChapterResourceRequest;
 use App\Models\Chapter;
 use App\Models\Resource;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -17,23 +17,13 @@ class ChapterResourceController extends Controller
         return view('admin.chapters.resources.create', compact('chapter'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreChapterResourceRequest $request): RedirectResponse
     {
-        $request->validate([
-            'chapter_id' => ['required', 'integer', 'exists:chapters,id'],
-            'tutorial' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
-            'quiz' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
-            'takeaway' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
-            'domain_summary' => ['nullable', 'file', 'mimes:mp4', 'max:512000'],
-        ]);
-
-        $chapter = Chapter::findOrFail($request->chapter_id);
+        $chapter = Chapter::findOrFail($request->validated('chapter_id'));
 
         $uploads = [
             'tutorial' => 'tutorial',
             'quiz' => 'quizzes',
-            'takeaway' => 'takeaway',
-            'domain_summary' => 'domain_summary',
         ];
 
         foreach ($uploads as $input => $type) {
@@ -48,6 +38,10 @@ class ChapterResourceController extends Controller
                     'resource_type' => $type,
                 ]);
             }
+        }
+
+        if ($request->has('additional_resources')) {
+            $chapter->update(['additional_resources' => $request->validated('additional_resources')]);
         }
 
         return redirect()->route('admin.chapters.show', $chapter)

@@ -239,6 +239,7 @@
         }
 
         .chapter-nav-link-title {
+            display: block;
             font-size: 13px;
             color: var(--navy);
             white-space: nowrap;
@@ -301,19 +302,6 @@
                             @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
                         </a>
 
-                        {{-- @php($cat = $categoryProgress->get('takeaway'))
-                        <a href="{{ route('members.chapters.takeaways', $chapter->slug) }}"
-                            class="resource-row {{ $cat['done'] ?? false ? 'is-done' : '' }}">
-                            <span class="resource-row-icon" style="background:rgba(16,185,129,0.1);color:#10b981;">
-                                <i class="bi bi-play-circle-fill"></i>
-                            </span>
-                            <div class="resource-row-text">
-                                <div class="resource-row-name">Takeaways</div>
-                                <div class="resource-row-sub">Watch takeaway videos for this chapter</div>
-                            </div>
-                            @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
-                        </a>
-
                         @php($cat = $categoryProgress->get('quizzes'))
                         <a href="{{ route('members.chapters.quizzes', $chapter->slug) }}"
                             class="resource-row {{ $cat['done'] ?? false ? 'is-done' : '' }}">
@@ -327,18 +315,16 @@
                             @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
                         </a>
 
-                        @php($cat = $categoryProgress->get('domain_summary'))
-                        <a href="{{ route('members.chapters.domain-summary', $chapter->slug) }}"
-                            class="resource-row {{ $cat['done'] ?? false ? 'is-done' : '' }}">
-                            <span class="resource-row-icon" style="background:rgba(139,92,246,0.1);color:#8b5cf6;">
-                                <i class="bi bi-play-circle-fill"></i>
+                        <a href="{{ route('members.chapters.additional-resources', $chapter->slug) }}" class="resource-row">
+                            <span class="resource-row-icon" style="background:rgba(16,185,129,0.1);color:#10b981;">
+                                <i class="bi bi-journal-text"></i>
                             </span>
                             <div class="resource-row-text">
-                                <div class="resource-row-name">Domain Summary in Poetry</div>
-                                <div class="resource-row-sub">Watch domain summary videos for this chapter</div>
+                                <div class="resource-row-name">Additional Optional Resources</div>
+                                <div class="resource-row-sub">Extra reading and reference material for this chapter</div>
                             </div>
-                            @include('pages.members.chapters._resource-row-action', ['cat' => $cat])
-                        </a> --}}
+                            <span class="resource-row-action">View <i class="bi bi-arrow-right"></i></span>
+                        </a>
                     </div>
 
                     {{-- Prev / Next / Back nav ──────────────────────────── --}}
@@ -346,7 +332,7 @@
                         @if ($prevChapter)
                             <a href="{{ route('members.chapters.show', $prevChapter->slug) }}" class="chapter-nav-link">
                                 <i class="bi bi-chevron-left" style="font-size:18px;color:var(--accent);flex-shrink:0;"></i>
-                                <div style="min-width:0;">
+                                <div style="min-width:0;flex:1;">
                                     <span class="chapter-nav-link-label">Previous</span>
                                     <span class="chapter-nav-link-title">{{ $prevChapter->title }}</span>
                                 </div>
@@ -364,7 +350,7 @@
                                 style="flex-direction:row-reverse;text-align:right;">
                                 <i class="bi bi-chevron-right"
                                     style="font-size:18px;color:var(--accent);flex-shrink:0;"></i>
-                                <div style="min-width:0;">
+                                <div style="min-width:0;flex:1;">
                                     <span class="chapter-nav-link-label">Next</span>
                                     <span class="chapter-nav-link-title">{{ $nextChapter->title }}</span>
                                 </div>

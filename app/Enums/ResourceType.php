@@ -28,4 +28,16 @@ enum ResourceType: string
             self::DomainSummary => 'bg-purple-100 text-purple-700',
         };
     }
+
+    /**
+     * Resource types that count toward chapter completion tracking.
+     * Takeaway and DomainSummary are excluded — Takeaway is now a chapter-level
+     * rich-text field, and DomainSummary is hidden from the UI entirely.
+     *
+     * @return array<int, self>
+     */
+    public static function completable(): array
+    {
+        return [self::Tutorial, self::Quizzes];
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\ResourceType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
@@ -16,6 +17,7 @@ class Chapter extends Model
         'title',
         'slug',
         'description',
+        'additional_resources',
         'image_path',
         'sort_order',
         'section',
@@ -29,7 +31,9 @@ class Chapter extends Model
 
     public function totalResourceCount(): int
     {
-        return $this->resources_count ?? $this->resources()->count();
+        return $this->resources_count ?? $this->resources()
+            ->whereIn('resource_type', ResourceType::completable())
+            ->count();
     }
 
     public function watchedResourceCount(?User $user): int
@@ -45,6 +49,7 @@ class Chapter extends Model
         }
 
         return $this->resources()
+            ->whereIn('resource_type', ResourceType::completable())
             ->whereHas('watchers', fn ($q) => $q->where('users.id', $user->id))
             ->count();
     }

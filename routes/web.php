@@ -110,9 +110,8 @@ Route::middleware('member')->prefix('members')->name('members.')->group(function
     Route::get('/chapters', [ChapterController::class, 'index'])->name('chapters.index');
     Route::get('/chapters/{chapter:slug}', [ChapterController::class, 'show'])->name('chapters.show');
     Route::get('/chapters/{chapter:slug}/tutorials', [ChapterResourceController::class, 'tutorials'])->name('chapters.tutorials');
-    // Route::get('/chapters/{chapter:slug}/takeaways', [ChapterResourceController::class, 'takeaways'])->name('chapters.takeaways');
-    // Route::get('/chapters/{chapter:slug}/quizzes', [ChapterResourceController::class, 'quizzes'])->name('chapters.quizzes');
-    // Route::get('/chapters/{chapter:slug}/domain-summary', [ChapterResourceController::class, 'domainSummary'])->name('chapters.domain-summary');
+    Route::get('/chapters/{chapter:slug}/quizzes', [ChapterResourceController::class, 'quizzes'])->name('chapters.quizzes');
+    Route::get('/chapters/{chapter:slug}/additional-resources', [ChapterResourceController::class, 'additionalResources'])->name('chapters.additional-resources');
 
     // Training completion certificate
     Route::get('/certificate', [CertificateController::class, 'show'])->name('certificate');
