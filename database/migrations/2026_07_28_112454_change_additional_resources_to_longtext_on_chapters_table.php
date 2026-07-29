@@ -10,6 +10,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // MODIFY is MySQL-only; sqlite (used by the test suite) has no column length limit to widen.
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
+
         DB::statement('ALTER TABLE `chapters` MODIFY `additional_resources` LONGTEXT NULL');
     }
 
@@ -18,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
+
         DB::statement('ALTER TABLE `chapters` MODIFY `additional_resources` TEXT NULL');
     }
 };
