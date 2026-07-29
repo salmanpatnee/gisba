@@ -42,10 +42,14 @@
       </div>
 
       <div class="nis2-promo-cta">
-        <span class="nis2-promo-ribbon"><i class="bi bi-hourglass-split"></i> Limited-Time — 49% Off</span>
+        @if($membershipDiscountPercent > 0)
+          <span class="nis2-promo-ribbon"><i class="bi bi-hourglass-split"></i> Limited-Time — {{ $membershipDiscountPercent }}% Off</span>
+        @endif
         <div class="nis2-promo-price-line">
-          <span class="nis2-promo-old-price">$59</span>
-          <span class="nis2-promo-new-price">$30<small>/person</small></span>
+          @if($membershipDiscountPercent > 0)
+            <span class="nis2-promo-old-price">{{ $membershipRegularPrice }}</span>
+          @endif
+          <span class="nis2-promo-new-price">{{ $membershipPrice }}<small>/person</small></span>
         </div>
         <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
           Get PMP Training <i class="bi bi-arrow-right"></i>

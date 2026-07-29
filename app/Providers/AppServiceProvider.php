@@ -25,5 +25,18 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('isPmpMode', $settings->website_mode === WebsiteMode::B2PMP->value);
         });
+
+        // Membership pricing appears on the PMP promo banner and article CTAs as well as
+        // the paywall; all of them read the same site_settings row so they cannot drift apart.
+        View::composer(['partials.pmp-banner', 'pages.pmp-show'], function ($view) {
+            $settings = SiteSettings::current();
+            $symbol = $settings->membership_currency_symbol;
+
+            $view->with([
+                'membershipPrice' => $symbol.number_format((float) $settings->membership_price, 0),
+                'membershipRegularPrice' => $symbol.number_format((float) $settings->membership_regular_price, 0),
+                'membershipDiscountPercent' => $settings->membership_discount_percent,
+            ]);
+        });
     }
 }

@@ -201,7 +201,7 @@
           <h3>Ready to advance your PMP certification?</h3>
           <p>Get comprehensive exam-ready content, practice questions, and expert guidance — everything you need to pass the PMP exam with confidence.</p>
           <div class="d-flex gap-3 flex-wrap">
-            <a href="{{ route('contact-us') }}" class="btn-hero-primary">$30 — Get PMP Training</a>
+            <a href="{{ route('contact-us') }}" class="btn-hero-primary">{{ $membershipPrice }} — Get PMP Training</a>
             <a href="{{ route('pmp') }}" class="btn-hero-secondary">More PMP Articles</a>
           </div>
         </div>

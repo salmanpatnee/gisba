@@ -51,7 +51,9 @@
       <div class="paywall-icon"><i class="bi bi-award-fill"></i></div>
 
       <div class="text-center mb-4">
-        <span class="paywall-offer-ribbon"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
+        @if($hasDiscount)
+          <span class="paywall-offer-ribbon"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
+        @endif
         <div class="paywall-price-row">
           @if($hasDiscount)
             <span class="paywall-discount-badge">{{ $settings->membership_discount_percent }}% OFF</span>

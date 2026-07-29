@@ -112,6 +112,34 @@ it('shows the configured price on the paywall', function () {
         ->assertDontSee('Pay $3 via PayPal');
 });
 
+it('shows the configured price on the PMP promo banner', function () {
+    SiteSettings::current()->update([
+        'website_mode' => 'b2pmp',
+        'membership_price' => 45,
+        'membership_regular_price' => 90,
+    ]);
+
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertSee('nis2-promo-new-price">$45', false)
+        ->assertSee('nis2-promo-old-price">$90', false)
+        ->assertSee('50% Off');
+});
+
+it('hides the promo ribbon on the banner when there is no discount', function () {
+    SiteSettings::current()->update([
+        'website_mode' => 'b2pmp',
+        'membership_price' => 30,
+        'membership_regular_price' => 30,
+    ]);
+
+    $this->get(route('home'))
+        ->assertOk()
+        ->assertSee('nis2-promo-new-price">$30', false)
+        ->assertDontSee('nis2-promo-old-price', false)
+        ->assertDontSee('Limited-Time');
+});
+
 it('hides the discount badge when there is no discount', function () {
     SiteSettings::current()->update([
         'membership_price' => 30,

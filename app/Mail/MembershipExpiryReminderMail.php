@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\SiteSettings;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -24,12 +25,16 @@ class MembershipExpiryReminderMail extends Mailable
 
     public function content(): Content
     {
+        $settings = SiteSettings::current();
+
         return new Content(
             view: 'emails.membership-expiry-reminder',
             with: [
                 'userName' => $this->user->name,
                 'expiresAt' => $this->user->memberExpiresAt()->format('F j, Y'),
                 'renewUrl' => route('members.paywall'),
+                'membershipPrice' => $settings->membership_currency_symbol
+                    .number_format((float) $settings->membership_price, 0),
             ],
         );
     }

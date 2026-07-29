@@ -32,7 +32,7 @@
               <div style="text-align:center;margin:0 0 28px;">
                 <a href="{{ $renewUrl }}"
                    style="display:inline-block;background:#002150;color:#fff;font-weight:700;font-size:16px;padding:14px 36px;border-radius:6px;text-decoration:none;letter-spacing:0.3px;">
-                  Renew for $30 / 6 months &rarr;
+                  Renew for {{ $membershipPrice }} / 6 months &rarr;
                 </a>
               </div>
 
