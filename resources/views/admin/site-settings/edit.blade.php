@@ -177,6 +177,103 @@
 
                 </div>
 
+                {{-- Membership Pricing --}}
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6"
+                     x-data="{
+                         price: {{ (float) old('membership_price', $settings->membership_price) }},
+                         was: {{ (float) old('membership_regular_price', $settings->membership_regular_price) }},
+                         currency: '{{ old('membership_currency', $settings->membership_currency) }}',
+                         get symbol() {
+                             return { USD: '$', GBP: '£', EUR: '€' }[this.currency] ?? this.currency + ' ';
+                         },
+                         get discount() {
+                             if (this.was <= 0 || this.price >= this.was) return 0;
+                             return Math.round((this.was - this.price) / this.was * 100);
+                         },
+                         fmt(n) { return this.symbol + Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+                     }">
+
+                    <h3 class="text-sm font-medium text-gray-700 mb-1">Membership Pricing</h3>
+                    <p class="text-sm text-gray-500 mb-6">
+                        <strong>This is the amount PayPal actually charges.</strong> The members paywall and the
+                        checkout both read these values, so they can never disagree.
+                    </p>
+
+                    {{-- Price charged --}}
+                    <div class="mb-5">
+                        <label for="membership_price" class="block text-sm font-medium text-gray-700 mb-1">
+                            Price charged <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="number"
+                            id="membership_price"
+                            name="membership_price"
+                            value="{{ old('membership_price', $settings->membership_price) }}"
+                            step="0.01"
+                            min="1"
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('membership_price') border-red-400 @enderror"
+                            required
+                            x-model.number="price"
+                        >
+                        @error('membership_price')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- "Was" price --}}
+                    <div class="mb-5">
+                        <label for="membership_regular_price" class="block text-sm font-medium text-gray-700 mb-1">
+                            Shown as "was" <span class="text-red-500">*</span>
+                        </label>
+                        <input
+                            type="number"
+                            id="membership_regular_price"
+                            name="membership_regular_price"
+                            value="{{ old('membership_regular_price', $settings->membership_regular_price) }}"
+                            step="0.01"
+                            min="0"
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('membership_regular_price') border-red-400 @enderror"
+                            required
+                            x-model.number="was"
+                        >
+                        <p class="mt-1 text-xs text-gray-400">Set equal to the price charged to hide the discount badge.</p>
+                        @error('membership_regular_price')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Currency --}}
+                    <div class="mb-6">
+                        <label for="membership_currency" class="block text-sm font-medium text-gray-700 mb-1">
+                            Currency <span class="text-red-500">*</span>
+                        </label>
+                        <select
+                            id="membership_currency"
+                            name="membership_currency"
+                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('membership_currency') border-red-400 @enderror"
+                            required
+                            x-model="currency"
+                        >
+                            @foreach (['USD' => 'US Dollar (USD)', 'GBP' => 'Pound Sterling (GBP)', 'EUR' => 'Euro (EUR)'] as $code => $label)
+                                <option value="{{ $code }}" {{ old('membership_currency', $settings->membership_currency) === $code ? 'selected' : '' }}>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                        @error('membership_currency')
+                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- Live preview --}}
+                    <div class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-600">
+                        <p class="font-medium text-gray-700 mb-2">Preview</p>
+                        <div class="flex flex-col gap-1">
+                            <span>Paywall shows: <strong x-text="fmt(price)"></strong><template x-if="discount > 0"><span> was <s x-text="fmt(was)"></s> — <span x-text="discount"></span>% OFF</span></template></span>
+                            <span>PayPal charges: <strong x-text="fmt(price)"></strong> <span x-text="currency"></span></span>
+                        </div>
+                    </div>
+
+                </div>
+
                 {{-- NIS2 Toolkit ZIP --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
 

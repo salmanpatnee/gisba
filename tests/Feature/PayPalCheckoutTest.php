@@ -2,6 +2,7 @@
 
 use App\Mail\WelcomeMemberMail;
 use App\Models\MemberAccessToken;
+use App\Models\SiteSettings;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Cache;
@@ -55,6 +56,72 @@ it('redirects to PayPal on valid checkout', function () {
 
     $response->assertRedirect('https://paypal.com/approve?token=ORDER-123');
     expect(session('paypal_pending_email'))->toBe('test@example.com');
+});
+
+it('charges the membership price from settings, not a hardcoded amount', function () {
+    SiteSettings::current()->update([
+        'membership_price' => 30,
+        'membership_currency' => 'USD',
+    ]);
+
+    $this->post(route('members.checkout'), ['email' => 'test@example.com']);
+
+    Http::assertSent(function ($request) {
+        if (! str_contains($request->url(), 'checkout/orders')) {
+            return false;
+        }
+
+        return $request['purchase_units'][0]['amount'] === [
+            'currency_code' => 'USD',
+            'value' => '30.00',
+        ];
+    });
+});
+
+it('follows the configured price and currency when an admin changes them', function () {
+    SiteSettings::current()->update([
+        'membership_price' => 45.50,
+        'membership_currency' => 'GBP',
+    ]);
+
+    $this->post(route('members.checkout'), ['email' => 'test@example.com']);
+
+    Http::assertSent(function ($request) {
+        if (! str_contains($request->url(), 'checkout/orders')) {
+            return false;
+        }
+
+        return $request['purchase_units'][0]['amount'] === [
+            'currency_code' => 'GBP',
+            'value' => '45.50',
+        ];
+    });
+});
+
+it('shows the configured price on the paywall', function () {
+    SiteSettings::current()->update([
+        'membership_price' => 30,
+        'membership_regular_price' => 59,
+        'membership_currency' => 'USD',
+    ]);
+
+    $this->get(route('members.paywall'))
+        ->assertOk()
+        ->assertSee('Pay $30 via PayPal')
+        ->assertSee('49% OFF')
+        ->assertDontSee('Pay $3 via PayPal');
+});
+
+it('hides the discount badge when there is no discount', function () {
+    SiteSettings::current()->update([
+        'membership_price' => 30,
+        'membership_regular_price' => 30,
+    ]);
+
+    $this->get(route('members.paywall'))
+        ->assertOk()
+        ->assertSee('Pay $30 via PayPal')
+        ->assertDontSee('% OFF');
 });
 
 it('creates user, stores audit token, sends welcome email, and redirects to success page on capture', function () {

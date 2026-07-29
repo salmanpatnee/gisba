@@ -44,7 +44,7 @@
     <div class="text-center mb-4">
       <span style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);padding:4px 14px;border-radius:20px;">Members Only</span>
       <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);font-weight:900;margin:16px 0 10px;">Enroll in GISBA’s PMP Training</h1>
-      <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">Now $30 <span style="text-decoration:line-through;color:#aaa;">$59</span> for 6 months of full access to exclusive cybersecurity &amp; PMP resources — limited time only.</p>
+      <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">Now {{ $price }} @if($hasDiscount)<span style="text-decoration:line-through;color:#aaa;">{{ $regularPrice }}</span> @endif for 6 months of full access to exclusive cybersecurity &amp; PMP resources — limited time only.</p>
     </div>
 
     <div class="paywall-card">
@@ -53,9 +53,11 @@
       <div class="text-center mb-4">
         <span class="paywall-offer-ribbon"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
         <div class="paywall-price-row">
-          <span class="paywall-discount-badge">49% OFF</span>
-          <span class="paywall-old-price">$59</span>
-          <div class="paywall-price">$30 <sub>/ 6 months</sub></div>
+          @if($hasDiscount)
+            <span class="paywall-discount-badge">{{ $settings->membership_discount_percent }}% OFF</span>
+            <span class="paywall-old-price">{{ $regularPrice }}</span>
+          @endif
+          <div class="paywall-price">{{ $price }} <sub>/ 6 months</sub></div>
         </div>
         <p style="font-size:13px;color:#888;margin-top:6px;">Renew any time. No auto-charge.</p>
       </div>
@@ -96,7 +98,7 @@
         </div>
 
         <button type="submit" class="btn-paywall">
-          <i class="bi bi-paypal me-2"></i>Pay $30 via PayPal
+          <i class="bi bi-paypal me-2"></i>Pay {{ $price }} via PayPal
         </button>
       </form>
 

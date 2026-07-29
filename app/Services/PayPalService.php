@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\SiteSettings;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 
@@ -41,7 +42,7 @@ class PayPalService
         });
     }
 
-    public function createOrder(string $returnUrl, string $cancelUrl): array
+    public function createOrder(string $returnUrl, string $cancelUrl, ?string $amount = null, ?string $currency = null): array
     {
         if ($this->isFake()) {
             $fakeOrderId = 'FAKE-'.strtoupper(substr(md5(uniqid()), 0, 12));
@@ -59,13 +60,17 @@ class PayPalService
             ];
         }
 
+        $settings = SiteSettings::current();
+        $amount ??= number_format((float) $settings->membership_price, 2, '.', '');
+        $currency ??= $settings->membership_currency;
+
         $response = Http::withToken($this->accessToken())
             ->post("{$this->baseUrl}/v2/checkout/orders", [
                 'intent' => 'CAPTURE',
                 'purchase_units' => [[
                     'amount' => [
-                        'currency_code' => 'USD',
-                        'value' => '3.00',
+                        'currency_code' => $currency,
+                        'value' => $amount,
                     ],
                     'description' => 'GISBA Members-Only Access',
                 ]],

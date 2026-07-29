@@ -31,6 +31,9 @@ it('can update region to me', function () {
             'website_mode' => 'b2b',
             'regular_price' => 2495,
             'sale_price' => 1500,
+            'membership_price' => 30,
+            'membership_regular_price' => 59,
+            'membership_currency' => 'USD',
         ])
         ->assertRedirect(route('admin.settings.edit'))
         ->assertSessionHas('success');
@@ -45,6 +48,9 @@ it('rejects an invalid region', function () {
             'website_mode' => 'b2b',
             'regular_price' => 2495,
             'sale_price' => 1500,
+            'membership_price' => 30,
+            'membership_regular_price' => 59,
+            'membership_currency' => 'USD',
         ])
         ->assertSessionHasErrors('success_stories_region');
 });
@@ -69,4 +75,69 @@ it('returns 200 for the eu success stories page', function () {
 
 it('returns 200 for the me success stories page', function () {
     $this->get(route('success-stories.me'))->assertOk();
+});
+
+it('defaults membership pricing to the advertised 30 USD', function () {
+    $settings = SiteSettings::current();
+
+    expect((float) $settings->membership_price)->toBe(30.00)
+        ->and((float) $settings->membership_regular_price)->toBe(59.00)
+        ->and($settings->membership_currency)->toBe('USD');
+});
+
+it('can update membership pricing', function () {
+    $this->actingAs(User::factory()->create())
+        ->put(route('admin.settings.update'), [
+            'success_stories_region' => 'eu',
+            'website_mode' => 'b2b',
+            'regular_price' => 2495,
+            'sale_price' => 1500,
+            'membership_price' => 45,
+            'membership_regular_price' => 90,
+            'membership_currency' => 'GBP',
+        ])
+        ->assertRedirect(route('admin.settings.edit'));
+
+    $settings = SiteSettings::current();
+
+    expect((float) $settings->membership_price)->toBe(45.00)
+        ->and($settings->membership_currency)->toBe('GBP')
+        ->and($settings->membership_discount_percent)->toBe(50);
+});
+
+it('rejects a membership price below the PayPal minimum', function () {
+    $this->actingAs(User::factory()->create())
+        ->put(route('admin.settings.update'), [
+            'success_stories_region' => 'eu',
+            'website_mode' => 'b2b',
+            'regular_price' => 2495,
+            'sale_price' => 1500,
+            'membership_price' => 0,
+            'membership_regular_price' => 59,
+            'membership_currency' => 'USD',
+        ])
+        ->assertSessionHasErrors('membership_price');
+});
+
+it('rejects a was-price lower than the price actually charged', function () {
+    $this->actingAs(User::factory()->create())
+        ->put(route('admin.settings.update'), [
+            'success_stories_region' => 'eu',
+            'website_mode' => 'b2b',
+            'regular_price' => 2495,
+            'sale_price' => 1500,
+            'membership_price' => 30,
+            'membership_regular_price' => 10,
+            'membership_currency' => 'USD',
+        ])
+        ->assertSessionHasErrors('membership_regular_price');
+});
+
+it('reports no discount when the two membership prices match', function () {
+    SiteSettings::current()->update([
+        'membership_price' => 30,
+        'membership_regular_price' => 30,
+    ]);
+
+    expect(SiteSettings::current()->membership_discount_percent)->toBe(0);
 });
