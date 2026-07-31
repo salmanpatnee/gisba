@@ -60,13 +60,17 @@ class ChapterController extends Controller
             });
 
         $prevChapter = Chapter::query()
+            ->where('section', $chapter->section)
             ->where('sort_order', '<', $chapter->sort_order)
             ->orderBy('sort_order', 'desc')
+            ->orderBy('id', 'desc')
             ->first();
 
         $nextChapter = Chapter::query()
+            ->where('section', $chapter->section)
             ->where('sort_order', '>', $chapter->sort_order)
             ->orderBy('sort_order')
+            ->orderBy('id')
             ->first();
 
         return view('pages.members.chapters.show', compact('chapter', 'categoryProgress', 'prevChapter', 'nextChapter'));
