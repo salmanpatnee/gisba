@@ -9,12 +9,13 @@ use Illuminate\Support\Facades\Storage;
 
 uses(RefreshDatabase::class);
 
-it('shows the crisc index page with posts', function () {
-    CriscPost::factory()->count(3)->create();
+it('shows the crisc articles section on the course landing page', function () {
+    $category = CriscCategory::create(['name' => 'Risk Assessment']);
+    CriscPost::factory()->count(3)->create(['category_id' => $category->id]);
 
-    $this->get(route('crisc'))
+    $this->get(route('crisc-course'))
         ->assertSuccessful()
-        ->assertViewIs('pages.crisc')
+        ->assertViewIs('pages.crisc-course')
         ->assertViewHas('categorizedPosts');
 });
 

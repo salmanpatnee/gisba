@@ -72,7 +72,6 @@ Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-u
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
 Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
-Route::get('/crisc', [CriscController::class, 'index'])->name('crisc');
 Route::get('/crisc/{slug}', [CriscController::class, 'show'])->name('crisc.show');
 // PMP index always redirects to '/' (avoids duplicate-content URLs). In B2PMP mode, '/' itself renders the PMP index (see root route above).
 Route::get('/pmp', fn () => redirect()->route('home'))->name('pmp');
