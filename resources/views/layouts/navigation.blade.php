@@ -15,6 +15,7 @@
                     @php
                         $nis2Active = request()->routeIs('admin.blog.*') || request()->routeIs('admin.categories.*');
                         $pmpActive = request()->routeIs('admin.pmp.*') || request()->routeIs('admin.pmp-categories.*') || request()->routeIs('admin.chapters.*');
+                        $criscActive = request()->routeIs('admin.crisc.*') || request()->routeIs('admin.crisc-categories.*') || request()->routeIs('admin.crisc-enrollments.*');
                         $wrapperClasses = fn ($active) => $active
                             ? 'flex items-center px-1 pt-1 border-b-2 border-indigo-400'
                             : 'flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 transition duration-150 ease-in-out';
@@ -54,6 +55,24 @@
                                 <x-dropdown-link :href="route('admin.pmp.index')">{{ __('Overview') }}</x-dropdown-link>
                                 <x-dropdown-link :href="route('admin.pmp-categories.index')">{{ __('Categories') }}</x-dropdown-link>
                                 <x-dropdown-link :href="route('admin.chapters.index')">{{ __('Chapters') }}</x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+
+                    <div class="{{ $wrapperClasses($criscActive) }}">
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button type="button" class="{{ $labelClasses($criscActive) }}">
+                                    {{ __('CRISC') }}
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.crisc.index')">{{ __('Posts') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.crisc-categories.index')">{{ __('Categories') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.crisc-enrollments.index')">{{ __('Enrollments') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -139,6 +158,17 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">
                 {{ __('Chapters') }}
+            </x-responsive-nav-link>
+
+            <div class="px-4 pt-3 pb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('CRISC') }}</div>
+            <x-responsive-nav-link :href="route('admin.crisc.index')" :active="request()->routeIs('admin.crisc.*')">
+                {{ __('Posts') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.crisc-categories.index')" :active="request()->routeIs('admin.crisc-categories.*')">
+                {{ __('Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.crisc-enrollments.index')" :active="request()->routeIs('admin.crisc-enrollments.*')">
+                {{ __('Enrollments') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">

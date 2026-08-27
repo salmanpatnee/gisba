@@ -25,6 +25,13 @@ class UpdateSiteSettingsRequest extends FormRequest
             'membership_regular_price' => ['required', 'numeric', 'gte:membership_price'],
             'membership_currency' => ['required', 'in:USD,GBP,EUR'],
             'toolkit_zip' => ['nullable', 'file', 'mimes:zip', 'max:51200'],
+            'crisc_price' => ['required', 'numeric', 'min:0'],
+            'crisc_currency' => ['required', 'in:USD,GBP,EUR'],
+            'crisc_date' => ['required', 'date'],
+            'crisc_time_start' => ['required', 'string', 'max:20'],
+            'crisc_time_end' => ['required', 'string', 'max:20'],
+            'crisc_timezone' => ['required', 'string', 'max:20'],
+            'crisc_capacity' => ['required', 'integer', 'min:1'],
         ];
     }
 

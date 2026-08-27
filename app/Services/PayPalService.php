@@ -79,6 +79,7 @@ class PayPalService
                     'cancel_url' => $cancelUrl,
                     'brand_name' => 'GISBA',
                     'user_action' => 'PAY_NOW',
+                    'locale' => 'en-US',
                 ],
             ]);
 

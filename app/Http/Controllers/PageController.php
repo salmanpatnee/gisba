@@ -194,6 +194,20 @@ class PageController extends Controller
         return view('pages.training-course-development');
     }
 
+    public function crisc(): View
+    {
+        $pricing = SiteSettings::current();
+
+        return view('pages.crisc-course', compact('pricing'));
+    }
+
+    public function criscPricing(): View
+    {
+        $pricing = SiteSettings::current();
+
+        return view('pages.crisc-course-pricing', compact('pricing'));
+    }
+
     public function successStories(): View
     {
         return view('pages.success-stories');

@@ -34,6 +34,13 @@ it('can update region to me', function () {
             'membership_price' => 30,
             'membership_regular_price' => 59,
             'membership_currency' => 'USD',
+            'crisc_price' => 9.99,
+            'crisc_currency' => 'USD',
+            'crisc_date' => '2026-09-21',
+            'crisc_time_start' => '7:00 AM',
+            'crisc_time_end' => '1:00 PM',
+            'crisc_timezone' => 'GMT+3',
+            'crisc_capacity' => 12,
         ])
         ->assertRedirect(route('admin.settings.edit'))
         ->assertSessionHas('success');
@@ -95,6 +102,13 @@ it('can update membership pricing', function () {
             'membership_price' => 45,
             'membership_regular_price' => 90,
             'membership_currency' => 'GBP',
+            'crisc_price' => 9.99,
+            'crisc_currency' => 'USD',
+            'crisc_date' => '2026-09-21',
+            'crisc_time_start' => '7:00 AM',
+            'crisc_time_end' => '1:00 PM',
+            'crisc_timezone' => 'GMT+3',
+            'crisc_capacity' => 12,
         ])
         ->assertRedirect(route('admin.settings.edit'));
 
@@ -131,6 +145,37 @@ it('rejects a was-price lower than the price actually charged', function () {
             'membership_currency' => 'USD',
         ])
         ->assertSessionHasErrors('membership_regular_price');
+});
+
+it('can update crisc course pricing and schedule', function () {
+    $this->actingAs(User::factory()->create())
+        ->put(route('admin.settings.update'), [
+            'success_stories_region' => 'eu',
+            'website_mode' => 'b2b',
+            'regular_price' => 2495,
+            'sale_price' => 1500,
+            'membership_price' => 30,
+            'membership_regular_price' => 59,
+            'membership_currency' => 'USD',
+            'crisc_price' => 14.99,
+            'crisc_currency' => 'GBP',
+            'crisc_date' => '2026-10-05',
+            'crisc_time_start' => '9:00 AM',
+            'crisc_time_end' => '3:00 PM',
+            'crisc_timezone' => 'GMT+1',
+            'crisc_capacity' => 20,
+        ])
+        ->assertRedirect(route('admin.settings.edit'));
+
+    $settings = SiteSettings::current();
+
+    expect((float) $settings->crisc_price)->toBe(14.99)
+        ->and($settings->crisc_currency)->toBe('GBP')
+        ->and($settings->crisc_date->format('Y-m-d'))->toBe('2026-10-05')
+        ->and($settings->crisc_time_start)->toBe('9:00 AM')
+        ->and($settings->crisc_time_end)->toBe('3:00 PM')
+        ->and($settings->crisc_timezone)->toBe('GMT+1')
+        ->and($settings->crisc_capacity)->toBe(20);
 });
 
 it('reports no discount when the two membership prices match', function () {

@@ -5,6 +5,10 @@ use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChapterController as AdminChapterController;
 use App\Http\Controllers\Admin\ChapterResourceController as AdminChapterResourceController;
+use App\Http\Controllers\Admin\CourseEnrollmentController;
+use App\Http\Controllers\Admin\CriscAttachmentController;
+use App\Http\Controllers\Admin\CriscCategoryController;
+use App\Http\Controllers\Admin\CriscController as AdminCriscController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
@@ -17,6 +21,8 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterResourceController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CriscCheckoutController;
+use App\Http\Controllers\CriscController;
 use App\Http\Controllers\MemberAccountController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\MembersLoginController;
@@ -46,6 +52,15 @@ Route::get('/awareness', [PageController::class, 'awareness'])->name('awareness'
 Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2-toolkit');
 Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2-toolkit.pricing');
 Route::get('/training-course-development', [PageController::class, 'training'])->name('training');
+Route::get('/crisc-course', [PageController::class, 'crisc'])->name('crisc-course');
+Route::get('/crisc-course/pricing', [PageController::class, 'criscPricing'])->name('crisc-course.pricing');
+Route::post('/crisc-course/checkout', [CriscCheckoutController::class, 'create'])->name('crisc-course.checkout');
+Route::get('/crisc-course/paypal/return', [CriscCheckoutController::class, 'capture'])->name('crisc-course.paypal.return');
+Route::get('/crisc-course/paypal/cancel', [CriscCheckoutController::class, 'cancel'])->name('crisc-course.paypal.cancel');
+Route::get('/crisc-course/enrolled', fn () => view('pages.crisc-course-enrolled', [
+    'enrollmentName' => session('enrollment_name'),
+    'enrollmentEmail' => session('enrollment_email'),
+]))->name('crisc-course.enrolled');
 Route::get('/success-stories', function () {
     $region = SiteSettings::current()->success_stories_region;
 
@@ -57,6 +72,8 @@ Route::get('/contact-us', [PageController::class, 'contactUs'])->name('contact-u
 Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
 Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
+Route::get('/crisc', [CriscController::class, 'index'])->name('crisc');
+Route::get('/crisc/{slug}', [CriscController::class, 'show'])->name('crisc.show');
 // PMP index always redirects to '/' (avoids duplicate-content URLs). In B2PMP mode, '/' itself renders the PMP index (see root route above).
 Route::get('/pmp', fn () => redirect()->route('home'))->name('pmp');
 Route::get('/pmp/{slug}', function (string $slug) {
@@ -149,6 +166,10 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::resource('pmp', PmpController::class)->except('show');
     Route::resource('pmp-categories', PmpCategoryController::class)->except('show');
     Route::delete('pmp-attachments/{attachment}', [PmpAttachmentController::class, 'destroy'])->name('pmp-attachments.destroy');
+    Route::resource('crisc', AdminCriscController::class)->except('show');
+    Route::resource('crisc-categories', CriscCategoryController::class)->except('show');
+    Route::delete('crisc-attachments/{attachment}', [CriscAttachmentController::class, 'destroy'])->name('crisc-attachments.destroy');
+    Route::get('crisc-enrollments', [CourseEnrollmentController::class, 'index'])->name('crisc-enrollments.index');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
