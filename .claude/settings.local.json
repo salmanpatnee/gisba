@@ -55,7 +55,9 @@
       "Bash(Remove-Item -Recurse -Force \"tests\\\\Feature\\\\Feature\")",
       "Bash(git push *)",
       "Bash(php -r \"echo \\(new ReflectionClass\\('Illuminate\\\\Mail\\\\MailManager'\\)\\)->getFileName\\(\\);\")",
-      "Bash(git check-ignore *)"
+      "Bash(git check-ignore *)",
+      "Bash(git fetch *)",
+      "Bash(git rebase *)"
     ]
   },
   "enableAllProjectMcpServers": true,
