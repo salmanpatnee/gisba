@@ -254,6 +254,17 @@
   </div>
 </div> --}}
 
+{{-- ── PMP Banner Image ─────────────────────────────────────────── --}}
+<div class="page-layout" style="padding-bottom:0;">
+  <div class="container">
+    <main class="img-content">
+      <div class="hero-banner-image">
+        <img class="img-fluid rounded" src="{{ asset('assets/images/PMP Banner.jpeg') }}" alt="PMP Live Online Training">
+      </div>
+    </main>
+  </div>
+</div>
+
 {{-- ── PMP Training Promo Banner ──────────────────────────────────────── --}}
 @include('partials.pmp-banner', ['showBlogLink' => true])
 

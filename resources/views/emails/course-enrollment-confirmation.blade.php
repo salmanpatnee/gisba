@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>You're enrolled — CRISC Online Course</title>
+  <title>You're enrolled — {{ $courseLabel }}</title>
 </head>
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:'Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:40px 20px;">
@@ -20,9 +20,12 @@
 
           <tr>
             <td style="padding:40px 40px 20px;">
-              <h1 style="font-size:22px;color:#002150;margin:0 0 12px;">You're enrolled in the CRISC Online Course!</h1>
+              <h1 style="font-size:22px;color:#002150;margin:0 0 12px;">You're enrolled in the {{ $courseLabel }}!</h1>
               <p style="font-size:15px;color:#444;line-height:1.7;margin:0 0 28px;">
-                Hi {{ $enrollment->name }}, thanks for enrolling — your payment of {{ $enrollment->currency }} {{ number_format((float) $enrollment->amount, 2) }} was successful. Your seat is confirmed, and a free copy of <em>CRISC and Beyond</em> is reserved for you.
+                Hi {{ $enrollment->name }}, thanks for enrolling — your payment of {{ $enrollment->currency }} {{ number_format((float) $enrollment->amount, 2) }} was successful. Your seat is confirmed.
+                @if($coursePerk)
+                  {{ $coursePerk }}
+                @endif
               </p>
 
               {{-- Schedule box --}}
@@ -34,11 +37,11 @@
                     <table cellpadding="0" cellspacing="0">
                       <tr>
                         <td style="font-size:13px;color:#888;padding-right:16px;padding-bottom:10px;white-space:nowrap;">Date</td>
-                        <td style="font-size:14px;color:#111;font-weight:600;padding-bottom:10px;">{{ optional($settings->crisc_date)->format('F j, Y') }}</td>
+                        <td style="font-size:14px;color:#111;font-weight:600;padding-bottom:10px;">{{ $settings->dateRangeFor($enrollment->course) ?? 'To be confirmed' }}</td>
                       </tr>
                       <tr>
                         <td style="font-size:13px;color:#888;padding-right:16px;white-space:nowrap;">Time</td>
-                        <td style="font-size:14px;color:#111;font-weight:600;">{{ $settings->crisc_time_start }} &ndash; {{ $settings->crisc_time_end }} ({{ $settings->crisc_timezone }})</td>
+                        <td style="font-size:14px;color:#111;font-weight:600;">{{ $settings->{"{$enrollment->course}_time_start"} ?? 'TBC' }} &ndash; {{ $settings->{"{$enrollment->course}_time_end"} ?? 'TBC' }} ({{ $settings->{"{$enrollment->course}_timezone"} }})</td>
                       </tr>
                     </table>
                   </td>

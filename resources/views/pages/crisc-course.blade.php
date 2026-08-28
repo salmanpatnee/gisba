@@ -135,8 +135,11 @@
       <div class="col-12">
         <main class="img-content">
           <section id="title" class="hero-section container">
+            <div class="hero-banner-image mb-4">
+              <img class="img-fluid rounded" src="{{ asset('assets/images/CRISC Banner.jpeg') }}" alt="CRISC Online Course">
+            </div>
             <div class="row align-items-center">
-              <div class="col-md-6">
+              <div class="col-12">
                 <h1 class="hero-title">
                   CRISC<br />
                   <span>Online Course</span>
@@ -152,9 +155,6 @@
                     <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat — ${{ number_format((float) $pricing->crisc_price, 2) }}
                   </a>
                 </div>
-              </div>
-              <div class="col-md-6 text-center">
-                <img class="image-content img-fluid" src="{{ asset('assets/images/compliance.png') }}" alt="CRISC Online Course">
               </div>
             </div>
           </section>
@@ -215,7 +215,7 @@
                   </div>
 
                   <div class="pricing-sublabel">
-                    {{ optional($pricing->crisc_date)->format('F j, Y') }} &middot; {{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} ({{ $pricing->crisc_timezone }})
+                    {{ $pricing->dateRangeFor('crisc') }} &middot; {{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} ({{ $pricing->crisc_timezone }})
                   </div>
                 </div>
 
@@ -268,7 +268,7 @@
               <h2 class="section-heading">Schedule &amp; Capacity</h2>
               <p>This is a live, one-day online course held on a single scheduled date.</p>
               <div class="checklist-group">
-                <div class="checklist-item"><i class="bi bi-calendar3"></i><span>Date: {{ optional($pricing->crisc_date)->format('F j, Y') }}</span></div>
+                <div class="checklist-item"><i class="bi bi-calendar3"></i><span>Date: {{ $pricing->dateRangeFor('crisc') }}</span></div>
                 <div class="checklist-item"><i class="bi bi-clock"></i><span>Time: {{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} ({{ $pricing->crisc_timezone }})</span></div>
                 <div class="checklist-item"><i class="bi bi-people-fill"></i><span>Capacity: limited to {{ $pricing->crisc_capacity }} participants</span></div>
               </div>
@@ -323,7 +323,7 @@
               <p>After enrollment:</p>
               <ul>
                 <li>You'll receive joining instructions for the live online session ahead of the course date.</li>
-                <li>The session runs live on {{ optional($pricing->crisc_date)->format('F j, Y') }}, {{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} ({{ $pricing->crisc_timezone }}).</li>
+                <li>The session runs live on {{ $pricing->dateRangeFor('crisc') }}, {{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} ({{ $pricing->crisc_timezone }}).</li>
                 <li>Your free copy of "CRISC and Beyond" will be arranged following enrollment.</li>
               </ul>
             </section>

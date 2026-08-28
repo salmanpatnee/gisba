@@ -41,6 +41,14 @@ it('can update region to me', function () {
             'crisc_time_end' => '1:00 PM',
             'crisc_timezone' => 'GMT+3',
             'crisc_capacity' => 12,
+            'cissp_price' => 9.99,
+            'cissp_currency' => 'USD',
+            'cissp_timezone' => 'GMT+3',
+            'cissp_capacity' => 15,
+            'prince2_price' => 9.99,
+            'prince2_currency' => 'USD',
+            'prince2_timezone' => 'GMT+3',
+            'prince2_capacity' => 15,
         ])
         ->assertRedirect(route('admin.settings.edit'))
         ->assertSessionHas('success');
@@ -109,6 +117,14 @@ it('can update membership pricing', function () {
             'crisc_time_end' => '1:00 PM',
             'crisc_timezone' => 'GMT+3',
             'crisc_capacity' => 12,
+            'cissp_price' => 9.99,
+            'cissp_currency' => 'USD',
+            'cissp_timezone' => 'GMT+3',
+            'cissp_capacity' => 15,
+            'prince2_price' => 9.99,
+            'prince2_currency' => 'USD',
+            'prince2_timezone' => 'GMT+3',
+            'prince2_capacity' => 15,
         ])
         ->assertRedirect(route('admin.settings.edit'));
 
@@ -164,6 +180,14 @@ it('can update crisc course pricing and schedule', function () {
             'crisc_time_end' => '3:00 PM',
             'crisc_timezone' => 'GMT+1',
             'crisc_capacity' => 20,
+            'cissp_price' => 9.99,
+            'cissp_currency' => 'USD',
+            'cissp_timezone' => 'GMT+3',
+            'cissp_capacity' => 15,
+            'prince2_price' => 9.99,
+            'prince2_currency' => 'USD',
+            'prince2_timezone' => 'GMT+3',
+            'prince2_capacity' => 15,
         ])
         ->assertRedirect(route('admin.settings.edit'));
 

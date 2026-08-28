@@ -122,8 +122,18 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('cissp*') ? 'active' : '' }}" href="{{ route('cissp') }}">
+              <i class="bi bi-shield-lock"></i>CISSP
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('pmp') }}">
               <i class="bi bi-award"></i>PMP
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link site-nav-link {{ request()->routeIs('prince2*') ? 'active' : '' }}" href="{{ route('prince2') }}">
+              <i class="bi bi-diagram-3"></i>PRINCE2
             </a>
           </li>
           <!--<li class="nav-item">-->
@@ -197,7 +207,9 @@
             <!--<li><a href="{{ route('nis2') }}">NIS2</a></li>-->
             <!--<li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>-->
             <li><a href="{{ route('crisc-course') }}">CRISC Online Course</a></li>
+            <li><a href="{{ route('cissp') }}">CISSP</a></li>
             <li><a href="{{ route('pmp') }}">PMP</a></li>
+            <li><a href="{{ route('prince2') }}">PRINCE2</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>

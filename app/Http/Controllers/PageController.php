@@ -216,6 +216,34 @@ class PageController extends Controller
         return view('pages.crisc-course-pricing', compact('pricing'));
     }
 
+    public function cissp(): View
+    {
+        $pricing = SiteSettings::current();
+
+        return view('pages.cissp-course', compact('pricing'));
+    }
+
+    public function cisspPricing(): View
+    {
+        $pricing = SiteSettings::current();
+
+        return view('pages.cissp-course-pricing', compact('pricing'));
+    }
+
+    public function prince2(): View
+    {
+        $pricing = SiteSettings::current();
+
+        return view('pages.prince2-course', compact('pricing'));
+    }
+
+    public function prince2Pricing(): View
+    {
+        $pricing = SiteSettings::current();
+
+        return view('pages.prince2-course-pricing', compact('pricing'));
+    }
+
     public function successStories(): View
     {
         return view('pages.success-stories');

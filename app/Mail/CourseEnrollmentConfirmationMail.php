@@ -14,6 +14,13 @@ class CourseEnrollmentConfirmationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    /** @var array<string, array{label: string, perk: string|null}> Course slug => display metadata. */
+    private const COURSES = [
+        'crisc' => ['label' => 'CRISC Online Course', 'perk' => 'A free copy of "CRISC and Beyond" is reserved for you.'],
+        'cissp' => ['label' => 'CISSP Live Online Training', 'perk' => null],
+        'prince2' => ['label' => 'PRINCE2 Live Online Training', 'perk' => null],
+    ];
+
     public function __construct(
         public readonly CourseEnrollment $enrollment,
     ) {}
@@ -21,18 +28,25 @@ class CourseEnrollmentConfirmationMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'You\'re enrolled — CRISC Online Course',
+            subject: "You're enrolled — {$this->courseLabel()}",
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.crisc-enrollment-confirmation',
+            view: 'emails.course-enrollment-confirmation',
             with: [
                 'enrollment' => $this->enrollment,
                 'settings' => SiteSettings::current(),
+                'courseLabel' => $this->courseLabel(),
+                'coursePerk' => self::COURSES[$this->enrollment->course]['perk'] ?? null,
             ],
         );
+    }
+
+    private function courseLabel(): string
+    {
+        return self::COURSES[$this->enrollment->course]['label'] ?? $this->enrollment->course;
     }
 }

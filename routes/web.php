@@ -21,6 +21,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterResourceController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CourseCheckoutController;
 use App\Http\Controllers\CriscCheckoutController;
 use App\Http\Controllers\CriscController;
 use App\Http\Controllers\MemberAccountController;
@@ -61,6 +62,26 @@ Route::get('/crisc-course/enrolled', fn () => view('pages.crisc-course-enrolled'
     'enrollmentName' => session('enrollment_name'),
     'enrollmentEmail' => session('enrollment_email'),
 ]))->name('crisc-course.enrolled');
+
+Route::get('/cissp', [PageController::class, 'cissp'])->name('cissp');
+Route::get('/cissp/pricing', [PageController::class, 'cisspPricing'])->name('cissp.pricing');
+Route::post('/cissp/checkout', [CourseCheckoutController::class, 'create'])->name('cissp.checkout')->defaults('course', 'cissp');
+Route::get('/cissp/paypal/return', [CourseCheckoutController::class, 'capture'])->name('cissp.paypal.return')->defaults('course', 'cissp');
+Route::get('/cissp/paypal/cancel', [CourseCheckoutController::class, 'cancel'])->name('cissp.paypal.cancel')->defaults('course', 'cissp');
+Route::get('/cissp/enrolled', fn () => view('pages.cissp-course-enrolled', [
+    'enrollmentName' => session('enrollment_name'),
+    'enrollmentEmail' => session('enrollment_email'),
+]))->name('cissp.enrolled');
+
+Route::get('/prince2', [PageController::class, 'prince2'])->name('prince2');
+Route::get('/prince2/pricing', [PageController::class, 'prince2Pricing'])->name('prince2.pricing');
+Route::post('/prince2/checkout', [CourseCheckoutController::class, 'create'])->name('prince2.checkout')->defaults('course', 'prince2');
+Route::get('/prince2/paypal/return', [CourseCheckoutController::class, 'capture'])->name('prince2.paypal.return')->defaults('course', 'prince2');
+Route::get('/prince2/paypal/cancel', [CourseCheckoutController::class, 'cancel'])->name('prince2.paypal.cancel')->defaults('course', 'prince2');
+Route::get('/prince2/enrolled', fn () => view('pages.prince2-course-enrolled', [
+    'enrollmentName' => session('enrollment_name'),
+    'enrollmentEmail' => session('enrollment_email'),
+]))->name('prince2.enrolled');
 Route::get('/success-stories', function () {
     $region = SiteSettings::current()->success_stories_region;
 
@@ -161,7 +182,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::resource('crisc', AdminCriscController::class)->except('show');
     Route::resource('crisc-categories', CriscCategoryController::class)->except('show');
     Route::delete('crisc-attachments/{attachment}', [CriscAttachmentController::class, 'destroy'])->name('crisc-attachments.destroy');
-    Route::get('crisc-enrollments', [CourseEnrollmentController::class, 'index'])->name('crisc-enrollments.index');
+    Route::get('course-enrollments/{course}', [CourseEnrollmentController::class, 'index'])->name('course-enrollments.index');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');

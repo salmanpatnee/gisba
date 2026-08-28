@@ -275,170 +275,28 @@
                 </div>
 
                 {{-- CRISC Course --}}
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6"
-                     x-data="{
-                         price: {{ (float) old('crisc_price', $settings->crisc_price) }},
-                         currency: '{{ old('crisc_currency', $settings->crisc_currency) }}',
-                         capacity: {{ (int) old('crisc_capacity', $settings->crisc_capacity) }},
-                         get symbol() {
-                             return { USD: '$', GBP: '£', EUR: '€' }[this.currency] ?? this.currency + ' ';
-                         },
-                         fmt(n) { return this.symbol + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
-                     }">
+                @include('admin.site-settings._course-pricing-fields', [
+                    'course' => 'crisc',
+                    'label' => 'CRISC Online Course',
+                    'description' => 'These values are shown on the CRISC course landing and pricing pages, and are the exact amount PayPal charges at checkout.',
+                    'dateTimeRequired' => true,
+                ])
 
-                    <h3 class="text-sm font-medium text-gray-700 mb-1">CRISC Online Course</h3>
-                    <p class="text-sm text-gray-500 mb-6">
-                        These values are shown on the CRISC course landing and pricing pages, and are the exact amount PayPal charges at checkout.
-                    </p>
+                {{-- CISSP Course --}}
+                @include('admin.site-settings._course-pricing-fields', [
+                    'course' => 'cissp',
+                    'label' => 'CISSP Live Online Training',
+                    'description' => 'These values are shown on the CISSP course landing and pricing pages, and are the exact amount PayPal charges at checkout.',
+                    'dateTimeRequired' => false,
+                ])
 
-                    {{-- Price --}}
-                    <div class="mb-5">
-                        <label for="crisc_price" class="block text-sm font-medium text-gray-700 mb-1">
-                            Price <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="number"
-                            id="crisc_price"
-                            name="crisc_price"
-                            value="{{ old('crisc_price', $settings->crisc_price) }}"
-                            step="0.01"
-                            min="0"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_price') border-red-400 @enderror"
-                            required
-                            x-model.number="price"
-                        >
-                        @error('crisc_price')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Currency --}}
-                    <div class="mb-5">
-                        <label for="crisc_currency" class="block text-sm font-medium text-gray-700 mb-1">
-                            Currency <span class="text-red-500">*</span>
-                        </label>
-                        <select
-                            id="crisc_currency"
-                            name="crisc_currency"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_currency') border-red-400 @enderror"
-                            required
-                            x-model="currency"
-                        >
-                            @foreach (['USD' => 'US Dollar (USD)', 'GBP' => 'Pound Sterling (GBP)', 'EUR' => 'Euro (EUR)'] as $code => $label)
-                                <option value="{{ $code }}" {{ old('crisc_currency', $settings->crisc_currency) === $code ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
-                        @error('crisc_currency')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Date --}}
-                    <div class="mb-5">
-                        <label for="crisc_date" class="block text-sm font-medium text-gray-700 mb-1">
-                            Course Date <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="date"
-                            id="crisc_date"
-                            name="crisc_date"
-                            value="{{ old('crisc_date', optional($settings->crisc_date)->format('Y-m-d')) }}"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_date') border-red-400 @enderror"
-                            required
-                        >
-                        @error('crisc_date')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Time --}}
-                    <div class="grid grid-cols-2 gap-4 mb-5">
-                        <div>
-                            <label for="crisc_time_start" class="block text-sm font-medium text-gray-700 mb-1">
-                                Start Time <span class="text-red-500">*</span>
-                            </label>
-                            <input
-                                type="text"
-                                id="crisc_time_start"
-                                name="crisc_time_start"
-                                value="{{ old('crisc_time_start', $settings->crisc_time_start) }}"
-                                placeholder="7:00 AM"
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_time_start') border-red-400 @enderror"
-                                required
-                            >
-                            @error('crisc_time_start')
-                                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="crisc_time_end" class="block text-sm font-medium text-gray-700 mb-1">
-                                End Time <span class="text-red-500">*</span>
-                            </label>
-                            <input
-                                type="text"
-                                id="crisc_time_end"
-                                name="crisc_time_end"
-                                value="{{ old('crisc_time_end', $settings->crisc_time_end) }}"
-                                placeholder="1:00 PM"
-                                class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_time_end') border-red-400 @enderror"
-                                required
-                            >
-                            @error('crisc_time_end')
-                                <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- Timezone --}}
-                    <div class="mb-5">
-                        <label for="crisc_timezone" class="block text-sm font-medium text-gray-700 mb-1">
-                            Timezone <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="text"
-                            id="crisc_timezone"
-                            name="crisc_timezone"
-                            value="{{ old('crisc_timezone', $settings->crisc_timezone) }}"
-                            placeholder="GMT+3"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_timezone') border-red-400 @enderror"
-                            required
-                        >
-                        @error('crisc_timezone')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Capacity --}}
-                    <div class="mb-6">
-                        <label for="crisc_capacity" class="block text-sm font-medium text-gray-700 mb-1">
-                            Seat Capacity <span class="text-red-500">*</span>
-                        </label>
-                        <input
-                            type="number"
-                            id="crisc_capacity"
-                            name="crisc_capacity"
-                            value="{{ old('crisc_capacity', $settings->crisc_capacity) }}"
-                            step="1"
-                            min="1"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error('crisc_capacity') border-red-400 @enderror"
-                            required
-                            x-model.number="capacity"
-                        >
-                        @error('crisc_capacity')
-                            <p class="mt-1 text-xs text-red-600">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    {{-- Live preview --}}
-                    <div class="px-4 py-3 bg-gray-50 border border-gray-200 rounded-md text-sm text-gray-600">
-                        <p class="font-medium text-gray-700 mb-2">Preview</p>
-                        <div class="flex flex-col gap-1">
-                            <span>Price: <strong x-text="fmt(price)"></strong></span>
-                            <span>Seats: <strong x-text="capacity"></strong> participants</span>
-                        </div>
-                    </div>
-
-                </div>
+                {{-- PRINCE2 Course --}}
+                @include('admin.site-settings._course-pricing-fields', [
+                    'course' => 'prince2',
+                    'label' => 'PRINCE2 Live Online Training',
+                    'description' => 'These values are shown on the PRINCE2 course landing and pricing pages, and are the exact amount PayPal charges at checkout.',
+                    'dateTimeRequired' => false,
+                ])
 
                 {{-- NIS2 Toolkit ZIP --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">

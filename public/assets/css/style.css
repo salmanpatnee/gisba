@@ -569,6 +569,13 @@ ul li {
     border-radius: 10px;
 }
 
+.hero-banner-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: var(--shadow-card, 0 4px 18px rgba(0,0,0,0.12));
+}
+
 .img-content {
     background: var(--bg-white);
     border: 1px solid var(--border-light);

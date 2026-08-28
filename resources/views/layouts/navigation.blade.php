@@ -15,7 +15,7 @@
                     @php
                         $nis2Active = request()->routeIs('admin.blog.*') || request()->routeIs('admin.categories.*');
                         $pmpActive = request()->routeIs('admin.pmp.*') || request()->routeIs('admin.pmp-categories.*') || request()->routeIs('admin.chapters.*');
-                        $criscActive = request()->routeIs('admin.crisc.*') || request()->routeIs('admin.crisc-categories.*') || request()->routeIs('admin.crisc-enrollments.*');
+                        $criscActive = request()->routeIs('admin.crisc.*') || request()->routeIs('admin.crisc-categories.*') || (request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'crisc');
                         $wrapperClasses = fn ($active) => $active
                             ? 'flex items-center px-1 pt-1 border-b-2 border-indigo-400'
                             : 'flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 transition duration-150 ease-in-out';
@@ -72,10 +72,17 @@
                             <x-slot name="content">
                                 <x-dropdown-link :href="route('admin.crisc.index')">{{ __('Posts') }}</x-dropdown-link>
                                 <x-dropdown-link :href="route('admin.crisc-categories.index')">{{ __('Categories') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.crisc-enrollments.index')">{{ __('Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'crisc')">{{ __('Enrollments') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
+
+                    <x-nav-link :href="route('admin.course-enrollments.index', 'cissp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'cissp'">
+                        {{ __('CISSP Enrollments') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">
+                        {{ __('PRINCE2 Enrollments') }}
+                    </x-nav-link>
 
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                         {{ __('Members') }}
@@ -167,8 +174,16 @@
             <x-responsive-nav-link :href="route('admin.crisc-categories.index')" :active="request()->routeIs('admin.crisc-categories.*')">
                 {{ __('Categories') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('admin.crisc-enrollments.index')" :active="request()->routeIs('admin.crisc-enrollments.*')">
+            <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'crisc')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'crisc'">
                 {{ __('Enrollments') }}
+            </x-responsive-nav-link>
+
+            <div class="px-4 pt-3 pb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Course Enrollments') }}</div>
+            <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'cissp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'cissp'">
+                {{ __('CISSP') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">
+                {{ __('PRINCE2') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
