@@ -122,7 +122,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('home') || request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('home') }}">
+            <a class="nav-link site-nav-link {{ request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('pmp') }}">
               <i class="bi bi-award"></i>PMP
             </a>
           </li>
@@ -197,7 +197,7 @@
             <!--<li><a href="{{ route('nis2') }}">NIS2</a></li>-->
             <!--<li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>-->
             <li><a href="{{ route('crisc-course') }}">CRISC Online Course</a></li>
-            <li><a href="{{ route('home') }}">PMP</a></li>
+            <li><a href="{{ route('pmp') }}">PMP</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>

@@ -73,15 +73,8 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
 Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
 Route::get('/crisc/{slug}', [CriscController::class, 'show'])->name('crisc.show');
-// PMP index always redirects to '/' (avoids duplicate-content URLs). In B2PMP mode, '/' itself renders the PMP index (see root route above).
-Route::get('/pmp', fn () => redirect()->route('home'))->name('pmp');
-Route::get('/pmp/{slug}', function (string $slug) {
-    if (SiteSettings::current()->website_mode === WebsiteMode::B2PMP->value) {
-        return app(PublicPmpController::class)->show($slug);
-    }
-
-    return redirect()->route('home');
-})->name('pmp.show');
+Route::get('/pmp', [PublicPmpController::class, 'index'])->name('pmp');
+Route::get('/pmp/{slug}', [PublicPmpController::class, 'show'])->name('pmp.show');
 Route::get('/video-resources', [VideoController::class, 'index'])->name('video-resources');
 Route::get('/video-resources/{video}/stream', [VideoController::class, 'stream'])->name('videos.stream');
 Route::post('/video-resources/{video}/view', [VideoController::class, 'recordView'])->name('videos.record-view');
