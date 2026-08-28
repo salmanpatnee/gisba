@@ -7,7 +7,7 @@
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
     <span><i class="bi bi-award-fill me-2"></i>GISBA Consultants — Celebrating 20 Years of Global Cybersecurity Excellence Since 2006</span>
     <div class="d-flex gap-3">
-      <a href="#about"><i class="bi bi-info-circle me-1"></i>About</a>
+      {{-- <a href="#about"><i class="bi bi-info-circle me-1"></i>About</a> --}}
       <a href="#services"><i class="bi bi-grid me-1"></i>Services</a>
       <a href="#why-gisba"><i class="bi bi-star me-1"></i>Why Us</a>
       <a href="{{ route('contact-us') }}"><i class="bi bi-envelope me-1"></i>Contact</a>
@@ -73,10 +73,10 @@
             <nav class="sidebar-nav">
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
-                <li><a href="#about"><i class="bi bi-info-circle"></i> About GISBA</a></li>
+                {{-- <li><a href="#about"><i class="bi bi-info-circle"></i> About GISBA</a></li> --}}
                 <li><a href="#expertise"><i class="bi bi-grid"></i> Our Expertise</a></li>
                 <li><a href="#services"><i class="bi bi-briefcase"></i> Our Services</a></li>
-                <li><a href="#european-partners"><i class="bi bi-people-fill"></i> European Partners</a></li>
+                {{-- <li><a href="#european-partners"><i class="bi bi-people-fill"></i> European Partners</a></li> --}}
                 <li><a href="#why-gisba"><i class="bi bi-star-fill"></i> Why Choose Us</a></li>
                 {{-- <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li> --}}
               </ul>
@@ -95,9 +95,9 @@
           <main class="main-content">
 
             {{-- --------------------------------------------------------
-                 ABOUT — GISBA Overview Hero
+                 ABOUT — GISBA Overview Hero (hidden — re-enable to restore)
             -------------------------------------------------------- --}}
-            <section id="about">
+            {{-- <section id="about">
               <div class="hero-section">
                 <div class="hero-badge">
                   <i class="bi bi-shield-lock-fill me-2"></i>Global Cybersecurity &amp; Compliance Consultancy
@@ -121,7 +121,7 @@
               </div>
             </section>
 
-            <hr class="content-divider" />
+            <hr class="content-divider" /> --}}
 
             {{-- --------------------------------------------------------
                  OUR EXPERTISE — 4 Areas
@@ -165,26 +165,24 @@
             <hr class="content-divider" />
 
             {{-- --------------------------------------------------------
-                 SECURE AI DEPLOYMENT SERVICE
+                 SECURE AI DEPLOYMENT SERVICE (hidden — re-enable to restore)
             -------------------------------------------------------- --}}
-            <section id="secure-ai-deployment">
+            {{-- <section id="secure-ai-deployment">
               <h2 class="section-heading">Secure AI Deployment Service</h2>
               <p>Enabling organizations to safely adopt and manage AI systems in alignment with ISO/IEC 42001.</p>
 
               <div class="inclusion-card mt-3" style="display:flex; flex-direction:column; gap:0; overflow:hidden;">
-                {{-- Image Section - Full Width Top --}}
                 <div style="width:100%; padding:0;">
                   <img src="{{ asset('assets/images/secure-ai-system.jpeg') }}" alt="Secure AI Management System - ISO/IEC 42001 Compliant" style="width:100%; height:auto; object-fit:cover; min-height:350px;" />
                 </div>
 
-                {{-- Content Section - Below Image --}}
                 <div style="padding:24px;">
                   <div class="inclusion-body">
-                    
+
                     <p>
                       Secure AI Deployment Service enables organizations to safely adopt and manage AI systems in alignment with ISO/IEC 42001. The service includes the appointment of a dedicated Secure AI Officer who leads AI governance, risk management, and deployment oversight, ensuring that AI solutions are secure, compliant, and responsibly managed throughout their lifecycle. Working in close collaboration with Cybersecurity, Legal, Compliance, and business teams, this service provides end-to-end support—from use-case approval and risk assessment to monitoring and continuous improvement—ensuring trusted, controlled, and business-aligned AI deployment.
                     </p>
-                
+
                     <div class="highlight-box">
                       <i class="bi bi-lightbulb-fill"></i>
                       <span>Ensuring <strong>trusted, controlled, and business-aligned AI deployment</strong> for your organization.</span>
@@ -194,7 +192,7 @@
               </div>
             </section>
 
-            <hr class="content-divider" />
+            <hr class="content-divider" /> --}}
 
             {{-- --------------------------------------------------------
                  FLAGSHIP SERVICES — 6 Services
@@ -203,8 +201,8 @@
               <h2 class="section-heading">Our Flagship Services</h2>
               <p>Comprehensive consulting solutions for modern business challenges across Europe and beyond.</p>
 
-              {{-- 1. NIS2 --}}
-              <div class="inclusion-card mt-3">
+              {{-- 1. NIS2 (hidden — re-enable to restore) --}}
+              {{-- <div class="inclusion-card mt-3">
                 <div class="inclusion-number">1</div>
                 <div class="inclusion-body">
                   <div class="inclusion-title">
@@ -233,7 +231,6 @@
                 </div>
               </div>
 
-              {{-- 2. DORA --}}
               <div class="inclusion-card">
                 <div class="inclusion-number">2</div>
                 <div class="inclusion-body">
@@ -258,11 +255,11 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> --}}
 
-              {{-- 3. GRC --}}
-              <div class="inclusion-card">
-                <div class="inclusion-number">3</div>
+              {{-- 1. GRC --}}
+              <div class="inclusion-card mt-3">
+                <div class="inclusion-number">1</div>
                 <div class="inclusion-body">
                   <div class="inclusion-title">
                     <i class="bi bi-clipboard-data me-2" style="color:var(--navy-light);"></i>Governance, Risk &amp; Compliance (GRC)
@@ -291,9 +288,9 @@
                 </div>
               </div>
 
-              {{-- 4. vCISO --}}
+              {{-- 2. vCISO --}}
               <div class="inclusion-card">
-                <div class="inclusion-number">4</div>
+                <div class="inclusion-number">2</div>
                 <div class="inclusion-body">
                   <div class="inclusion-title">
                     <i class="bi bi-person-badge me-2" style="color:var(--navy-light);"></i>Virtual CISO (vCISO) Services
@@ -328,9 +325,9 @@
                 </div>
               </div>
 
-              {{-- 5. ISO --}}
+              {{-- 3. ISO --}}
               <div class="inclusion-card">
-                <div class="inclusion-number">5</div>
+                <div class="inclusion-number">3</div>
                 <div class="inclusion-body">
                   <div class="inclusion-title">
                     <i class="bi bi-patch-check me-2" style="color:var(--navy-light);"></i>ISO Implementation Services
@@ -368,9 +365,9 @@
                 </div>
               </div>
 
-              {{-- 6. Project Management --}}
+              {{-- 4. Project Management --}}
               <div class="inclusion-card">
-                <div class="inclusion-number">6</div>
+                <div class="inclusion-number">4</div>
                 <div class="inclusion-body">
                   <div class="inclusion-title">
                     <i class="bi bi-kanban me-2" style="color:var(--navy-light);"></i>Project Management Services
@@ -400,9 +397,9 @@
             <hr class="content-divider" />
 
             {{-- --------------------------------------------------------
-                 EUROPEAN PARTNERS — existing section, preserved
+                 EUROPEAN PARTNERS — existing section, preserved (hidden — re-enable to restore)
             -------------------------------------------------------- --}}
-            <section id="european-partners">
+            {{-- <section id="european-partners">
               <h2 class="section-heading">Our European Partners for NIS2</h2>
               <p>We work alongside trusted European organisations to bring NIS2 expertise directly to organisations across the EU.</p>
               <div class="partners-grid">
@@ -415,7 +412,7 @@
               </div>
             </section>
 
-            <hr class="content-divider" />
+            <hr class="content-divider" /> --}}
 
             {{-- --------------------------------------------------------
                  WHY CHOOSE GISBA — 5 Differentiators
