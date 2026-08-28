@@ -1,11 +1,11 @@
 @extends('layouts.site')
 
 @section('title', 'CRISC Online Course | GISBA Consultants')
-@section('meta_description', 'Join the GISBA CRISC Online Course — a live, instructor-led programme for IT risk and cybersecurity professionals, limited to 12 participants.')
+@section('meta_description', 'Join the GISBA CRISC Online Course — a live, instructor-led programme for IT risk and cybersecurity professionals, limited to ' . $pricing->crisc_capacity . ' participants.')
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-mortarboard me-2"></i>CRISC Online Course — Limited to 12 Participants</span>
+    <span><i class="bi bi-mortarboard me-2"></i>CRISC Online Course — Limited to {{ $pricing->crisc_capacity }} Participants</span>
     <div class="d-flex gap-3">
       <a href="#what-is-crisc"><i class="bi bi-info-circle me-1"></i>About</a>
       <a href="#schedule"><i class="bi bi-calendar-event me-1"></i>Schedule</a>
@@ -145,7 +145,7 @@
                   CRISC has become one of the most in-demand certifications for cybersecurity and IT risk professionals. Following the successful completion of our first CRISC course, we're pleased to announce our second CRISC Online Course.
                 </p>
                 <p class="hero-desc">
-                  This live, instructor-led course is limited to just 12 participants and is conducted by the author of multiple books, including <em>CRISC and Beyond</em>. Every participant receives a free copy of the author's book.
+                  This live, instructor-led course is limited to just {{ $pricing->crisc_capacity }} participants and is conducted by the author of multiple books, including <em>CRISC and Beyond</em>. Every participant receives a free copy of the author's book.
                 </p>
                 <div class="hero-actions mb-3">
                   <a href="{{ route('crisc-course.pricing') }}" class="btn-hero-primary">

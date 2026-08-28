@@ -196,7 +196,7 @@
         {{-- Bottom CTA --}}
         <div class="article-bottom-cta">
           <h3>Ready to advance your IT risk career with CRISC?</h3>
-          <p>Join our next CRISC Online Course — limited to 12 participants, taught by the author of "CRISC and Beyond".</p>
+          <p>Join our next CRISC Online Course — limited to {{ $pricing->crisc_capacity }} participants, taught by the author of "CRISC and Beyond".</p>
           <div class="d-flex gap-3 flex-wrap">
             <a href="{{ route('crisc-course.pricing') }}" class="btn-hero-primary">Reserve Your Seat</a>
             <a href="{{ route('contact-us') }}" class="btn-hero-secondary">Speak to a Consultant</a>

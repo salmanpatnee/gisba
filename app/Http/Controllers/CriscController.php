@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CriscPost;
+use App\Models\SiteSettings;
 use Illuminate\View\View;
 
 class CriscController extends Controller
@@ -20,6 +21,8 @@ class CriscController extends Controller
             ->take(3)
             ->get();
 
-        return view('pages.crisc-show', compact('post', 'related'));
+        $pricing = SiteSettings::current();
+
+        return view('pages.crisc-show', compact('post', 'related', 'pricing'));
     }
 }

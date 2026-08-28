@@ -30,7 +30,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'crisc_date' => ['required', 'date'],
             'crisc_time_start' => ['required', 'string', 'max:20'],
             'crisc_time_end' => ['required', 'string', 'max:20'],
-            'crisc_timezone' => ['required', 'string', 'max:20'],
+            'crisc_timezone' => ['required', 'string', 'max:50'],
             'crisc_capacity' => ['required', 'integer', 'min:1'],
         ];
     }
