@@ -1,6 +1,5 @@
 <?php
 
-use App\Mail\CourseEnrollmentConfirmationMail;
 use App\Models\CourseEnrollment;
 use App\Models\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,12 +47,6 @@ it('rejects an invalid email', function () {
         ->assertSessionHasErrors('email');
 });
 
-it('rejects a free-mail address via the business email rule', function () {
-    $this->post(route('crisc-course.checkout'), ['name' => 'Jane Doe', 'email' => 'jane@gmail.com'])
-        ->assertRedirect()
-        ->assertSessionHasErrors('email');
-});
-
 it('redirects to PayPal with the configured price on valid checkout', function () {
     $response = $this->post(route('crisc-course.checkout'), [
         'name' => 'Jane Doe',
@@ -85,7 +78,7 @@ it('rejects checkout once the course is fully booked', function () {
     Http::assertNotSent(fn ($request) => str_contains($request->url(), 'checkout/orders'));
 });
 
-it('creates an enrollment and sends a confirmation email on capture', function () {
+it('creates an enrollment without sending a confirmation email on capture', function () {
     Mail::fake();
     session(['crisc_pending_name' => 'Jane Doe', 'crisc_pending_email' => 'jane@example.com']);
 
@@ -100,5 +93,5 @@ it('creates an enrollment and sends a confirmation email on capture', function (
     expect((float) $enrollment->amount)->toBe(9.99);
     expect($enrollment->status)->toBe('completed');
 
-    Mail::assertSent(CourseEnrollmentConfirmationMail::class, fn ($mail) => $mail->hasTo('jane@example.com'));
+    Mail::assertNothingSent();
 });

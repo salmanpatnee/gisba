@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CriscCheckoutRequest;
-use App\Mail\CourseEnrollmentConfirmationMail;
 use App\Models\CourseEnrollment;
 use App\Models\SiteSettings;
 use App\Services\PayPalService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class CriscCheckoutController extends Controller
 {
@@ -65,7 +62,7 @@ class CriscCheckoutController extends Controller
 
         $settings = SiteSettings::current();
 
-        $enrollment = CourseEnrollment::create([
+        CourseEnrollment::create([
             'course' => self::COURSE,
             'name' => $name,
             'email' => $email,
@@ -74,12 +71,6 @@ class CriscCheckoutController extends Controller
             'paypal_order_id' => $orderId,
             'status' => 'completed',
         ]);
-
-        try {
-            Mail::to($email)->send(new CourseEnrollmentConfirmationMail($enrollment));
-        } catch (\Throwable $e) {
-            Log::error('CourseEnrollmentConfirmationMail failed', ['error' => $e->getMessage()]);
-        }
 
         session()->forget(['crisc_pending_name', 'crisc_pending_email']);
 

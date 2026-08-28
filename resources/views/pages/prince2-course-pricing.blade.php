@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="mb-3">
-                  <label for="email" class="form-label fw-semibold" style="font-size:13px;">Your Business Email Address</label>
+                  <label for="email" class="form-label fw-semibold" style="font-size:13px;">Your Email Address</label>
                   <input type="email"
                          id="email"
                          name="email"

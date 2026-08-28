@@ -1,6 +1,5 @@
 <?php
 
-use App\Mail\CourseEnrollmentConfirmationMail;
 use App\Models\CourseEnrollment;
 use App\Models\SiteSettings;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -34,12 +33,6 @@ dataset('courses', ['cissp', 'prince2']);
 
 it('rejects an invalid email', function (string $course) {
     $this->post(route("{$course}.checkout"), ['name' => 'Jane Doe', 'email' => 'not-an-email'])
-        ->assertRedirect()
-        ->assertSessionHasErrors('email');
-})->with('courses');
-
-it('rejects a free-mail address via the business email rule', function (string $course) {
-    $this->post(route("{$course}.checkout"), ['name' => 'Jane Doe', 'email' => 'jane@gmail.com'])
         ->assertRedirect()
         ->assertSessionHasErrors('email');
 })->with('courses');
@@ -86,7 +79,7 @@ it('rejects checkout once the course is fully booked', function (string $course)
     Http::assertNothingSent();
 })->with('courses');
 
-it('creates an enrollment and sends a confirmation email on capture', function (string $course) {
+it('creates an enrollment without sending a confirmation email on capture', function (string $course) {
     Http::fake([
         '*oauth2/token*' => Http::response(['access_token' => 'fake-token', 'expires_in' => 28800], 200),
         "*orders/ORDER-{$course}-1/capture*" => Http::response([
@@ -109,5 +102,5 @@ it('creates an enrollment and sends a confirmation email on capture', function (
     expect((float) $enrollment->amount)->toBe(9.99);
     expect($enrollment->status)->toBe('completed');
 
-    Mail::assertSent(CourseEnrollmentConfirmationMail::class, fn ($mail) => $mail->hasTo('jane@example.com'));
+    Mail::assertNothingSent();
 })->with('courses');

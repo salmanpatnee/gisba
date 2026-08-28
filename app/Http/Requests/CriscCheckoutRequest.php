@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\BusinessEmail;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,7 +17,7 @@ class CriscCheckoutRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255', new BusinessEmail],
+            'email' => ['required', 'email', 'max:255'],
         ];
     }
 }

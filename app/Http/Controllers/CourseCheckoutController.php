@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseCheckoutRequest;
-use App\Mail\CourseEnrollmentConfirmationMail;
 use App\Models\CourseEnrollment;
 use App\Models\SiteSettings;
 use App\Services\PayPalService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CourseCheckoutController extends Controller
@@ -73,7 +70,7 @@ class CourseCheckoutController extends Controller
 
         $settings = SiteSettings::current();
 
-        $enrollment = CourseEnrollment::create([
+        CourseEnrollment::create([
             'course' => $course,
             'name' => $name,
             'email' => $email,
@@ -82,12 +79,6 @@ class CourseCheckoutController extends Controller
             'paypal_order_id' => $orderId,
             'status' => 'completed',
         ]);
-
-        try {
-            Mail::to($email)->send(new CourseEnrollmentConfirmationMail($enrollment));
-        } catch (\Throwable $e) {
-            Log::error('CourseEnrollmentConfirmationMail failed', ['error' => $e->getMessage()]);
-        }
 
         session()->forget(["{$course}_pending_name", "{$course}_pending_email"]);
 
