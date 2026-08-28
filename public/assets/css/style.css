@@ -948,7 +948,7 @@ ul li {
 ============================================================ */
 .requirement-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 12px;
   margin: 18px 0;
 }
@@ -1457,6 +1457,218 @@ ul li {
   .contact-card-body p {
     text-align: justify;
   }
+}
+
+/* ============================================================
+   AVAILABLE COURSES GRID
+============================================================ */
+.course-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  height: 100%;
+  text-decoration: none;
+}
+
+.course-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent);
+}
+
+.course-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--accent);
+  line-height: 0;
+}
+
+.course-card-img-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: saturate(0.9) brightness(0.97);
+  transition: transform 0.4s ease;
+}
+
+.course-card:hover .course-card-img-wrap img {
+  transform: scale(1.03);
+}
+
+.course-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 26px;
+  min-width: 0;
+}
+
+.course-card-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.course-card-title {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 10px;
+}
+
+.course-card-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-body);
+  margin-bottom: 16px;
+}
+
+.course-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.course-card-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.course-card-meta i {
+  color: var(--navy-light);
+}
+
+.course-card-body .btn-hero-primary {
+  font-size: 13px;
+  padding: 9px 18px;
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* ============================================================
+   TRAINING SCHEDULE
+============================================================ */
+.schedule-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  margin-top: 16px;
+}
+
+.schedule-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+}
+
+.schedule-table thead th {
+  background: var(--navy);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-align: left;
+  padding: 15px 20px;
+  white-space: nowrap;
+}
+
+.schedule-table tbody td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: middle;
+}
+
+.schedule-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.schedule-table tbody tr:hover {
+  background: var(--bg-section-alt);
+}
+
+.schedule-course-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.schedule-course-cell i {
+  color: var(--accent);
+  font-size: 17px;
+}
+
+.schedule-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+}
+
+.schedule-status.is-closed {
+  background: #f1f3f6;
+  color: var(--text-muted);
+}
+
+.schedule-status.is-open {
+  background: rgba(200, 168, 75, 0.14);
+  color: #8a6d1f;
+  border: 1px solid rgba(200, 168, 75, 0.35);
+}
+
+.schedule-date {
+  display: block;
+  font-size: 13.5px;
+  color: var(--text-body);
+}
+
+.schedule-date.is-closed-text {
+  color: var(--text-muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--border-mid);
+}
+
+.schedule-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy-light);
+  text-decoration: none;
+  margin-top: 6px;
+  transition: color 0.2s, gap 0.2s;
+}
+
+.schedule-cta:hover {
+  color: var(--accent);
+  gap: 7px;
 }
 
 /* ============================================================

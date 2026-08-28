@@ -66,32 +66,9 @@
       <div class="row g-4">
 
         {{-- ============================================================
-             SIDEBAR
-        ============================================================ --}}
-        <div class="col-12 col-md-3">
-          <aside class="sidebar">
-            <nav class="sidebar-nav">
-              <p class="sidebar-nav-title">Quick Links</p>
-              <ul>
-                {{-- <li><a href="#about"><i class="bi bi-info-circle"></i> About GISBA</a></li> --}}
-                <li><a href="#expertise"><i class="bi bi-grid"></i> Our Expertise</a></li>
-                <li><a href="#services"><i class="bi bi-briefcase"></i> Our Services</a></li>
-                {{-- <li><a href="#european-partners"><i class="bi bi-people-fill"></i> European Partners</a></li> --}}
-                <li><a href="#why-gisba"><i class="bi bi-star-fill"></i> Why Choose Us</a></li>
-                {{-- <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li> --}}
-              </ul>
-            </nav>
-            <div class="sidebar-contact">
-              <strong><i class="bi bi-envelope me-1"></i>Contact GISBA</strong>
-              <a href="{{ route('contact-us') }}">Contact Us</a>
-            </div>
-          </aside>
-        </div>
-
-        {{-- ============================================================
              MAIN CONTENT
         ============================================================ --}}
-        <div class="col-12 col-md-9">
+        <div class="col-12">
           <main class="main-content">
 
             {{-- --------------------------------------------------------
@@ -122,6 +99,166 @@
             </section>
 
             <hr class="content-divider" /> --}}
+
+            {{-- --------------------------------------------------------
+                 AVAILABLE COURSES
+            -------------------------------------------------------- --}}
+            <section id="courses">
+              <h2 class="section-heading">Available Courses</h2>
+              <p>Advance your career with our globally recognized certification training programs.</p>
+              <div class="row g-4" style="margin-top:4px;">
+                <div class="col-6 col-md-3">
+                  <a href="{{ route('crisc-course') }}" class="course-card">
+                    <div class="course-card-img-wrap">
+                      <img src="{{ asset('assets/images/CRISC Banner.jpeg') }}" alt="CRISC Course">
+                    </div>
+                    <div class="course-card-body">
+                      <span class="course-card-eyebrow">Online Course</span>
+                      <div class="course-card-title">CRISC</div>
+                      <p class="course-card-desc">One of the most in-demand certifications for cybersecurity and IT risk professionals.</p>
+                      <div class="course-card-meta">
+                        <span><i class="bi bi-person-badge"></i> Expert-Led</span>
+                        <span><i class="bi bi-camera-video"></i> Live Sessions</span>
+                      </div>
+                      <span class="btn-hero-primary"><i class="bi bi-arrow-right me-2"></i>View Course Details</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-6 col-md-3">
+                  <a href="{{ route('cissp') }}" class="course-card">
+                    <div class="course-card-img-wrap">
+                      <img src="{{ asset('assets/images/CISSP Banner.png') }}" alt="CISSP Course">
+                    </div>
+                    <div class="course-card-body">
+                      <span class="course-card-eyebrow">Live Online Training</span>
+                      <div class="course-card-title">CISSP</div>
+                      <p class="course-card-desc">One of the world's most recognized and respected certifications for experienced security professionals.</p>
+                      <div class="course-card-meta">
+                        <span><i class="bi bi-person-badge"></i> Expert-Led</span>
+                        <span><i class="bi bi-camera-video"></i> Live Sessions</span>
+                      </div>
+                      <span class="btn-hero-primary"><i class="bi bi-arrow-right me-2"></i>View Course Details</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-6 col-md-3">
+                  <a href="{{ route('pmp') }}" class="course-card">
+                    <div class="course-card-img-wrap">
+                      <img src="{{ asset('assets/images/PMP Banner.jpeg') }}" alt="PMP Course">
+                    </div>
+                    <div class="course-card-body">
+                      <span class="course-card-eyebrow">Live Online Training</span>
+                      <div class="course-card-title">PMP</div>
+                      <p class="course-card-desc">Exam-ready content, practice questions &amp; expert guidance — everything you need to pass the PMP exam.</p>
+                      <div class="course-card-meta">
+                        <span><i class="bi bi-person-badge"></i> Expert-Led</span>
+                        <span><i class="bi bi-camera-video"></i> Live Sessions</span>
+                      </div>
+                      <span class="btn-hero-primary"><i class="bi bi-arrow-right me-2"></i>View Course Details</span>
+                    </div>
+                  </a>
+                </div>
+                <div class="col-6 col-md-3">
+                  <a href="{{ route('prince2') }}" class="course-card">
+                    <div class="course-card-img-wrap">
+                      <img src="{{ asset('assets/images/PRINCE2  Banner.jpeg') }}" alt="PRINCE2 Course">
+                    </div>
+                    <div class="course-card-body">
+                      <span class="course-card-eyebrow">Live Online Training</span>
+                      <div class="course-card-title">PRINCE2</div>
+                      <p class="course-card-desc">One of the world's most widely recognized structured project management methods.</p>
+                      <div class="course-card-meta">
+                        <span><i class="bi bi-person-badge"></i> Expert-Led</span>
+                        <span><i class="bi bi-camera-video"></i> Live Sessions</span>
+                      </div>
+                      <span class="btn-hero-primary"><i class="bi bi-arrow-right me-2"></i>View Course Details</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <hr class="content-divider" />
+
+            {{-- --------------------------------------------------------
+                 TRAINING SCHEDULE 2026
+            -------------------------------------------------------- --}}
+            <section id="schedule">
+              <h2 class="section-heading">Training Schedule 2026</h2>
+              <p>Upcoming cohort dates for our live, instructor-led certification courses. Seats are limited — early registration is recommended.</p>
+
+              <div class="schedule-table-wrap">
+                <table class="schedule-table">
+                  <thead>
+                    <tr>
+                      <th>Course</th>
+                      <th>Recent Cohort</th>
+                      <th>Upcoming Cohort</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="schedule-course-cell"><i class="bi bi-mortarboard"></i>CRISC</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                        <span class="schedule-date is-closed-text">31st Aug 2026</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                        <span class="schedule-date">21st Sep 2026</span>
+                        <a href="{{ route('crisc-course') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="schedule-course-cell"><i class="bi bi-shield-lock"></i>CISSP</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                        <span class="schedule-date is-closed-text">07th &ndash; 10th Sep 2026</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                        <span class="schedule-date">12th &ndash; 15th Oct 2026</span>
+                        <a href="{{ route('cissp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="schedule-course-cell"><i class="bi bi-award"></i>PMP</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                        <span class="schedule-date is-closed-text">28th Sep 2026</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                        <span class="schedule-date">02nd &ndash; 05th Nov 2026</span>
+                        <a href="{{ route('pmp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <span class="schedule-course-cell"><i class="bi bi-diagram-3"></i>PRINCE2</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                        <span class="schedule-date is-closed-text">05th Oct 2026</span>
+                      </td>
+                      <td>
+                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                        <span class="schedule-date">26th &ndash; 29th Oct 2026</span>
+                        <a href="{{ route('prince2') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+
+            <hr class="content-divider" />
 
             {{-- --------------------------------------------------------
                  OUR EXPERTISE — 4 Areas
