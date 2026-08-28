@@ -106,16 +106,11 @@
           <!--    <i class="bi bi-grid-3x3-gap"></i>Portfolio-->
           <!--  </a>-->
           <!--</li>-->
-          <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('awareness') ? 'active' : '' }}" href="{{ route('awareness') }}">
-              <i class="bi bi-lightbulb"></i>Awareness Toolkit
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('nis2') ? 'active' : '' }}" href="{{ route('nis2') }}">
-              <i class="bi bi-journal-text"></i>NIS2
-            </a>
-          </li>
+          <!--<li class="nav-item">-->
+          <!--  <a class="nav-link site-nav-link {{ request()->routeIs('nis2') ? 'active' : '' }}" href="{{ route('nis2') }}">-->
+          <!--    <i class="bi bi-journal-text"></i>NIS2-->
+          <!--  </a>-->
+          <!--</li>-->
           @if($isPmpMode)
           <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('home') || request()->routeIs('pmp*') ? 'active' : '' }}" href="{{ route('home') }}">
@@ -123,11 +118,11 @@
             </a>
           </li>
           @endif
-          <li class="nav-item">
-            <a class="nav-link site-nav-link {{ request()->routeIs('nis2-toolkit') ? 'active' : '' }}" href="{{ route('nis2-toolkit') }}">
-              <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit
-            </a>
-          </li>
+          <!--<li class="nav-item">-->
+          <!--  <a class="nav-link site-nav-link {{ request()->routeIs('nis2-toolkit') ? 'active' : '' }}" href="{{ route('nis2-toolkit') }}">-->
+          <!--    <i class="bi bi-mortarboard"></i>NIS2 Implementation Toolkit-->
+          <!--  </a>-->
+          <!--</li>-->
           <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('crisc-course') || request()->routeIs('crisc*') ? 'active' : '' }}" href="{{ route('crisc-course') }}">
               <i class="bi bi-mortarboard"></i>CRISC Online Course
@@ -201,10 +196,9 @@
           <strong style="color:#fff; font-size:13px; display:block; margin-bottom:8px;">Quick Links</strong>
           <ul style="list-style:none; padding:0; margin:0; font-size:12.5px;">
             <li><a href="{{ route('home.legacy') }}">Home</a></li>
-            <li><a href="{{ route('awareness') }}">Awareness Toolkit</a></li>
-            <li><a href="{{ route('nis2') }}">NIS2</a></li>
+            <!--<li><a href="{{ route('nis2') }}">NIS2</a></li>-->
             @if($isPmpMode)<li><a href="{{ route('home') }}">PMP</a></li>@endif
-            <li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>
+            <!--<li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>-->
             <li><a href="{{ route('crisc-course') }}">CRISC Online Course</a></li>
             <li><a href="{{ route('training') }}">Training Course Development Services</a></li>
             <li><a href="{{ route('success-stories') }}">Success Stories</a></li>
