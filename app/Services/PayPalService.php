@@ -72,7 +72,7 @@ class PayPalService
                         'currency_code' => $currency,
                         'value' => $amount,
                     ],
-                    'description' => 'GISBA Members-Only Access',
+                    'description' => 'Online Training Registration Confirmation',
                 ]],
                 'application_context' => [
                     'return_url' => $returnUrl,
