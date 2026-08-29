@@ -284,7 +284,7 @@
           @else
             Your seat in the CRISC Online Course is confirmed.
           @endif
-          We've received your payment. Our team will get in touch with you shortly via
+          We've received your payment. Our team will get in touch within 8 hours on your email:
           @if($enrollmentEmail)
             <strong>{{ $enrollmentEmail }}</strong>
           @else
