@@ -252,7 +252,7 @@
                   <div style="display:flex; align-items:center; gap:10px; margin-top:14px; padding:12px 16px; background:rgba(200,168,75,0.12); border:1px solid rgba(200,168,75,0.4); border-radius:var(--radius-md);">
                     <i class="bi bi-star-fill" style="color:var(--accent); font-size:18px; flex-shrink:0;"></i>
                     <p style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:0;">
-                      This special price is for UK, Bahrain, Saudi Arabia, UK, Czechoslovakia, Poland and Germany
+                      This special price is for UK, Bahrain, Saudi Arabia, Czechoslovakia, Poland and Germany
                     </p>
                   </div>
                 </div>
