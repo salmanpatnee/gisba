@@ -32,6 +32,20 @@
 .kb-accent-bar { width: 40px; height: 3px; background: var(--accent); border-radius: 2px; }
 .kb-count-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600; color: var(--text-muted); background: var(--bg-section-alt); border: 1px solid var(--border-light); padding: 4px 12px; border-radius: 20px; }
 
+.training-carousel .carousel-inner { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); }
+.training-slide { position: relative; height: 460px; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--navy); }
+.training-slide-bg { position: absolute; inset: -20px; background-size: cover; background-position: center; filter: blur(28px) brightness(0.55) saturate(1.15); transform: scale(1.15); }
+.training-slide img { position: relative; z-index: 1; max-height: 100%; max-width: 100%; width: auto; height: auto; object-fit: contain; box-shadow: 0 18px 44px rgba(0,0,0,0.4); }
+.training-carousel .carousel-control-prev,
+.training-carousel .carousel-control-next { width: 48px; height: 48px; top: 50%; transform: translateY(-50%); background: rgba(0,51,102,0.55); border-radius: 50%; opacity: 0.85; }
+.training-carousel .carousel-control-prev { left: 20px; }
+.training-carousel .carousel-control-next { right: 20px; }
+.training-carousel .carousel-control-prev:hover,
+.training-carousel .carousel-control-next:hover { opacity: 1; }
+@media (max-width: 575px) {
+  .training-slide { height: 300px; }
+}
+
 .kb-card {
   background: var(--bg-white);
   border: 1px solid var(--border-light);
@@ -334,6 +348,48 @@
       </div>
     </div>
   </div>
+
+  <section id="training-gallery" class="kb-section">
+    <div class="container">
+
+      <div class="kb-section-header kb-reveal text-center">
+        <span class="kb-section-label">Global Training Footprint</span>
+        <h2 class="kb-section-title">Years of Training Experience Across the World</h2>
+        <div class="kb-accent-bar mx-auto mt-2"></div>
+      </div>
+
+      @php
+        $crisscGalleryImages = [
+          'Image 1.png', 'Image 2.jpg', 'Image 3.png', 'Image 4.png', 'Image 5.jpg',
+          'Image 6.png', 'Image 7.png', 'Image 8.png', 'Image 9.jpg', 'Image 10.jpg',
+          'Image 11.png', 'Image 12.jpg', 'Image 13.jpg', 'Image 14.jpg', 'Image 15.jpg',
+        ];
+      @endphp
+
+      <div id="crisc-training-carousel" class="carousel slide training-carousel kb-reveal" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          @foreach($crisscGalleryImages as $image)
+          @php($imageUrl = asset('assets/images/crisc/' . $image))
+          <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+            <div class="training-slide">
+              <div class="training-slide-bg" style="background-image: url('{{ $imageUrl }}');"></div>
+              <img src="{{ $imageUrl }}" alt="CRISC training session photo {{ $loop->iteration }}">
+            </div>
+          </div>
+          @endforeach
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#crisc-training-carousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#crisc-training-carousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
 
   <section id="articles" class="kb-section">
     <div class="container">
