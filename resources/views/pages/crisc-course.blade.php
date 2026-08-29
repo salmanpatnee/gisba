@@ -237,13 +237,16 @@
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Direct access to the author and instructor</div>
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Certificate of Participation</div>
                   </div>
-                  <div class="d-flex flex-row gap-2 mt-3">
+                  <div class="d-flex flex-column flex-sm-row gap-2 mt-3">
                     <span class="btn-closed flex-fill">
                       <span class="btn-closed-label"><i class="bi bi-slash-circle"></i>Session Closed</span>
                       <span class="btn-closed-date">31st Aug 2026</span>
                     </span>
                     <a href="{{ route('crisc-course.pricing') }}" class="btn-hero-primary flex-fill text-center">
                       <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat
+                      @if ($pricing->dateRangeFor('crisc'))
+                        &mdash; {{ $pricing->dateRangeFor('crisc') }}
+                      @endif
                     </a>
                   </div>
                 </div>
