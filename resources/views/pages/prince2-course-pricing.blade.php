@@ -74,12 +74,6 @@
               <li><i class="bi bi-check-circle-fill"></i>Small-group format — max {{ $pricing->prince2_capacity }} participants</li>
             </ul>
 
-            @if ($pricing->prince2_seats_remaining !== null)
-              <p class="pt-payment-label">{{ $pricing->prince2_seats_remaining }} of {{ $pricing->prince2_capacity }} seats reserved</p>
-            @else
-              <p class="pt-payment-label">Capacity: {{ $pricing->prince2_capacity }} participants</p>
-            @endif
-
             <form action="{{ route('prince2.checkout') }}" method="POST">
               @csrf
 

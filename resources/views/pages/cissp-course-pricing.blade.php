@@ -74,12 +74,6 @@
               <li><i class="bi bi-check-circle-fill"></i>Direct access to an experienced cybersecurity trainer</li>
             </ul>
 
-            @if ($pricing->cissp_seats_remaining !== null)
-              <p class="pt-payment-label">{{ $pricing->cissp_seats_remaining }} of {{ $pricing->cissp_capacity }} seats reserved</p>
-            @else
-              <p class="pt-payment-label">Capacity: {{ $pricing->cissp_capacity }} participants</p>
-            @endif
-
             <form action="{{ route('cissp.checkout') }}" method="POST">
               @csrf
 

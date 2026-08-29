@@ -63,12 +63,6 @@
               <li><i class="bi bi-check-circle-fill"></i>Direct access to the author and instructor</li>
             </ul>
 
-            @if ($pricing->crisc_seats_remaining !== null)
-              <p class="pt-payment-label">{{ $pricing->crisc_seats_remaining }} of {{ $pricing->crisc_capacity }} seats reserved</p>
-            @else
-              <p class="pt-payment-label">Capacity: {{ $pricing->crisc_capacity }} participants</p>
-            @endif
-
             <form action="{{ route('crisc-course.checkout') }}" method="POST">
               @csrf
 
