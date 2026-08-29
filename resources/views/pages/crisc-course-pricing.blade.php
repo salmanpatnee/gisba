@@ -63,54 +63,45 @@
               <li><i class="bi bi-check-circle-fill"></i>Direct access to the author and instructor</li>
             </ul>
 
-            @if ($pricing->crisc_seats_remaining > 0)
-              <p class="pt-payment-label">{{ $pricing->crisc_seats_remaining }} of {{ $pricing->crisc_capacity }} seats remaining</p>
-
-              <form action="{{ route('crisc-course.checkout') }}" method="POST">
-                @csrf
-
-                <div class="mb-3">
-                  <label for="name" class="form-label fw-semibold" style="font-size:13px;">Your Name</label>
-                  <input type="text"
-                         id="name"
-                         name="name"
-                         value="{{ old('name') }}"
-                         class="form-control @error('name') is-invalid @enderror"
-                         required>
-                  @error('name')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
-
-                <div class="mb-3">
-                  <label for="email" class="form-label fw-semibold" style="font-size:13px;">Your Email Address</label>
-                  <input type="email"
-                         id="email"
-                         name="email"
-                         value="{{ old('email') }}"
-                         class="form-control @error('email') is-invalid @enderror"
-                         required>
-                  @error('email')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                  @enderror
-                </div>
-
-                <button type="submit" class="pt-btn">
-                  <i class="bi bi-paypal"></i> Reserve Your Seat with PayPal
-                </button>
-              </form>
+            @if ($pricing->crisc_seats_remaining !== null)
+              <p class="pt-payment-label">{{ $pricing->crisc_seats_remaining }} of {{ $pricing->crisc_capacity }} seats reserved</p>
             @else
-              <div class="pt-bank-details" style="display:block;">
-                <div class="pt-bank-header">
-                  <i class="bi bi-exclamation-circle"></i>
-                  <span>Course Fully Booked</span>
-                </div>
-                <p class="pt-bank-note" style="border-top:none;">
-                  <i class="bi bi-info-circle"></i>
-                  All {{ $pricing->crisc_capacity }} seats have been reserved. <a href="{{ route('contact-us') }}">Contact us</a> to join the waitlist for the next session.
-                </p>
-              </div>
+              <p class="pt-payment-label">Capacity: {{ $pricing->crisc_capacity }} participants</p>
             @endif
+
+            <form action="{{ route('crisc-course.checkout') }}" method="POST">
+              @csrf
+
+              <div class="mb-3">
+                <label for="name" class="form-label fw-semibold" style="font-size:13px;">Your Name</label>
+                <input type="text"
+                       id="name"
+                       name="name"
+                       value="{{ old('name') }}"
+                       class="form-control @error('name') is-invalid @enderror"
+                       required>
+                @error('name')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label fw-semibold" style="font-size:13px;">Your Email Address</label>
+                <input type="email"
+                       id="email"
+                       name="email"
+                       value="{{ old('email') }}"
+                       class="form-control @error('email') is-invalid @enderror"
+                       required>
+                @error('email')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
+
+              <button type="submit" class="pt-btn">
+                <i class="bi bi-paypal"></i> Reserve Your Seat with PayPal
+              </button>
+            </form>
 
             <p class="pt-secure-note">
               <i class="bi bi-shield-lock"></i> Secure checkout via PayPal

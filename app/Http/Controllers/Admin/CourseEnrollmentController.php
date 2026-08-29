@@ -32,6 +32,7 @@ class CourseEnrollmentController extends Controller
             'enrollments' => $enrollments,
             'seatsRemaining' => $settings->{"{$course}_seats_remaining"},
             'capacity' => $settings->{"{$course}_capacity"},
+            'totalEnrolled' => $enrollments->total(),
         ]);
     }
 }

@@ -21,12 +21,8 @@ class CourseCheckoutController extends Controller
 
     public function create(CourseCheckoutRequest $request, string $course): RedirectResponse
     {
-        $label = $this->label($course);
+        $this->label($course);
         $settings = SiteSettings::current();
-
-        if ($settings->{"{$course}_seats_remaining"} <= 0) {
-            return back()->withErrors([$course => "The {$label} is fully booked. Please contact us to join the waitlist."]);
-        }
 
         $order = $this->paypal->createOrder(
             route("{$course}.paypal.return"),

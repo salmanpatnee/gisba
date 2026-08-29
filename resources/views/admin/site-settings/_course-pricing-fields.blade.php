@@ -8,7 +8,7 @@
      x-data="{
          price: {{ (float) old("{$course}_price", $settings->{"{$course}_price"}) }},
          currency: '{{ old("{$course}_currency", $settings->{"{$course}_currency"}) }}',
-         capacity: {{ (int) old("{$course}_capacity", $settings->{"{$course}_capacity"}) }},
+         capacity: @js(old("{$course}_capacity", $settings->{"{$course}_capacity"})),
          get symbol() {
              return { USD: '$', GBP: '£', EUR: '€' }[this.currency] ?? this.currency + ' ';
          },
@@ -158,15 +158,14 @@
             Seat Capacity <span class="text-red-500">*</span>
         </label>
         <input
-            type="number"
+            type="text"
             id="{{ $course }}_capacity"
             name="{{ $course }}_capacity"
             value="{{ old("{$course}_capacity", $settings->{"{$course}_capacity"}) }}"
-            step="1"
-            min="1"
+            placeholder="e.g. 15 or 15+"
             class="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 @error("{$course}_capacity") border-red-400 @enderror"
             required
-            x-model.number="capacity"
+            x-model="capacity"
         >
         @error("{$course}_capacity")
             <p class="mt-1 text-xs text-red-600">{{ $message }}</p>

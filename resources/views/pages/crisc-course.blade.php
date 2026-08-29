@@ -5,7 +5,7 @@
 
 @section('banner')
   <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
-    <span><i class="bi bi-mortarboard me-2"></i>CRISC Online Course — Limited to {{ $pricing->crisc_capacity }} Participants</span>
+    <span><i class="bi bi-mortarboard me-2"></i>CRISC Online Course</span>
     <div class="d-flex gap-3">
       <a href="#what-is-crisc"><i class="bi bi-info-circle me-1"></i>About</a>
       <a href="#schedule"><i class="bi bi-calendar-event me-1"></i>Schedule</a>
@@ -237,9 +237,6 @@
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Direct access to the author and instructor</div>
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Certificate of Participation</div>
                   </div>
-                  <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
-                    <i class="bi bi-hourglass-split me-1"></i>{{ $pricing->crisc_seats_remaining }} of {{ $pricing->crisc_capacity }} seats remaining — enrollment closes once the course is full.
-                  </p>
                   <div class="d-flex flex-row gap-2 mt-3">
                     <span class="btn-closed flex-fill">
                       <span class="btn-closed-label"><i class="bi bi-slash-circle"></i>Session Closed</span>

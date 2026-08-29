@@ -51,15 +51,12 @@ class SiteSettings extends Model
         'crisc_price' => 'decimal:2',
         'crisc_date' => 'date',
         'crisc_end_date' => 'date',
-        'crisc_capacity' => 'integer',
         'cissp_price' => 'decimal:2',
         'cissp_date' => 'date',
         'cissp_end_date' => 'date',
-        'cissp_capacity' => 'integer',
         'prince2_price' => 'decimal:2',
         'prince2_date' => 'date',
         'prince2_end_date' => 'date',
-        'prince2_capacity' => 'integer',
     ];
 
     public static function current(): self
@@ -78,19 +75,19 @@ class SiteSettings extends Model
             'crisc_time_start' => '7:00 AM',
             'crisc_time_end' => '1:00 PM',
             'crisc_timezone' => 'Saudi Arabia Standard Time',
-            'crisc_capacity' => 12,
+            'crisc_capacity' => '12',
             'cissp_price' => 999.99,
             'cissp_currency' => 'USD',
             'cissp_time_start' => '7:00 AM',
             'cissp_time_end' => '1:00 PM',
             'cissp_timezone' => 'Saudi Arabia Standard Time',
-            'cissp_capacity' => 15,
+            'cissp_capacity' => '15',
             'prince2_price' => 999.99,
             'prince2_currency' => 'USD',
             'prince2_time_start' => '7:00 AM',
             'prince2_time_end' => '1:00 PM',
             'prince2_timezone' => 'Saudi Arabia Standard Time',
-            'prince2_capacity' => 15,
+            'prince2_capacity' => '15',
         ]);
     }
 
@@ -127,34 +124,38 @@ class SiteSettings extends Model
     }
 
     /**
-     * Remaining CRISC course seats, never negative.
+     * Remaining CRISC course seats, never negative, or null when capacity isn't a plain number.
      */
-    public function getCriscSeatsRemainingAttribute(): int
+    public function getCriscSeatsRemainingAttribute(): ?int
     {
         return $this->seatsRemainingFor('crisc', $this->crisc_capacity);
     }
 
     /**
-     * Remaining CISSP course seats, never negative.
+     * Remaining CISSP course seats, never negative, or null when capacity isn't a plain number.
      */
-    public function getCisspSeatsRemainingAttribute(): int
+    public function getCisspSeatsRemainingAttribute(): ?int
     {
         return $this->seatsRemainingFor('cissp', $this->cissp_capacity);
     }
 
     /**
-     * Remaining PRINCE2 course seats, never negative.
+     * Remaining PRINCE2 course seats, never negative, or null when capacity isn't a plain number.
      */
-    public function getPrince2SeatsRemainingAttribute(): int
+    public function getPrince2SeatsRemainingAttribute(): ?int
     {
         return $this->seatsRemainingFor('prince2', $this->prince2_capacity);
     }
 
-    private function seatsRemainingFor(string $course, int $capacity): int
+    private function seatsRemainingFor(string $course, string $capacity): ?int
     {
+        if (! preg_match('/\d+/', $capacity, $matches)) {
+            return null;
+        }
+
         $taken = CourseEnrollment::query()->forCourse($course)->count();
 
-        return max(0, $capacity - $taken);
+        return max(0, (int) $matches[0] - $taken);
     }
 
     /**

@@ -2,7 +2,13 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{ $label }} Enrollments</h2>
-            <span class="text-sm text-gray-500">{{ $seatsRemaining }} of {{ $capacity }} seats remaining</span>
+            <span class="text-sm text-gray-500">
+                @if ($seatsRemaining !== null)
+                    {{ $seatsRemaining }} of {{ $capacity }} seats remaining
+                @else
+                    {{ $totalEnrolled }} enrolled &mdash; capacity: {{ $capacity }}
+                @endif
+            </span>
         </div>
     </x-slot>
 

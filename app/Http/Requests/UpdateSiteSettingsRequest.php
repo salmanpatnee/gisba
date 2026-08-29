@@ -32,7 +32,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'crisc_time_start' => ['required', 'string', 'max:20'],
             'crisc_time_end' => ['required', 'string', 'max:20'],
             'crisc_timezone' => ['required', 'string', 'max:50'],
-            'crisc_capacity' => ['required', 'integer', 'min:1'],
+            'crisc_capacity' => ['required', 'string', 'max:50'],
             'cissp_price' => ['required', 'numeric', 'min:0'],
             'cissp_currency' => ['required', 'in:USD,GBP,EUR'],
             'cissp_date' => ['nullable', 'date'],
@@ -40,7 +40,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'cissp_time_start' => ['nullable', 'string', 'max:20'],
             'cissp_time_end' => ['nullable', 'string', 'max:20'],
             'cissp_timezone' => ['required', 'string', 'max:50'],
-            'cissp_capacity' => ['required', 'integer', 'min:1'],
+            'cissp_capacity' => ['required', 'string', 'max:50'],
             'prince2_price' => ['required', 'numeric', 'min:0'],
             'prince2_currency' => ['required', 'in:USD,GBP,EUR'],
             'prince2_date' => ['nullable', 'date'],
@@ -48,7 +48,7 @@ class UpdateSiteSettingsRequest extends FormRequest
             'prince2_time_start' => ['nullable', 'string', 'max:20'],
             'prince2_time_end' => ['nullable', 'string', 'max:20'],
             'prince2_timezone' => ['required', 'string', 'max:50'],
-            'prince2_capacity' => ['required', 'integer', 'min:1'],
+            'prince2_capacity' => ['required', 'string', 'max:50'],
         ];
     }
 

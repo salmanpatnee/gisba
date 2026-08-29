@@ -18,10 +18,6 @@ class CriscCheckoutController extends Controller
     {
         $settings = SiteSettings::current();
 
-        if ($settings->crisc_seats_remaining <= 0) {
-            return back()->withErrors(['crisc' => 'The CRISC Online Course is fully booked. Please contact us to join the waitlist.']);
-        }
-
         $order = $this->paypal->createOrder(
             route('crisc-course.paypal.return'),
             route('crisc-course.paypal.cancel'),
