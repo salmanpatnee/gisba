@@ -42,11 +42,6 @@
                 <p class="hero-desc">
                   Led by an experienced cybersecurity course leader who has delivered professional training for Fortune 500 companies, this live, intentionally small-group programme combines structured exam preparation with practical insights, interactive discussions, comprehensive course material, and plenty of quizzes to reinforce your understanding.
                 </p>
-                <div class="hero-actions mb-3">
-                  <a href="{{ route('cissp.pricing') }}" class="btn-hero-primary">
-                    <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat — ${{ number_format((float) $pricing->cissp_price, 2) }}
-                  </a>
-                </div>
               </div>
             </div>
           </section>
@@ -131,8 +126,12 @@
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
                     <i class="bi bi-hourglass-split me-1"></i>{{ $pricing->cissp_seats_remaining }} of {{ $pricing->cissp_capacity }} seats remaining — enrollment closes once the course is full.
                   </p>
-                  <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="{{ route('cissp.pricing') }}" class="btn-hero-primary d-block text-center">
+                  <div class="d-flex flex-row gap-2 mt-3">
+                    <span class="btn-closed flex-fill">
+                      <span class="btn-closed-label"><i class="bi bi-slash-circle"></i>Session Closed</span>
+                      <span class="btn-closed-date">07th – 10th Sep 2026</span>
+                    </span>
+                    <a href="{{ route('cissp.pricing') }}" class="btn-hero-primary flex-fill text-center">
                       <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat
                     </a>
                   </div>

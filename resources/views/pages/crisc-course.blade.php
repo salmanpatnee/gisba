@@ -150,11 +150,6 @@
                 <p class="hero-desc">
                   This live, instructor-led course is limited to just {{ $pricing->crisc_capacity }} participants and is conducted by the author of multiple books, including <em>CRISC and Beyond</em>. Every participant receives a free copy of the author's book.
                 </p>
-                <div class="hero-actions mb-3">
-                  <a href="{{ route('crisc-course.pricing') }}" class="btn-hero-primary">
-                    <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat — ${{ number_format((float) $pricing->crisc_price, 2) }}
-                  </a>
-                </div>
               </div>
             </div>
           </section>
@@ -231,8 +226,12 @@
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
                     <i class="bi bi-hourglass-split me-1"></i>{{ $pricing->crisc_seats_remaining }} of {{ $pricing->crisc_capacity }} seats remaining — enrollment closes once the course is full.
                   </p>
-                  <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="{{ route('crisc-course.pricing') }}" class="btn-hero-primary d-block text-center">
+                  <div class="d-flex flex-row gap-2 mt-3">
+                    <span class="btn-closed flex-fill">
+                      <span class="btn-closed-label"><i class="bi bi-slash-circle"></i>Session Closed</span>
+                      <span class="btn-closed-date">31st Aug 2026</span>
+                    </span>
+                    <a href="{{ route('crisc-course.pricing') }}" class="btn-hero-primary flex-fill text-center">
                       <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat
                     </a>
                   </div>

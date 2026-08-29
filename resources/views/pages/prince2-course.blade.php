@@ -42,11 +42,6 @@
                 <p class="hero-desc">
                   Led by the author of the <em>Encyclopaedia of Project Management</em>, this training goes beyond simply teaching the methodology — it provides an in-depth understanding of PRINCE2 while continuously comparing its approach with PMBOK throughout the course.
                 </p>
-                <div class="hero-actions mb-3">
-                  <a href="{{ route('prince2.pricing') }}" class="btn-hero-primary">
-                    <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat — ${{ number_format((float) $pricing->prince2_price, 2) }}
-                  </a>
-                </div>
               </div>
             </div>
           </section>
@@ -131,8 +126,12 @@
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
                     <i class="bi bi-hourglass-split me-1"></i>{{ $pricing->prince2_seats_remaining }} of {{ $pricing->prince2_capacity }} seats remaining — enrollment closes once the course reaches capacity.
                   </p>
-                  <div class="d-flex flex-column gap-2 mt-3">
-                    <a href="{{ route('prince2.pricing') }}" class="btn-hero-primary d-block text-center">
+                  <div class="d-flex flex-row gap-2 mt-3">
+                    <span class="btn-closed flex-fill">
+                      <span class="btn-closed-label"><i class="bi bi-slash-circle"></i>Session Closed</span>
+                      <span class="btn-closed-date">05th Oct 2026</span>
+                    </span>
+                    <a href="{{ route('prince2.pricing') }}" class="btn-hero-primary flex-fill text-center">
                       <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat
                     </a>
                   </div>
