@@ -365,7 +365,7 @@
       <div class="outline-stats">
         <span class="outline-stat"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
         <span class="outline-stat"><i class="bi bi-patch-check-fill"></i> Tutorials, Quizzes &amp; Takeaways</span>
-        <span class="outline-stat"><i class="bi bi-award-fill"></i> Completion Certificate</span>
+        <span class="outline-stat"><i class="bi bi-award-fill"></i> 35 PDU Hours Certificate of Completion</span>
       </div>
     </div>
 

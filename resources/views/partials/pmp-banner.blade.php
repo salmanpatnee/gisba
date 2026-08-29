@@ -29,7 +29,7 @@
             <span class="nis2-promo-trust-sep">&bull;</span>
             <span class="nis2-promo-trust-item"><i class="bi bi-calendar-check"></i> 6-Month Access</span>
             <span class="nis2-promo-trust-sep">&bull;</span>
-            <span class="nis2-promo-trust-item"><i class="bi bi-award-fill"></i> Completion Certificate</span>
+            <span class="nis2-promo-trust-item"><i class="bi bi-award-fill"></i> 35 PDU Hours Certificate of Completion</span>
           </div>
           @endif
 

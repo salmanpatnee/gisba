@@ -126,6 +126,7 @@
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Plenty of practice quizzes and knowledge checks</div>
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Small-group format — max {{ $pricing->cissp_capacity }} participants</div>
                     <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Direct access to an experienced cybersecurity trainer</div>
+                    <div class="pricing-include-item"><i class="bi bi-check-lg"></i> Certificate of Participation</div>
                   </div>
                   <p style="font-size:12.5px; color:var(--text-muted); margin-top:16px; margin-bottom:0;">
                     <i class="bi bi-hourglass-split me-1"></i>{{ $pricing->cissp_seats_remaining }} of {{ $pricing->cissp_capacity }} seats remaining — enrollment closes once the course is full.
