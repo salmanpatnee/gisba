@@ -249,6 +249,12 @@
                       @endif
                     </a>
                   </div>
+                  <div style="display:flex; align-items:center; gap:10px; margin-top:14px; padding:12px 16px; background:rgba(200,168,75,0.12); border:1px solid rgba(200,168,75,0.4); border-radius:var(--radius-md);">
+                    <i class="bi bi-star-fill" style="color:var(--accent); font-size:18px; flex-shrink:0;"></i>
+                    <p style="font-size:14.5px; font-weight:700; color:var(--navy); margin-bottom:0;">
+                      This special price is for UK, Bahrain, Saudi Arabia, UK, Czechoslovakia, Poland and Germany
+                    </p>
+                  </div>
                 </div>
               </div>
             </section>
@@ -341,6 +347,13 @@
                 <li>Your free copy of "CRISC and Beyond" will be arranged following enrollment.</li>
               </ul>
             </section>
+
+            <hr class="content-divider" />
+
+            <div class="course-disclaimer">
+              <i class="bi bi-info-circle-fill"></i>
+              <p><strong>Disclaimer:</strong> All trademarks, service marks, certification marks, and registered names are the property of their respective owners. All training courses offered by GISBA are independently developed and delivered and are not affiliated with, sponsored by, approved by, or endorsed by PMI, PeopleCert/PRINCE2, ISC2, or ISACA.</p>
+            </div>
 
           </main>
         </div>

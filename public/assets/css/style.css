@@ -643,6 +643,36 @@ ul li {
   margin-top: 0;
 }
 
+.course-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-section-alt);
+  border: 1px solid var(--border-light);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin-top: 24px;
+}
+
+.course-disclaimer i {
+  color: var(--accent);
+  font-size: 16px;
+  line-height: 1.6;
+  flex-shrink: 0;
+}
+
+.course-disclaimer p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
+
+.course-disclaimer strong {
+  color: var(--text-heading);
+}
+
 .sub-heading {
   font-size: 1rem;
   font-weight: 700;

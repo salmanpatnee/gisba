@@ -250,6 +250,13 @@
               </ul>
             </section>
 
+            <hr class="content-divider" />
+
+            <div class="course-disclaimer">
+              <i class="bi bi-info-circle-fill"></i>
+              <p><strong>Disclaimer:</strong> All trademarks, service marks, certification marks, and registered names are the property of their respective owners. All training courses offered by GISBA are independently developed and delivered and are not affiliated with, sponsored by, approved by, or endorsed by PMI, PeopleCert/PRINCE2, ISC2, or ISACA.</p>
+            </div>
+
           </main>
         </div>
 
