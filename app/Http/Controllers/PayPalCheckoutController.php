@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InitiatePayPalRequest;
 use App\Mail\WelcomeMemberMail;
 use App\Models\MemberAccessToken;
+use App\Models\SiteSettings;
 use App\Models\User;
 use App\Services\PayPalService;
 use Illuminate\Http\RedirectResponse;
@@ -14,6 +15,10 @@ use Illuminate\Support\Str;
 
 class PayPalCheckoutController extends Controller
 {
+    private const COUPON_CODES = ['ISACA50', 'MEPAK50'];
+
+    private const COUPON_PRICE = 499.99;
+
     public function __construct(private readonly PayPalService $paypal) {}
 
     public function create(InitiatePayPalRequest $request): RedirectResponse
@@ -25,9 +30,18 @@ class PayPalCheckoutController extends Controller
                 ->with('info', 'You already have an active membership. Please log in.');
         }
 
+        $settings = SiteSettings::current();
+
+        $couponCode = $request->coupon_code ? strtoupper(trim($request->coupon_code)) : null;
+        $couponApplied = in_array($couponCode, self::COUPON_CODES, true);
+
+        $amount = $couponApplied ? self::COUPON_PRICE : (float) $settings->membership_price;
+
         $order = $this->paypal->createOrder(
             route('members.paypal.return', ['email' => $request->email]),
-            route('members.paypal.cancel')
+            route('members.paypal.cancel'),
+            number_format($amount, 2, '.', ''),
+            $settings->membership_currency
         );
 
         $approvalUrl = collect($order['links'] ?? [])
@@ -37,7 +51,11 @@ class PayPalCheckoutController extends Controller
             return back()->withErrors(['paypal' => 'Could not initiate PayPal checkout. Please try again.']);
         }
 
-        session(['paypal_pending_email' => $request->email]);
+        session([
+            'paypal_pending_email' => $request->email,
+            'paypal_pending_amount' => $amount,
+            'paypal_pending_coupon_code' => $couponApplied ? $couponCode : null,
+        ]);
 
         return redirect()->away($approvalUrl);
     }
@@ -46,10 +64,13 @@ class PayPalCheckoutController extends Controller
     {
         $orderId = request()->query('token');
         $email = session('paypal_pending_email');
+        $couponCode = session('paypal_pending_coupon_code');
 
         if (! $orderId || ! $email) {
             return redirect()->route('members.paywall')->withErrors(['paypal' => 'Invalid payment session.']);
         }
+
+        $amount = session('paypal_pending_amount', fn () => (float) SiteSettings::current()->membership_price);
 
         $result = $this->paypal->captureOrder($orderId);
 
@@ -81,6 +102,8 @@ class PayPalCheckoutController extends Controller
             'email' => $email,
             'token' => Str::random(64),
             'paypal_order_id' => $orderId,
+            'amount_paid' => $amount,
+            'coupon_code' => $couponCode,
             'expires_at' => $expiresAt,
         ]);
 
@@ -90,7 +113,7 @@ class PayPalCheckoutController extends Controller
             Log::error('WelcomeMemberMail failed', ['error' => $e->getMessage()]);
         }
 
-        session()->forget('paypal_pending_email');
+        session()->forget(['paypal_pending_email', 'paypal_pending_amount', 'paypal_pending_coupon_code']);
 
         return redirect()->route('members.email-sent')->with([
             'member_email' => $email,

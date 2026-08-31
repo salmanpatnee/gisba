@@ -37,6 +37,22 @@
 .btn-paywall { display: block; width: 100%; background: var(--navy); color: #fff; font-weight: 700; font-size: 15px; padding: 14px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.2s; }
 .btn-paywall:hover { background: #003070; }
 .paywall-secure { font-size: 11.5px; color: #aaa; text-align: center; margin-top: 14px; }
+[x-cloak] { display: none !important; }
+#coupon_code::placeholder { text-transform: none; }
+.paywall-coupon-apply-btn {
+  padding: 0 18px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--navy);
+  background: rgba(200, 168, 75, 0.15);
+  border: 1px solid #ced4da;
+  border-left: none;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  transition: background 0.15s, color 0.15s;
+}
+.paywall-coupon-apply-btn:hover { background: var(--accent); color: #fff; }
+.paywall-coupon-apply-btn:active { background: #b3944a; color: #fff; }
 </style>
 
 <section class="paywall-hero">
@@ -47,19 +63,37 @@
       <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">Now {{ $price }} @if($hasDiscount)<span style="text-decoration:line-through;color:#aaa;">{{ $regularPrice }}</span> @endif for 6 months of full access to exclusive cybersecurity &amp; PMP resources — limited time only.</p>
     </div>
 
-    <div class="paywall-card">
+    <div class="paywall-card" x-data="{
+           coupon: '{{ old('coupon_code') }}',
+           applied: false,
+           invalid: false,
+           discountedPrice: '499.99',
+           checkCoupon() {
+             if (['ISACA50', 'MEPAK50'].includes(this.coupon.trim().toUpperCase())) {
+               this.applied = true;
+               this.invalid = false;
+             } else {
+               this.applied = false;
+               this.invalid = true;
+             }
+           }
+         }">
       <div class="paywall-icon"><i class="bi bi-award-fill"></i></div>
 
       <div class="text-center mb-4">
         @if($hasDiscount)
-          <span class="paywall-offer-ribbon"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
+          <span class="paywall-offer-ribbon" x-show="!applied"><i class="bi bi-lightning-charge-fill"></i> Limited Time Offer</span>
         @endif
-        <div class="paywall-price-row">
+        <div class="paywall-price-row" x-show="!applied">
           @if($hasDiscount)
             <span class="paywall-discount-badge">{{ $settings->membership_discount_percent }}% OFF</span>
             <span class="paywall-old-price">{{ $regularPrice }}</span>
           @endif
           <div class="paywall-price">{{ $price }} <sub>/ 6 months</sub></div>
+        </div>
+        <div class="paywall-price-row" x-show="applied" x-cloak>
+          <span class="paywall-old-price">{{ $price }}</span>
+          <div class="paywall-price">{{ $settings->membership_currency_symbol }}<span x-text="discountedPrice"></span> <sub>/ 6 months</sub></div>
         </div>
         <p style="font-size:13px;color:#888;margin-top:6px;">Renew any time. No auto-charge.</p>
       </div>
@@ -99,8 +133,33 @@
           @enderror
         </div>
 
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="text"
+                   id="coupon_code"
+                   name="coupon_code"
+                   placeholder="Coupon Code (optional)"
+                   x-model="coupon"
+                   @input="applied = false; invalid = false;"
+                   @keydown.enter.prevent="checkCoupon()"
+                   value="{{ old('coupon_code') }}"
+                   class="form-control @error('coupon_code') is-invalid @enderror"
+                   :class="{ 'is-invalid': invalid }"
+                   style="text-transform:uppercase;">
+            <button type="button" class="paywall-coupon-apply-btn" @click="checkCoupon()">Apply</button>
+          </div>
+          @error('coupon_code')
+            <div class="invalid-feedback d-block">{{ $message }}</div>
+          @enderror
+          <div class="text-danger mt-1" style="font-size:13px;" x-show="invalid" x-cloak>Invalid coupon code.</div>
+          <div class="text-success fw-semibold mt-1" style="font-size:13px;" x-show="applied" x-cloak>
+            <i class="bi bi-check-circle-fill"></i> Coupon applied — new price: {{ $settings->membership_currency_symbol }}<span x-text="discountedPrice"></span>
+          </div>
+        </div>
+
         <button type="submit" class="btn-paywall">
-          <i class="bi bi-paypal me-2"></i>Pay {{ $price }} via PayPal
+          <template x-if="!applied"><span><i class="bi bi-paypal me-2"></i>Pay {{ $price }} via PayPal</span></template>
+          <template x-if="applied"><span><i class="bi bi-paypal me-2"></i>Pay {{ $settings->membership_currency_symbol }}<span x-text="discountedPrice"></span> via PayPal</span></template>
         </button>
       </form>
 
@@ -110,5 +169,9 @@
     </div>
   </div>
 </section>
+
+@push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
+@endpush
 
 @endsection

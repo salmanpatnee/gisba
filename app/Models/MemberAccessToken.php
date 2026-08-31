@@ -12,6 +12,7 @@ class MemberAccessToken extends Model
         'token',
         'paypal_order_id',
         'amount_paid',
+        'coupon_code',
         'used_at',
         'expires_at',
     ];
