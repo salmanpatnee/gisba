@@ -207,7 +207,7 @@
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">21st Sep 2026</span>
+                        <span class="schedule-date">14th - 17th Sep 2026</span>
                         <a href="{{ route('crisc-course') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
                       </td>
                     </tr>
@@ -221,7 +221,7 @@
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">12th &ndash; 15th Oct 2026</span>
+                        <span class="schedule-date">21st &ndash; 24th Sep 2026</span>
                         <a href="{{ route('cissp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
                       </td>
                     </tr>
@@ -235,7 +235,7 @@
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">02nd &ndash; 05th Nov 2026</span>
+                        <span class="schedule-date">28th &ndash; 1st Oct 2026</span>
                         <a href="{{ route('pmp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
                       </td>
                     </tr>
@@ -245,11 +245,11 @@
                       </td>
                       <td>
                         <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
-                        <span class="schedule-date is-closed-text">05th Oct 2026</span>
+                        <span class="schedule-date is-closed-text">12th &ndash; 15th Oct 2026</span>
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">26th &ndash; 29th Oct 2026</span>
+                        <span class="schedule-date">12th &ndash; 15th Oct 2026</span>
                         <a href="{{ route('prince2') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
                       </td>
                     </tr>
