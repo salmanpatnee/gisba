@@ -42,9 +42,18 @@
         <div class="pt-card" style="position:relative; overflow:visible;" x-data="{
                fullPrice: {{ (float) $pricing->crisc_price }},
                coupon: '{{ old('coupon_code') }}',
-               get applied() { return this.coupon.trim().toUpperCase() === 'ISACA50'; },
-               get invalid() { return this.coupon.trim().length > 0 && !this.applied; },
-               get discountedPrice() { return '499.99'; }
+               applied: false,
+               invalid: false,
+               discountedPrice: '499.99',
+               checkCoupon() {
+                 if (this.coupon.trim().toUpperCase() === 'ISACA50') {
+                   this.applied = true;
+                   this.invalid = false;
+                 } else {
+                   this.applied = false;
+                   this.invalid = true;
+                 }
+               }
              }">
 
           <div class="pt-ribbon">
@@ -107,19 +116,24 @@
               </div>
 
               <div class="mb-3">
-                <input type="text"
-                       id="coupon_code"
-                       name="coupon_code"
-                       placeholder="Coupon Code (optional)"
-                       x-model="coupon"
-                       value="{{ old('coupon_code') }}"
-                       class="form-control @error('coupon_code') is-invalid @enderror"
-                       :class="{ 'is-invalid': invalid }"
-                       style="text-transform:uppercase;">
+                <div class="input-group">
+                  <input type="text"
+                         id="coupon_code"
+                         name="coupon_code"
+                         placeholder="Coupon Code (optional)"
+                         x-model="coupon"
+                         @input="applied = false; invalid = false;"
+                         @keydown.enter.prevent="checkCoupon()"
+                         value="{{ old('coupon_code') }}"
+                         class="form-control @error('coupon_code') is-invalid @enderror"
+                         :class="{ 'is-invalid': invalid }"
+                         style="text-transform:uppercase;">
+                  <button type="button" class="btn btn-outline-secondary" @click="checkCoupon()">Apply</button>
+                </div>
                 @error('coupon_code')
-                  <div class="invalid-feedback">{{ $message }}</div>
+                  <div class="invalid-feedback d-block">{{ $message }}</div>
                 @enderror
-                <div class="invalid-feedback" x-show="invalid" style="display:block;" x-cloak>Invalid coupon code.</div>
+                <div class="text-danger mt-1" style="font-size:13px;" x-show="invalid" x-cloak>Invalid coupon code.</div>
                 <div class="text-success fw-semibold mt-1" style="font-size:13px;" x-show="applied" x-cloak>
                   <i class="bi bi-check-circle-fill"></i> Coupon applied — new price: $<span x-text="discountedPrice"></span>
                 </div>
