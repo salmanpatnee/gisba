@@ -118,7 +118,7 @@
           <!--</li>-->
           <li class="nav-item">
             <a class="nav-link site-nav-link {{ request()->routeIs('crisc-course') || request()->routeIs('crisc*') ? 'active' : '' }}" href="{{ route('crisc-course') }}">
-              <i class="bi bi-mortarboard"></i>CRISC Online Course
+              <i class="bi bi-mortarboard"></i>CRISC
             </a>
           </li>
           <li class="nav-item">
@@ -206,7 +206,7 @@
             <li><a href="{{ route('home.legacy') }}">Home</a></li>
             <!--<li><a href="{{ route('nis2') }}">NIS2</a></li>-->
             <!--<li><a href="{{ route('nis2-toolkit') }}">NIS2 Implementation Toolkit</a></li>-->
-            <li><a href="{{ route('crisc-course') }}">CRISC Online Course</a></li>
+            <li><a href="{{ route('crisc-course') }}">CRISC</a></li>
             <li><a href="{{ route('cissp') }}">CISSP</a></li>
             <li><a href="{{ route('pmp') }}">PMP</a></li>
             <li><a href="{{ route('prince2') }}">PRINCE2</a></li>
