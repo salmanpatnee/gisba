@@ -128,7 +128,7 @@
                          class="form-control @error('coupon_code') is-invalid @enderror"
                          :class="{ 'is-invalid': invalid }"
                          style="text-transform:uppercase;">
-                  <button type="button" class="btn btn-outline-secondary" @click="checkCoupon()">Apply</button>
+                  <button type="button" class="pt-coupon-apply-btn" @click="checkCoupon()">Apply</button>
                 </div>
                 @error('coupon_code')
                   <div class="invalid-feedback d-block">{{ $message }}</div>
@@ -181,6 +181,29 @@
       .pt-features{margin-bottom:20px; gap:9px;}
       .pt-features li{font-size:13.5px;}
       #coupon_code::placeholder{text-transform:none;}
+
+      .pt-coupon-apply-btn {
+        padding: 0 18px;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--navy);
+        background: rgba(200, 168, 75, 0.15);
+        border: 1px solid #ced4da;
+        border-left: none;
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+        transition: background 0.15s, color 0.15s;
+      }
+
+      .pt-coupon-apply-btn:hover {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .pt-coupon-apply-btn:active {
+        background: #b3944a;
+        color: #fff;
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
   @endpush
