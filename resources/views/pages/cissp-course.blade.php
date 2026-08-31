@@ -190,7 +190,8 @@
             <hr class="content-divider" />
 
             <section id="instructor">
-              <h2 class="section-heading">Your Instructor</h2>
+              <h2 class="section-heading">Instructor's Profile</h2>
+              <p>The course trainer holds several internationally recognized professional certifications, including CISSP, CISA, CISM, CRISC, CGEIT, MBCP, PMP, and PRINCE2 Practitioner. Most recently, he became the first person in the region to achieve the ITIL AI Governance certification and is also a member of the ITIL AI Beta Community, contributing to course development activities.</p>
               <p>
                 The CISSP Live Online Training is led by an experienced cybersecurity course leader with extensive professional
                 training and consulting experience, who has conducted professional training programs for Fortune 500 companies.

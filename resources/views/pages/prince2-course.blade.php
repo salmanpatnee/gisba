@@ -200,7 +200,8 @@
             <hr class="content-divider" />
 
             <section id="leader">
-              <h2 class="section-heading">Your Course Leader</h2>
+              <h2 class="section-heading">Instructor's Profile</h2>
+              <p>The course trainer holds several internationally recognized professional certifications, including CISSP, CISA, CISM, CRISC, CGEIT, MBCP, PMP, and PRINCE2 Practitioner. Most recently, he became the first person in the region to achieve the ITIL AI Governance certification and is also a member of the ITIL AI Beta Community, contributing to course development activities.</p>
               <p>
                 The PRINCE2 Live Online Training is led by the author of the <strong>Encyclopaedia of Project Management</strong>,
                 bringing extensive project management knowledge and professional experience into every session. The course leader has
