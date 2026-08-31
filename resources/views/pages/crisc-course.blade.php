@@ -162,7 +162,7 @@
                   CRISC has become one of the most in-demand certifications for cybersecurity and IT risk professionals. Following the successful completion of our first CRISC course, we're pleased to announce our second CRISC Online Course.
                 </p>
                 <p class="hero-desc">
-                  This live, instructor-led course is limited to just {{ $pricing->crisc_capacity }} participants and is conducted by the author of multiple books, including <em>CRISC and Beyond</em>. Every participant receives a free copy of the author's book.
+                  This live, instructor-led course is limited to just {{ $pricing->crisc_capacity }} participants and is conducted by the author of multiple books. Every participant receives a free copy of the author's book.
                 </p>
               </div>
             </div>
@@ -301,9 +301,10 @@
             <hr class="content-divider" />
 
             <section id="instructor">
-              <h2 class="section-heading">Your Instructor</h2>
+              <h2 class="section-heading">Instructor's Profile</h2>
+              <p>The course trainer holds several internationally recognized professional certifications, including CISSP, CISA, CISM, CRISC, CGEIT, MBCP, PMP, and PRINCE2 Practitioner. Most recently, he became the first person in the region to achieve the ITIL AI Governance certification and is also a member of the ITIL AI Beta Community, contributing to course development activities.</p>
               <p>
-                This course is conducted by the author of multiple books, including <strong>CRISC and Beyond</strong>.
+                This course is conducted by the author of multiple books.
                 Every participant receives a free copy of the book as part of their enrollment.
               </p>
               <p>The course draws on decades of hands-on IT risk management and cybersecurity governance consulting experience across global organizations.</p>
