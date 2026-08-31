@@ -16,6 +16,7 @@ class CourseEnrollment extends Model
         'email',
         'amount',
         'currency',
+        'coupon_code',
         'paypal_order_id',
         'status',
     ];

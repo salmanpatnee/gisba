@@ -39,17 +39,31 @@
       <div class="pricing-table-wrap">
 
         {{-- ── PRICING CARD ─────────────────────────────────────── --}}
-        <div class="pt-card" style="position:relative; overflow:visible;">
+        <div class="pt-card" style="position:relative; overflow:visible;" x-data="{
+               fullPrice: {{ (float) $pricing->crisc_price }},
+               coupon: '{{ old('coupon_code') }}',
+               get applied() { return this.coupon.trim().toUpperCase() === 'ISACA50'; },
+               get invalid() { return this.coupon.trim().length > 0 && !this.applied; },
+               get discountedPrice() { return '499.99'; }
+             }">
 
           <div class="pt-ribbon">
             <i class="bi bi-people-fill me-1"></i>Limited to {{ $pricing->crisc_capacity }} Participants
           </div>
 
-          <div class="pt-card-header" style="padding-top:36px;">
+          <div class="pt-card-header" style="padding-top:28px;">
             <div class="pt-plan-name">CRISC Online Course</div>
 
-            <div class="pt-price">
-              <span class="pt-currency">$</span>{{ number_format((float) $pricing->crisc_price, 2) }}
+            <div class="pt-price" :style="applied ? 'font-size:2.75rem;' : ''">
+              <template x-if="!applied">
+                <span><span class="pt-currency">$</span><span x-text="fullPrice.toFixed(2)"></span></span>
+              </template>
+              <template x-if="applied">
+                <span style="display:inline-flex; align-items:baseline; gap:10px;">
+                  <span style="text-decoration:line-through; opacity:0.5; font-size:0.55em;">${{ number_format((float) $pricing->crisc_price, 2) }}</span>
+                  <span><span class="pt-currency">$</span><span x-text="discountedPrice"></span></span>
+                </span>
+              </template>
             </div>
             <div class="pt-billing">One-time fee &nbsp;·&nbsp; {{ $pricing->dateRangeFor('crisc') }}, {{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} ({{ $pricing->crisc_timezone }})</div>
           </div>
@@ -92,6 +106,25 @@
                 @enderror
               </div>
 
+              <div class="mb-3">
+                <label for="coupon_code" class="form-label fw-semibold" style="font-size:13px;">Coupon Code (optional)</label>
+                <input type="text"
+                       id="coupon_code"
+                       name="coupon_code"
+                       x-model="coupon"
+                       value="{{ old('coupon_code') }}"
+                       class="form-control @error('coupon_code') is-invalid @enderror"
+                       :class="{ 'is-invalid': invalid }"
+                       style="text-transform:uppercase;">
+                @error('coupon_code')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+                <div class="invalid-feedback" x-show="invalid" style="display:block;" x-cloak>Invalid coupon code.</div>
+                <div class="text-success fw-semibold mt-1" style="font-size:13px;" x-show="applied" x-cloak>
+                  <i class="bi bi-check-circle-fill"></i> Coupon applied — new price: $<span x-text="discountedPrice"></span>
+                </div>
+              </div>
+
               <button type="submit" class="pt-btn">
                 <i class="bi bi-paypal"></i> Reserve Your Seat with PayPal
               </button>
@@ -118,6 +151,13 @@
 
   @push('scripts')
     @include('partials._course-pricing-page-styles')
+    <style>
+      [x-cloak]{display:none!important;}
+      .pt-card-body{padding:24px 36px 28px;}
+      .pt-features{margin-bottom:20px; gap:9px;}
+      .pt-features li{font-size:13.5px;}
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
   @endpush
 
 @endsection

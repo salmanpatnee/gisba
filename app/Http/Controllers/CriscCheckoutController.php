@@ -12,16 +12,25 @@ class CriscCheckoutController extends Controller
 {
     private const COURSE = 'crisc';
 
+    private const COUPON_CODE = 'ISACA50';
+
+    private const COUPON_PRICE = 499.99;
+
     public function __construct(private readonly PayPalService $paypal) {}
 
     public function create(CriscCheckoutRequest $request): RedirectResponse
     {
         $settings = SiteSettings::current();
 
+        $couponCode = $request->coupon_code ? strtoupper(trim($request->coupon_code)) : null;
+        $couponApplied = $couponCode === self::COUPON_CODE;
+
+        $amount = $couponApplied ? self::COUPON_PRICE : (float) $settings->crisc_price;
+
         $order = $this->paypal->createOrder(
             route('crisc-course.paypal.return'),
             route('crisc-course.paypal.cancel'),
-            number_format((float) $settings->crisc_price, 2, '.', ''),
+            number_format($amount, 2, '.', ''),
             $settings->crisc_currency
         );
 
@@ -35,6 +44,8 @@ class CriscCheckoutController extends Controller
         session([
             'crisc_pending_name' => $request->name,
             'crisc_pending_email' => $request->email,
+            'crisc_pending_amount' => $amount,
+            'crisc_pending_coupon_code' => $couponApplied ? self::COUPON_CODE : null,
         ]);
 
         return redirect()->away($approvalUrl);
@@ -45,8 +56,10 @@ class CriscCheckoutController extends Controller
         $orderId = request()->query('token');
         $name = session('crisc_pending_name');
         $email = session('crisc_pending_email');
+        $amount = session('crisc_pending_amount');
+        $couponCode = session('crisc_pending_coupon_code');
 
-        if (! $orderId || ! $name || ! $email) {
+        if (! $orderId || ! $name || ! $email || ! $amount) {
             return redirect()->route('crisc-course.pricing')->withErrors(['crisc' => 'Invalid payment session.']);
         }
 
@@ -62,13 +75,14 @@ class CriscCheckoutController extends Controller
             'course' => self::COURSE,
             'name' => $name,
             'email' => $email,
-            'amount' => $settings->crisc_price,
+            'amount' => $amount,
             'currency' => $settings->crisc_currency,
+            'coupon_code' => $couponCode,
             'paypal_order_id' => $orderId,
             'status' => 'completed',
         ]);
 
-        session()->forget(['crisc_pending_name', 'crisc_pending_email']);
+        session()->forget(['crisc_pending_name', 'crisc_pending_email', 'crisc_pending_amount', 'crisc_pending_coupon_code']);
 
         return redirect()->route('crisc-course.enrolled')->with([
             'enrollment_name' => $name,
