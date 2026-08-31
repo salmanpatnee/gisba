@@ -235,7 +235,7 @@
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">28th &ndash; 1st Oct 2026</span>
+                        <span class="schedule-date">28th Sep &ndash; 1st Oct 2026</span>
                         <a href="{{ route('pmp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
                       </td>
                     </tr>
