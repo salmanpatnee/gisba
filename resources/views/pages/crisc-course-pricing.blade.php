@@ -81,10 +81,10 @@
               @csrf
 
               <div class="mb-3">
-                <label for="name" class="form-label fw-semibold" style="font-size:13px;">Your Name</label>
                 <input type="text"
                        id="name"
                        name="name"
+                       placeholder="Your Name"
                        value="{{ old('name') }}"
                        class="form-control @error('name') is-invalid @enderror"
                        required>
@@ -94,10 +94,10 @@
               </div>
 
               <div class="mb-3">
-                <label for="email" class="form-label fw-semibold" style="font-size:13px;">Your Email Address</label>
                 <input type="email"
                        id="email"
                        name="email"
+                       placeholder="Your Email Address"
                        value="{{ old('email') }}"
                        class="form-control @error('email') is-invalid @enderror"
                        required>
@@ -107,10 +107,10 @@
               </div>
 
               <div class="mb-3">
-                <label for="coupon_code" class="form-label fw-semibold" style="font-size:13px;">Coupon Code (optional)</label>
                 <input type="text"
                        id="coupon_code"
                        name="coupon_code"
+                       placeholder="Coupon Code (optional)"
                        x-model="coupon"
                        value="{{ old('coupon_code') }}"
                        class="form-control @error('coupon_code') is-invalid @enderror"
@@ -123,6 +123,16 @@
                 <div class="text-success fw-semibold mt-1" style="font-size:13px;" x-show="applied" x-cloak>
                   <i class="bi bi-check-circle-fill"></i> Coupon applied — new price: $<span x-text="discountedPrice"></span>
                 </div>
+              </div>
+
+              <div class="mb-3 form-check">
+                <input type="checkbox"
+                       id="consent"
+                       class="form-check-input"
+                       required>
+                <label for="consent" class="form-check-label" style="font-size:12.5px;">
+                  I consent to the use of my information by GISBA for training preparation, follow-ups, CPE verification/confirmation, and related activities.
+                </label>
               </div>
 
               <button type="submit" class="pt-btn">
@@ -156,6 +166,7 @@
       .pt-card-body{padding:24px 36px 28px;}
       .pt-features{margin-bottom:20px; gap:9px;}
       .pt-features li{font-size:13.5px;}
+      #coupon_code::placeholder{text-transform:none;}
     </style>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js" defer></script>
   @endpush
