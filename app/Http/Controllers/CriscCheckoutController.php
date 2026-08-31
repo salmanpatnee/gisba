@@ -12,7 +12,7 @@ class CriscCheckoutController extends Controller
 {
     private const COURSE = 'crisc';
 
-    private const COUPON_CODE = 'ISACA50';
+    private const COUPON_CODES = ['ISACA50', 'MEPAK50'];
 
     private const COUPON_PRICE = 499.99;
 
@@ -23,7 +23,7 @@ class CriscCheckoutController extends Controller
         $settings = SiteSettings::current();
 
         $couponCode = $request->coupon_code ? strtoupper(trim($request->coupon_code)) : null;
-        $couponApplied = $couponCode === self::COUPON_CODE;
+        $couponApplied = in_array($couponCode, self::COUPON_CODES, true);
 
         $amount = $couponApplied ? self::COUPON_PRICE : (float) $settings->crisc_price;
 
@@ -45,7 +45,7 @@ class CriscCheckoutController extends Controller
             'crisc_pending_name' => $request->name,
             'crisc_pending_email' => $request->email,
             'crisc_pending_amount' => $amount,
-            'crisc_pending_coupon_code' => $couponApplied ? self::COUPON_CODE : null,
+            'crisc_pending_coupon_code' => $couponApplied ? $couponCode : null,
         ]);
 
         return redirect()->away($approvalUrl);

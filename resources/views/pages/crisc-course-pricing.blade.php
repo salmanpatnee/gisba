@@ -46,7 +46,7 @@
                invalid: false,
                discountedPrice: '499.99',
                checkCoupon() {
-                 if (this.coupon.trim().toUpperCase() === 'ISACA50') {
+                 if (['ISACA50', 'MEPAK50'].includes(this.coupon.trim().toUpperCase())) {
                    this.applied = true;
                    this.invalid = false;
                  } else {
