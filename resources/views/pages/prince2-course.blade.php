@@ -126,7 +126,7 @@
                   <div class="d-flex flex-column flex-sm-row gap-2 mt-3">
                     <span class="btn-closed flex-fill">
                       <span class="btn-closed-label"><i class="bi bi-slash-circle"></i>Session Closed</span>
-                      <span class="btn-closed-date">05th Oct 2026</span>
+                      <span class="btn-closed-date">28th Sep &ndash; 1st Oct 2026</span>
                     </span>
                     <a href="{{ route('prince2.pricing') }}" class="btn-hero-primary flex-fill text-center">
                       <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat
