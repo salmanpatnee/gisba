@@ -246,7 +246,7 @@
             </section>
 
             <section id="discount-request" class="pwyca-section">
-              <span class="pwyca-eyebrow"><i class="bi bi-heart-fill"></i> Financial Assistance Program</span>
+              {{-- <span class="pwyca-eyebrow"><i class="bi bi-heart-fill"></i> Financial Assistance Program</span> --}}
               <h2 class="section-heading mt-2">Get Discount for Other Courses as Well: GISBA Pay-What-You-Can-Afford Program</h2>
               <p>We believe that financial limitations should not prevent motivated professionals and students from accessing high-quality professional training.</p>
               <p>All GISBA courses have a standard published price. However, if the standard fee is beyond your current budget, you may request a special discount under our Pay-What-You-Can-Afford Program.</p>
@@ -267,7 +267,7 @@
                     <div class="pwyca-course-field">
                       <div class="input-group">
                         <input type="number" class="form-control" id="discount-pmp-percentage" name="pmp_discount_percentage"
-                               placeholder="e.g. 25" min="0" max="100" step="1"
+                               placeholder="" min="0" max="100" step="1"
                                style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
                         <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
                       </div>
@@ -283,7 +283,7 @@
                     <div class="pwyca-course-field">
                       <div class="input-group">
                         <input type="number" class="form-control" id="discount-crisc-percentage" name="crisc_discount_percentage"
-                               placeholder="e.g. 25" min="0" max="100" step="1"
+                               placeholder="" min="0" max="100" step="1"
                                style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
                         <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
                       </div>
@@ -299,7 +299,7 @@
                     <div class="pwyca-course-field">
                       <div class="input-group">
                         <input type="number" class="form-control" id="discount-prince2-percentage" name="prince2_discount_percentage"
-                               placeholder="e.g. 25" min="0" max="100" step="1"
+                               placeholder="" min="0" max="100" step="1"
                                style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
                         <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
                       </div>
