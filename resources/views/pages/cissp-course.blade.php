@@ -22,6 +22,36 @@
 
 @section('content')
 
+  <style>
+    .cissp-or-divider {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin: 36px 0;
+    }
+    .cissp-or-divider-line {
+      flex: 1 1 auto;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid) 15%, var(--border-mid) 85%, transparent);
+    }
+    .cissp-or-divider-badge {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--accent);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.25);
+    }
+  </style>
+
   <div class="page-layout" style="padding-bottom:0;">
     <div class="container">
       <div class="col-12">
@@ -56,6 +86,7 @@
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
                 <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
+                <li><a href="#discount-request"><i class="bi bi-percent"></i> Request a Discount</a></li>
                 <li><a href="#what-is-cissp"><i class="bi bi-shield-check"></i> What is CISSP?</a></li>
                 <li><a href="#schedule"><i class="bi bi-calendar-event"></i> Schedule &amp; Capacity</a></li>
                 <li><a href="#instructor"><i class="bi bi-person-badge"></i> Instructor</a></li>
@@ -141,6 +172,74 @@
                       This special price is for Middle East, UK, and Czech Republic
                     </p>
                   </div>
+                </div>
+              </div>
+            </section>
+
+            <div class="cissp-or-divider" role="separator" aria-label="or">
+              <span class="cissp-or-divider-line"></span>
+              <span class="cissp-or-divider-badge">OR</span>
+              <span class="cissp-or-divider-line"></span>
+            </div>
+
+            <section id="discount-request">
+              <h2 class="section-heading mt-4">Request a Discount</h2>
+              <p>If the standard fee is beyond your current budget, tell us the discount you'd like to request and we'll do our best to accommodate you, subject to seat availability.</p>
+
+              <div id="discount-form-alert" role="alert" aria-live="polite" style="display:none;" class="mt-3"></div>
+
+              <div class="contact-card mt-3">
+                <div class="contact-card-body">
+                  <form id="discount-request-form-el" action="{{ route('cissp.discount-request') }}" method="post" novalidate>
+
+                    <div class="row g-3">
+
+                      <div class="col-12 col-sm-6">
+                        <label for="discount-name" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Full Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="discount-name" name="name"
+                               placeholder="Your full name" required
+                               minlength="2" maxlength="100"
+                               style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
+                        <div class="invalid-feedback" id="err-discount-name"></div>
+                      </div>
+
+                      <div class="col-12 col-sm-6">
+                        <label for="discount-email" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Email Address <span class="text-danger">*</span></label>
+                        <input type="email" class="form-control" id="discount-email" name="email"
+                               placeholder="name@company.com" required maxlength="150"
+                               style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
+                        <div class="invalid-feedback" id="err-discount-email"></div>
+                      </div>
+
+                      <div class="col-12 col-sm-6">
+                        <label for="discount-percentage" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Discount Percentage Requested <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                          <input type="number" class="form-control" id="discount-percentage" name="discount_percentage"
+                                 placeholder="e.g. 25" required min="1" max="99"
+                                 style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
+                          <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
+                        </div>
+                        <div class="invalid-feedback" id="err-discount-percentage"></div>
+                      </div>
+
+                      <div class="col-12">
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" id="discount-consent" name="consent" required />
+                          <label class="form-check-label" for="discount-consent" style="font-size:13.5px;">
+                            I consent to the use of my information by GISBA for training preparation, follow-ups, CPE verification/confirmation, and related activities. <span class="text-danger">*</span>
+                          </label>
+                        </div>
+                        <div class="invalid-feedback d-block" id="err-discount-consent"></div>
+                      </div>
+
+                      <div class="col-12">
+                        <button type="submit" id="discount-submit-btn" class="btn-hero-primary" style="border:none; cursor:pointer;">
+                          <i class="bi bi-send me-2"></i>Send Request
+                        </button>
+                      </div>
+
+                    </div>
+                  </form>
                 </div>
               </div>
             </section>
@@ -278,3 +377,138 @@
   </div>
 
 @endsection
+
+@push('scripts')
+<script>
+  function setFieldError(inputEl, errEl, message) {
+    inputEl.classList.add('is-invalid');
+    inputEl.classList.remove('is-valid');
+    if (errEl) { errEl.textContent = message; }
+  }
+
+  function setFieldValid(inputEl) {
+    inputEl.classList.remove('is-invalid');
+    inputEl.classList.add('is-valid');
+  }
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function validateDiscountForm() {
+    let valid = true;
+    const name = document.getElementById('discount-name');
+    const email = document.getElementById('discount-email');
+    const percentage = document.getElementById('discount-percentage');
+    const consent = document.getElementById('discount-consent');
+
+    if (!name.value.trim() || name.value.trim().length < 2) {
+      setFieldError(name, document.getElementById('err-discount-name'), 'Full name must be at least 2 characters.');
+      valid = false;
+    } else {
+      setFieldValid(name);
+    }
+
+    if (!email.value.trim()) {
+      setFieldError(email, document.getElementById('err-discount-email'), 'Email address is required.');
+      valid = false;
+    } else if (!validateEmail(email.value.trim())) {
+      setFieldError(email, document.getElementById('err-discount-email'), 'Please enter a valid email address.');
+      valid = false;
+    } else {
+      setFieldValid(email);
+    }
+
+    const percentValue = Number(percentage.value);
+    if (!percentage.value || percentValue < 1 || percentValue > 99) {
+      setFieldError(percentage, document.getElementById('err-discount-percentage'), 'Please enter a discount percentage between 1 and 99.');
+      valid = false;
+    } else {
+      setFieldValid(percentage);
+    }
+
+    const consentErr = document.getElementById('err-discount-consent');
+    if (!consent.checked) {
+      consentErr.textContent = 'Please consent to the use of your information before submitting.';
+      valid = false;
+    } else {
+      consentErr.textContent = '';
+    }
+
+    return valid;
+  }
+
+  const discountForm = document.getElementById('discount-request-form-el');
+  const discountAlertEl = document.getElementById('discount-form-alert');
+  const discountSubmitBtn = document.getElementById('discount-submit-btn');
+
+  function showDiscountAlert(type, message) {
+    const iconMap = { success: 'bi-check-circle-fill', danger: 'bi-exclamation-triangle-fill', warning: 'bi-exclamation-circle-fill' };
+    discountAlertEl.className = `alert alert-${type} d-flex align-items-start gap-2 mt-3`;
+    discountAlertEl.innerHTML = `<i class="bi ${iconMap[type] || 'bi-info-circle-fill'} flex-shrink-0 mt-1"></i><span>${message}</span>`;
+    discountAlertEl.style.display = '';
+    discountAlertEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  if (discountForm) {
+    discountForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      if (!validateDiscountForm()) {
+        showDiscountAlert('warning', 'Please correct the highlighted fields before submitting.');
+        return;
+      }
+
+      discountSubmitBtn.disabled = true;
+      discountSubmitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Sending…';
+      discountAlertEl.style.display = 'none';
+
+      try {
+        const response = await fetch(discountForm.action, {
+          method: 'POST',
+          headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            'Accept': 'application/json',
+          },
+          body: new FormData(discountForm),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          showDiscountAlert('success', data.message);
+          discountForm.reset();
+          discountForm.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
+            el.classList.remove('is-valid', 'is-invalid');
+          });
+        } else if (data.errors) {
+          const fieldMap = {
+            name: ['discount-name', 'err-discount-name'],
+            email: ['discount-email', 'err-discount-email'],
+            discount_percentage: ['discount-percentage', 'err-discount-percentage'],
+            consent: ['discount-consent', 'err-discount-consent'],
+          };
+          Object.entries(data.errors).forEach(([field, messages]) => {
+            const mapped = fieldMap[field];
+            if (!mapped) { return; }
+            const [inputId, errId] = mapped;
+            const inputEl = document.getElementById(inputId);
+            const errEl = document.getElementById(errId);
+            if (inputEl && errEl) {
+              setFieldError(inputEl, errEl, messages[0]);
+            }
+          });
+          showDiscountAlert('danger', data.message || 'Please correct the highlighted fields before submitting.');
+        } else {
+          showDiscountAlert('danger', data.message || 'Something went wrong. Please try again.');
+        }
+      } catch (err) {
+        showDiscountAlert('danger', 'Something went wrong. Please try again or email us directly.');
+      } finally {
+        discountSubmitBtn.disabled = false;
+        discountSubmitBtn.innerHTML = '<i class="bi bi-send me-2"></i>Send Request';
+      }
+    });
+  }
+</script>
+@endpush

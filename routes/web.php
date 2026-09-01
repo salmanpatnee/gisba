@@ -24,6 +24,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CourseCheckoutController;
 use App\Http\Controllers\CriscCheckoutController;
 use App\Http\Controllers\CriscController;
+use App\Http\Controllers\DiscountRequestController;
 use App\Http\Controllers\MemberAccountController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\MembersLoginController;
@@ -72,6 +73,7 @@ Route::get('/cissp/enrolled', fn () => view('pages.cissp-course-enrolled', [
     'enrollmentName' => session('enrollment_name'),
     'enrollmentEmail' => session('enrollment_email'),
 ]))->name('cissp.enrolled');
+Route::post('/cissp/discount-request', [DiscountRequestController::class, 'send'])->name('cissp.discount-request');
 
 Route::get('/prince2', [PageController::class, 'prince2'])->name('prince2');
 Route::get('/prince2/pricing', [PageController::class, 'prince2Pricing'])->name('prince2.pricing');
