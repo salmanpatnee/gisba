@@ -1,39 +1,55 @@
-# Memory — Home Page: Available Courses & Training Schedule
+# Memory — Coupon System: ISACA90/MEPAK90 (90% off) + Mailtrap SDK
 
-Last updated: 2026-08-28
+Last updated: 2026-09-01
 
 ## What was built
 
-Added two new sections to the home page (`resources/views/pages/home.blade.php`) and their styles (`public/assets/css/style.css`), and reworked the home page layout. Committed on `main` as `1105263` ("feat(home): add Available Courses and Training Schedule sections") — not yet pushed to `origin`.
+**Coupon feature — new 90%-off tier**, added alongside the existing ISACA50/MEPAK50 flat-$499.99 coupon across all four checkout flows. Committed as `996eaf0` ("feat(coupons): add ISACA90/MEPAK90 for 90% off dynamic pricing") on `main`.
 
-**Layout change:** Removed the home page's left sidebar (`Quick Links` nav + Contact GISBA box) entirely. Main content column changed from `col-12 col-md-9` to `col-12` — the whole home page content area is now full width. Also fixed `.requirement-grid` (used by "Our Expertise" and reused on several other pages: CRISC/CISSP/PRINCE2 course pages, training-course-development, nis2-implementation-toolkit, awareness) from `grid-template-columns: repeat(auto-fill, minmax(200px,1fr))` to `repeat(auto-fit, ...)` — `auto-fill` was reserving invisible empty columns and leaving a gap on the right once the container got wider (after the sidebar was removed); `auto-fit` collapses those and stretches the real items to fill the row. This is a global CSS change, not home-page-scoped.
+Files touched:
+- `app/Http/Controllers/CriscCheckoutController.php`
+- `app/Http/Controllers/CourseCheckoutController.php` (shared by CISSP + PRINCE2 via `$course` route param)
+- `app/Http/Controllers/PayPalCheckoutController.php` (PMP / `/members` paywall flow)
+- `resources/views/pages/crisc-course-pricing.blade.php`
+- `resources/views/pages/cissp-course-pricing.blade.php`
+- `resources/views/pages/prince2-course-pricing.blade.php`
+- `resources/views/pages/members.blade.php`
 
-**"Available Courses" section** (`#courses`, placed right after the top hero, before "Our Expertise"): a 4-column grid (`col-6 col-md-3`) of `.course-card` cards — one per course (CRISC, CISSP, PMP, PRINCE2), in that order (matches header/footer nav order). Each card: full-width **uncropped** banner image on top (no `object-fit`/forced height — went through two redesign iterations; first version cropped the image which the user rejected as "not looking professional" / "image is cropping", so the final version just lets the image render at natural aspect ratio), a gold divider, then an eyebrow label, serif course title, a one-line description pulled from each course's own real hero copy, two feature tags (Expert-Led / Live Sessions), and a "View Course Details" CTA linking to the course's real route (`crisc-course`, `cissp`, `pmp`, `prince2`). Grid width went 4-col → 2-col (editorial split-card layout) → back to 4-col (image-top layout) across the session per user feedback — final state is 4-col, image-top.
+Each controller now has `PERCENT_COUPON_CODES = ['ISACA90', 'MEPAK90']` and `PERCENT_COUPON_DISCOUNT = 0.10`, with a 3-way `match(true)` branch (flat coupon > percent coupon > normal price) computing the discounted amount as `floor($basePrice * self::PERCENT_COUPON_DISCOUNT * 100) / 100`. Each blade view's Alpine `checkCoupon()` mirrors this client-side for the price preview using `Math.floor(this.fullPrice * 0.10 * 100) / 100`.
 
-**"Training Schedule 2026" section** (`#schedule`, placed after "Available Courses", before "Our Expertise"): content extracted directly from `content/Training Schedule 2026 (1).docx` (a table + bullet lists — read via a one-off Python `zipfile`/`ElementTree` script since the docx tool can't read binary files directly). Renders as a `.schedule-table` (Course / Recent Cohort / Upcoming Cohort) with gold "Enrolling" pills for the open cohort (linking to the course page) and grey struck-through "Closed" pills for the past cohort, using the exact dates from the doc. A "Salient Features" 2×2 card grid (one per course, bullet list of course-specific selling points also from the doc) was added, then **removed entirely** per explicit user request ("Remove all Salient Features cards") — both the Blade markup and the now-dead `.schedule-feature-*` CSS were deleted. Final section is just the schedule table.
+`members.blade.php` needed one extra change the course pages didn't: it had no raw numeric base price in its Alpine `x-data` block (only pre-formatted currency strings), so added `fullPrice: {{ (float) $settings->membership_price }}` — `$settings` was already being passed into the view from `MembersController::paywall()`.
+
+**Second, unrelated commit**: `1a2ccc2` ("feat(mail): send contact form enquiries via Mailtrap SDK") — added `railsware/mailtrap-php` + `symfony/mailer` + `symfony/http-client` to `composer.json`, registered a `mailtrap-sdk` mail transport in `config/mail.php`, and switched `ContactController::send()` to use `Mail::mailer('mailtrap-sdk')`. Also added empty `MAILTRAP_HOST`/`MAILTRAP_API_KEY`/`MAILTRAP_INBOX_ID` placeholders to `.env.example`. This was pre-existing uncommitted work from a different task (not part of the coupon session) — committed separately at the user's request, no secrets included.
 
 ## Decisions made
 
-- Course promo images are shown **uncropped** (top, natural aspect ratio) rather than cropped/cover-fit — user explicitly rejected two different cropped treatments (a short `object-fit:cover` strip, then a left-split card crop) before landing on "just show the full image."
-- Sidebar/"Quick Links" removed from the home page entirely (not just hidden) per explicit request — full-width layout is now the home page's standing design, not a one-off for this section.
-- Training Schedule content is static/hardcoded from the docx, not wired to `SiteSettings` DB fields — the docx has data (a "Closed" cohort + salient features) that doesn't exist in the `site_settings` schema at all, and this was treated as a one-time marketing-content add, consistent with how the course cards above it are also hardcoded rather than DB-driven.
-- Salient Features cards were cut entirely rather than trimmed/restyled — user wanted them gone, not adjusted.
+- **90%-off coupon computes dynamically from the live `SiteSettings` price** (e.g. `crisc_price`, `cissp_price`, `prince2_price`, `membership_price`) at checkout time, not a hardcoded flat price like the existing 50% coupon — user explicitly said "Prices are dynamic, it should change accordingly." This means CRISC's 90%-off amount ($9.99 base) is very different in scale from CISSP/PRINCE2's ($999.99 base) — that's intentional per-flow behavior, not a bug.
+- **Truncate (floor), don't round**, to 2 decimals: `999.99 * 0.10 = 99.999` — `round()`/`toFixed()` bumped this to `100.00`, but the user wanted exactly `99.99`. Fixed by switching both server (`floor($x*100)/100`) and client (`Math.floor(x*100)/100`) from round-based to floor-based truncation. This must be kept in sync — any future coupon math needs both sides updated identically or the client preview will drift from the actual server-charged amount.
+- **Kept the existing duplication pattern** (3 controllers + 4 views, no shared coupon config/class) rather than centralizing — explicit user choice for scope reasons, even though this is the second time the same 7 files needed touching for a new coupon tier. If a third tier is ever requested, worth revisiting centralization at that point.
+- Coupon codes are case-insensitive via `strtoupper(trim(...))` server-side and `.toUpperCase()` client-side — consistent with the existing ISACA50/MEPAK50 pattern.
 
 ## Problems solved
 
-- A PowerShell `-replace` / `Set-Content -Encoding utf8` one-liner used to bulk-swap grid column classes **corrupted the file's encoding** (em dashes became `â€"` mojibake, a stray BOM was added). Caught it via `git diff`, reverted the file with `git checkout --`, and rebuilt the lost edits (which included that session's earlier "Available Courses" section work) using the Edit tool instead of shell text substitution. **Lesson: never use PowerShell/shell find-replace on this Blade file (or likely any UTF-8 file with em dashes/smart quotes) — always use the Edit tool.**
-- Reading `.docx` content: the `Read` tool errors on binary files. Worked around it by treating the `.docx` as a zip and parsing `word/document.xml` directly with Python (`zipfile` + `xml.etree.ElementTree`), which also correctly separated the schedule `<w:tbl>` table rows from the "Salient Features" paragraphs.
-- CSS Grid `auto-fill` vs `auto-fit` gap bug (see Layout change above) — general fix applicable anywhere `.requirement-grid` is used with a container wider than the items need.
+- **Rounding bug**: initial implementation used `round($basePrice * 0.10, 2)` (and `.toFixed(2)` client-side), which turned $999.99 into $100.00 instead of the desired $99.99, because `999.99 * 0.10 = 99.999` rounds up at 2dp. Fixed by switching to floor-based truncation (`floor($x * 100) / 100`) on both server and client — verified this also applies correctly to CRISC ($9.99 → $0.99) and membership ($30.00 → $3.00) bases.
 
 ## Current state
 
-Home page (`/`) now has, top to bottom: hero, Available Courses (4-col, uncropped images), Training Schedule 2026 (table only, no feature cards), Our Expertise (now full-width, no gap), Our Flagship Services, and the rest of the pre-existing sections — all full width, no sidebar. Committed as `1105263` on `main`, working tree clean for this feature (only this `memory.md` file itself is left modified, intentionally excluded from that commit as unrelated). Not pushed to `origin`. `vendor/bin/pint --dirty` passes. Not manually re-tested in-browser after the very last "remove Salient Features" edit's CSS cleanup pass beyond confirming pint — worth a quick visual check next session if picking this back up.
+All four checkout flows (CRISC, CISSP, PRINCE2, PMP/members) now accept both coupon tiers:
+- `ISACA50`/`MEPAK50` → flat $499.99 (unchanged, pre-existing)
+- `ISACA90`/`MEPAK90` → 90% off current live price, truncated to cents (new this session)
+
+Both are enforced server-side (PayPal charge always matches) and previewed client-side via Alpine. `vendor/bin/pint --dirty` passes. Both commits (`996eaf0`, `1a2ccc2`) are local on `main`, 2 commits ahead of `origin/main` — **not pushed**. No automated tests were added (project's standing default is no-TDD unless explicitly asked — see global memory `feedback_no_tdd_default`).
+
+Not yet manually verified in-browser this session — the fix was applied and Pint-checked, but no live page reload / PayPal sandbox test was run to confirm $999.99 → $99.99 actually renders and charges correctly end-to-end.
 
 ## Next session starts with
 
-Nothing queued. If continuing: confirm whether `1105263` should be pushed to `origin/main`, and do a final visual pass on `/` (desktop + mobile) now that Salient Features are gone, to make sure the Training Schedule section's spacing/divider still looks right without them.
+Nothing queued. If continuing:
+1. Confirm whether `996eaf0` and `1a2ccc2` should be pushed to `origin/main` (2 commits currently ahead, unpushed).
+2. Do a manual browser check on all 4 pricing pages (`/crisc-course`, `/cissp-course`, `/prince2-course`, `/members`) with `ISACA90`/`MEPAK90` to confirm the displayed price is correct (e.g. CISSP $999.99 → $99.99, not $100.00) and that `ISACA50`/`MEPAK50` still show flat $499.99 (regression check).
+3. If practical, submit a real checkout with a sandbox PayPal account to confirm the persisted `CourseEnrollment.amount` / `MemberAccessToken.amount_paid` matches the truncated discount.
 
 ## Open questions
 
-- Push policy unconfirmed again this session (same open question as last time) — does the user push manually, or should Claude push after committing?
-- No test coverage was added for any of this session's home-page changes (static content/CSS only, consistent with skip-tests-on-static-content pattern established last session) — confirm that's still fine if this work expands to anything dynamic later.
+- Push policy still unconfirmed (same recurring open question across sessions) — does the user push manually, or should Claude push after committing?
+- Mailtrap SDK commit (`1a2ccc2`) was committed as-is without deep review of the Mailtrap integration itself (it was pre-existing work from outside this session's task) — worth a sanity check that `MAILTRAP_API_KEY` etc. are actually set in the real `.env` (not just `.env.example`) before this reaches production, since a missing key would silently break contact form emails.
