@@ -44,9 +44,15 @@
                coupon: '{{ old('coupon_code') }}',
                applied: false,
                invalid: false,
-               discountedPrice: '499.99',
+               discountedPrice: '0.00',
                checkCoupon() {
-                 if (['ISACA50', 'MEPAK50'].includes(this.coupon.trim().toUpperCase())) {
+                 const code = this.coupon.trim().toUpperCase();
+                 if (['ISACA50', 'MEPAK50'].includes(code)) {
+                   this.discountedPrice = '499.99';
+                   this.applied = true;
+                   this.invalid = false;
+                 } else if (['ISACA90', 'MEPAK90'].includes(code)) {
+                   this.discountedPrice = (Math.floor(this.fullPrice * 0.10 * 100) / 100).toFixed(2);
                    this.applied = true;
                    this.invalid = false;
                  } else {

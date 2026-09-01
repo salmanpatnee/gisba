@@ -16,6 +16,10 @@ class CriscCheckoutController extends Controller
 
     private const COUPON_PRICE = 499.99;
 
+    private const PERCENT_COUPON_CODES = ['ISACA90', 'MEPAK90'];
+
+    private const PERCENT_COUPON_DISCOUNT = 0.10;
+
     public function __construct(private readonly PayPalService $paypal) {}
 
     public function create(CriscCheckoutRequest $request): RedirectResponse
@@ -23,9 +27,17 @@ class CriscCheckoutController extends Controller
         $settings = SiteSettings::current();
 
         $couponCode = $request->coupon_code ? strtoupper(trim($request->coupon_code)) : null;
-        $couponApplied = in_array($couponCode, self::COUPON_CODES, true);
+        $flatApplied = in_array($couponCode, self::COUPON_CODES, true);
+        $percentApplied = in_array($couponCode, self::PERCENT_COUPON_CODES, true);
 
-        $amount = $couponApplied ? self::COUPON_PRICE : (float) $settings->crisc_price;
+        $basePrice = (float) $settings->crisc_price;
+        $amount = match (true) {
+            $flatApplied => self::COUPON_PRICE,
+            $percentApplied => floor($basePrice * self::PERCENT_COUPON_DISCOUNT * 100) / 100,
+            default => $basePrice,
+        };
+
+        $couponApplied = $flatApplied || $percentApplied;
 
         $order = $this->paypal->createOrder(
             route('crisc-course.paypal.return'),
