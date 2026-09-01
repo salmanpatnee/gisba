@@ -15,7 +15,8 @@ class ContactController extends Controller
         $validated = $request->validated();
 
         try {
-            Mail::to(config('mail.enquiry_recipient'))
+            Mail::mailer('mailtrap-sdk')
+                ->to(config('mail.enquiry_recipient'))
                 ->send(new ContactMail(
                     name: $validated['name'],
                     email: $validated['email'],
