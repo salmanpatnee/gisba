@@ -23,32 +23,101 @@
 @section('content')
 
   <style>
-    .cissp-or-divider {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      margin: 36px 0;
+    .pwyca-section {
+      margin-top: 44px;
     }
-    .cissp-or-divider-line {
-      flex: 1 1 auto;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--border-mid) 15%, var(--border-mid) 85%, transparent);
-    }
-    .cissp-or-divider-badge {
-      flex: 0 0 auto;
-      display: flex;
+    .pwyca-eyebrow {
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: var(--navy);
-      border: 2px solid var(--accent);
+      gap: 6px;
+      background: rgba(200, 168, 75, 0.12);
       color: var(--accent);
-      font-size: 13px;
+      border: 1px solid rgba(200, 168, 75, 0.45);
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.08em;
-      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.25);
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 4px;
+    }
+    .pwyca-card {
+      background: linear-gradient(180deg, #ffffff 0%, var(--bg-section-alt, #f7f9fc) 100%);
+      border: 1px solid var(--border-mid);
+      border-top: 4px solid var(--accent);
+      border-radius: var(--radius-md);
+      padding: 26px 24px;
+      box-shadow: 0 10px 30px rgba(0, 51, 102, 0.08);
+    }
+    .pwyca-card-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pwyca-card-label i {
+      color: var(--accent);
+    }
+    .pwyca-price-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: #fff;
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+    .pwyca-price-row:hover {
+      border-color: var(--accent);
+      box-shadow: 0 6px 16px rgba(200, 168, 75, 0.18);
+      transform: translateY(-1px);
+    }
+    .pwyca-course-info {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .pwyca-course-name {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--text-heading);
+    }
+    .pwyca-course-name i {
+      color: var(--navy-light, var(--navy));
+      font-size: 13px;
+    }
+    .pwyca-course-price {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .pwyca-course-field {
+      flex: 0 0 190px;
+      max-width: 190px;
+    }
+    .pwyca-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid) 15%, var(--border-mid) 85%, transparent);
+      margin: 22px 0 20px;
+    }
+    @media (max-width: 576px) {
+      .pwyca-course-field {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+      .pwyca-price-row {
+        align-items: flex-start;
+      }
     }
   </style>
 
@@ -86,7 +155,7 @@
               <p class="sidebar-nav-title">Quick Links</p>
               <ul>
                 <li><a href="#pricing"><i class="bi bi-tag"></i> Pricing</a></li>
-                <li><a href="#discount-request"><i class="bi bi-percent"></i> Request a Discount</a></li>
+                <li><a href="#discount-request"><i class="bi bi-percent"></i> Pay-What-You-Can-Afford</a></li>
                 <li><a href="#what-is-cissp"><i class="bi bi-shield-check"></i> What is CISSP?</a></li>
                 <li><a href="#schedule"><i class="bi bi-calendar-event"></i> Schedule &amp; Capacity</a></li>
                 <li><a href="#instructor"><i class="bi bi-person-badge"></i> Instructor</a></li>
@@ -176,71 +245,107 @@
               </div>
             </section>
 
-            <div class="cissp-or-divider" role="separator" aria-label="or">
-              <span class="cissp-or-divider-line"></span>
-              <span class="cissp-or-divider-badge">OR</span>
-              <span class="cissp-or-divider-line"></span>
-            </div>
-
-            <section id="discount-request">
-              <h2 class="section-heading mt-4">Request a Discount</h2>
-              <p>If the standard fee is beyond your current budget, tell us the discount you'd like to request and we'll do our best to accommodate you, subject to seat availability.</p>
+            <section id="discount-request" class="pwyca-section">
+              <span class="pwyca-eyebrow"><i class="bi bi-heart-fill"></i> Financial Assistance Program</span>
+              <h2 class="section-heading mt-2">Get Discount for Other Courses as Well: GISBA Pay-What-You-Can-Afford Program</h2>
+              <p>We believe that financial limitations should not prevent motivated professionals and students from accessing high-quality professional training.</p>
+              <p>All GISBA courses have a standard published price. However, if the standard fee is beyond your current budget, you may request a special discount under our Pay-What-You-Can-Afford Program.</p>
+              <p>Tell us the amount you can reasonably afford, and we will review your request and do our best to accommodate you, subject to seat availability.</p>
 
               <div id="discount-form-alert" role="alert" aria-live="polite" style="display:none;" class="mt-3"></div>
 
-              <div class="contact-card mt-3">
-                <div class="contact-card-body">
-                  <form id="discount-request-form-el" action="{{ route('cissp.discount-request') }}" method="post" novalidate>
+              <div class="pwyca-card mt-3">
+                <p class="pwyca-card-label"><i class="bi bi-percent"></i> Request a discount for one or more of the courses below</p>
 
-                    <div class="row g-3">
+                <form id="discount-request-form-el" action="{{ route('cissp.discount-request') }}" method="post" novalidate>
 
-                      <div class="col-12 col-sm-6">
-                        <label for="discount-name" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Full Name <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" id="discount-name" name="name"
-                               placeholder="Your full name" required
-                               minlength="2" maxlength="100"
-                               style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
-                        <div class="invalid-feedback" id="err-discount-name"></div>
-                      </div>
-
-                      <div class="col-12 col-sm-6">
-                        <label for="discount-email" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Email Address <span class="text-danger">*</span></label>
-                        <input type="email" class="form-control" id="discount-email" name="email"
-                               placeholder="name@company.com" required maxlength="150"
-                               style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
-                        <div class="invalid-feedback" id="err-discount-email"></div>
-                      </div>
-
-                      <div class="col-12 col-sm-6">
-                        <label for="discount-percentage" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Discount Percentage Requested <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                          <input type="number" class="form-control" id="discount-percentage" name="discount_percentage"
-                                 placeholder="e.g. 25" required min="1" max="99"
-                                 style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
-                          <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
-                        </div>
-                        <div class="invalid-feedback" id="err-discount-percentage"></div>
-                      </div>
-
-                      <div class="col-12">
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="discount-consent" name="consent" required />
-                          <label class="form-check-label" for="discount-consent" style="font-size:13.5px;">
-                            I consent to the use of my information by GISBA for training preparation, follow-ups, CPE verification/confirmation, and related activities. <span class="text-danger">*</span>
-                          </label>
-                        </div>
-                        <div class="invalid-feedback d-block" id="err-discount-consent"></div>
-                      </div>
-
-                      <div class="col-12">
-                        <button type="submit" id="discount-submit-btn" class="btn-hero-primary" style="border:none; cursor:pointer;">
-                          <i class="bi bi-send me-2"></i>Send Request
-                        </button>
-                      </div>
-
+                  <div class="pwyca-price-row">
+                    <div class="pwyca-course-info">
+                      <span class="pwyca-course-name"><i class="bi bi-mortarboard-fill"></i> PMP</span>
+                      <span class="pwyca-course-price">Std. Price $999</span>
                     </div>
-                  </form>
-                </div>
+                    <div class="pwyca-course-field">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="discount-pmp-percentage" name="pmp_discount_percentage"
+                               placeholder="e.g. 25" min="0" max="100" step="1"
+                               style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
+                        <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
+                      </div>
+                      <div class="invalid-feedback" id="err-discount-pmp-percentage"></div>
+                    </div>
+                  </div>
+
+                  <div class="pwyca-price-row">
+                    <div class="pwyca-course-info">
+                      <span class="pwyca-course-name"><i class="bi bi-mortarboard-fill"></i> CRISC</span>
+                      <span class="pwyca-course-price">Std. Price $999</span>
+                    </div>
+                    <div class="pwyca-course-field">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="discount-crisc-percentage" name="crisc_discount_percentage"
+                               placeholder="e.g. 25" min="0" max="100" step="1"
+                               style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
+                        <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
+                      </div>
+                      <div class="invalid-feedback" id="err-discount-crisc-percentage"></div>
+                    </div>
+                  </div>
+
+                  <div class="pwyca-price-row">
+                    <div class="pwyca-course-info">
+                      <span class="pwyca-course-name"><i class="bi bi-mortarboard-fill"></i> PRINCE2</span>
+                      <span class="pwyca-course-price">Std. Price $999</span>
+                    </div>
+                    <div class="pwyca-course-field">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="discount-prince2-percentage" name="prince2_discount_percentage"
+                               placeholder="e.g. 25" min="0" max="100" step="1"
+                               style="border-color:var(--border-mid); border-radius:var(--radius-sm) 0 0 var(--radius-sm); font-size:14px;" />
+                        <span class="input-group-text" style="border-color:var(--border-mid);">%</span>
+                      </div>
+                      <div class="invalid-feedback" id="err-discount-prince2-percentage"></div>
+                    </div>
+                  </div>
+
+                  <div class="pwyca-divider"></div>
+
+                  <div class="row g-3">
+
+                    <div class="col-12 col-sm-6">
+                      <label for="discount-name" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Full Name <span class="text-danger">*</span></label>
+                      <input type="text" class="form-control" id="discount-name" name="name"
+                             placeholder="Your full name" required
+                             minlength="2" maxlength="100"
+                             style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
+                      <div class="invalid-feedback" id="err-discount-name"></div>
+                    </div>
+
+                    <div class="col-12 col-sm-6">
+                      <label for="discount-email" class="form-label" style="font-weight:600; font-size:13.5px; color:var(--text-heading);">Official Email <span class="text-danger">*</span></label>
+                      <input type="email" class="form-control" id="discount-email" name="email"
+                             placeholder="name@company.com" required maxlength="150"
+                             style="border-color:var(--border-mid); border-radius:var(--radius-sm); font-size:14px;" />
+                      <div class="invalid-feedback" id="err-discount-email"></div>
+                    </div>
+
+                    <div class="col-12">
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="discount-consent" name="consent" required />
+                        <label class="form-check-label" for="discount-consent" style="font-size:13.5px;">
+                          I consent to the use of my information by GISBA for training preparation, follow-ups, CPE verification/confirmation, and related activities. <span class="text-danger">*</span>
+                        </label>
+                      </div>
+                      <div class="invalid-feedback d-block" id="err-discount-consent"></div>
+                    </div>
+
+                    <div class="col-12">
+                      <button type="submit" id="discount-submit-btn" class="btn-hero-primary" style="border:none; cursor:pointer;">
+                        <i class="bi bi-send me-2"></i>Send Request
+                      </button>
+                    </div>
+
+                  </div>
+                </form>
               </div>
             </section>
 
@@ -395,12 +500,30 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
+  function validateOptionalPercentage(inputEl, errEl) {
+    const raw = inputEl.value.trim();
+    if (raw === '') {
+      inputEl.classList.remove('is-invalid', 'is-valid');
+      if (errEl) { errEl.textContent = ''; }
+      return true;
+    }
+    const num = Number(raw);
+    if (Number.isNaN(num) || num < 0 || num > 100) {
+      setFieldError(inputEl, errEl, 'Please enter a percentage between 0 and 100.');
+      return false;
+    }
+    setFieldValid(inputEl);
+    return true;
+  }
+
   function validateDiscountForm() {
     let valid = true;
     const name = document.getElementById('discount-name');
     const email = document.getElementById('discount-email');
-    const percentage = document.getElementById('discount-percentage');
     const consent = document.getElementById('discount-consent');
+    const pmp = document.getElementById('discount-pmp-percentage');
+    const crisc = document.getElementById('discount-crisc-percentage');
+    const prince2 = document.getElementById('discount-prince2-percentage');
 
     if (!name.value.trim() || name.value.trim().length < 2) {
       setFieldError(name, document.getElementById('err-discount-name'), 'Full name must be at least 2 characters.');
@@ -419,14 +542,6 @@
       setFieldValid(email);
     }
 
-    const percentValue = Number(percentage.value);
-    if (!percentage.value || percentValue < 1 || percentValue > 99) {
-      setFieldError(percentage, document.getElementById('err-discount-percentage'), 'Please enter a discount percentage between 1 and 99.');
-      valid = false;
-    } else {
-      setFieldValid(percentage);
-    }
-
     const consentErr = document.getElementById('err-discount-consent');
     if (!consent.checked) {
       consentErr.textContent = 'Please consent to the use of your information before submitting.';
@@ -434,6 +549,10 @@
     } else {
       consentErr.textContent = '';
     }
+
+    if (!validateOptionalPercentage(pmp, document.getElementById('err-discount-pmp-percentage'))) { valid = false; }
+    if (!validateOptionalPercentage(crisc, document.getElementById('err-discount-crisc-percentage'))) { valid = false; }
+    if (!validateOptionalPercentage(prince2, document.getElementById('err-discount-prince2-percentage'))) { valid = false; }
 
     return valid;
   }
@@ -485,8 +604,10 @@
           const fieldMap = {
             name: ['discount-name', 'err-discount-name'],
             email: ['discount-email', 'err-discount-email'],
-            discount_percentage: ['discount-percentage', 'err-discount-percentage'],
             consent: ['discount-consent', 'err-discount-consent'],
+            pmp_discount_percentage: ['discount-pmp-percentage', 'err-discount-pmp-percentage'],
+            crisc_discount_percentage: ['discount-crisc-percentage', 'err-discount-crisc-percentage'],
+            prince2_discount_percentage: ['discount-prince2-percentage', 'err-discount-prince2-percentage'],
           };
           Object.entries(data.errors).forEach(([field, messages]) => {
             const mapped = fieldMap[field];

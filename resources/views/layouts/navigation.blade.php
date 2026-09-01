@@ -16,6 +16,7 @@
                         $nis2Active = request()->routeIs('admin.blog.*') || request()->routeIs('admin.categories.*');
                         $pmpActive = request()->routeIs('admin.pmp.*') || request()->routeIs('admin.pmp-categories.*') || request()->routeIs('admin.chapters.*');
                         $criscActive = request()->routeIs('admin.crisc.*') || request()->routeIs('admin.crisc-categories.*') || (request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'crisc');
+                        $enrollmentsActive = (request()->routeIs('admin.course-enrollments.*') && in_array(request()->route('course'), ['cissp', 'prince2'])) || request()->routeIs('admin.discount-requests.*');
                         $wrapperClasses = fn ($active) => $active
                             ? 'flex items-center px-1 pt-1 border-b-2 border-indigo-400'
                             : 'flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-gray-300 transition duration-150 ease-in-out';
@@ -77,12 +78,23 @@
                         </x-dropdown>
                     </div>
 
-                    <x-nav-link :href="route('admin.course-enrollments.index', 'cissp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'cissp'">
-                        {{ __('CISSP Enrollments') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">
-                        {{ __('PRINCE2 Enrollments') }}
-                    </x-nav-link>
+                    <div class="{{ $wrapperClasses($enrollmentsActive) }}">
+                        <x-dropdown align="left" width="48">
+                            <x-slot name="trigger">
+                                <button type="button" class="{{ $labelClasses($enrollmentsActive) }}">
+                                    {{ __('Enrollments & Requests') }}
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'cissp')">{{ __('CISSP Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'prince2')">{{ __('PRINCE2 Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.discount-requests.index')">{{ __('Discount Requests') }}</x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
 
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                         {{ __('Members') }}
@@ -178,12 +190,15 @@
                 {{ __('Enrollments') }}
             </x-responsive-nav-link>
 
-            <div class="px-4 pt-3 pb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Course Enrollments') }}</div>
+            <div class="px-4 pt-3 pb-1 text-xs font-semibold text-gray-400 uppercase tracking-wide">{{ __('Enrollments & Requests') }}</div>
             <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'cissp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'cissp'">
-                {{ __('CISSP') }}
+                {{ __('CISSP Enrollments') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">
-                {{ __('PRINCE2') }}
+                {{ __('PRINCE2 Enrollments') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.discount-requests.index')" :active="request()->routeIs('admin.discount-requests.*')">
+                {{ __('Discount Requests') }}
             </x-responsive-nav-link>
 
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">

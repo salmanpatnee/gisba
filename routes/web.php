@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CourseEnrollmentController;
 use App\Http\Controllers\Admin\CriscAttachmentController;
 use App\Http\Controllers\Admin\CriscCategoryController;
 use App\Http\Controllers\Admin\CriscController as AdminCriscController;
+use App\Http\Controllers\Admin\DiscountRequestController as AdminDiscountRequestController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
@@ -73,7 +74,7 @@ Route::get('/cissp/enrolled', fn () => view('pages.cissp-course-enrolled', [
     'enrollmentName' => session('enrollment_name'),
     'enrollmentEmail' => session('enrollment_email'),
 ]))->name('cissp.enrolled');
-Route::post('/cissp/discount-request', [DiscountRequestController::class, 'send'])->name('cissp.discount-request');
+Route::post('/cissp/discount-request', [DiscountRequestController::class, 'store'])->name('cissp.discount-request');
 
 Route::get('/prince2', [PageController::class, 'prince2'])->name('prince2');
 Route::get('/prince2/pricing', [PageController::class, 'prince2Pricing'])->name('prince2.pricing');
@@ -185,6 +186,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::resource('crisc-categories', CriscCategoryController::class)->except('show');
     Route::delete('crisc-attachments/{attachment}', [CriscAttachmentController::class, 'destroy'])->name('crisc-attachments.destroy');
     Route::get('course-enrollments/{course}', [CourseEnrollmentController::class, 'index'])->name('course-enrollments.index');
+    Route::get('discount-requests', [AdminDiscountRequestController::class, 'index'])->name('discount-requests.index');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');

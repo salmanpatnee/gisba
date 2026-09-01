@@ -3,37 +3,37 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DiscountRequestRequest;
-use App\Mail\DiscountRequestMail;
+use App\Models\DiscountRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class DiscountRequestController extends Controller
 {
-    public function send(DiscountRequestRequest $request): JsonResponse
+    public function store(DiscountRequestRequest $request): JsonResponse
     {
         $validated = $request->validated();
 
         try {
-            Mail::mailer('mailtrap-sdk')
-                ->to(config('mail.enquiry_recipient'))
-                ->send(new DiscountRequestMail(
-                    name: $validated['name'],
-                    email: $validated['email'],
-                    discountPercentage: (int) $validated['discount_percentage'],
-                ));
+            $discountRequest = DiscountRequest::query()->create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'consent' => true,
+                'pmp_discount_percentage' => $validated['pmp_discount_percentage'] ?? null,
+                'crisc_discount_percentage' => $validated['crisc_discount_percentage'] ?? null,
+                'prince2_discount_percentage' => $validated['prince2_discount_percentage'] ?? null,
+            ]);
         } catch (\Throwable $e) {
-            Log::error('DiscountRequestMail failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+            Log::error('DiscountRequest save failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
 
             return response()->json([
                 'success' => false,
-                'message' => 'We could not send your request right now. Please try again in a moment.',
+                'message' => 'We could not submit your request right now. Please try again in a moment.',
             ], 500);
         }
 
         return response()->json([
             'success' => true,
-            'message' => 'Thank you, '.e($validated['name']).'! Your discount request has been sent. We will get back to you shortly.',
+            'message' => 'Thank you, '.e($discountRequest->name).'! Your Pay-What-You-Can-Afford request has been received. Our team will review it and get back to you shortly.',
         ]);
     }
 }
