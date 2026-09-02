@@ -22,6 +22,7 @@
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Email</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Amount</th>
+                            <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Coupon Code</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Enrolled</th>
                         </tr>
@@ -32,12 +33,13 @@
                             <td class="px-6 py-4 font-medium text-gray-900">{{ $enrollment->name }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ $enrollment->email }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ $enrollment->currency }} {{ number_format((float) $enrollment->amount, 2) }}</td>
+                            <td class="px-6 py-4 text-gray-600">{{ $enrollment->coupon_code ?? '—' }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ ucfirst($enrollment->status) }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ $enrollment->created_at->format('M d, Y') }}</td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="5" class="px-6 py-10 text-center text-gray-500">No enrollments yet.</td>
+                            <td colspan="6" class="px-6 py-10 text-center text-gray-500">No enrollments yet.</td>
                         </tr>
                         @endforelse
                     </tbody>
