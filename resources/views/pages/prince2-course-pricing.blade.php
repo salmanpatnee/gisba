@@ -90,9 +90,9 @@
             <div class="pt-billing">
               One-time fee &nbsp;·&nbsp;
               @if($pricing->prince2_date)
-                {{ $pricing->dateRangeFor('prince2') }}
+                Session 1: Saturday 26&ndash;Sunday 27 Sep &middot; Session 2: Saturday 3&ndash;Sunday 4 Oct 2026
                 @if($pricing->prince2_time_start)
-                  , {{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} ({{ $pricing->prince2_timezone }})
+                  &middot; {{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} ({{ $pricing->prince2_timezone }})
                 @endif
               @else
                 Date to be announced
