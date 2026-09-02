@@ -98,7 +98,7 @@
                   <div class="pricing-label">Live Online Training</div>
 
                   <div style="font-size:1.75rem; font-weight:800; color:#fff; margin:10px 0 2px; letter-spacing:-.02em;">
-                    ${{ number_format((float) $pricing->prince2_price, 2) }}
+                    ${{ number_format((float) $pricing->prince2_price, 2) }} (approx &pound;750+ GBP)
                   </div>
 
                   <div class="pricing-sublabel">
