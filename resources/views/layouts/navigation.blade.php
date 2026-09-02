@@ -96,6 +96,9 @@
                         </x-dropdown>
                     </div>
 
+                    <x-nav-link :href="route('admin.coupons.index')" :active="request()->routeIs('admin.coupons.*')">
+                        {{ __('Coupons') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                         {{ __('Members') }}
                     </x-nav-link>
@@ -201,6 +204,9 @@
                 {{ __('Discount Requests') }}
             </x-responsive-nav-link>
 
+            <x-responsive-nav-link :href="route('admin.coupons.index')" :active="request()->routeIs('admin.coupons.*')">
+                {{ __('Coupons') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.members.index')" :active="request()->routeIs('admin.members.*')">
                 {{ __('Members') }}
             </x-responsive-nav-link>

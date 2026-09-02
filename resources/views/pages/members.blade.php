@@ -71,18 +71,25 @@
            discountedPrice: '0.00',
            checkCoupon() {
              const code = this.coupon.trim().toUpperCase();
-             if (['MEPAK50'].includes(code)) {
-               this.discountedPrice = '499.99';
-               this.applied = true;
-               this.invalid = false;
-             } else if (['ISACA50', 'ISACA90', 'MEPAK90'].includes(code)) {
-               this.discountedPrice = (Math.floor(this.fullPrice * 0.10 * 100) / 100).toFixed(2);
-               this.applied = true;
-               this.invalid = false;
-             } else {
-               this.applied = false;
-               this.invalid = true;
-             }
+             fetch('{{ route('coupons.check') }}', {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+                 'X-CSRF-TOKEN': document.querySelector('meta[name=csrf-token]').content,
+               },
+               body: JSON.stringify({ code }),
+             })
+               .then(response => response.json())
+               .then(data => {
+                 if (data.valid) {
+                   this.discountedPrice = (this.fullPrice * (1 - data.value / 100)).toFixed(2);
+                   this.applied = true;
+                   this.invalid = false;
+                 } else {
+                   this.applied = false;
+                   this.invalid = true;
+                 }
+               });
            }
          }">
       <div class="paywall-icon"><i class="bi bi-award-fill"></i></div>

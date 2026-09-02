@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\ValidCoupon;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CriscCheckoutRequest extends FormRequest
+class CheckCouponRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -17,9 +16,7 @@ class CriscCheckoutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'coupon_code' => ['nullable', 'string', 'max:50', new ValidCoupon],
+            'code' => ['required', 'string', 'max:50'],
         ];
     }
 }

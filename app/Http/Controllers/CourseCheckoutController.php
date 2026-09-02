@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CourseCheckoutRequest;
+use App\Models\Coupon;
 use App\Models\CourseEnrollment;
 use App\Models\SiteSettings;
 use App\Services\PayPalService;
@@ -17,14 +18,6 @@ class CourseCheckoutController extends Controller
         'prince2' => 'PRINCE2 Live Online Training',
     ];
 
-    private const COUPON_CODES = ['MEPAK50'];
-
-    private const COUPON_PRICE = 499.99;
-
-    private const PERCENT_COUPON_CODES = ['ISACA50', 'ISACA90', 'MEPAK90'];
-
-    private const PERCENT_COUPON_DISCOUNT = 0.10;
-
     public function __construct(private readonly PayPalService $paypal) {}
 
     public function create(CourseCheckoutRequest $request, string $course): RedirectResponse
@@ -33,17 +26,12 @@ class CourseCheckoutController extends Controller
         $settings = SiteSettings::current();
 
         $couponCode = $request->coupon_code ? strtoupper(trim($request->coupon_code)) : null;
-        $flatApplied = in_array($couponCode, self::COUPON_CODES, true);
-        $percentApplied = in_array($couponCode, self::PERCENT_COUPON_CODES, true);
+        $coupon = $couponCode ? Coupon::query()->active()->where('name', $couponCode)->first() : null;
 
         $basePrice = (float) $settings->{"{$course}_price"};
-        $amount = match (true) {
-            $flatApplied => self::COUPON_PRICE,
-            $percentApplied => floor($basePrice * self::PERCENT_COUPON_DISCOUNT * 100) / 100,
-            default => $basePrice,
-        };
+        $amount = $coupon ? $coupon->discountedAmount($basePrice) : $basePrice;
 
-        $couponApplied = $flatApplied || $percentApplied;
+        $couponApplied = $coupon !== null;
 
         $order = $this->paypal->createOrder(
             route("{$course}.paypal.return"),

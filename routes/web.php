@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlogAttachmentController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChapterController as AdminChapterController;
 use App\Http\Controllers\Admin\ChapterResourceController as AdminChapterResourceController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\CourseEnrollmentController;
 use App\Http\Controllers\Admin\CriscAttachmentController;
 use App\Http\Controllers\Admin\CriscCategoryController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\ChapterResourceController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CouponCheckController;
 use App\Http\Controllers\CourseCheckoutController;
 use App\Http\Controllers\CriscCheckoutController;
 use App\Http\Controllers\CriscController;
@@ -55,6 +57,8 @@ Route::get('/awareness', [PageController::class, 'awareness'])->name('awareness'
 Route::get('/nis2-implementation-toolkit', [PageController::class, 'nis2'])->name('nis2-toolkit');
 Route::get('/nis2-implementation-toolkit/pricing', [PageController::class, 'nis2Pricing'])->name('nis2-toolkit.pricing');
 Route::get('/training-course-development', [PageController::class, 'training'])->name('training');
+Route::post('/coupons/check', CouponCheckController::class)->name('coupons.check');
+
 Route::get('/crisc-course', [PageController::class, 'crisc'])->name('crisc-course');
 Route::get('/crisc-course/pricing', [PageController::class, 'criscPricing'])->name('crisc-course.pricing');
 Route::post('/crisc-course/checkout', [CriscCheckoutController::class, 'create'])->name('crisc-course.checkout');
@@ -191,6 +195,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');
     Route::resource('member-posts', AdminMemberPostController::class)->except('show');
+    Route::resource('coupons', CouponController::class)->except('show');
     Route::get('members', [MemberController::class, 'index'])->name('members.index');
     Route::patch('members/{user}/revoke', [MemberController::class, 'revoke'])->name('members.revoke');
     Route::delete('members/{user}', [MemberController::class, 'destroy'])->name('members.destroy');

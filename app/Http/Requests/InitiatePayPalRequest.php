@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidCoupon;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -20,7 +21,7 @@ class InitiatePayPalRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email', 'max:255'],
-            'coupon_code' => ['nullable', 'string', 'max:50'],
+            'coupon_code' => ['nullable', 'string', 'max:50', new ValidCoupon],
         ];
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InitiatePayPalRequest;
 use App\Mail\WelcomeMemberMail;
+use App\Models\Coupon;
 use App\Models\MemberAccessToken;
 use App\Models\SiteSettings;
 use App\Models\User;
@@ -15,14 +16,6 @@ use Illuminate\Support\Str;
 
 class PayPalCheckoutController extends Controller
 {
-    private const COUPON_CODES = ['MEPAK50'];
-
-    private const COUPON_PRICE = 499.99;
-
-    private const PERCENT_COUPON_CODES = ['ISACA50', 'ISACA90', 'MEPAK90'];
-
-    private const PERCENT_COUPON_DISCOUNT = 0.10;
-
     public function __construct(private readonly PayPalService $paypal) {}
 
     public function create(InitiatePayPalRequest $request): RedirectResponse
@@ -37,17 +30,12 @@ class PayPalCheckoutController extends Controller
         $settings = SiteSettings::current();
 
         $couponCode = $request->coupon_code ? strtoupper(trim($request->coupon_code)) : null;
-        $flatApplied = in_array($couponCode, self::COUPON_CODES, true);
-        $percentApplied = in_array($couponCode, self::PERCENT_COUPON_CODES, true);
+        $coupon = $couponCode ? Coupon::query()->active()->where('name', $couponCode)->first() : null;
 
         $basePrice = (float) $settings->membership_price;
-        $amount = match (true) {
-            $flatApplied => self::COUPON_PRICE,
-            $percentApplied => floor($basePrice * self::PERCENT_COUPON_DISCOUNT * 100) / 100,
-            default => $basePrice,
-        };
+        $amount = $coupon ? $coupon->discountedAmount($basePrice) : $basePrice;
 
-        $couponApplied = $flatApplied || $percentApplied;
+        $couponApplied = $coupon !== null;
 
         $order = $this->paypal->createOrder(
             route('members.paypal.return', ['email' => $request->email]),
