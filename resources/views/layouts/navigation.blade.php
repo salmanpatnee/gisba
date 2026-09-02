@@ -36,8 +36,8 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('admin.blog.index')">{{ __('Blogs') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.categories.index')">{{ __('Categories') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.blog.index')" :active="request()->routeIs('admin.blog.*')">{{ __('Blogs') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.*')">{{ __('Categories') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -53,9 +53,9 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('admin.pmp.index')">{{ __('Overview') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.pmp-categories.index')">{{ __('Categories') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.chapters.index')">{{ __('Chapters') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.pmp.index')" :active="request()->routeIs('admin.pmp.*')">{{ __('Overview') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.pmp-categories.index')" :active="request()->routeIs('admin.pmp-categories.*')">{{ __('Categories') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.chapters.index')" :active="request()->routeIs('admin.chapters.*')">{{ __('Chapters') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -71,8 +71,8 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('admin.crisc.index')">{{ __('Posts') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.crisc-categories.index')">{{ __('Categories') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.crisc.index')" :active="request()->routeIs('admin.crisc.*')">{{ __('Posts') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.crisc-categories.index')" :active="request()->routeIs('admin.crisc-categories.*')">{{ __('Categories') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
@@ -88,10 +88,10 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'crisc')">{{ __('CRISC Enrollments') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'cissp')">{{ __('CISSP Enrollments') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'prince2')">{{ __('PRINCE2 Enrollments') }}</x-dropdown-link>
-                                <x-dropdown-link :href="route('admin.discount-requests.index')">{{ __('Discount Requests') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'crisc')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'crisc'">{{ __('CRISC Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'cissp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'cissp'">{{ __('CISSP Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">{{ __('PRINCE2 Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.discount-requests.index')" :active="request()->routeIs('admin.discount-requests.*')">{{ __('Discount Requests') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
