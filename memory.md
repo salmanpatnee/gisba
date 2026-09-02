@@ -1,46 +1,50 @@
-# Memory — Pay-What-You-Can-Afford Program (Discount Request Rework)
+# Memory — Coupon management system + admin nav rename
 
-Last updated: 2026-09-01
+Last updated: 2026-09-02
 
 ## What was built
 
-Reworked the CISSP page's old email-only "Request a Discount" form into a database-backed **Pay-What-You-Can-Afford Program**. Committed as `29d8a5e` ("feat(cissp): rework discount form into Pay-What-You-Can-Afford program") on `main`, pushed to `origin/main`.
+**1. Percentage-based coupon system** (replaces hardcoded coupon logic previously duplicated across 3 checkout controllers and 4 pricing pages)
+- Migration `database/migrations/2026_09_02_071159_create_coupons_table.php` — `coupons` table: `name` (unique), `value` (unsigned tinyint, percentage 1–100), nullable `expires_at`.
+- Data migration `2026_09_02_071342_seed_existing_hardcoded_coupons.php` — seeds the 4 codes that used to be hardcoded: `MEPAK50` (50%), `ISACA50` (50%), `ISACA90` (90%), `MEPAK90` (90%), all lifetime (`expires_at = null`).
+- `app/Models/Coupon.php` — `active()` scope, `isExpired()`, `discountedAmount(basePrice)`.
+- `app/Rules/ValidCoupon.php` — validates a submitted code exists and is active; wired into `CourseCheckoutRequest`, `CriscCheckoutRequest`, `InitiatePayPalRequest`.
+- `CourseCheckoutController`, `CriscCheckoutController`, `PayPalCheckoutController` — removed all `COUPON_CODES`/`PERCENT_COUPON_CODES` constants, now do a single `Coupon::active()->where('name', ...)->first()` lookup + `discountedAmount()`.
+- Admin CRUD at `/admin/coupons` — `Admin\CouponController` (index/create/edit/update/destroy), `StoreCouponRequest`/`UpdateCouponRequest`, views in `resources/views/admin/coupons/`. Added "Coupons" link to admin nav (desktop + mobile).
+- `CouponCheckController` (invokable) + `CheckCouponRequest` — new `POST /coupons/check` endpoint returning `{valid, value}` JSON. The Alpine `checkCoupon()` live-preview JS in `members.blade.php`, `crisc-course-pricing.blade.php`, `cissp-course-pricing.blade.php`, `prince2-course-pricing.blade.php` now calls this via `fetch` instead of checking a hardcoded array.
+- Commits: `e479fd3` (coupon system).
 
-Files touched:
-- `database/migrations/2026_09_01_111430_create_discount_requests_table.php` (new) — `discount_requests` table: `name`, `email`, `consent` (boolean), `pmp_discount_percentage`/`crisc_discount_percentage`/`prince2_discount_percentage` (nullable `unsignedTinyInteger`), timestamps.
-- `app/Models/DiscountRequest.php` (new) — fillable + casts for the above.
-- `app/Http/Requests/DiscountRequestRequest.php` — reworked: `name`/`email`/`consent` required, the three course percentages `nullable|numeric|min:0|max:100`. No `BusinessEmail` rule — any email domain allowed.
-- `app/Http/Controllers/DiscountRequestController.php` — `send()` renamed to `store()`; persists to DB instead of emailing; same JSON success/error response shape as before.
-- `app/Mail/DiscountRequestMail.php` and `resources/views/emails/discount-request.blade.php` — **deleted** (confirmed unreferenced elsewhere first).
-- `app/Http/Controllers/Admin/DiscountRequestController.php` (new) + `resources/views/admin/discount-requests/index.blade.php` (new) — read-only paginated admin list, same pattern as the existing `Admin\CourseEnrollmentController`/`admin/course-enrollments/index.blade.php`.
-- `routes/web.php` — `cissp.discount-request` now points at `store`; added `GET /admin/discount-requests` → `admin.discount-requests.index`.
-- `resources/views/pages/cissp-course.blade.php` — removed the "OR" divider and its CSS; new section title "Get Discount for Other Courses as Well: GISBA Pay-What-You-Can-Afford Program"; three separate description paragraphs; course discount fields (PMP/CRISC/PRINCE2) moved above Name/Email/Consent, laid out as three chip-style rows (course name + icon on the left, `Std. Price $999` prominent in gold, input on the right); page-scoped `<style>` block for the new `.pwyca-*` classes (eyebrow badge, elevated card with gold top border + shadow, hover-lift price rows, divider); sidebar link text updated to "Pay-What-You-Can-Afford".
-- `resources/views/layouts/navigation.blade.php` — added a top-level **"Enrollments & Requests"** dropdown (matching the existing NIS2/PMP/CRISC dropdown pattern) containing CISSP Enrollments, PRINCE2 Enrollments, and Discount Requests, in both desktop and mobile nav. Replaced the three standalone nav-link entries that used to exist for these.
+**2. Admin nav label rename**
+- "Enrollments & Requests" dropdown renamed to just "Enrollments" (desktop + mobile) in `resources/views/layouts/navigation.blade.php`.
+- Commit: `a9bb608`.
+
+Both commits pushed to `origin/main` (`cf5a1c7..a9bb608`).
 
 ## Decisions made
 
-- **Consent stays required** even though the task brief's field-list section called it optional — the brief's own Constraints/Acceptance-Criteria section explicitly listed it as required, which was treated as authoritative.
-- **Course percentages are all optional**, independent of each other — a visitor can request a discount on just one course, all three, or none.
-- **No live `pmp_price` column exists** on `site_settings` (only `cissp_price`, `crisc_price`, `prince2_price`) — used a static "Std. Price $999" label for all three courses for visual consistency, rather than mixing live and static prices. Flagged as a follow-up if GISBA later wants a real `pmp_price` field.
-- **Admin list is read-only**, no create/edit/delete, no status/review workflow — matches the user's explicit choice and the existing `CourseEnrollmentController` precedent (no other admin index view in this app has search/filter either, so none was added here).
-- Iterative UI polish this session, in order: moved percentage fields above Name/Email/Consent; switched to a 2-column (course info | input) 3-row layout; removed the "Discount Percentage Requested" label; added `$` prefix and made price prominent (gold, bold); added "Std. Price" prefix; used `/frontend-design` to give the whole section a more prominent-but-professional treatment (eyebrow badge, gold-top-border card, hover-lift chip rows); added top margin so the section doesn't sit flush against the pricing card above it.
+- **MEPAK50** (previously a flat $499.99 price override, not a percentage) migrated to **50%** — happens to equal exactly 50% of the $999.99 CISSP/PRINCE2 price, so no precision was lost. Confirmed via AskUserQuestion.
+- **ISACA50/ISACA90/MEPAK90** — previously all gave the *same* discount (a shared 0.10 factor, which actually meant customer pays 10% i.e. 90% off, regardless of code name). User chose to make the percentage match the code's name going forward: ISACA50→50%, ISACA90→90%, MEPAK90→90%. This is a behavior change from what was live before (ISACA50 used to behave like a 90%-off code; now it's 50% off).
+- **Invalid/expired coupon codes now produce a validation error** ("Invalid coupon code.") at checkout, replacing the old silent-ignore behavior (full price charged with no feedback). Confirmed via AskUserQuestion — explicit behavior change.
+- **Coupon codes are global**, not scoped per course/checkout flow — same `coupons` table and lookup used for membership, CRISC, CISSP, and PRINCE2 checkouts, matching the pre-existing behavior where the same codes worked everywhere.
+- Front-end live discount preview needed a real endpoint (`/coupons/check`) since the source of truth moved from a hardcoded JS array to the database — this was a necessary technical consequence, not a separately negotiated decision.
+- No Pest tests were written this session — matches [[feedback_no_tdd_default]] (standing default: don't write tests unless explicitly asked).
 
 ## Problems solved
 
-- None novel this session — no bugs hit; all iterations were straightforward Blade/CSS edits verified via Chrome MCP + `php artisan tinker` DB checks each time.
+- Discovered mid-build (via tinker) that the pre-existing "percent" coupon logic was actually charging 10% of price (90% off), not giving 10% off as the naming/comments implied — this was surfaced to the user before deciding the new percentages, so the migration reflects an intentional fix, not a silent behavior change.
 
 ## Current state
 
-Feature is fully built, tested end-to-end (browser submission with partial/edge-case percentages, server-side 422 rejection of out-of-range values via bypassed devtools fetch, DB row inspection via tinker, admin view rendered via tinker to confirm no Blade errors), and pushed to `origin/main` at commit `29d8a5e`. `vendor/bin/pint --dirty --format agent` passes clean on every change. No Pest tests were added, per this project's standing no-TDD default (see global memory `feedback_no_tdd_default`).
+All work committed and pushed to `origin/main` at `a9bb608`. Migrations ran successfully against the local DB (verified 4 coupon rows exist with correct values via tinker). Pint passes clean. Routes verified via `route:list`. Manually verified in tinker: discount math (90% off $999.99 → $100), expired-coupon check, and the `ValidCoupon` rule (rejects unknown codes, accepts lowercase input via the same uppercase-normalization the checkout controllers already used).
 
-`memory.md` itself was intentionally left out of the feature commit (unrelated session-notes churn) and is committed/updated separately via `/remember`.
+**Not yet done:** no actual browser click-through of a coupon checkout (membership/CRISC/CISSP/PRINCE2) was performed — user was told this explicitly at the end of the build since it touches live payment flows.
 
 ## Next session starts with
 
-Nothing queued. If continuing:
-1. No nav menu entry work remains — "Enrollments & Requests" dropdown is done and pushed.
-2. If GISBA wants live PMP pricing instead of the static "Std. Price $999", that requires adding a `pmp_price` column to `site_settings` (see Decisions above) — not currently planned.
+Nothing queued. If picking this back up, possible follow-ups not yet requested:
+1. Manually test a coupon end-to-end in the browser on at least one checkout flow (e.g. PRINCE2 pricing page → apply `ISACA90` → verify PayPal order amount is correct).
+2. Consider whether coupon usage should be tracked/limited (single-use, max redemptions) — explicitly out of scope this session, not asked for.
 
 ## Open questions
 
-- None outstanding. Push policy question from prior sessions is resolved — user explicitly asked to commit and push this session, and it was done (5 commits total pushed: coupons, Mailtrap contact form, discount-form v1, memory notes, and this session's PWYCA rework).
+- None outstanding — all ambiguities (MEPAK50 migration, ISACA/MEPAK90 percentages, invalid-coupon UX) were resolved via AskUserQuestion before implementation.
