@@ -12,11 +12,11 @@ class CriscCheckoutController extends Controller
 {
     private const COURSE = 'crisc';
 
-    private const COUPON_CODES = ['ISACA50', 'MEPAK50'];
+    private const COUPON_CODES = ['MEPAK50'];
 
     private const COUPON_PRICE = 499.99;
 
-    private const PERCENT_COUPON_CODES = ['ISACA90', 'MEPAK90'];
+    private const PERCENT_COUPON_CODES = ['ISACA50', 'ISACA90', 'MEPAK90'];
 
     private const PERCENT_COUPON_DISCOUNT = 0.10;
 

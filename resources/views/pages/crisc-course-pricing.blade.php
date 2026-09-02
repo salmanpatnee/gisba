@@ -47,11 +47,11 @@
                discountedPrice: '0.00',
                checkCoupon() {
                  const code = this.coupon.trim().toUpperCase();
-                 if (['ISACA50', 'MEPAK50'].includes(code)) {
+                 if (['MEPAK50'].includes(code)) {
                    this.discountedPrice = '499.99';
                    this.applied = true;
                    this.invalid = false;
-                 } else if (['ISACA90', 'MEPAK90'].includes(code)) {
+                 } else if (['ISACA50', 'ISACA90', 'MEPAK90'].includes(code)) {
                    this.discountedPrice = (Math.floor(this.fullPrice * 0.10 * 100) / 100).toFixed(2);
                    this.applied = true;
                    this.invalid = false;
