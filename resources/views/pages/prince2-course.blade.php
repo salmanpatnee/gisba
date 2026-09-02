@@ -102,13 +102,9 @@
                   </div>
 
                   <div class="pricing-sublabel">
-                    @if($pricing->prince2_date)
-                      {{ $pricing->dateRangeFor('prince2') }}
-                      @if($pricing->prince2_time_start)
-                        &middot; {{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} ({{ $pricing->prince2_timezone }})
-                      @endif
-                    @else
-                      Date to be announced &middot; {{ $pricing->prince2_timezone }}
+                    Session 1: Saturday 26&ndash;Sunday 27 Sep &middot; Session 2: Saturday 3&ndash;Sunday 4 Oct 2026
+                    @if($pricing->prince2_time_start)
+                      &middot; {{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} ({{ $pricing->prince2_timezone }})
                     @endif
                   </div>
                 </div>
@@ -130,9 +126,6 @@
                     </span>
                     <a href="{{ route('prince2.pricing') }}" class="btn-hero-primary flex-fill text-center">
                       <i class="bi bi-calendar-check me-2"></i>Reserve Your Seat
-                      @if ($pricing->dateRangeFor('prince2'))
-                        &mdash; {{ $pricing->dateRangeFor('prince2') }}
-                      @endif
                     </a>
                   </div>
                   <div style="display:flex; align-items:center; gap:10px; margin-top:14px; padding:12px 16px; background:rgba(200,168,75,0.12); border:1px solid rgba(200,168,75,0.4); border-radius:var(--radius-md);">
@@ -186,7 +179,10 @@
               <h2 class="section-heading">Schedule &amp; Capacity</h2>
               <p>This is a live, instructor-led online PRINCE2 training program delivered according to a structured training schedule.</p>
               <div class="checklist-group">
-                <div class="checklist-item"><i class="bi bi-calendar3"></i><span>Date: {{ $pricing->dateRangeFor('prince2') ?? 'To be announced' }}</span></div>
+                <div class="checklist-item"><i class="bi bi-mortarboard"></i><span>Course: PRINCE2 Foundation</span></div>
+                <div class="checklist-item"><i class="bi bi-calendar-week"></i><span>Duration: 4 Days | 2 Weekends</span></div>
+                <div class="checklist-item"><i class="bi bi-calendar3"></i><span>Session 1: Saturday, 26 &ndash; Sunday, 27 September 2026</span></div>
+                <div class="checklist-item"><i class="bi bi-calendar3"></i><span>Session 2: Saturday, 3 &ndash; Sunday, 4 October 2026</span></div>
                 @php($prince2Time = $pricing->prince2_time_start ? "{$pricing->prince2_time_start}\u{2013}{$pricing->prince2_time_end}" : 'TBC')
                 <div class="checklist-item"><i class="bi bi-clock"></i><span>Time: {{ $prince2Time }} ({{ $pricing->prince2_timezone }})</span></div>
                 <div class="checklist-item"><i class="bi bi-people-fill"></i><span>Capacity: limited to {{ $pricing->prince2_capacity }} participants</span></div>

@@ -241,7 +241,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <span class="schedule-course-cell"><i class="bi bi-diagram-3"></i>PRINCE2</span>
+                        <span class="schedule-course-cell"><i class="bi bi-diagram-3"></i>PRINCE2 Foundation</span>
                       </td>
                       <td>
                         <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
@@ -249,7 +249,7 @@
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">12th &ndash; 15th Oct 2026</span>
+                        <span class="schedule-date">26th&ndash;27th Sep &amp; 3rd&ndash;4th Oct 2026</span>
                         <a href="{{ route('prince2') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
                       </td>
                     </tr>
