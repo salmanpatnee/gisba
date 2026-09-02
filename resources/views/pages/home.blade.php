@@ -245,7 +245,7 @@
                       </td>
                       <td>
                         <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
-                        <span class="schedule-date is-closed-text">20th &ndash; 24th Oct 2026</span>
+                        <span class="schedule-date is-closed-text">20th &ndash; 24th Sep 2026</span>
                       </td>
                       <td>
                         <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
