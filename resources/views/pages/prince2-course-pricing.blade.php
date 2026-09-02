@@ -88,11 +88,11 @@
               </template>
             </div>
             <div class="pt-billing">
-              One-time fee &nbsp;·&nbsp;
               @if($pricing->prince2_date)
-                Session 1: Saturday 26&ndash;Sunday 27 Sep &middot; Session 2: Saturday 3&ndash;Sunday 4 Oct 2026
+                <div>Session 1: Saturday 26&ndash;Sunday 27 Sep 2026</div>
+                <div>Session 2: Saturday 3&ndash;Sunday 4 Oct 2026</div>
                 @if($pricing->prince2_time_start)
-                  &middot; {{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} ({{ $pricing->prince2_timezone }})
+                  <div>{{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} ({{ $pricing->prince2_timezone }})</div>
                 @endif
               @else
                 Date to be announced
