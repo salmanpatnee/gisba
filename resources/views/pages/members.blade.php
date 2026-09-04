@@ -57,8 +57,7 @@
 <section class="paywall-hero">
   <div class="container">
     <div class="text-center mb-4">
-      <span style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--accent);background:rgba(200,168,75,0.1);border:1px solid rgba(200,168,75,0.25);padding:4px 14px;border-radius:20px;">Members Only</span>
-      <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);font-weight:900;margin:16px 0 10px;">Enroll in GISBA’s PMP Training</h1>
+      <h1 style="font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);color:var(--navy);font-weight:900;margin:0 0 10px;">Enroll in GISBA’s PMP Training</h1>
       <p style="color:#555;font-size:15px;max-width:460px;margin:0 auto;">Now {{ $price }} @if($hasDiscount)<span style="text-decoration:line-through;color:#aaa;">{{ $regularPrice }}</span> @endif for full access to exclusive cybersecurity &amp; PMP resources — limited time only.</p>
     </div>
 

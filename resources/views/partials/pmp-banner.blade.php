@@ -47,7 +47,7 @@
           @if($membershipDiscountPercent > 0)
             <span class="nis2-promo-old-price">{{ $membershipRegularPrice }}</span>
           @endif
-          <span class="nis2-promo-new-price">{{ $membershipPrice }}<small>/person</small></span>
+          <span class="nis2-promo-new-price">{{ $membershipPrice }}</span>
         </div>
         <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
           Get PMP Training <i class="bi bi-arrow-right"></i>
