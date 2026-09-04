@@ -1,50 +1,52 @@
-# Memory — Coupon management system + admin nav rename
+# Memory — /pmp page redesign + /contact-us dropdown cleanup
 
-Last updated: 2026-09-02
+Last updated: 2026-09-04
 
 ## What was built
 
-**1. Percentage-based coupon system** (replaces hardcoded coupon logic previously duplicated across 3 checkout controllers and 4 pricing pages)
-- Migration `database/migrations/2026_09_02_071159_create_coupons_table.php` — `coupons` table: `name` (unique), `value` (unsigned tinyint, percentage 1–100), nullable `expires_at`.
-- Data migration `2026_09_02_071342_seed_existing_hardcoded_coupons.php` — seeds the 4 codes that used to be hardcoded: `MEPAK50` (50%), `ISACA50` (50%), `ISACA90` (90%), `MEPAK90` (90%), all lifetime (`expires_at = null`).
-- `app/Models/Coupon.php` — `active()` scope, `isExpired()`, `discountedAmount(basePrice)`.
-- `app/Rules/ValidCoupon.php` — validates a submitted code exists and is active; wired into `CourseCheckoutRequest`, `CriscCheckoutRequest`, `InitiatePayPalRequest`.
-- `CourseCheckoutController`, `CriscCheckoutController`, `PayPalCheckoutController` — removed all `COUPON_CODES`/`PERCENT_COUPON_CODES` constants, now do a single `Coupon::active()->where('name', ...)->first()` lookup + `discountedAmount()`.
-- Admin CRUD at `/admin/coupons` — `Admin\CouponController` (index/create/edit/update/destroy), `StoreCouponRequest`/`UpdateCouponRequest`, views in `resources/views/admin/coupons/`. Added "Coupons" link to admin nav (desktop + mobile).
-- `CouponCheckController` (invokable) + `CheckCouponRequest` — new `POST /coupons/check` endpoint returning `{valid, value}` JSON. The Alpine `checkCoupon()` live-preview JS in `members.blade.php`, `crisc-course-pricing.blade.php`, `cissp-course-pricing.blade.php`, `prince2-course-pricing.blade.php` now calls this via `fetch` instead of checking a hardcoded array.
-- Commits: `e479fd3` (coupon system).
+**1. `/pmp` page changes** (planned via `/architect`, several pieces refined via `/frontend-design`)
+- `resources/views/partials/pmp-banner.blade.php` — added a gold dashed-border "promo code" chip (tag icon, pulsing glow, links to `route('members.paywall')#coupon_code`) under the "Get PMP Training" button; removed the "6-Month Access" trust-row item and the "6-month access" CTA note; removed `/person` from the price.
+- `resources/views/pages/pmp.blade.php` — removed the "Learning Innovation" (rhyme-based learning) section entirely, incl. its CSS. Removed unused CSS as sections were stripped.
+- `resources/views/pages/_chapter-outline-card.blade.php` — removed the "Members" lock badge, the "Unlock with membership" link/text, and the wrapping `<a>` — cards are now plain non-clickable display cards (image, title, description).
+- `resources/views/pages/members.blade.php` — removed the "Members Only" badge above the heading; removed all "6 months" wording (intro copy, both price `<sub>` tags, the "6 months of full access" feature bullet).
+- New "Author Showcase" section added to `pmp.blade.php`, sitting between "Special Offer" and "Inside the Training". Went through several design iterations (see Decisions) and landed on: centered eyebrow "Learn From the Author" + heading "Live Online Course Conducted by the Author of the Popular Best-Selling Book, *Encyclopedia of Project Management: Beyond PMP*" (book title in gold) + the book cover image (`public/assets/images/pmp-book.png`, 483×517px) displayed at full natural size below the heading, no card background, no shadow, no ribbon — plain and minimal on the page background.
+- New "Topics to be Covered During Live Online Course" divider added right before the Part 1 "PMBOK 8th Edition Review Training" section-header — styled as a centered flanking-gold-line + diamond-flourish + list-icon divider (classes `.topics-divider*`), sized up once from its first pass (label 12px→15px, icon 13px→16px, diamonds 7px→9px, lines 1px→2px thick).
+- Commits (all on `main`, pushed): `fcf1037` (promo chip + 6-month/rhyme/outline-card removal), `6e0a2d8` (Members Only badge + /person removal), `7f4bd79` (author showcase add), `e9be6d7` (topics divider add). Pushed range `8041235..e9be6d7`.
 
-**2. Admin nav label rename**
-- "Enrollments & Requests" dropdown renamed to just "Enrollments" (desktop + mobile) in `resources/views/layouts/navigation.blade.php`.
-- Commit: `a9bb608`.
-
-Both commits pushed to `origin/main` (`cf5a1c7..a9bb608`).
+**2. `/contact-us` heard-from dropdown cleanup**
+- `resources/views/pages/contact-us.blade.php` — removed the "DAIC (Partner's Website)" and "Visionary Alpha (Partner's Website)" `<option>`s from the `#contact-heard-from` select; only LinkedIn / Google Search / Others remain.
+- `app/Http/Requests/EnquiryRequest.php` — tightened `heard_from` validation from `in:linkedin,google,diac,visionary-alpha,other` to `in:linkedin,google,other`.
+- Left `app/Mail/ContactMail.php`'s `$heardFromLabels` map untouched (still has `diac`/`visionary-alpha` entries) — intentional, so any already-stored historical `Enquiry` rows with those old values still render a friendly label instead of a raw slug.
+- Commit: `52fe626`, pushed (`e9be6d7..52fe626`).
 
 ## Decisions made
 
-- **MEPAK50** (previously a flat $499.99 price override, not a percentage) migrated to **50%** — happens to equal exactly 50% of the $999.99 CISSP/PRINCE2 price, so no precision was lost. Confirmed via AskUserQuestion.
-- **ISACA50/ISACA90/MEPAK90** — previously all gave the *same* discount (a shared 0.10 factor, which actually meant customer pays 10% i.e. 90% off, regardless of code name). User chose to make the percentage match the code's name going forward: ISACA50→50%, ISACA90→90%, MEPAK90→90%. This is a behavior change from what was live before (ISACA50 used to behave like a 90%-off code; now it's 50% off).
-- **Invalid/expired coupon codes now produce a validation error** ("Invalid coupon code.") at checkout, replacing the old silent-ignore behavior (full price charged with no feedback). Confirmed via AskUserQuestion — explicit behavior change.
-- **Coupon codes are global**, not scoped per course/checkout flow — same `coupons` table and lookup used for membership, CRISC, CISSP, and PRINCE2 checkouts, matching the pre-existing behavior where the same codes worked everywhere.
-- Front-end live discount preview needed a real endpoint (`/coupons/check`) since the source of truth moved from a hardcoded JS array to the database — this was a necessary technical consequence, not a separately negotiated decision.
-- No Pest tests were written this session — matches [[feedback_no_tdd_default]] (standing default: don't write tests unless explicitly asked).
+- **Promo code chip**: text/link hint only, not a new functional coupon input — the real coupon field already lives on `members.paywall`; the chip just deep-links there.
+- **"6-month access" removal scope**: explicitly extended to the `/members` paywall/checkout page too, not just `/pmp` — user confirmed via AskUserQuestion. Backend membership duration itself (still 6 months) was not touched, only the displayed copy.
+- **Outline card link removal**: fully removed the click-through (no `stretched-link`), not just the visible badge/text — user confirmed via AskUserQuestion.
+- **Author showcase — iterative simplification**: started as a side-by-side card (image left, text right, like the Special Offer card) → user asked for `/frontend-design` polish → became an elaborate navy "stage" (gradient bg, stripe texture, glow orbs, tilted book, Best-Seller ribbon) → user then asked, in sequence: "remove the bg and make the image full size" (→ plain page background, heading switched to navy text, image at true 483px width) → "remove the image card" (→ dropped the box-shadow/hover-lift, image is now flat) → "remove best seller ribbon" (→ dropped the ribbon markup/CSS entirely). **Signal for future work on this page: this user prefers restrained/minimal treatments over ornate ones for this section — don't re-add decorative chrome (shadows, ribbons, gradients) without being asked.**
+- **Topics divider**: kept centered per explicit request; redesigned from a plain bold heading into a flanking-line divider motif (reusing the domain-eyebrow diamond flourish already used elsewhere on the page) rather than inventing a new visual language.
+- **ContactMail label map**: kept the now-orphaned `diac`/`visionary-alpha` labels rather than deleting them, favoring backward-compatible display of historical data over strict dead-code removal — this was a judgment call, not explicitly asked.
+- No Pest tests written this session — matches `feedback_no_tdd_default` (standing default: don't write tests unless explicitly asked). Confirmed no existing test references the removed `diac`/`daic`/`visionary-alpha` values, so nothing went stale.
 
 ## Problems solved
 
-- Discovered mid-build (via tinker) that the pre-existing "percent" coupon logic was actually charging 10% of price (90% off), not giving 10% off as the naming/comments implied — this was surfaced to the user before deciding the new percentages, so the migration reflects an intentional fix, not a silent behavior change.
+- **Browser screenshot/scroll desync**: the claude-in-chrome screenshot tool repeatedly returned frames at a stale/different scroll position than the actual page (especially right after lazy-loaded images caused a layout reflow), producing blank or wrong-section screenshots. Worked around by cross-checking with `javascript_tool` (`getBoundingClientRect`, `getComputedStyle`, `document.elementsFromPoint`, `innerText` checks) whenever a screenshot looked wrong, and by re-scrolling/re-screenshotting until stable.
+- **Stale `style.css` in an already-open tab**: CSS edits to `public/assets/css/style.css` didn't show up in a tab that loaded the page before the edit. Fixed by forcing a cache-busted reload of just the stylesheet link via JS (`link.href = link.href.split('?')[0] + '?v=' + Date.now()`) rather than a full page reload.
+- **Pre-existing spelling bug found (not fixed, now moot)**: `contact-us.blade.php` used option value `daic`, but `EnquiryRequest`'s old validation rule and `ContactMail`'s label map both used `diac` — a mismatch that meant selecting "DAIC" would have failed the `in:` validation. Both options are now removed entirely so this no longer matters, but worth knowing if partner-referral options are ever reintroduced.
 
 ## Current state
 
-All work committed and pushed to `origin/main` at `a9bb608`. Migrations ran successfully against the local DB (verified 4 coupon rows exist with correct values via tinker). Pint passes clean. Routes verified via `route:list`. Manually verified in tinker: discount math (90% off $999.99 → $100), expired-coupon check, and the `ValidCoupon` rule (rejects unknown codes, accepts lowercase input via the same uppercase-normalization the checkout controllers already used).
+All 6 commits pushed to `origin/main`, latest is `52fe626`. Pint passes clean on every change. Verified in-browser (via DOM/computed-style checks and screenshots) that: the promo chip renders correctly, all "6-month"/"/person" text is gone from `/pmp` and `/members`, the author showcase section renders plain with a full-size image and no ribbon/shadow, the topics divider renders centered at its increased size, and the `/contact-us` heard-from `<select>` only has 3 options left (`linkedin`, `google`, `other`).
 
-**Not yet done:** no actual browser click-through of a coupon checkout (membership/CRISC/CISSP/PRINCE2) was performed — user was told this explicitly at the end of the build since it touches live payment flows.
+**Not yet done / not asked for:** no browser click-through submission test of the `/contact-us` form after the validation change; `resources/views/pages/home.blade.php` still shows DAIC and Visionary Alpha **partner logos** in a separate "partners" section (unrelated select field, explicitly out of scope — user only asked about `/contact-us`); `resources/views/pages/nis2-pricing.blade.php` also had a DIAC/Visionary text match that was never investigated (unknown if it's a similar dropdown needing the same fix).
 
 ## Next session starts with
 
-Nothing queued. If picking this back up, possible follow-ups not yet requested:
-1. Manually test a coupon end-to-end in the browser on at least one checkout flow (e.g. PRINCE2 pricing page → apply `ISACA90` → verify PayPal order amount is correct).
-2. Consider whether coupon usage should be tracked/limited (single-use, max redemptions) — explicitly out of scope this session, not asked for.
+Nothing queued. If DAIC/Visionary Alpha come up again, check whether the user wants:
+1. The partner logos removed from `home.blade.php`'s partners section too.
+2. `nis2-pricing.blade.php` checked for a similar select field.
 
 ## Open questions
 
-- None outstanding — all ambiguities (MEPAK50 migration, ISACA/MEPAK90 percentages, invalid-coupon UX) were resolved via AskUserQuestion before implementation.
+- None blocking. The home.blade.php partner logos and nis2-pricing.blade.php mention are flagged above only in case they're relevant later — not confirmed as needing any action.
