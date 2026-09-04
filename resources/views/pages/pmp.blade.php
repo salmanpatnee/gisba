@@ -201,6 +201,22 @@
   .offer-card { padding: 24px 20px; }
   .offer-benefits { flex-direction: column; gap: 8px; }
 }
+
+/* ─── Author Showcase ─────────────────────────────────────────── */
+.author-section { padding: 8px 0 60px; background: var(--bg-page); text-align: center; }
+
+.author-eyebrow { display: inline-block; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+
+.author-heading { font-family: var(--font-display); font-size: clamp(1.3rem, 3vw, 2.05rem); font-weight: 800; line-height: 1.45; color: var(--navy); max-width: 680px; margin: 0 auto; }
+.author-heading span { color: var(--accent); }
+
+/* Book showcase */
+.author-book-showcase { position: relative; display: inline-block; margin-top: 32px; }
+.author-book-img {
+  width: 100%;
+  max-width: 483px;
+  height: auto;
+}
 </style>
 
 {{-- ── Hero ─────────────────────────────────────────────────────── --}}
@@ -252,6 +268,17 @@
           Get in Touch <i class="bi bi-arrow-right"></i>
         </a>
       </div>
+    </div>
+  </div>
+</section>
+
+{{-- ── Author Showcase ──────────────────────────────────────────── --}}
+<section class="author-section">
+  <div class="container kb-reveal">
+    <span class="author-eyebrow"><i class="bi bi-mortarboard-fill me-1"></i> Learn From the Author</span>
+    <h2 class="author-heading">Live Online Course Conducted by the Author of the Popular Best-Selling Book, <span>Encyclopedia of Project Management: Beyond PMP</span></h2>
+    <div class="author-book-showcase">
+      <img src="{{ asset('assets/images/pmp-book.png') }}" alt="Encyclopedia of Project Management: Beyond PMP" class="author-book-img" loading="lazy">
     </div>
   </div>
 </section>
