@@ -144,6 +144,18 @@
 .outline-stat { display: inline-flex; align-items: center; gap: 7px; font-size: 12.5px; font-weight: 700; color: var(--navy); background: var(--bg-section-alt); border: 1px solid var(--border-light); padding: 7px 16px; border-radius: 999px; }
 .outline-stat i { color: var(--accent); }
 
+.topics-divider { display: flex; align-items: center; justify-content: center; gap: 22px; margin: 8px 0 44px; }
+.topics-divider-line { flex: 1; max-width: 160px; height: 2px; background: linear-gradient(90deg, transparent, rgba(200,168,75,0.55)); }
+.topics-divider-line:last-child { background: linear-gradient(90deg, rgba(200,168,75,0.55), transparent); }
+.topics-divider-diamond { flex-shrink: 0; width: 9px; height: 9px; background: var(--accent); transform: rotate(45deg); }
+.topics-divider-label { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; font-family: var(--font-body); font-size: 15px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--navy); white-space: nowrap; }
+.topics-divider-label i { color: var(--accent); font-size: 16px; }
+@media (max-width: 575px) {
+  .topics-divider { gap: 12px; }
+  .topics-divider-line { max-width: 36px; }
+  .topics-divider-label { font-size: 12px; letter-spacing: 0.5px; white-space: normal; text-align: center; }
+}
+
 .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
 .section-badge { flex-shrink: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--navy); color: #fff; font-family: var(--font-display); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
 .section-title { font-family: var(--font-display); font-size: clamp(1.05rem, 2.2vw, 1.3rem); font-weight: 800; color: var(--navy); margin: 0; }
@@ -290,13 +302,21 @@
 
     <div class="outline-head kb-reveal">
       <span class="outline-eyebrow"><i class="bi bi-mortarboard-fill me-1"></i> Inside the Training</span>
-      <h2 class="outline-title">What You'll Master in the PMP Comprehensive Training Aligned with PMBOK 8th Edition and PMP July 2026 Exam Outline</h2>
-      <p class="outline-lead">Aligned with Exam Content Outline July 2026 Exam</p>
+      <h2 class="outline-title author-heading">What You'll Master in the PMP Comprehensive Live Online Training </h2>
+      <p class="outline-lead">Aligned with PMBOK 8th Edition and PMP July 2026 Exam Outline</p>
       <div class="outline-stats">
         <span class="outline-stat"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
         <span class="outline-stat"><i class="bi bi-patch-check-fill"></i> Tutorials, Quizzes &amp; Takeaways</span>
         <span class="outline-stat"><i class="bi bi-award-fill"></i> 35 PDU Hours Certificate of Completion</span>
       </div>
+    </div>
+
+    <div class="topics-divider kb-reveal">
+      <span class="topics-divider-line"></span>
+      <span class="topics-divider-diamond" aria-hidden="true"></span>
+      <span class="topics-divider-label"><i class="bi bi-list-check"></i> Topics to be Covered During Live Online Course</span>
+      <span class="topics-divider-diamond" aria-hidden="true"></span>
+      <span class="topics-divider-line"></span>
     </div>
 
     {{-- Part 1 --}}
