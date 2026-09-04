@@ -27,8 +27,6 @@
           <div class="nis2-promo-trust-row">
             <span class="nis2-promo-trust-item"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
             <span class="nis2-promo-trust-sep">&bull;</span>
-            <span class="nis2-promo-trust-item"><i class="bi bi-calendar-check"></i> 6-Month Access</span>
-            <span class="nis2-promo-trust-sep">&bull;</span>
             <span class="nis2-promo-trust-item"><i class="bi bi-award-fill"></i> 35 PDU Hours Certificate of Completion</span>
           </div>
           @endif
@@ -54,7 +52,13 @@
         <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
           Get PMP Training <i class="bi bi-arrow-right"></i>
         </a>
-        <span class="nis2-promo-note">6-month access</span>
+        <a href="{{ route('members.paywall') }}#coupon_code" class="nis2-promo-coupon-chip">
+          <span class="nis2-promo-coupon-chip-icon"><i class="bi bi-tag-fill"></i></span>
+          <span class="nis2-promo-coupon-chip-copy">
+            <strong>Have a promo code?</strong>
+            Apply it at checkout for an extra discount
+          </span>
+        </a>
       </div>
 
     </div>

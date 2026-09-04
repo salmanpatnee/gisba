@@ -175,45 +175,9 @@
 .chapter-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
 .chapter-card-media { position: relative; }
 .chapter-card-img { width: 100%; height: 200px; object-fit: cover; }
-.chapter-lock-badge { position: absolute; top: 12px; right: 12px; display: inline-flex; align-items: center; gap: 5px; background: rgba(0,33,80,0.92); color: var(--accent); font-size: 10.5px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
-.chapter-lock-badge i { font-size: 11px; }
 .chapter-card-body { padding: 18px 20px; flex: 1; display: flex; flex-direction: column; }
 .chapter-card-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.35; }
-.chapter-card-desc { font-size: 13px; color: #555; line-height: 1.6; flex: 1; margin-bottom: 16px; }
-.chapter-card-foot { margin-top: auto; }
-.btn-unlock { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--navy); text-decoration: none; transition: color 0.2s, gap 0.2s; }
-.btn-unlock i { color: var(--accent); transition: transform 0.2s; }
-.chapter-card:hover .btn-unlock { color: var(--accent); gap: 9px; }
-.chapter-card:hover .btn-unlock i { transform: scale(1.12); }
-
-/* ─── Rhyme-Based Learning Card ───────────────────────────────── */
-.rhyme-section { padding: 56px 0; background: var(--bg-page); }
-.rhyme-head { text-align: center; max-width: 640px; margin: 0 auto 32px; }
-.rhyme-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 8px; }
-.rhyme-title { font-family: var(--font-display); font-size: clamp(1.3rem, 2.8vw, 1.9rem); font-weight: 800; color: var(--navy); line-height: 1.25; margin: 0; }
-.rhyme-lead { font-size: 14px; color: #555; line-height: 1.7; margin: 10px auto 16px; max-width: 620px; }
-.rhyme-human-badge { display: inline-flex; align-items: center; gap: 7px; background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.4); color: var(--navy); font-size: 12.5px; font-weight: 700; padding: 7px 16px; border-radius: 999px; }
-.rhyme-human-badge i { color: var(--accent); }
-
-.rhyme-card { background: var(--bg-white); border: 1px solid var(--border-light); border-top: 3px solid var(--accent); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: box-shadow 0.25s ease, transform 0.25s ease; height: 100%; }
-.rhyme-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-3px); }
-
-.rhyme-card-header { display: flex; align-items: center; gap: 14px; padding: 22px 28px; background: linear-gradient(135deg, var(--navy) 0%, rgba(0,33,80,0.92) 100%); position: relative; overflow: hidden; }
-.rhyme-card-header::before { content: ''; position: absolute; top: -22px; right: -22px; width: 90px; height: 90px; background: rgba(200,168,75,0.12); border-radius: 50%; }
-.rhyme-card-header::after { content: ''; position: absolute; bottom: -30px; left: 38%; width: 70px; height: 70px; background: rgba(200,168,75,0.08); border-radius: 50%; }
-.rhyme-card-icon { flex-shrink: 0; width: 44px; height: 44px; background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.35); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--accent); position: relative; z-index: 1; }
-.rhyme-card-kicker { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--accent); margin-bottom: 3px; position: relative; z-index: 1; }
-.rhyme-card-question { font-family: var(--font-display); font-size: 1.1rem; font-weight: 800; color: #fff; margin: 0; position: relative; z-index: 1; }
-
-.rhyme-card-body { padding: 28px; }
-.rhyme-quote { background: var(--bg-section-alt); border-left: 3px solid var(--accent); border-radius: 8px; padding: 18px 22px; margin-bottom: 0; }
-.rhyme-quote p { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 15px; line-height: 1.85; color: var(--navy); margin: 0; }
-.rhyme-desc { font-size: 13.5px; color: #555; line-height: 1.7; margin: 0; }
-.rhyme-desc-wide { max-width: 760px; margin: 28px auto 0; text-align: center; }
-@media (max-width: 575px) {
-  .rhyme-card-header { padding: 18px 20px; }
-  .rhyme-card-body { padding: 22px 20px; }
-}
+.chapter-card-desc { font-size: 13px; color: #555; line-height: 1.6; flex: 1; margin-bottom: 0; }
 
 /* ─── Special Offer Card ─────────────────────────────────────── */
 .offer-section { padding: 0 0 56px; background: var(--bg-page); }
@@ -267,67 +231,6 @@
 
 {{-- ── PMP Training Promo Banner ──────────────────────────────────────── --}}
 @include('partials.pmp-banner', ['showBlogLink' => true])
-
-{{-- ── Rhyme-Based Learning ─────────────────────────────────────── --}}
-<section class="rhyme-section">
-  <div class="container">
-    <div class="rhyme-head kb-reveal">
-      <span class="rhyme-eyebrow"><i class="bi bi-music-note-beamed me-1"></i> Learning Innovation</span>
-      <h2 class="rhyme-title">PMP Concepts You'll Actually Remember — Taught Through Rhyme</h2>
-      <p class="rhyme-lead">Every key concept in the training is distilled into a short, human-written rhyme — a memory technique built for exam recall, not novelty.</p>
-      <span class="rhyme-human-badge"><i class="bi bi-patch-check-fill"></i> 100% Human-Written — No AI-Generated Rhymes</span>
-    </div>
-
-    <div class="row g-4">
-      <div class="col-md-6 kb-reveal">
-        <div class="rhyme-card">
-          <div class="rhyme-card-header">
-            <span class="rhyme-card-icon"><i class="bi bi-vinyl-fill"></i></span>
-            <div>
-              <span class="rhyme-card-kicker">For Example</span>
-              <h3 class="rhyme-card-question">What is a Project?</h3>
-            </div>
-          </div>
-          <div class="rhyme-card-body">
-            <div class="rhyme-quote">
-              <p>
-                A project is an initiative, clearly and simply stated,<br>
-                Temporary, unique, and progressively elaborated.<br>
-                A project must create value and it can be stand-alone,<br>
-                Or part of a Portfolio or a Program, this is well known
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {{-- PLACEHOLDER: illustrative second rhyme — replace with a real second rhyme from course content before shipping --}}
-      <div class="col-md-6 kb-reveal" style="transition-delay: 0.08s;">
-        <div class="rhyme-card">
-          <div class="rhyme-card-header">
-            <span class="rhyme-card-icon"><i class="bi bi-vinyl-fill"></i></span>
-            <div>
-              <span class="rhyme-card-kicker">For Example</span>
-              <h3 class="rhyme-card-question">What is Scope?</h3>
-            </div>
-          </div>
-          <div class="rhyme-card-body">
-            <div class="rhyme-quote">
-              <p>
-                Scope defines the boundary of the work to be done,<br>
-                What's included and excluded, agreed on by everyone.<br>
-                Guard it well against creep, both silent and bold,<br>
-                For a project without scope control is a story half-told.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p class="rhyme-desc rhyme-desc-wide kb-reveal">All key project management concepts are summarized this way throughout the training — creating a fast, memorable review at the end of every chapter, for both individual learners and educational institutions.</p>
-  </div>
-</section>
 
 {{-- ── Special Offer ────────────────────────────────────────────── --}}
 <section class="offer-section">

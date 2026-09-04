@@ -2124,6 +2124,62 @@ ul li {
   white-space: nowrap;
 }
 
+/* Promo-code chip (used by resources/views/partials/pmp-banner.blade.php) */
+.nis2-promo-coupon-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  padding: 8px 16px 8px 8px;
+  max-width: 240px;
+  background: linear-gradient(135deg, rgba(200,168,75,0.18), rgba(200,168,75,0.05));
+  border: 1.5px dashed rgba(200,168,75,0.6);
+  border-radius: 999px;
+  text-decoration: none !important;
+  cursor: pointer;
+  animation: nis2-coupon-pulse 2.6s ease-in-out infinite;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.nis2-promo-coupon-chip:hover {
+  background: linear-gradient(135deg, rgba(200,168,75,0.3), rgba(200,168,75,0.12));
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  animation-play-state: paused;
+}
+.nis2-promo-coupon-chip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--navy);
+  font-size: 11px;
+  transform: rotate(-10deg);
+}
+.nis2-promo-coupon-chip-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  text-align: left;
+  line-height: 1.3;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.65);
+}
+.nis2-promo-coupon-chip-copy strong {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--accent-light);
+  letter-spacing: 0.1px;
+}
+@keyframes nis2-coupon-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,168,75,0.28); }
+  50% { box-shadow: 0 0 0 7px rgba(200,168,75,0); }
+}
+
 @media (max-width: 767px) {
   .nis2-promo-banner { padding: 22px 20px 26px; }
   .nis2-promo-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
