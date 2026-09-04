@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\CriscAttachmentController;
 use App\Http\Controllers\Admin\CriscCategoryController;
 use App\Http\Controllers\Admin\CriscController as AdminCriscController;
 use App\Http\Controllers\Admin\DiscountRequestController as AdminDiscountRequestController;
+use App\Http\Controllers\Admin\EnquiryController as AdminEnquiryController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\MemberPostController as AdminMemberPostController;
 use App\Http\Controllers\Admin\PmpAttachmentController;
@@ -191,6 +192,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::delete('crisc-attachments/{attachment}', [CriscAttachmentController::class, 'destroy'])->name('crisc-attachments.destroy');
     Route::get('course-enrollments/{course}', [CourseEnrollmentController::class, 'index'])->name('course-enrollments.index');
     Route::get('discount-requests', [AdminDiscountRequestController::class, 'index'])->name('discount-requests.index');
+    Route::get('enquiries', [AdminEnquiryController::class, 'index'])->name('enquiries.index');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EnquiryRequest;
-use App\Mail\ContactMail;
+use App\Models\Enquiry;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -15,19 +14,17 @@ class ContactController extends Controller
         $validated = $request->validated();
 
         try {
-            Mail::mailer('mailtrap-sdk')
-                ->to(config('mail.enquiry_recipient'))
-                ->send(new ContactMail(
-                    name: $validated['name'],
-                    email: $validated['email'],
-                    phone: $validated['phone'] ?? '',
-                    organization: $validated['organization'] ?? '',
-                    service: $validated['service'] ?? '',
-                    heardFrom: $validated['heard_from'],
-                    message: $validated['message'],
-                ));
+            $enquiry = Enquiry::query()->create([
+                'name' => $validated['name'],
+                'organization' => $validated['organization'] ?? null,
+                'email' => $validated['email'],
+                'phone' => $validated['phone'] ?? null,
+                'service' => $validated['service'] ?? null,
+                'heard_from' => $validated['heard_from'],
+                'message' => $validated['message'],
+            ]);
         } catch (\Throwable $e) {
-            Log::error('ContactMail failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
+            Log::error('Enquiry save failed', ['error' => $e->getMessage(), 'trace' => $e->getTraceAsString()]);
 
             return response()->json([
                 'success' => false,
@@ -37,7 +34,7 @@ class ContactController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Thank you, '.e($validated['name']).'! Your enquiry has been sent. We will get back to you within one business day.',
+            'message' => 'Thank you, '.e($enquiry->name).'! Your enquiry has been sent. We will get back to you within one business day.',
         ]);
     }
 }
