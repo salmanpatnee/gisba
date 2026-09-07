@@ -307,7 +307,7 @@
       <div class="outline-stats">
         <span class="outline-stat"><i class="bi bi-journals"></i> {{ $outlineChapterCount }} Chapters</span>
         <span class="outline-stat"><i class="bi bi-patch-check-fill"></i> Tutorials, Quizzes &amp; Takeaways</span>
-        <span class="outline-stat"><i class="bi bi-award-fill"></i> 35 PDU Hours Certificate of Completion</span>
+        <span class="outline-stat"><i class="bi bi-award-fill"></i> 35 Contact Hours Completion Certificate</span>
       </div>
     </div>
 
@@ -323,7 +323,7 @@
     @if($outlinePart1->isNotEmpty())
       <div class="section-header kb-reveal">
         <div class="section-badge">1</div>
-        <h2 class="section-title">PMBOK 8th Edition Review Training</h2>
+        <h2 class="section-title">Part 1: PMBOK Comprehensive Training Topics</h2>
       </div>
       <div class="row g-4">
         @foreach($outlinePart1 as $chapter)
@@ -338,12 +338,12 @@
     @if($hasPart2)
       <div class="section-header kb-reveal">
         <div class="section-badge">2</div>
-        <h2 class="section-title">PMP Exam Content Outline Mapping Trainings</h2>
+        <h2 class="section-title">Complete Sessions on Each of the Exam Outline Topics</h2>
       </div>
       @php($divMeta = [
-        1 => ['no' => '01', 'name' => 'People',               'desc' => 'Leading, motivating and empowering the project team.'],
-        2 => ['no' => '02', 'name' => 'Process',              'desc' => 'Executing the technical work that delivers the project.'],
-        3 => ['no' => '03', 'name' => 'Business Environment', 'desc' => 'Aligning the project with organizational strategy and compliance.'],
+        1 => ['no' => '01', 'name' => 'PMP Exam Outline Domain 1: People 33%',               'desc' => 'Leading, motivating and empowering the project team.'],
+        2 => ['no' => '02', 'name' => 'PMP Exam Outline Domain 2: Process 41%',              'desc' => 'Executing the technical work that delivers the project.'],
+        3 => ['no' => '03', 'name' => 'PMP Exam Outline Domain 3: Business Environment 26%', 'desc' => 'Aligning the project with organizational strategy and compliance.'],
       ])
       @foreach($outlinePart2Divisions as $divId => $divChapters)
         @continue($divChapters->isEmpty())
