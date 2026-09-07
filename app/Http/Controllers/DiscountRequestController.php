@@ -3,12 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DiscountRequestRequest;
+use App\Models\Coupon;
 use App\Models\DiscountRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
 class DiscountRequestController extends Controller
 {
+    /**
+     * Course field => display name for the courses covered by this form.
+     *
+     * @var array<string, string>
+     */
+    private const COURSES = [
+        'pmp_discount_percentage' => 'PMP',
+        'crisc_discount_percentage' => 'CRISC',
+        'prince2_discount_percentage' => 'PRINCE2',
+    ];
+
     public function store(DiscountRequestRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -31,9 +43,35 @@ class DiscountRequestController extends Controller
             ], 500);
         }
 
+        $coupons = [];
+
+        foreach (self::COURSES as $field => $courseName) {
+            $percentage = $validated[$field] ?? null;
+
+            if ($percentage === null) {
+                continue;
+            }
+
+            $coupon = Coupon::query()->firstOrCreate(
+                ['name' => 'DISACP'.$percentage],
+                ['value' => $percentage, 'expires_at' => null],
+            );
+
+            $coupons[] = [
+                'course' => $courseName,
+                'code' => $coupon->name,
+                'percentage' => $percentage,
+            ];
+        }
+
+        $message = count($coupons) > 0
+            ? 'Thank you, '.e($discountRequest->name).'! Your requested discount code(s) are as follows.'
+            : 'Thank you, '.e($discountRequest->name).'! Your request has been received.';
+
         return response()->json([
             'success' => true,
-            'message' => 'Thank you, '.e($discountRequest->name).'! Your Pay-What-You-Can-Afford request has been received. Our team will review it and get back to you shortly.',
+            'message' => $message,
+            'coupons' => $coupons,
         ]);
     }
 }

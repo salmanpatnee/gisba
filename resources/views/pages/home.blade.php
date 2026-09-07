@@ -144,21 +144,13 @@
       margin-bottom: 8px;
     }
     .pwyca-percent-field {
-      border-radius: var(--radius-sm) 0 0 var(--radius-sm) !important;
+      border-radius: var(--radius-sm) !important;
       border-color: var(--border-mid);
-      font-size: 18px;
-      font-weight: 800;
-      text-align: center;
-      color: var(--navy);
-      padding: 10px 6px;
-    }
-    .pwyca-percent-suffix {
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0 !important;
-      border-color: var(--border-mid);
-      background: rgba(200, 168, 75, 0.14);
-      color: var(--accent);
-      font-weight: 800;
       font-size: 15px;
+      font-weight: 800;
+      text-align-last: center;
+      color: var(--navy);
+      padding: 10px 30px 10px 12px;
     }
     .pwyca-divider {
       height: 1px;
@@ -352,7 +344,7 @@
 
               <p>We believe that financial limitations should not prevent motivated professionals and students from accessing high-quality professional training.</p>
               <p>All GISBA courses have a standard published price. However, if the standard fee is beyond your current budget, you may request a special discount under our Pay-What-You-Can-Afford Program.</p>
-              <p>Tell us the amount you can reasonably afford, and we will review your request and do our best to accommodate you, subject to seat availability.</p>
+              <p>Select your requested discount for one or more courses below, and we'll instantly generate a discount code you can use at checkout, subject to seat availability.</p>
 
               <div id="discount-form-alert" role="alert" aria-live="polite" style="display:none;" class="mt-3"></div>
 
@@ -370,9 +362,12 @@
                         <div class="pwyca-course-card-price">Std. Price <strong>$999</strong></div>
                         <label class="pwyca-course-card-label" for="discount-pmp-percentage">Requested Discount</label>
                         <div class="input-group">
-                          <input type="number" class="form-control pwyca-percent-field" id="discount-pmp-percentage" name="pmp_discount_percentage"
-                                 placeholder="0" min="0" max="100" step="1" />
-                          <span class="input-group-text pwyca-percent-suffix">%</span>
+                          <select class="form-select pwyca-percent-field" id="discount-pmp-percentage" name="pmp_discount_percentage">
+                            <option value="">Select discount %</option>
+                            @for ($i = 10; $i <= 90; $i += 10)
+                              <option value="{{ $i }}">{{ $i }}%</option>
+                            @endfor
+                          </select>
                         </div>
                         <div class="invalid-feedback d-block" id="err-discount-pmp-percentage"></div>
                       </div>
@@ -385,9 +380,12 @@
                         <div class="pwyca-course-card-price">Std. Price <strong>$999</strong></div>
                         <label class="pwyca-course-card-label" for="discount-crisc-percentage">Requested Discount</label>
                         <div class="input-group">
-                          <input type="number" class="form-control pwyca-percent-field" id="discount-crisc-percentage" name="crisc_discount_percentage"
-                                 placeholder="0" min="0" max="100" step="1" />
-                          <span class="input-group-text pwyca-percent-suffix">%</span>
+                          <select class="form-select pwyca-percent-field" id="discount-crisc-percentage" name="crisc_discount_percentage">
+                            <option value="">Select discount %</option>
+                            @for ($i = 10; $i <= 90; $i += 10)
+                              <option value="{{ $i }}">{{ $i }}%</option>
+                            @endfor
+                          </select>
                         </div>
                         <div class="invalid-feedback d-block" id="err-discount-crisc-percentage"></div>
                       </div>
@@ -400,9 +398,12 @@
                         <div class="pwyca-course-card-price">Std. Price <strong>$999</strong></div>
                         <label class="pwyca-course-card-label" for="discount-prince2-percentage">Requested Discount</label>
                         <div class="input-group">
-                          <input type="number" class="form-control pwyca-percent-field" id="discount-prince2-percentage" name="prince2_discount_percentage"
-                                 placeholder="0" min="0" max="100" step="1" />
-                          <span class="input-group-text pwyca-percent-suffix">%</span>
+                          <select class="form-select pwyca-percent-field" id="discount-prince2-percentage" name="prince2_discount_percentage">
+                            <option value="">Select discount %</option>
+                            @for ($i = 10; $i <= 90; $i += 10)
+                              <option value="{{ $i }}">{{ $i }}%</option>
+                            @endfor
+                          </select>
                         </div>
                         <div class="invalid-feedback d-block" id="err-discount-prince2-percentage"></div>
                       </div>
@@ -1062,11 +1063,6 @@
       if (errEl) { errEl.textContent = ''; }
       return true;
     }
-    const num = Number(raw);
-    if (Number.isNaN(num) || num < 0 || num > 100) {
-      setFieldError(inputEl, errEl, 'Please enter a percentage between 0 and 100.');
-      return false;
-    }
     setFieldValid(inputEl);
     return true;
   }
@@ -1116,10 +1112,25 @@
   const discountAlertEl = document.getElementById('discount-form-alert');
   const discountSubmitBtn = document.getElementById('discount-submit-btn');
 
-  function showDiscountAlert(type, message) {
+  function escapeHtml(value) {
+    const div = document.createElement('div');
+    div.textContent = value;
+    return div.innerHTML;
+  }
+
+  function showDiscountAlert(type, message, coupons) {
     const iconMap = { success: 'bi-check-circle-fill', danger: 'bi-exclamation-triangle-fill', warning: 'bi-exclamation-circle-fill' };
     discountAlertEl.className = `alert alert-${type} d-flex align-items-start gap-2 mt-3`;
-    discountAlertEl.innerHTML = `<i class="bi ${iconMap[type] || 'bi-info-circle-fill'} flex-shrink-0 mt-1"></i><span>${message}</span>`;
+
+    let couponsHtml = '';
+    if (Array.isArray(coupons) && coupons.length > 0) {
+      const items = coupons.map(c => (
+        `<li><strong>${escapeHtml(c.course)}</strong> &mdash; <code>${escapeHtml(c.code)}</code> (${escapeHtml(String(c.percentage))}% off)</li>`
+      )).join('');
+      couponsHtml = `<ul class="mb-2 ps-3">${items}</ul><div class="small fw-semibold">Please use ${coupons.length > 1 ? 'these codes' : 'this code'} within 3 days &mdash; after that they may no longer be available.</div>`;
+    }
+
+    discountAlertEl.innerHTML = `<i class="bi ${iconMap[type] || 'bi-info-circle-fill'} flex-shrink-0 mt-1"></i><div><div>${message}</div>${couponsHtml}</div>`;
     discountAlertEl.style.display = '';
     discountAlertEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -1150,7 +1161,7 @@
         const data = await response.json();
 
         if (data.success) {
-          showDiscountAlert('success', data.message);
+          showDiscountAlert('success', data.message, data.coupons);
           discountForm.reset();
           discountForm.querySelectorAll('.is-valid, .is-invalid').forEach(el => {
             el.classList.remove('is-valid', 'is-invalid');
