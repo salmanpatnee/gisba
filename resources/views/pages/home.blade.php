@@ -157,6 +157,74 @@
       background: linear-gradient(90deg, transparent, var(--border-mid) 15%, var(--border-mid) 85%, transparent);
       margin: 26px 0 20px;
     }
+    .pwyca-trust-banner {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin: 22px 0 8px;
+      padding: 22px 28px;
+      background: linear-gradient(135deg, rgba(200, 168, 75, 0.09) 0%, rgba(0, 51, 102, 0.03) 100%);
+      border: 1px solid rgba(200, 168, 75, 0.4);
+      border-left: 5px solid var(--accent);
+      border-radius: var(--radius-md);
+      box-shadow: 0 10px 26px rgba(0, 51, 102, 0.07);
+      overflow: hidden;
+    }
+    .pwyca-trust-banner::after {
+      content: '\201D';
+      position: absolute;
+      top: -34px;
+      right: 18px;
+      font-family: var(--font-display);
+      font-size: 130px;
+      line-height: 1;
+      color: rgba(200, 168, 75, 0.14);
+      pointer-events: none;
+    }
+    .pwyca-trust-icon {
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      box-shadow: 0 8px 18px rgba(0, 51, 102, 0.3);
+    }
+    .pwyca-trust-text {
+      position: relative;
+      z-index: 1;
+    }
+    .pwyca-trust-text p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--navy);
+      margin: 0 0 12px;
+    }
+    .pwyca-trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent) 0%, #e3c877 100%);
+      padding: 6px 14px;
+      border-radius: 999px;
+      box-shadow: 0 4px 12px rgba(200, 168, 75, 0.4);
+    }
     @media (max-width: 576px) {
       .pwyca-card-header {
         gap: 12px;
@@ -168,6 +236,16 @@
       }
       .pwyca-card-title {
         font-size: 16.5px;
+      }
+      .pwyca-trust-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 20px;
+      }
+      .pwyca-trust-banner::after {
+        font-size: 90px;
+        top: -22px;
       }
     }
   </style>
@@ -344,6 +422,13 @@
 
               <p>We believe that financial limitations should not prevent motivated professionals and students from accessing high-quality professional training.</p>
               <p>All GISBA courses have a standard published price. However, if the standard fee is beyond your current budget, you may request a special discount under our Pay-What-You-Can-Afford Program.</p>
+              <div class="pwyca-trust-banner">
+                <div class="pwyca-trust-icon"><i class="bi bi-patch-check-fill"></i></div>
+                <div class="pwyca-trust-text">
+                  <p>GISBA believes in honesty and trust. We leave it entirely up to you to decide what discount you honestly feel is reasonable, and we will respect your judgment.</p>
+                  <span class="pwyca-trust-badge"><i class="bi bi-check2"></i>No questions asked</span>
+                </div>
+              </div>
               <p>Select your requested discount for one or more courses below, and we'll instantly generate a discount code you can use at checkout, subject to seat availability.</p>
 
               <div id="discount-form-alert" role="alert" aria-live="polite" style="display:none;" class="mt-3"></div>
