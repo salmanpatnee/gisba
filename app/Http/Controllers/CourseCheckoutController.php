@@ -16,6 +16,7 @@ class CourseCheckoutController extends Controller
     private const COURSES = [
         'cissp' => 'CISSP Live Online Training',
         'prince2' => 'PRINCE2 Live Online Training',
+        'pmp' => 'PMP Live Online Training',
     ];
 
     public function __construct(private readonly PayPalService $paypal) {}

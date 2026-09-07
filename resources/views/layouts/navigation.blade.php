@@ -91,6 +91,7 @@
                                 <x-dropdown-link :href="route('admin.course-enrollments.index', 'crisc')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'crisc'">{{ __('CRISC Enrollments') }}</x-dropdown-link>
                                 <x-dropdown-link :href="route('admin.course-enrollments.index', 'cissp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'cissp'">{{ __('CISSP Enrollments') }}</x-dropdown-link>
                                 <x-dropdown-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">{{ __('PRINCE2 Enrollments') }}</x-dropdown-link>
+                                <x-dropdown-link :href="route('admin.course-enrollments.index', 'pmp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'pmp'">{{ __('PMP Enrollments') }}</x-dropdown-link>
                                 <x-dropdown-link :href="route('admin.discount-requests.index')" :active="request()->routeIs('admin.discount-requests.*')">{{ __('Discount Requests') }}</x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
@@ -202,6 +203,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'prince2')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'prince2'">
                 {{ __('PRINCE2 Enrollments') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.course-enrollments.index', 'pmp')" :active="request()->routeIs('admin.course-enrollments.*') && request()->route('course') === 'pmp'">
+                {{ __('PMP Enrollments') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.discount-requests.index')" :active="request()->routeIs('admin.discount-requests.*')">
                 {{ __('Discount Requests') }}

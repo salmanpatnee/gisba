@@ -4,10 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Chapter;
 use App\Models\PmpPost;
+use App\Models\SiteSettings;
 use Illuminate\View\View;
 
 class PmpController extends Controller
 {
+    public function pricing(): View
+    {
+        return view('pages.pmp-course-pricing', [
+            'pricing' => SiteSettings::current(),
+        ]);
+    }
+
     public function index(): View
     {
         $categorizedPosts = PmpPost::query()

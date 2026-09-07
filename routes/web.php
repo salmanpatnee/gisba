@@ -103,6 +103,14 @@ Route::get('/nis2', [BlogController::class, 'index'])->name('nis2');
 Route::get('/nis2/{slug}', [BlogController::class, 'show'])->name('nis2.show');
 Route::get('/crisc/{slug}', [CriscController::class, 'show'])->name('crisc.show');
 Route::get('/pmp', [PublicPmpController::class, 'index'])->name('pmp');
+Route::get('/pmp/pricing', [PublicPmpController::class, 'pricing'])->name('pmp.pricing');
+Route::post('/pmp/checkout', [CourseCheckoutController::class, 'create'])->name('pmp.checkout')->defaults('course', 'pmp');
+Route::get('/pmp/paypal/return', [CourseCheckoutController::class, 'capture'])->name('pmp.paypal.return')->defaults('course', 'pmp');
+Route::get('/pmp/paypal/cancel', [CourseCheckoutController::class, 'cancel'])->name('pmp.paypal.cancel')->defaults('course', 'pmp');
+Route::get('/pmp/enrolled', fn () => view('pages.pmp-course-enrolled', [
+    'enrollmentName' => session('enrollment_name'),
+    'enrollmentEmail' => session('enrollment_email'),
+]))->name('pmp.enrolled');
 Route::get('/pmp/{slug}', [PublicPmpController::class, 'show'])->name('pmp.show');
 Route::get('/video-resources', [VideoController::class, 'index'])->name('video-resources');
 Route::get('/video-resources/{video}/stream', [VideoController::class, 'stream'])->name('videos.stream');

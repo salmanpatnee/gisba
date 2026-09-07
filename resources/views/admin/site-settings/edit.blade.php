@@ -298,6 +298,14 @@
                     'dateTimeRequired' => false,
                 ])
 
+                {{-- PMP Course --}}
+                @include('admin.site-settings._course-pricing-fields', [
+                    'course' => 'pmp',
+                    'label' => 'PMP Live Online Training',
+                    'description' => 'These values are shown on the PMP course landing and pricing pages, and are the exact amount PayPal charges at checkout.',
+                    'dateTimeRequired' => false,
+                ])
+
                 {{-- NIS2 Toolkit ZIP --}}
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 mb-6">
 

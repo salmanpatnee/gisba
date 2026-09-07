@@ -40,19 +40,16 @@
       </div>
 
       <div class="nis2-promo-cta">
-        @if($membershipDiscountPercent > 0)
-          <span class="nis2-promo-ribbon"><i class="bi bi-hourglass-split"></i> Limited-Time — {{ $membershipDiscountPercent }}% Off</span>
-        @endif
         <div class="nis2-promo-price-line">
-          @if($membershipDiscountPercent > 0)
-            <span class="nis2-promo-old-price">{{ $membershipRegularPrice }}</span>
-          @endif
-          <span class="nis2-promo-new-price">{{ $membershipPrice }}</span>
+          <span class="nis2-promo-new-price">{{ $pmpPrice }}</span>
         </div>
-        <a href="{{ route('members.paywall') }}" class="btn-nis2-buy">
+        @if($pmpSchedule)
+          <div class="nis2-promo-schedule"><i class="bi bi-calendar3"></i> {{ $pmpSchedule }}</div>
+        @endif
+        <a href="{{ route('pmp.pricing') }}" class="btn-nis2-buy">
           Get PMP Training <i class="bi bi-arrow-right"></i>
         </a>
-        <a href="{{ route('members.paywall') }}#coupon_code" class="nis2-promo-coupon-chip">
+        <a href="{{ route('pmp.pricing') }}#coupon_code" class="nis2-promo-coupon-chip">
           <span class="nis2-promo-coupon-chip-icon"><i class="bi bi-tag-fill"></i></span>
           <span class="nis2-promo-coupon-chip-copy">
             <strong>Have a promo code?</strong>

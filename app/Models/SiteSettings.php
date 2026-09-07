@@ -41,6 +41,14 @@ class SiteSettings extends Model
         'prince2_time_end',
         'prince2_timezone',
         'prince2_capacity',
+        'pmp_price',
+        'pmp_currency',
+        'pmp_date',
+        'pmp_end_date',
+        'pmp_time_start',
+        'pmp_time_end',
+        'pmp_timezone',
+        'pmp_capacity',
     ];
 
     protected $casts = [
@@ -57,6 +65,9 @@ class SiteSettings extends Model
         'prince2_price' => 'decimal:2',
         'prince2_date' => 'date',
         'prince2_end_date' => 'date',
+        'pmp_price' => 'decimal:2',
+        'pmp_date' => 'date',
+        'pmp_end_date' => 'date',
     ];
 
     public static function current(): self
@@ -88,6 +99,12 @@ class SiteSettings extends Model
             'prince2_time_end' => '1:00 PM',
             'prince2_timezone' => 'Saudi Arabia Standard Time',
             'prince2_capacity' => '15',
+            'pmp_price' => 999.99,
+            'pmp_currency' => 'USD',
+            'pmp_time_start' => '7:00 AM',
+            'pmp_time_end' => '1:00 PM',
+            'pmp_timezone' => 'Saudi Arabia Standard Time',
+            'pmp_capacity' => '15',
         ]);
     }
 
@@ -145,6 +162,14 @@ class SiteSettings extends Model
     public function getPrince2SeatsRemainingAttribute(): ?int
     {
         return $this->seatsRemainingFor('prince2', $this->prince2_capacity);
+    }
+
+    /**
+     * Remaining PMP course seats, never negative, or null when capacity isn't a plain number.
+     */
+    public function getPmpSeatsRemainingAttribute(): ?int
+    {
+        return $this->seatsRemainingFor('pmp', $this->pmp_capacity);
     }
 
     private function seatsRemainingFor(string $course, string $capacity): ?int

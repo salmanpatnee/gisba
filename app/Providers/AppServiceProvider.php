@@ -26,16 +26,22 @@ class AppServiceProvider extends ServiceProvider
             $view->with('isPmpMode', $settings->website_mode === WebsiteMode::B2PMP->value);
         });
 
-        // Membership pricing appears on the PMP promo banner and article CTAs as well as
-        // the paywall; all of them read the same site_settings row so they cannot drift apart.
+        // PMP course pricing appears on the PMP promo banner and article CTAs; both
+        // read the same site_settings row so they cannot drift apart.
         View::composer(['partials.pmp-banner', 'pages.pmp-show'], function ($view) {
             $settings = SiteSettings::current();
-            $symbol = $settings->membership_currency_symbol;
+
+            $schedule = null;
+            if ($settings->pmp_date) {
+                $schedule = $settings->dateRangeFor('pmp');
+                if ($settings->pmp_time_start) {
+                    $schedule .= ', '.$settings->pmp_time_start.'–'.$settings->pmp_time_end.' ('.$settings->pmp_timezone.')';
+                }
+            }
 
             $view->with([
-                'membershipPrice' => $symbol.number_format((float) $settings->membership_price, 0),
-                'membershipRegularPrice' => $symbol.number_format((float) $settings->membership_regular_price, 0),
-                'membershipDiscountPercent' => $settings->membership_discount_percent,
+                'pmpPrice' => '$'.number_format((float) $settings->pmp_price, 2),
+                'pmpSchedule' => $schedule,
             ]);
         });
     }

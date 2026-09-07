@@ -2115,6 +2115,20 @@ ul li {
   white-space: nowrap;
 }
 
+.nis2-promo-schedule {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+}
+.nis2-promo-schedule i {
+  color: var(--accent);
+}
+
 /* Promo-code chip (used by resources/views/partials/pmp-banner.blade.php) */
 .nis2-promo-coupon-chip {
   display: inline-flex;

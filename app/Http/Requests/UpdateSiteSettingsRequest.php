@@ -49,6 +49,14 @@ class UpdateSiteSettingsRequest extends FormRequest
             'prince2_time_end' => ['nullable', 'string', 'max:20'],
             'prince2_timezone' => ['required', 'string', 'max:50'],
             'prince2_capacity' => ['required', 'string', 'max:50'],
+            'pmp_price' => ['required', 'numeric', 'min:0'],
+            'pmp_currency' => ['required', 'in:USD,GBP,EUR'],
+            'pmp_date' => ['nullable', 'date'],
+            'pmp_end_date' => ['nullable', 'date', 'after_or_equal:pmp_date'],
+            'pmp_time_start' => ['nullable', 'string', 'max:20'],
+            'pmp_time_end' => ['nullable', 'string', 'max:20'],
+            'pmp_timezone' => ['required', 'string', 'max:50'],
+            'pmp_capacity' => ['required', 'string', 'max:50'],
         ];
     }
 
