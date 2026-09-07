@@ -458,78 +458,168 @@
             -------------------------------------------------------- --}}
             <section id="schedule">
               <h2 class="section-heading">Training Schedule 2026</h2>
-              <p>Upcoming cohort dates for our live, instructor-led certification courses. Seats are limited — early registration is recommended.</p>
+              <p class="schedule-intro">Upcoming cohort dates for our live, instructor-led certification courses. Seats are limited — early registration is recommended.</p>
 
-              <div class="schedule-table-wrap">
-                <table class="schedule-table">
-                  <thead>
-                    <tr>
-                      <th>Course</th>
-                      <th>Recent Cohort</th>
-                      <th>Upcoming Cohort</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <span class="schedule-course-cell"><i class="bi bi-mortarboard"></i>CRISC</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
-                        <span class="schedule-date is-closed-text">31st Aug 2026</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">14th - 17th Sep 2026</span>
-                        <a href="{{ route('crisc-course') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="schedule-course-cell"><i class="bi bi-shield-lock"></i>CISSP</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
-                        <span class="schedule-date is-closed-text">07th &ndash; 10th Sep 2026</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">21st &ndash; 24th Sep 2026</span>
-                        <a href="{{ route('cissp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="schedule-course-cell"><i class="bi bi-award"></i>PMP</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
-                        <span class="schedule-date is-closed-text">14th Sep 2026</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">28th Sep &ndash; 1st Oct 2026</span>
-                        <a href="{{ route('pmp') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <span class="schedule-course-cell"><i class="bi bi-diagram-3"></i>PRINCE2 Foundation</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
-                        <span class="schedule-date is-closed-text">20th &ndash; 21st Sep 2026</span>
-                      </td>
-                      <td>
-                        <span class="schedule-status is-open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
-                        <span class="schedule-date">26th&ndash;27th Sep &amp; 3rd&ndash;4th Oct 2026</span>
-                        <a href="{{ route('prince2') }}" class="schedule-cta">View Course <i class="bi bi-arrow-right"></i></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div class="cohort-ledger">
+
+                <article class="cohort-ticket">
+                  <span class="cohort-ticket-accent" aria-hidden="true"></span>
+                  <div class="cohort-course">
+                    <span class="cohort-course-icon"><i class="bi bi-mortarboard"></i></span>
+                    <div>
+                      <span class="cohort-course-eyebrow">Course</span>
+                      <h3 class="cohort-course-name">CRISC</h3>
+                    </div>
+                  </div>
+
+                  <div class="cohort-recent">
+                    <span class="cohort-tag cohort-tag--closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                    <span class="cohort-recent-date">31st Aug 2026</span>
+                  </div>
+
+                  <span class="cohort-perf" aria-hidden="true"></span>
+
+                  <div class="cohort-upcoming">
+                    <span class="cohort-tag cohort-tag--open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                    <span class="cohort-upcoming-date">
+                      @if($pricing->crisc_date)
+                        {{ $pricing->dateRangeFor('crisc') }}
+                      @else
+                        Date to be announced
+                      @endif
+                    </span>
+                    @if($pricing->crisc_date && $pricing->crisc_time_start)
+                      <span class="cohort-upcoming-time"><i class="bi bi-clock"></i>{{ $pricing->crisc_time_start }}&ndash;{{ $pricing->crisc_time_end }} &middot; {{ $pricing->crisc_timezone }}</span>
+                    @endif
+                  </div>
+
+                  <a href="{{ route('crisc-course') }}" class="cohort-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                </article>
+
+                <article class="cohort-ticket">
+                  <span class="cohort-ticket-accent" aria-hidden="true"></span>
+                  <div class="cohort-course">
+                    <span class="cohort-course-icon"><i class="bi bi-shield-lock"></i></span>
+                    <div>
+                      <span class="cohort-course-eyebrow">Course</span>
+                      <h3 class="cohort-course-name">CISSP</h3>
+                    </div>
+                  </div>
+
+                  <div class="cohort-recent">
+                    <span class="cohort-tag cohort-tag--closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                    <span class="cohort-recent-date">07th &ndash; 10th Sep 2026</span>
+                  </div>
+
+                  <span class="cohort-perf" aria-hidden="true"></span>
+
+                  <div class="cohort-upcoming">
+                    <span class="cohort-tag cohort-tag--open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                    <span class="cohort-upcoming-date">
+                      @if($pricing->cissp_date)
+                        {{ $pricing->dateRangeFor('cissp') }}
+                      @else
+                        Date to be announced
+                      @endif
+                    </span>
+                    @if($pricing->cissp_date && $pricing->cissp_time_start)
+                      <span class="cohort-upcoming-time"><i class="bi bi-clock"></i>{{ $pricing->cissp_time_start }}&ndash;{{ $pricing->cissp_time_end }} &middot; {{ $pricing->cissp_timezone }}</span>
+                    @endif
+                  </div>
+
+                  <a href="{{ route('cissp') }}" class="cohort-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                </article>
+
+                <article class="cohort-ticket">
+                  <span class="cohort-ticket-accent" aria-hidden="true"></span>
+                  <div class="cohort-course">
+                    <span class="cohort-course-icon"><i class="bi bi-award"></i></span>
+                    <div>
+                      <span class="cohort-course-eyebrow">Course</span>
+                      <h3 class="cohort-course-name">PMP</h3>
+                    </div>
+                  </div>
+
+                  <div class="cohort-recent">
+                    <span class="cohort-tag cohort-tag--closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                    <span class="cohort-recent-date">14th Sep 2026</span>
+                  </div>
+
+                  <span class="cohort-perf" aria-hidden="true"></span>
+
+                  <div class="cohort-upcoming">
+                    <span class="cohort-tag cohort-tag--open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                    <span class="cohort-upcoming-date">
+                      @if($pricing->pmp_date)
+                        {{ $pricing->dateRangeFor('pmp') }}
+                      @else
+                        Date to be announced
+                      @endif
+                    </span>
+                    @if($pricing->pmp_date && $pricing->pmp_time_start)
+                      <span class="cohort-upcoming-time"><i class="bi bi-clock"></i>{{ $pricing->pmp_time_start }}&ndash;{{ $pricing->pmp_time_end }} &middot; {{ $pricing->pmp_timezone }}</span>
+                    @endif
+                  </div>
+
+                  <a href="{{ route('pmp') }}" class="cohort-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                </article>
+
+                <article class="cohort-ticket">
+                  <span class="cohort-ticket-accent" aria-hidden="true"></span>
+                  <div class="cohort-course">
+                    <span class="cohort-course-icon"><i class="bi bi-diagram-3"></i></span>
+                    <div>
+                      <span class="cohort-course-eyebrow">Course</span>
+                      <h3 class="cohort-course-name">PRINCE2 Foundation</h3>
+                    </div>
+                  </div>
+
+                  <div class="cohort-recent">
+                    <span class="cohort-tag cohort-tag--closed"><i class="bi bi-x-circle-fill"></i>Closed</span>
+                    <span class="cohort-recent-date">20th &ndash; 21st Sep 2026</span>
+                  </div>
+
+                  <span class="cohort-perf" aria-hidden="true"></span>
+
+                  <div class="cohort-upcoming">
+                    <span class="cohort-tag cohort-tag--open"><i class="bi bi-check-circle-fill"></i>Enrolling</span>
+                    <span class="cohort-upcoming-date">
+                      @if($pricing->prince2_date)
+                        {{ $pricing->dateRangeFor('prince2') }}
+                      @else
+                        Date to be announced
+                      @endif
+                    </span>
+                    @if($pricing->prince2_date && $pricing->prince2_time_start)
+                      <span class="cohort-upcoming-time"><i class="bi bi-clock"></i>{{ $pricing->prince2_time_start }}&ndash;{{ $pricing->prince2_time_end }} &middot; {{ $pricing->prince2_timezone }}</span>
+                    @endif
+                  </div>
+
+                  <a href="{{ route('prince2') }}" class="cohort-cta">View Course <i class="bi bi-arrow-right"></i></a>
+                </article>
+
               </div>
             </section>
+
+            @push('scripts')
+            <script>
+              (function () {
+                const cohortObserver = new IntersectionObserver((entries) => {
+                  entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                      entry.target.classList.add('is-visible');
+                      cohortObserver.unobserve(entry.target);
+                    }
+                  });
+                }, { threshold: 0.15 });
+
+                document.querySelectorAll('.cohort-ticket').forEach((ticket, index) => {
+                  ticket.style.transitionDelay = (index * 0.08) + 's';
+                  cohortObserver.observe(ticket);
+                });
+              })();
+            </script>
+            @endpush
 
             <hr class="content-divider" />
 

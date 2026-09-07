@@ -163,7 +163,7 @@ class PageController extends Controller
 
     public function home(): View
     {
-        return view('pages.home');
+        return view('pages.home', ['pricing' => SiteSettings::current()]);
     }
 
     public function portfolio(): View
