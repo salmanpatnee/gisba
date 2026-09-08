@@ -21,6 +21,17 @@ class DiscountRequestController extends Controller
         'prince2_discount_percentage' => 'PRINCE2',
     ];
 
+    /**
+     * Course field => named route to that course's page, where checkout happens.
+     *
+     * @var array<string, string>
+     */
+    private const COURSE_ROUTES = [
+        'pmp_discount_percentage' => 'pmp',
+        'crisc_discount_percentage' => 'crisc-course',
+        'prince2_discount_percentage' => 'prince2',
+    ];
+
     public function store(DiscountRequestRequest $request): JsonResponse
     {
         $validated = $request->validated();
@@ -61,6 +72,7 @@ class DiscountRequestController extends Controller
                 'course' => $courseName,
                 'code' => $coupon->name,
                 'percentage' => $percentage,
+                'checkout_url' => route(self::COURSE_ROUTES[$field]),
             ];
         }
 

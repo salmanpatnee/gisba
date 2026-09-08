@@ -1210,9 +1210,9 @@
     let couponsHtml = '';
     if (Array.isArray(coupons) && coupons.length > 0) {
       const items = coupons.map(c => (
-        `<li><strong>${escapeHtml(c.course)}</strong> &mdash; <code>${escapeHtml(c.code)}</code> (${escapeHtml(String(c.percentage))}% off)</li>`
+        `<li><strong>${escapeHtml(c.course)}</strong> &mdash; <code>${escapeHtml(c.code)}</code> (${escapeHtml(String(c.percentage))}% off) &mdash; <a href="${escapeHtml(c.checkout_url)}" class="fw-semibold">Go to checkout &rarr;</a></li>`
       )).join('');
-      couponsHtml = `<ul class="mb-2 ps-3">${items}</ul><div class="small fw-semibold">Please use ${coupons.length > 1 ? 'these codes' : 'this code'} within 3 days &mdash; after that they may no longer be available.</div>`;
+      couponsHtml = `<ul class="mb-2 ps-3">${items}</ul><div class="small fw-semibold">Please use ${coupons.length > 1 ? 'these codes' : 'this code'} within 3 days &mdash; after that ${coupons.length > 1 ? 'they' : 'it'} may no longer be available. Visit the course page above and apply ${coupons.length > 1 ? 'them' : 'it'} at checkout to claim your discount today.</div>`;
     }
 
     discountAlertEl.innerHTML = `<i class="bi ${iconMap[type] || 'bi-info-circle-fill'} flex-shrink-0 mt-1"></i><div><div>${message}</div>${couponsHtml}</div>`;
