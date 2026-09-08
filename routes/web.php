@@ -203,6 +203,7 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::get('discount-requests', [AdminDiscountRequestController::class, 'index'])->name('discount-requests.index');
     Route::delete('discount-requests/{discountRequest}', [AdminDiscountRequestController::class, 'destroy'])->name('discount-requests.destroy');
     Route::get('enquiries', [AdminEnquiryController::class, 'index'])->name('enquiries.index');
+    Route::delete('enquiries/{enquiry}', [AdminEnquiryController::class, 'destroy'])->name('enquiries.destroy');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');
     Route::put('settings', [SiteSettingsController::class, 'update'])->name('settings.update');

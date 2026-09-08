@@ -9,6 +9,12 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
+            @if(session('success'))
+                <div class="mb-6 px-4 py-3 bg-green-100 border border-green-300 text-green-800 rounded-md text-sm">
+                    {{ session('success') }}
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <table class="min-w-full divide-y divide-gray-200 text-sm">
                     <thead class="bg-gray-50">
@@ -21,6 +27,7 @@
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Heard From</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Message</th>
                             <th class="px-6 py-3 text-left font-medium text-gray-500 uppercase tracking-wider">Submitted</th>
+                            <th class="px-6 py-3 text-right font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -34,10 +41,18 @@
                             <td class="px-6 py-4 text-gray-600">{{ $enquiry->heard_from }}</td>
                             <td class="px-6 py-4 text-gray-600 max-w-xs truncate" title="{{ $enquiry->message }}">{{ $enquiry->message }}</td>
                             <td class="px-6 py-4 text-gray-600">{{ $enquiry->created_at->format('M d, Y') }}</td>
+                            <td class="px-6 py-4 text-right">
+                                <form action="{{ route('admin.enquiries.destroy', $enquiry) }}" method="POST" class="inline"
+                                      onsubmit="return confirm('Delete this enquiry? This cannot be undone.')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="8" class="px-6 py-10 text-center text-gray-500">No enquiries yet.</td>
+                            <td colspan="9" class="px-6 py-10 text-center text-gray-500">No enquiries yet.</td>
                         </tr>
                         @endforelse
                     </tbody>
