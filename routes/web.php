@@ -199,7 +199,9 @@ Route::middleware(['auth', 'redirect-if-member'])->prefix('admin')->name('admin.
     Route::resource('crisc-categories', CriscCategoryController::class)->except('show');
     Route::delete('crisc-attachments/{attachment}', [CriscAttachmentController::class, 'destroy'])->name('crisc-attachments.destroy');
     Route::get('course-enrollments/{course}', [CourseEnrollmentController::class, 'index'])->name('course-enrollments.index');
+    Route::delete('course-enrollments/{enrollment}', [CourseEnrollmentController::class, 'destroy'])->name('course-enrollments.destroy');
     Route::get('discount-requests', [AdminDiscountRequestController::class, 'index'])->name('discount-requests.index');
+    Route::delete('discount-requests/{discountRequest}', [AdminDiscountRequestController::class, 'destroy'])->name('discount-requests.destroy');
     Route::get('enquiries', [AdminEnquiryController::class, 'index'])->name('enquiries.index');
     Route::resource('videos', App\Http\Controllers\Admin\VideoController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     Route::get('settings', [SiteSettingsController::class, 'edit'])->name('settings.edit');

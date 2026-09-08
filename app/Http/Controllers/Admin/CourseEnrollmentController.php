@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CourseEnrollment;
 use App\Models\SiteSettings;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -35,5 +36,15 @@ class CourseEnrollmentController extends Controller
             'capacity' => $settings->{"{$course}_capacity"},
             'totalEnrolled' => $enrollments->total(),
         ]);
+    }
+
+    public function destroy(CourseEnrollment $enrollment): RedirectResponse
+    {
+        $course = $enrollment->course;
+
+        $enrollment->delete();
+
+        return redirect()->route('admin.course-enrollments.index', $course)
+            ->with('success', 'Enrollment deleted successfully.');
     }
 }
